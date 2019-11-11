@@ -33,7 +33,6 @@ public class LichSuMuaHangController extends HttpServlet {
 			writer.print("location='userTrangChu';");
 			writer.print("</script>");
 		}
-		
 	}
 
 }
