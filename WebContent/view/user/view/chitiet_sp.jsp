@@ -140,9 +140,9 @@
 												</p>
 											</div>
 											<div class="sl_button">
-												<form method="get" action="#" id="formChiTietSP">
+												<form method="get" action="/SachKyAnh/ThemSachVaoGioHang" onsubmit="return ktSoLuongMua();" id="formChiTietSP">
 												 	<span class="label_sl">Số lượng: </span>
-													<input type='number' name='so_luong' value='1' class="sl_mua"><br/> 
+													<input type='number' name='SoLuong' value='1' class="sl_mua"><br/> 
 													<div class="col-md-12 col-sm-12 col-xs-12 padding-0 nut">
 														<div class="col-md-3 col-sm-4 col-xs-4 padding-0 margin_right">
 															<a href="/SachKyAnh/userTrangChu" class="">
@@ -154,7 +154,6 @@
 														<div class="col-md-8 col-sm-8 col-xs-8 padding-0">
 															<button type="submit" class="btn bg_btn">Thêm vào giỏ hàng</button>
 														</div>
-														
 													</div>
 											 	</form> 
 											</div>
@@ -204,6 +203,7 @@
 
 		<!-- start my js -->
 		<script src="${url}/static/js/giaSanPhamVaMaSachTheoNamXB.js" type="text/javascript" charset="utf-8"></script>
+		<script src="${url}/static/js/kiemTraSoLuongMua.js" type="text/javascript" charset="utf-8"></script>
 		<!-- end my js -->
 	</div>
 </body>
