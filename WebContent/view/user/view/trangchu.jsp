@@ -68,10 +68,16 @@
 													<div class="anh_sp">
 														<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sach1.getMaSach() %>" class="">
 															<img class="anh" src="${url}/static/img/sanpham/<%=sach1.getUrlHinh() %>" title="sp" alt="anhsp">
-															<a href="" class="them_gh text-a" >
-																<span class="glyphicon glyphicon-shopping-cart"></span>
-																<span class="text"> Thêm vào giỏ</span>
-															</a>
+															<%
+															if(sach1.getSoLuong() >= 1){
+															%>
+																<a href="/SachKyAnh/ThemSachVaoGioHang?MaSach=<%=sach1.getMaSach() %>&SoLuong=1" class="them_gh text-a" >
+																	<span class="glyphicon glyphicon-shopping-cart"></span>
+																	<span class="text"> Thêm vào giỏ</span>
+																</a>
+															<%
+															}
+															%>
 														</a>
 													</div>
 													<div class="tensp_giasp">
@@ -104,10 +110,16 @@
 													<div class="anh_sp">
 														<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sach2.getMaSach() %>" class="">
 															<img class="anh" src="${url}/static/img/sanpham/<%=sach2.getUrlHinh() %>" title="sp" alt="anhsp">
-															<a href="" class="them_gh text-a" >
-																<span class="glyphicon glyphicon-shopping-cart"></span>
-																<span class="text"> Thêm vào giỏ</span>
-															</a>
+															<%
+															if(sach2.getSoLuong() >= 1){
+															%>
+																<a href="/SachKyAnh/ThemSachVaoGioHang?MaSach=<%=sach2.getMaSach() %>&SoLuong=1" class="them_gh text-a" >
+																	<span class="glyphicon glyphicon-shopping-cart"></span>
+																	<span class="text"> Thêm vào giỏ</span>
+																</a>
+															<%
+															}
+															%>
 														</a>
 													</div>
 													<div class="tensp_giasp">
@@ -167,10 +179,16 @@
 												<div class="anh_sp">
 													<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sach.getMaSach() %>" class="">
 														<img class="anh" src="${url}/static/img/sanpham/<%=sach.getUrlHinh() %>" title="sp" alt="anhsp">
-														<a href="#" class="them_gh text-a" >
-															<span class="glyphicon glyphicon-shopping-cart"></span>
-															<span class="text"> Thêm vào giỏ</span>
-														</a>
+														<%
+														if(sach.getSoLuong() >= 1){
+														%>
+															<a href="/SachKyAnh/ThemSachVaoGioHang?MaSach=<%=sach.getMaSach() %>&SoLuong=1" class="them_gh text-a" >
+																<span class="glyphicon glyphicon-shopping-cart"></span>
+																<span class="text"> Thêm vào giỏ</span>
+															</a>
+														<%
+														}
+														%>
 													</a>
 												</div>
 												<div class="tensp_giasp">
@@ -212,10 +230,16 @@
 													<div class="anh_sp">
 														<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sach.getMaSach() %>" class="">
 															<img class="anh" src="${url}/static/img/sanpham/<%=sach.getUrlHinh() %>" title="sp" alt="anhsp">
-															<a href="" class="them_gh text-a">
-																<span class="glyphicon glyphicon-shopping-cart"></span>
-																<span class="text"> Thêm vào giỏ</span>
-															</a>
+															<%
+															if(sach.getSoLuong() >= 1){
+															%>
+																<a href="/SachKyAnh/ThemSachVaoGioHang?MaSach=<%=sach.getMaSach() %>&SoLuong=1" class="them_gh text-a">
+																	<span class="glyphicon glyphicon-shopping-cart"></span>
+																	<span class="text"> Thêm vào giỏ</span>
+																</a>
+															<%
+															}
+															%>
 														</a>
 													</div>
 													<div class="tensp_giasp">
@@ -312,10 +336,16 @@
 														<div class="anh_sp my_border">
 															<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sachDau.getMaSach() %>" class="">
 																<img class="anh" src="${url}/static/img/sanpham/<%=sachDau.getUrlHinh() %>" title="sp" alt="anhsp">
-																<a href="#" class="them_gh text-a" >
-																	<span class="glyphicon glyphicon-shopping-cart"></span>
-																	<span class="text"> Thêm vào giỏ</span>
-																</a>
+																<%
+																if(sachDau.getSoLuong() >= 1){
+																%>
+																	<a href="/SachKyAnh/ThemSachVaoGioHang?MaSach=<%=sachDau.getMaSach() %>&SoLuong=1" class="them_gh text-a" >
+																		<span class="glyphicon glyphicon-shopping-cart"></span>
+																		<span class="text"> Thêm vào giỏ</span>
+																	</a>
+																<%
+																}
+																%>
 															</a>
 														</div>
 														<div class="tensp_giasp">
@@ -361,10 +391,16 @@
 													<div class="anh_sp my_border">
 														<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sachDau.getMaSach() %>" class="">
 															<img class="anh" src="${url}/static/img/sanpham/<%=sachDau.getUrlHinh() %>" title="sp" alt="anhsp">
-															<a href="#" class="them_gh text-a" >
-																<span class="glyphicon glyphicon-shopping-cart"></span>
-																<span class="text"> Thêm vào giỏ</span>
-															</a>
+															<%
+															if(sachDau.getSoLuong() >= 1){
+															%>
+																<a href="/SachKyAnh/ThemSachVaoGioHang?MaSach=<%=sachDau.getMaSach() %>&SoLuong=1" class="them_gh text-a" >
+																	<span class="glyphicon glyphicon-shopping-cart"></span>
+																	<span class="text"> Thêm vào giỏ</span>
+																</a>
+															<%
+															}
+															%>
 														</a>
 													</div>
 													<div class="tensp_giasp">
@@ -407,10 +443,16 @@
 													<div class="anh_sp my_border">
 														<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sachDau.getMaSach() %>" class="">
 															<img class="anh" src="${url}/static/img/sanpham/<%=sachDau.getUrlHinh() %>" title="sp" alt="anhsp">
-															<a href="#" class="them_gh text-a" >
-																<span class="glyphicon glyphicon-shopping-cart"></span>
-																<span class="text"> Thêm vào giỏ</span>
-															</a>
+															<%
+															if(sachDau.getSoLuong() >= 1){
+															%>
+																<a href="/SachKyAnh/ThemSachVaoGioHang?MaSach=<%=sachDau.getMaSach() %>&SoLuong=1" class="them_gh text-a" >
+																	<span class="glyphicon glyphicon-shopping-cart"></span>
+																	<span class="text"> Thêm vào giỏ</span>
+																</a>
+															<%
+															}
+															%>
 														</a>
 													</div>
 													<div class="tensp_giasp">
