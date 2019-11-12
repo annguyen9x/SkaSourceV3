@@ -207,7 +207,7 @@
 																	KhachHang khachHang = (KhachHang)session.getAttribute("TaiKhoan");
 																	if( khachHang != null && (khachHang.getEmail()).equals(hoaDonBan.getEmail()) ){
 															%>
-																		<a href="/SachKyAnh/GioHang" class="btn btn-default">Cập nhật đơn hàng?</a>
+																		<a href="/SachKyAnh/CapNhatDonHang" class="btn btn-default">Cập nhật đơn hàng?</a>
 															<%
 																	}else{
 															%>
