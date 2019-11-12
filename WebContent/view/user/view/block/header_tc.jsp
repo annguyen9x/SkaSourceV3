@@ -62,7 +62,7 @@
 				</div>
 				<div class="col-md-3 col-sm-4 col-xs-5">
 					<div class="cart" id="cart-block">
-	                    <a title="Giỏ hàng" href="gio_hang.jsp">
+	                    <a title="Giỏ hàng" href="/SachKyAnh/XemGioHang">
 	                    	<img src="${url}/static/img/icon/cart.png" alt="">
 	                    	<span class="text-show">Giỏ hàng</span>
 	                    	<span class="soluong_sp">0</span>
