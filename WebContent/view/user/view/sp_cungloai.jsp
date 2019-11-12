@@ -80,10 +80,16 @@
 																<div class="anh_sp">
 																	<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sachDau.getMaSach() %>" class="">
 																		<img class="anh" src="${url}/static/img/sanpham/<%=sachDau.getUrlHinh() %>" title="sp" alt="anhsp">
-																		<a href="#" class="them_gh text-a" >
-																			<span class="glyphicon glyphicon-shopping-cart"></span>
-																			<span class="text"> Thêm vào giỏ</span>
-																		</a>
+																		<%
+																		if(sachDau.getSoLuong() >= 1){
+																		%>
+																			<a href="/SachKyAnh/ThemSachVaoGioHang?MaSach=<%=sachDau.getMaSach() %>&SoLuong=1" class="them_gh text-a" >
+																				<span class="glyphicon glyphicon-shopping-cart"></span>
+																				<span class="text"> Thêm vào giỏ</span>
+																			</a>
+																		<%
+																		}
+																		%>
 																	</a>
 																</div>
 																<div class="tensp_giasp">
