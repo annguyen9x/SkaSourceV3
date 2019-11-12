@@ -47,25 +47,25 @@
 					<ul>
 						<li class="list-li">
 							<span class="glyphicon glyphicon-chevron-right" style="color:#fff; font-size: 1rem"></span>
-							<a href="gioi_thieu.jsp" class="text-a">
+							<a href="/SachKyAnh/MenuNgang?NoiDung=gt" class="text-a">
 								Giới Thiệu
 							</a>
 						</li>
 						<li class="list-li">
 							<span class="glyphicon glyphicon-chevron-right" style="color:#fff; font-size: 1rem"></span>
-							<a href="huongdan_muahang.jsp" class="text-a">
+							<a href="/SachKyAnh/MenuNgang?NoiDung=hdmh" class="text-a">
 								Hướng Dẫn Mua Hàng, Thanh Toán
 							</a>
 						</li>
 						<li class="list-li">
 							<span class="glyphicon glyphicon-chevron-right" style="color:#fff; font-size: 1rem"></span>
-							<a href="dich_vu.jsp" class="text-a">
+							<a href="/SachKyAnh/MenuNgang?NoiDung=dv" class="text-a">
 								Dịch vụ
 							</a>
 						</li>
 						<li class="list-li">
 							<span class="glyphicon glyphicon-chevron-right" style="color:#fff; font-size: 1rem"></span>
-							<a href="lien_he.jsp" class="text-a">
+							<a href="/SachKyAnh/MenuNgang?NoiDung=lh" class="text-a">
 								Liên Hệ
 							</a>
 						</li>
