@@ -68,7 +68,7 @@ public class XacNhanEmailDatHangController extends HttpServlet {
 		}
 		
 		if(maXacNhanTuServer.equals(maXacNhanTuClient)) {
-			response.sendRedirect("/SachKyAnh/GioHang");
+			response.sendRedirect("/SachKyAnh/CapNhatDonHang");
 		}else {
 			session.setAttribute("xacNhanEmailDatHang", "mxnSai");
 			response.sendRedirect("/SachKyAnh/view/user/view/xacnhan_email_dathang.jsp");
