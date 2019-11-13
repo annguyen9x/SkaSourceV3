@@ -81,9 +81,24 @@
 																	<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sachDau.getMaSach() %>" class="">
 																		<img class="anh" src="${url}/static/img/sanpham/<%=sachDau.getUrlHinh() %>" title="sp" alt="anhsp">
 																		<%
-																		if(sachDau.getSoLuong() >= 1){
+																		int soLuongDB;
+																		Map<String, Object> gioHang = (Map)session.getAttribute("GioHang");
+																		if( gioHang== null ){
+																			soLuongDB = sachDau.getSoLuong();
+																		}
+																		else{
+																			Map<String, Object> danhSachChiTietGioHang = (Map)gioHang.get("DanhSachChiTietGioHang");
+																			if( danhSachChiTietGioHang.get(sachDau.getMaSach())== null ){
+																				soLuongDB = sachDau.getSoLuong();
+																			}
+																			else{
+																				Map<String, Integer> chiTiet = (Map<String, Integer>)danhSachChiTietGioHang.get(sachDau.getMaSach());
+																				soLuongDB = chiTiet.get("SoLuongDB");
+																			}
+																		}
+																		if(soLuongDB >= 1){
 																		%>
-																			<a href="/SachKyAnh/ThemSachVaoGioHang?MaSach=<%=sachDau.getMaSach() %>&SoLuong=1" class="them_gh text-a" >
+																			<a href="/SachKyAnh/ThemSachVaoGioHang?MaSach=<%=sachDau.getMaSach() %>&SoLuong=1&DuongDan=<%= request.getServletPath() %>" class="them_gh text-a" >
 																				<span class="glyphicon glyphicon-shopping-cart"></span>
 																				<span class="text"> Thêm vào giỏ</span>
 																			</a>
