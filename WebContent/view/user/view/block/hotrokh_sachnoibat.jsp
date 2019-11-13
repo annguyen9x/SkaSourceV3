@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ page import="java.util.List" %>
+<%@ page import="java.util.Map" %>
 <%@ page import="model.Sach" %>
 <%@ page import="java.text.NumberFormat" %>
 <%@page import="java.text.DecimalFormat" %>
@@ -66,7 +67,22 @@
 						<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sach.getMaSach() %>" class="">
 							<img class="anh" src="${url}/static/img/sanpham/<%=sach.getUrlHinh() %>" title="sp" alt="anhsp">
 							<%
-							if(sach.getSoLuong() >= 1){
+							int soLuongDB;
+							Map<String, Object> gioHang = (Map)session.getAttribute("GioHang");
+							if( gioHang== null ){
+								soLuongDB = sach.getSoLuong();
+							}
+							else{
+								Map<String, Object> danhSachChiTietGioHang = (Map)gioHang.get("DanhSachChiTietGioHang");
+								if( danhSachChiTietGioHang.get(sach.getMaSach())== null ){
+									soLuongDB = sach.getSoLuong();
+								}
+								else{
+									Map<String, Integer> chiTiet = (Map<String, Integer>)danhSachChiTietGioHang.get(sach.getMaSach());
+									soLuongDB = chiTiet.get("SoLuongDB");
+								}
+							}
+							if(soLuongDB >= 1){
 							%>
 								<a href="/SachKyAnh/ThemSachVaoGioHang?MaSach=<%=sach.getMaSach() %>&SoLuong=1" class="them_gh text-a" >
 									<span class="glyphicon glyphicon-shopping-cart"></span>
