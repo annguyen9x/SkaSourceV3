@@ -3,6 +3,8 @@
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="java.text.NumberFormat"%>
 <%@page import="java.util.List" %>
+<%@page import="java.util.Map" %>
+<%@ page import="javax.servlet.http.HttpUtils.*" %>
 <%@page import="model.Sach" %>
 <%@page import="model.LoaiSach" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -50,6 +52,22 @@
 					Sach sachDau = dsSach.get(0);
 					
 					LoaiSach loaiSach = (LoaiSach)request.getAttribute("LoaiSach");
+					
+					int soLuongDB;
+					Map<String, Object> gioHang = (Map)session.getAttribute("GioHang");
+					if( gioHang== null ){
+						soLuongDB = sachDau.getSoLuong();
+					}
+					else{
+						Map<String, Object> danhSachChiTietGioHang = (Map)gioHang.get("DanhSachChiTietGioHang");
+						if( danhSachChiTietGioHang.get(sachDau.getMaSach())== null ){
+							soLuongDB = sachDau.getSoLuong();
+						}
+						else{
+							Map<String, Integer> chiTiet = (Map<String, Integer>)danhSachChiTietGioHang.get(sachDau.getMaSach());
+							soLuongDB = chiTiet.get("SoLuongDB");
+						}
+					}
 				%>
 					<!-- phần top -->
 					<div class="col-md-12 col-sm-12 col-xs-12 padding-0 top_nd_trang">
@@ -87,7 +105,7 @@
 													<p>
 														Tình trạng: <span class="trang_thai">
 														<%
-															if(sachDau.getSoLuong() > 0){
+															if(soLuongDB > 0){
 																out.print("Còn hàng");
 															}else{
 																out.print("Hết hàng");
@@ -140,9 +158,10 @@
 												</p>
 											</div>
 											<div class="sl_button">
-												<form method="get" action="/SachKyAnh/ThemSachVaoGioHang" onsubmit="return ktSoLuongMua();" id="formChiTietSP">
+												<form method="get" action="/SachKyAnh/ThemSachVaoGioHang" onsubmit="return ktSoLuongMua('<%=soLuongDB %>', '<%=sachDau.getTenSach() %>');" id="formChiTietSP">
 												 	<span class="label_sl">Số lượng: </span>
 													<input type='number' name='SoLuong' value='1' class="sl_mua"><br/> 
+													<input type='hidden' name='DuongDan' value='<%= request.getServletPath() %>'><br/> 
 													<div class="col-md-12 col-sm-12 col-xs-12 padding-0 nut">
 														<div class="col-md-3 col-sm-4 col-xs-4 padding-0 margin_right">
 															<a href="/SachKyAnh/userTrangChu" class="">
