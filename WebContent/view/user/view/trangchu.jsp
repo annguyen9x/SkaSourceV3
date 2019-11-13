@@ -69,7 +69,22 @@
 														<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sach1.getMaSach() %>" class="">
 															<img class="anh" src="${url}/static/img/sanpham/<%=sach1.getUrlHinh() %>" title="sp" alt="anhsp">
 															<%
-															if(sach1.getSoLuong() >= 1){
+															int soLuongDB;
+															Map<String, Object> gioHang = (Map)session.getAttribute("GioHang");
+															if( gioHang== null ){
+																soLuongDB = sach1.getSoLuong();
+															}
+															else{
+																Map<String, Object> danhSachChiTietGioHang = (Map)gioHang.get("DanhSachChiTietGioHang");
+																if( danhSachChiTietGioHang.get(sach1.getMaSach())== null ){
+																	soLuongDB = sach1.getSoLuong();
+																}
+																else{
+																	Map<String, Integer> chiTiet = (Map<String, Integer>)danhSachChiTietGioHang.get(sach1.getMaSach());
+																	soLuongDB = chiTiet.get("SoLuongDB");
+																}
+															}
+															if(soLuongDB >= 1){
 															%>
 																<a href="/SachKyAnh/ThemSachVaoGioHang?MaSach=<%=sach1.getMaSach() %>&SoLuong=1" class="them_gh text-a" >
 																	<span class="glyphicon glyphicon-shopping-cart"></span>
@@ -111,7 +126,20 @@
 														<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sach2.getMaSach() %>" class="">
 															<img class="anh" src="${url}/static/img/sanpham/<%=sach2.getUrlHinh() %>" title="sp" alt="anhsp">
 															<%
-															if(sach2.getSoLuong() >= 1){
+															if( gioHang== null ){
+																soLuongDB = sach2.getSoLuong();
+															}
+															else{
+																Map<String, Object> danhSachChiTietGioHang = (Map)gioHang.get("DanhSachChiTietGioHang");
+																if( danhSachChiTietGioHang.get(sach2.getMaSach())== null ){
+																	soLuongDB = sach2.getSoLuong();
+																}
+																else{
+																	Map<String, Integer> chiTiet = (Map<String, Integer>)danhSachChiTietGioHang.get(sach2.getMaSach());
+																	soLuongDB = chiTiet.get("SoLuongDB");
+																}
+															}
+															if(soLuongDB >= 1){
 															%>
 																<a href="/SachKyAnh/ThemSachVaoGioHang?MaSach=<%=sach2.getMaSach() %>&SoLuong=1" class="them_gh text-a" >
 																	<span class="glyphicon glyphicon-shopping-cart"></span>
@@ -180,7 +208,20 @@
 													<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sach.getMaSach() %>" class="">
 														<img class="anh" src="${url}/static/img/sanpham/<%=sach.getUrlHinh() %>" title="sp" alt="anhsp">
 														<%
-														if(sach.getSoLuong() >= 1){
+														if( gioHang== null ){
+															soLuongDB = sach.getSoLuong();
+														}
+														else{
+															Map<String, Object> danhSachChiTietGioHang = (Map)gioHang.get("DanhSachChiTietGioHang");
+															if( danhSachChiTietGioHang.get(sach.getMaSach())== null ){
+																soLuongDB = sach.getSoLuong();
+															}
+															else{
+																Map<String, Integer> chiTiet = (Map<String, Integer>)danhSachChiTietGioHang.get(sach.getMaSach());
+																soLuongDB = chiTiet.get("SoLuongDB");
+															}
+														}
+														if(soLuongDB >= 1){
 														%>
 															<a href="/SachKyAnh/ThemSachVaoGioHang?MaSach=<%=sach.getMaSach() %>&SoLuong=1" class="them_gh text-a" >
 																<span class="glyphicon glyphicon-shopping-cart"></span>
@@ -231,7 +272,20 @@
 														<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sach.getMaSach() %>" class="">
 															<img class="anh" src="${url}/static/img/sanpham/<%=sach.getUrlHinh() %>" title="sp" alt="anhsp">
 															<%
-															if(sach.getSoLuong() >= 1){
+															if( gioHang== null ){
+																soLuongDB = sach.getSoLuong();
+															}
+															else{
+																Map<String, Object> danhSachChiTietGioHang = (Map)gioHang.get("DanhSachChiTietGioHang");
+																if( danhSachChiTietGioHang.get(sach.getMaSach())== null ){
+																	soLuongDB = sach.getSoLuong();
+																}
+																else{
+																	Map<String, Integer> chiTiet = (Map<String, Integer>)danhSachChiTietGioHang.get(sach.getMaSach());
+																	soLuongDB = chiTiet.get("SoLuongDB");
+																}
+															}
+															if(soLuongDB >= 1){
 															%>
 																<a href="/SachKyAnh/ThemSachVaoGioHang?MaSach=<%=sach.getMaSach() %>&SoLuong=1" class="them_gh text-a">
 																	<span class="glyphicon glyphicon-shopping-cart"></span>
@@ -337,7 +391,20 @@
 															<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sachDau.getMaSach() %>" class="">
 																<img class="anh" src="${url}/static/img/sanpham/<%=sachDau.getUrlHinh() %>" title="sp" alt="anhsp">
 																<%
-																if(sachDau.getSoLuong() >= 1){
+																if( gioHang== null ){
+																	soLuongDB = sachDau.getSoLuong();
+																}
+																else{
+																	Map<String, Object> danhSachChiTietGioHang = (Map)gioHang.get("DanhSachChiTietGioHang");
+																	if( danhSachChiTietGioHang.get(sachDau.getMaSach())== null ){
+																		soLuongDB = sachDau.getSoLuong();
+																	}
+																	else{
+																		Map<String, Integer> chiTiet = (Map<String, Integer>)danhSachChiTietGioHang.get(sachDau.getMaSach());
+																		soLuongDB = chiTiet.get("SoLuongDB");
+																	}
+																}
+																if(soLuongDB >= 1){
 																%>
 																	<a href="/SachKyAnh/ThemSachVaoGioHang?MaSach=<%=sachDau.getMaSach() %>&SoLuong=1" class="them_gh text-a" >
 																		<span class="glyphicon glyphicon-shopping-cart"></span>
@@ -392,7 +459,20 @@
 														<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sachDau.getMaSach() %>" class="">
 															<img class="anh" src="${url}/static/img/sanpham/<%=sachDau.getUrlHinh() %>" title="sp" alt="anhsp">
 															<%
-															if(sachDau.getSoLuong() >= 1){
+															if( gioHang== null ){
+																soLuongDB = sachDau.getSoLuong();
+															}
+															else{
+																Map<String, Object> danhSachChiTietGioHang = (Map)gioHang.get("DanhSachChiTietGioHang");
+																if( danhSachChiTietGioHang.get(sachDau.getMaSach())== null ){
+																	soLuongDB = sachDau.getSoLuong();
+																}
+																else{
+																	Map<String, Integer> chiTiet = (Map<String, Integer>)danhSachChiTietGioHang.get(sachDau.getMaSach());
+																	soLuongDB = chiTiet.get("SoLuongDB");
+																}
+															}
+															if(soLuongDB >= 1){
 															%>
 																<a href="/SachKyAnh/ThemSachVaoGioHang?MaSach=<%=sachDau.getMaSach() %>&SoLuong=1" class="them_gh text-a" >
 																	<span class="glyphicon glyphicon-shopping-cart"></span>
@@ -444,7 +524,20 @@
 														<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sachDau.getMaSach() %>" class="">
 															<img class="anh" src="${url}/static/img/sanpham/<%=sachDau.getUrlHinh() %>" title="sp" alt="anhsp">
 															<%
-															if(sachDau.getSoLuong() >= 1){
+															if( gioHang== null ){
+																soLuongDB = sachDau.getSoLuong();
+															}
+															else{
+																Map<String, Object> danhSachChiTietGioHang = (Map)gioHang.get("DanhSachChiTietGioHang");
+																if( danhSachChiTietGioHang.get(sachDau.getMaSach())== null ){
+																	soLuongDB = sachDau.getSoLuong();
+																}
+																else{
+																	Map<String, Integer> chiTiet = (Map<String, Integer>)danhSachChiTietGioHang.get(sachDau.getMaSach());
+																	soLuongDB = chiTiet.get("SoLuongDB");
+																}
+															}
+															if(soLuongDB >= 1){
 															%>
 																<a href="/SachKyAnh/ThemSachVaoGioHang?MaSach=<%=sachDau.getMaSach() %>&SoLuong=1" class="them_gh text-a" >
 																	<span class="glyphicon glyphicon-shopping-cart"></span>
