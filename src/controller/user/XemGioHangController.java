@@ -14,9 +14,4 @@ public class XemGioHangController extends HttpServlet {
 		response.sendRedirect("/SachKyAnh/view/user/view/gio_hang.jsp");
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
-
 }
