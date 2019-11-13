@@ -1,6 +1,10 @@
+<%@page import="org.eclipse.jdt.internal.compiler.env.IModule.IService"%>
+<%@page import="java.util.Map.Entry"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@page import="model.KhachHang" %>
+<%@page import="java.util.Map" %>
+<%@page import="java.util.Iterator" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:url var="url" value="/view/user"></c:url>
 
@@ -65,7 +69,30 @@
 	                    <a title="Giỏ hàng" href="/SachKyAnh/XemGioHang">
 	                    	<img src="${url}/static/img/icon/cart.png" alt="">
 	                    	<span class="text-show">Giỏ hàng</span>
-	                    	<span class="soluong_sp">0</span>
+	                    	<%
+	                    		Map<String, Object> gioHang = (Map<String, Object>)session.getAttribute("GioHang");
+	                    		if( gioHang == null ){
+	                    			
+	                    	%>
+	                    		<span class="soluong_sp">0</span>
+	                    	<%
+	                    		}else{
+	                    			Map<String, Object> danhSachChiTietGioHang = (Map<String, Object>)gioHang.get("DanhSachChiTietGioHang");
+	                    			if( danhSachChiTietGioHang != null ){
+	                    				Iterator iterator =  danhSachChiTietGioHang.entrySet().iterator();
+	                    				int tongSanPham = 0;
+	                    				while( iterator.hasNext()){
+	                    					Map.Entry ketQua = (Map.Entry)iterator.next();
+	                    					Map<String, Integer> chiTiet  = (Map<String, Integer>)ketQua.getValue();
+	                    					tongSanPham += chiTiet.get("SoLuong");
+	                    				}
+	                    			
+	                    	%>
+	                    				<span class="soluong_sp"><%=tongSanPham %></span>
+	                    	<%
+	                    			}
+	                    		}
+	                    	%>
 	                    </a>
 	                </div>
 				</div>
