@@ -32,6 +32,7 @@ public class SachDao implements ITFSachDao{
 	public boolean delete(Sach sach) {
 		return false;
 	}
+	
 
 	@Override
 	public Sach getSachTheoMaSach(String maSach) {
@@ -336,5 +337,4 @@ public class SachDao implements ITFSachDao{
 	
 		return null;
 	}
-
 }
