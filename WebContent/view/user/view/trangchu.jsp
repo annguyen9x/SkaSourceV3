@@ -82,6 +82,9 @@
 																else{
 																	Map<String, Integer> chiTiet = (Map<String, Integer>)danhSachChiTietGioHang.get(sach1.getMaSach());
 																	soLuongDB = chiTiet.get("SoLuongDB");
+																	if(soLuongDB > sach1.getSoLuong()){
+																		soLuongDB = sach1.getSoLuong();
+																	}
 																}
 															}
 															if(soLuongDB >= 1){
@@ -137,6 +140,9 @@
 																else{
 																	Map<String, Integer> chiTiet = (Map<String, Integer>)danhSachChiTietGioHang.get(sach2.getMaSach());
 																	soLuongDB = chiTiet.get("SoLuongDB");
+																	if(soLuongDB > sach2.getSoLuong()){
+																		soLuongDB = sach2.getSoLuong();
+																	}
 																}
 															}
 															if(soLuongDB >= 1){
@@ -219,6 +225,9 @@
 															else{
 																Map<String, Integer> chiTiet = (Map<String, Integer>)danhSachChiTietGioHang.get(sach.getMaSach());
 																soLuongDB = chiTiet.get("SoLuongDB");
+																if(soLuongDB > sach.getSoLuong()){
+																	soLuongDB = sach.getSoLuong();
+																}
 															}
 														}
 														if(soLuongDB >= 1){
@@ -283,6 +292,9 @@
 																else{
 																	Map<String, Integer> chiTiet = (Map<String, Integer>)danhSachChiTietGioHang.get(sach.getMaSach());
 																	soLuongDB = chiTiet.get("SoLuongDB");
+																	if(soLuongDB > sach.getSoLuong()){
+																		soLuongDB = sach.getSoLuong();
+																	}
 																}
 															}
 															if(soLuongDB >= 1){
@@ -402,6 +414,9 @@
 																	else{
 																		Map<String, Integer> chiTiet = (Map<String, Integer>)danhSachChiTietGioHang.get(sachDau.getMaSach());
 																		soLuongDB = chiTiet.get("SoLuongDB");
+																		if(soLuongDB > sachDau.getSoLuong()){
+																			soLuongDB = sachDau.getSoLuong();
+																		}
 																	}
 																}
 																if(soLuongDB >= 1){
@@ -470,6 +485,9 @@
 																else{
 																	Map<String, Integer> chiTiet = (Map<String, Integer>)danhSachChiTietGioHang.get(sachDau.getMaSach());
 																	soLuongDB = chiTiet.get("SoLuongDB");
+																	if(soLuongDB > sachDau.getSoLuong()){
+																		soLuongDB = sachDau.getSoLuong();
+																	}
 																}
 															}
 															if(soLuongDB >= 1){
@@ -535,6 +553,9 @@
 																else{
 																	Map<String, Integer> chiTiet = (Map<String, Integer>)danhSachChiTietGioHang.get(sachDau.getMaSach());
 																	soLuongDB = chiTiet.get("SoLuongDB");
+																	if(soLuongDB > sachDau.getSoLuong()){
+																		soLuongDB = sachDau.getSoLuong();
+																	}
 																}
 															}
 															if(soLuongDB >= 1){
