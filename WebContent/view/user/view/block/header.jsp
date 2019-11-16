@@ -83,10 +83,9 @@
 	                    				int tongSanPham = 0;
 	                    				while( iterator.hasNext()){
 	                    					Map.Entry ketQua = (Map.Entry)iterator.next();
-	                    					Map<String, Integer> chiTiet  = (Map<String, Integer>)ketQua.getValue();
-	                    					tongSanPham += chiTiet.get("SoLuong");
+	                    					Map<String, Object> chiTiet  = (Map<String, Object>)ketQua.getValue();
+	                    					tongSanPham += (int)chiTiet.get("SoLuong");
 	                    				}
-	                    			
 	                    	%>
 	                    				<span class="soluong_sp"><%=tongSanPham %></span>
 	                    	<%
