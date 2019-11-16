@@ -32,19 +32,23 @@ public class ThemSachVaoGioHangController extends HttpServlet {
 				session.removeAttribute("GioHang");//Xóa giỏ hàng nếu đang mua hàng, tạo giỏ hàng mới
 			}
 			session.removeAttribute("CapNhatDonHang");
-			
 			//Đổ dữ liệu từ đơn hàng sang giỏ hàng, rồi cập nhật trên đơn hàng sau đó lưu database
 		}else {
 			Map<String, Object> GioHangMoi = null;
 			Map<String, Object> danhSachChiTietGioHang = null;
-			Map<String, Integer> chiTiet = null;
+			Map<String, Object> chiTiet = null;
+			
 			SachDao sachDao = new SachDao();
-			Sach sach = sachDao.getSachTheoMaSach(maSach);
 			
 			if( gioHang == null ) {
 				danhSachChiTietGioHang = new HashMap<String, Object>();
 				
-				chiTiet = new HashMap<String, Integer>();
+				Sach sach = sachDao.getSachTheoMaSach(maSach);
+				
+				chiTiet = new HashMap<String, Object>();
+				chiTiet.put("TenSach", sach.getTenSach());
+				chiTiet.put("UrlHinh", sach.getUrlHinh());
+				chiTiet.put("DonGia", sach.getDonGiaBan());
 				chiTiet.put("SoLuongDB", sach.getSoLuong() - soLuong);
 				chiTiet.put("SoLuong", soLuong);
 				
@@ -56,17 +60,32 @@ public class ThemSachVaoGioHangController extends HttpServlet {
 			}else {
 				danhSachChiTietGioHang = (Map)gioHang.get("DanhSachChiTietGioHang");
 				if( danhSachChiTietGioHang.get(maSach) == null ) {
-					chiTiet = new HashMap<String, Integer>();
+					Sach sach = sachDao.getSachTheoMaSach(maSach);
+					
+					chiTiet = new HashMap<String, Object>();
+					chiTiet.put("TenSach", sach.getTenSach());
+					chiTiet.put("UrlHinh", sach.getUrlHinh());
+					chiTiet.put("DonGia", sach.getDonGiaBan());
 					chiTiet.put("SoLuongDB", sach.getSoLuong() - soLuong);
 					chiTiet.put("SoLuong", soLuong);
 					
 					danhSachChiTietGioHang.put(maSach, chiTiet);
 				}
 				else {
+					
+					Sach sach = sachDao.getSachTheoMaSach(maSach);
+					
 					chiTiet = (Map)danhSachChiTietGioHang.get(maSach);
-					int soLuongDBMoi = chiTiet.get("SoLuongDB") - soLuong;
-					int soLuongMoi = chiTiet.get("SoLuong") + soLuong;
+					int soLuongDBMoi;
+					int soLuongDBTrongGioHang = (int)chiTiet.get("SoLuongDB");
+					if( soLuongDBTrongGioHang > sach.getSoLuong() ) {
+						soLuongDBMoi = sach.getSoLuong()-soLuong;
+					}else {
+						soLuongDBMoi = ((int)chiTiet.get("SoLuongDB") - soLuong);
+					}
 					chiTiet.put("SoLuongDB", soLuongDBMoi);
+					
+					int soLuongMoi = (int)chiTiet.get("SoLuong") + soLuong;
 					chiTiet.put("SoLuong", soLuongMoi);
 					
 					danhSachChiTietGioHang.put(maSach, chiTiet);
@@ -77,7 +96,7 @@ public class ThemSachVaoGioHangController extends HttpServlet {
 			
 			//In Giỏ hàng để test
 			if( gioHang != null ) {
-				System.out.println("\n--------- Giỏ Hàng ---------\n");
+				System.out.println("\n--------- Giỏ Hàng  ---------\n");
 				for(int i = 0; i < gioHang.size(); i++) {
 					danhSachChiTietGioHang = (Map<String, Object>)gioHang.get("DanhSachChiTietGioHang");
 					Iterator iterator =  danhSachChiTietGioHang.entrySet().iterator();
@@ -88,7 +107,7 @@ public class ThemSachVaoGioHangController extends HttpServlet {
 				}
 			}
 			
-			//Phần chuyển hướng
+			//Phần chuyển trang
 			String url = request.getParameter("DuongDan");
 			if( url != null &&  url.equals("/view/user/view/chitiet_sp.jsp")) {
 				response.sendRedirect("/SachKyAnh/ChiTietSach?MaSach="+maSach);
