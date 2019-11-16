@@ -53,21 +53,6 @@ Values(N'Hà Việt Anh', N'Kho', 'e10adc3949ba59abbe56e057f20f883e', 'kho@gmail
 Insert into NhanVien(TenNV, ChucVu, MatKhau, Email, DienThoai, GioiTinh, NgaySinh, DiaChi) 
 Values(N'Hồ Đức Hiếu', N'Giao Hàng', 'e10adc3949ba59abbe56e057f20f883e', 'giaohang@gmail.com', '0123887756', N'Nam', '1996-12-05',N'P. Kỳ Liên, Tx. Kỳ Anh, T. Hà Tĩnh')
 
-Create table HoaDonNhap(
-MaHDN varchar(6) primary key,
-TenNCC nvarchar(100),
-NgayNhap date,
-TongTienNhap decimal(18,2),
-MaNVKho int foreign key references NhanVien(MaNV),
-)
-Go
-
-Insert into HoaDonNhap Values('NS0001', N'Công ty Sách & Thiết Bị Giáo Dục Miền Nam', '2019-09-19', 490100.00, 1003)
-Insert into HoaDonNhap Values('NS0002', N'Công ty cổ phần phát hành sách TP. HCM', '2019-10-19', 475000.00, 1004)
-Insert into HoaDonNhap Values('NS0003', N'Công ty cổ phần sách và thiết bị giáo dục Bình Dương', '2019-10-22', 530000.00, 1004)
-Insert into HoaDonNhap Values('NS0004', N'Công ty TNHH Hải Hà', '2019-11-25', 865000.00, 1004)
-Insert into HoaDonNhap Values('NS0005', N'Công ty cổ phần Sách Giáo Dục', '2019-12-05', 934000.00, 1003)
-
 Create table LoaiSach(
 MaLoaiSach varchar(4) primary key,
 TenLoaiSach nvarchar(100) not null,
@@ -328,6 +313,26 @@ N'<p>
 - Cuốn sách này tập hợp những câu chuyện vô cùng thú vị về chú mèo máy Doraemon: Viên cảm tình, Câu chuyện cảm động, Mây tạo tuyết...
 </p>', 
 N'Fujiko-F-Fujio', 2019, N'Nhà Xuất Bản Kim Đồng', 'NS0005', 'LS07')
+
+Create table NhapSach(
+MaNS varchar(6) primary key,
+MaNVKho int foreign key references NhanVien(MaNV),
+MaSach varchar(6) foreign key references Sach(MaSach),
+SoLuongNhap int,
+NgayNhap date,
+)
+Go
+
+Insert into NhapSach Values('NS0001', 1003, 'SKC001', 10, '2019-09-19')
+Insert into NhapSach Values('NS0002', 1004, 'SKC002', 10, '2019-10-19')
+Insert into NhapSach Values('NS0003', 1004, 'SKC003', 10, '2019-10-22')
+Insert into NhapSach Values('NS0004', 1004, 'SKC004', 10,  '2019-11-25')
+Insert into NhapSach Values('NS0005', 1003, 'SKC005', 10,  '2019-12-05')
+Insert into NhapSach Values('NS0006', 1003, 'SKC006', 10, '2019-09-19')
+Insert into NhapSach Values('NS0007', 1004, 'STL007', 10, '2019-10-19')
+Insert into NhapSach Values('NS0008', 1004, 'STL008', 10, '2019-10-22')
+Insert into NhapSach Values('NS0009', 1004, 'SKT009', 10,  '2019-11-25')
+Insert into NhapSach Values('NS0010', 1003, 'SKT010', 10,  '2019-12-25')
 
 Create table HoaDonBan(
 SoHD int identity(10000001,1) primary key,
