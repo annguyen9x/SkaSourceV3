@@ -80,6 +80,9 @@
 								else{
 									Map<String, Integer> chiTiet = (Map<String, Integer>)danhSachChiTietGioHang.get(sach.getMaSach());
 									soLuongDB = chiTiet.get("SoLuongDB");
+									if(soLuongDB > sach.getSoLuong()){
+										soLuongDB = sach.getSoLuong();
+									}
 								}
 							}
 							if(soLuongDB >= 1){
