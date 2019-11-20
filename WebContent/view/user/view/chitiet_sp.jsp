@@ -125,7 +125,7 @@
 																<span class="gia_sp">
 																<%
 																	NumberFormat numberFormat = new DecimalFormat("###,###,###");
-																	out.print(numberFormat.format(sach.getDonGiaBan())); 
+																	out.print(numberFormat.format(sach.getDonGia())); 
 																%> đ
 																</span>
 															</div>
