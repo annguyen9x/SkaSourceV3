@@ -21,7 +21,11 @@ import util.KiemTraKieuSo;
 public class ThemSachVaoGioHangController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String maSach = request.getParameter("MaSach");
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset=utf-8"); 
+		
+		String maSach = request.getParameter("MaSach").trim();
 		int soLuong = Integer.parseInt(request.getParameter("SoLuong").trim());
 		
 		HttpSession session = request.getSession();
@@ -36,7 +40,7 @@ public class ThemSachVaoGioHangController extends HttpServlet {
 		}else {
 			Map<String, Object> GioHangMoi = null;
 			Map<String, Object> danhSachChiTietGioHang = null;
-			Map<String, Object> chiTiet = null;
+			Map<String, Object> chiTietGioHang = null;
 			
 			SachDao sachDao = new SachDao();
 			
@@ -45,14 +49,15 @@ public class ThemSachVaoGioHangController extends HttpServlet {
 				
 				Sach sach = sachDao.getSachTheoMaSach(maSach);
 				
-				chiTiet = new HashMap<String, Object>();
-				chiTiet.put("TenSach", sach.getTenSach());
-				chiTiet.put("UrlHinh", sach.getUrlHinh());
-				chiTiet.put("DonGia", sach.getDonGiaBan());
-				chiTiet.put("SoLuongDB", sach.getSoLuong() - soLuong);
-				chiTiet.put("SoLuong", soLuong);
+				chiTietGioHang = new HashMap<String, Object>();
+				chiTietGioHang.put("TenSach", sach.getTenSach());
+				chiTietGioHang.put("UrlHinh", sach.getUrlHinh());
+				chiTietGioHang.put("DonGia", sach.getDonGia());
+				chiTietGioHang.put("SoLuongDB", sach.getSoLuong() - soLuong);
+				chiTietGioHang.put("TongSoLuongDB", sach.getSoLuong());
+				chiTietGioHang.put("SoLuong", soLuong);
 				
-				danhSachChiTietGioHang.put(maSach, chiTiet);
+				danhSachChiTietGioHang.put(maSach, chiTietGioHang);
 				
 				GioHangMoi = new HashMap<String, Object>();
 				GioHangMoi.put("DanhSachChiTietGioHang", danhSachChiTietGioHang);
@@ -62,33 +67,35 @@ public class ThemSachVaoGioHangController extends HttpServlet {
 				if( danhSachChiTietGioHang.get(maSach) == null ) {
 					Sach sach = sachDao.getSachTheoMaSach(maSach);
 					
-					chiTiet = new HashMap<String, Object>();
-					chiTiet.put("TenSach", sach.getTenSach());
-					chiTiet.put("UrlHinh", sach.getUrlHinh());
-					chiTiet.put("DonGia", sach.getDonGiaBan());
-					chiTiet.put("SoLuongDB", sach.getSoLuong() - soLuong);
-					chiTiet.put("SoLuong", soLuong);
+					chiTietGioHang = new HashMap<String, Object>();
+					chiTietGioHang.put("TenSach", sach.getTenSach());
+					chiTietGioHang.put("UrlHinh", sach.getUrlHinh());
+					chiTietGioHang.put("DonGia", sach.getDonGia());
+					chiTietGioHang.put("SoLuongDB", sach.getSoLuong() - soLuong);
+					chiTietGioHang.put("TongSoLuongDB", sach.getSoLuong());
+					chiTietGioHang.put("SoLuong", soLuong);
 					
-					danhSachChiTietGioHang.put(maSach, chiTiet);
+					danhSachChiTietGioHang.put(maSach, chiTietGioHang);
 				}
 				else {
 					
 					Sach sach = sachDao.getSachTheoMaSach(maSach);
 					
-					chiTiet = (Map)danhSachChiTietGioHang.get(maSach);
+					chiTietGioHang = (Map)danhSachChiTietGioHang.get(maSach);
 					int soLuongDBMoi;
-					int soLuongDBTrongGioHang = (int)chiTiet.get("SoLuongDB");
+					int soLuongDBTrongGioHang = (int)chiTietGioHang.get("SoLuongDB");
 					if( soLuongDBTrongGioHang > sach.getSoLuong() ) {
 						soLuongDBMoi = sach.getSoLuong()-soLuong;
 					}else {
-						soLuongDBMoi = ((int)chiTiet.get("SoLuongDB") - soLuong);
+						soLuongDBMoi = ((int)chiTietGioHang.get("SoLuongDB") - soLuong);
 					}
-					chiTiet.put("SoLuongDB", soLuongDBMoi);
+					chiTietGioHang.put("SoLuongDB", soLuongDBMoi);
+					chiTietGioHang.put("TongSoLuongDB", sach.getSoLuong());
 					
-					int soLuongMoi = (int)chiTiet.get("SoLuong") + soLuong;
-					chiTiet.put("SoLuong", soLuongMoi);
+					int soLuongMoi = (int)chiTietGioHang.get("SoLuong") + soLuong;
+					chiTietGioHang.put("SoLuong", soLuongMoi);
 					
-					danhSachChiTietGioHang.put(maSach, chiTiet);
+					danhSachChiTietGioHang.put(maSach, chiTietGioHang);
 				}
 				gioHang.put("DanhSachChiTietGioHang", danhSachChiTietGioHang);
 				session.setAttribute("GioHang", gioHang);
@@ -96,7 +103,7 @@ public class ThemSachVaoGioHangController extends HttpServlet {
 			
 			//In Giỏ hàng để test
 			if( gioHang != null ) {
-				System.out.println("\n--------- Giỏ Hàng  ---------\n");
+				System.out.println("\n--------- Gio Hang  ---------\n");
 				for(int i = 0; i < gioHang.size(); i++) {
 					danhSachChiTietGioHang = (Map<String, Object>)gioHang.get("DanhSachChiTietGioHang");
 					Iterator iterator =  danhSachChiTietGioHang.entrySet().iterator();
