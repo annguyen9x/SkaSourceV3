@@ -41,7 +41,7 @@ public class SachDao implements ITFSachDao{
 		try {
 			conn = KetNoiDatabase.getConn();
 			conn.setAutoCommit(false);
-			String sql = "Select MaSach, TenSach, DonGiaNhap, DonGiaBan, SoLuong, UrlHinh, NoiDung, TacGia, NamXB, NXB, MaHDN, MaLoaiSach " + 
+			String sql = "Select MaSach, TenSach, DonGia, SoLuong, UrlHinh, NoiDung, TacGia, NamXB, NXB, MaLoaiSach " + 
 						 "From Sach " + 
 						 "Where MaSach= ?";
 			pStatement = conn.prepareStatement(sql);
@@ -51,26 +51,29 @@ public class SachDao implements ITFSachDao{
 			if( rs.next() ) {
 				sach.setMaSach(rs.getString("MaSach"));
 				sach.setTenSach(rs.getNString("TenSach"));
-				sach.setDonGiaNhap(rs.getFloat("DonGiaNhap"));
-				sach.setDonGiaBan(rs.getFloat("DonGiaBan"));
+				sach.setDonGia(rs.getFloat("DonGia"));
 				sach.setSoLuong(rs.getInt("SoLuong"));
 				sach.setUrlHinh(rs.getString("UrlHinh"));
 				sach.setNoiDung(rs.getString("NoiDung"));
 				sach.setTacGia(rs.getString("TacGia"));
 				sach.setNamXB(rs.getInt("NamXB"));
 				sach.setnXB(rs.getString("NXB"));
-				sach.setMaHDN(rs.getString("MaHDN"));
 				sach.setMaLoaiSach(rs.getString("MaLoaiSach"));
 			}
 			conn.commit();
 			return sach;
 		} catch (SQLException e) {
-			System.out.println("Lỗi truy vấn sách trong table Sach: " + e.toString());
+			System.out.println("Loi truy van Sach trong table Sach: " + e.toString());
+			try {
+                conn.rollback();
+            } catch (SQLException ex1) {
+                System.out.println("Loi rollback");
+            }
 		}finally {
 			try {
 				pStatement.close();
 			} catch (SQLException e) {
-				System.out.println("Lỗi đóng kết nối PreparedStatement: " + e.toString());
+				System.out.println("Loi dong ket noi PreparedStatement: " + e.toString());
 			}
 			ketNoiDatabase.closeConnection(conn);
 		}
@@ -85,9 +88,9 @@ public class SachDao implements ITFSachDao{
 		try {
 			conn = KetNoiDatabase.getConn();
 			conn.setAutoCommit(false);
-			String sql = "Select Top "+ soLuong +" MaSach, TenSach, DonGiaNhap, DonGiaBan, SoLuong, UrlHinh, NoiDung, TacGia, NamXB, NXB, MaHDN, MaLoaiSach " + 
+			String sql = "Select Top "+ soLuong +" MaSach, TenSach, DonGia, SoLuong, UrlHinh, NoiDung, TacGia, NamXB, NXB, MaLoaiSach " + 
 						 "From Sach " + 
-						 "Order By DonGiaBan DESC ";
+						 "Order By DonGia DESC ";
 			pStatement = conn.prepareStatement(sql);
 			rs = pStatement.executeQuery();
 			dsSachNoiBat = new ArrayList<Sach>();
@@ -95,15 +98,13 @@ public class SachDao implements ITFSachDao{
 				Sach sach = new Sach();
 				sach.setMaSach(rs.getString("MaSach"));
 				sach.setTenSach(rs.getNString("TenSach"));
-				sach.setDonGiaNhap(rs.getFloat("DonGiaNhap"));
-				sach.setDonGiaBan(rs.getFloat("DonGiaBan"));
+				sach.setDonGia(rs.getFloat("DonGia"));
 				sach.setSoLuong(rs.getInt("SoLuong"));
 				sach.setUrlHinh(rs.getString("UrlHinh"));
 				sach.setNoiDung(rs.getString("NoiDung"));
 				sach.setTacGia(rs.getString("TacGia"));
 				sach.setNamXB(rs.getInt("NamXB"));
 				sach.setnXB(rs.getString("NXB"));
-				sach.setMaHDN(rs.getString("MaHDN"));
 				sach.setMaLoaiSach(rs.getString("MaLoaiSach"));
 				
 				dsSachNoiBat.add(sach);
@@ -111,12 +112,17 @@ public class SachDao implements ITFSachDao{
 			conn.commit();
 			return dsSachNoiBat;
 		} catch (SQLException e) {
-			System.out.println("Lỗi truy vấn danh sách SachNoiBat: " + e.toString());
+			System.out.println("Loi truy van danh sach SachNoiBat: " + e.toString());
+			try {
+                conn.rollback();
+            } catch (SQLException ex1) {
+                System.out.println("Loi rollback");
+            }
 		}finally {
 			try {
 				pStatement.close();
 			} catch (SQLException e) {
-				System.out.println("Lỗi đóng kết nối PreparedStatement: " + e.toString());
+				System.out.println("Loi dong ket noi PreparedStatement: " + e.toString());
 			}
 			ketNoiDatabase.closeConnection(conn);
 		}
@@ -131,7 +137,7 @@ public class SachDao implements ITFSachDao{
 		try {
 			conn = KetNoiDatabase.getConn();
 			conn.setAutoCommit(false);
-			String sql = "Select Top "+ soLuong +" MaSach, TenSach, DonGiaNhap, DonGiaBan, SoLuong, UrlHinh, NoiDung, TacGia, NamXB, NXB, MaHDN, MaLoaiSach " + 
+			String sql = "Select Top "+ soLuong +" MaSach, TenSach, DonGia, SoLuong, UrlHinh, NoiDung, TacGia, NamXB, NXB, MaLoaiSach " + 
 						 "From Sach " + 
 						 "Order By NamXB DESC ";
 			pStatement = conn.prepareStatement(sql);
@@ -141,15 +147,13 @@ public class SachDao implements ITFSachDao{
 				Sach sach = new Sach();
 				sach.setMaSach(rs.getString("MaSach"));
 				sach.setTenSach(rs.getNString("TenSach"));
-				sach.setDonGiaNhap(rs.getFloat("DonGiaNhap"));
-				sach.setDonGiaBan(rs.getFloat("DonGiaBan"));
+				sach.setDonGia(rs.getFloat("DonGia"));
 				sach.setSoLuong(rs.getInt("SoLuong"));
 				sach.setUrlHinh(rs.getString("UrlHinh"));
 				sach.setNoiDung(rs.getString("NoiDung"));
 				sach.setTacGia(rs.getString("TacGia"));
 				sach.setNamXB(rs.getInt("NamXB"));
 				sach.setnXB(rs.getString("NXB"));
-				sach.setMaHDN(rs.getString("MaHDN"));
 				sach.setMaLoaiSach(rs.getString("MaLoaiSach"));
 				
 				dsSachMoi.add(sach);
@@ -157,12 +161,17 @@ public class SachDao implements ITFSachDao{
 			conn.commit();
 			return dsSachMoi;
 		} catch (SQLException e) {
-			System.out.println("Lỗi truy vấn danh sách SachMoi: " + e.toString());
+			System.out.println("Loi truy van danh sach SachMoi: " + e.toString());
+			try {
+                conn.rollback();
+            } catch (SQLException ex1) {
+                System.out.println("Loi rollback");
+            }
 		}finally {
 			try {
 				pStatement.close();
 			} catch (SQLException e) {
-				System.out.println("Lỗi đóng kết nối PreparedStatement: " + e.toString());
+				System.out.println("Loi dong ket noi PreparedStatement: " + e.toString());
 			}
 			ketNoiDatabase.closeConnection(conn);
 		}
@@ -194,12 +203,17 @@ public class SachDao implements ITFSachDao{
 			conn.commit();
 			return dsTenSachTheoLoaiSach;
 		} catch (SQLException e) {
-			System.out.println("Lỗi truy vấn danh sách TenSachTheoLoaiSach: " + e.toString());
+			System.out.println("Loi truy van danh sach TenSachTheoLoaiSach: " + e.toString());
+			try {
+                conn.rollback();
+            } catch (SQLException ex1) {
+                System.out.println("Loi rollback");
+            }
 		}finally {
 			try {
 				pStatement.close();
 			} catch (SQLException e) {
-				System.out.println("Lỗi đóng kết nối PreparedStatement: " + e.toString());
+				System.out.println("Loi dong ket noi PreparedStatement: " + e.toString());
 			}
 			ketNoiDatabase.closeConnection(conn);
 		}
@@ -214,10 +228,10 @@ public class SachDao implements ITFSachDao{
 		try {
 			conn = KetNoiDatabase.getConn();
 			conn.setAutoCommit(false);
-			String sql = "Select MaSach, TenSach, DonGiaNhap, DonGiaBan, SoLuong, UrlHinh, NoiDung, TacGia, NamXB, NXB, MaHDN, MaLoaiSach " + 
+			String sql = "Select MaSach, TenSach, DonGia, SoLuong, UrlHinh, NoiDung, TacGia, NamXB, NXB, MaLoaiSach " + 
 						 "From Sach " + 
 						 "Where TenSach=? " +
-						 "Order By DonGiaBan ASC";
+						 "Order By DonGia ASC";
 			pStatement = conn.prepareStatement(sql);
 			pStatement.setNString(1, tenSach);
 			rs = pStatement.executeQuery();
@@ -226,15 +240,13 @@ public class SachDao implements ITFSachDao{
 				Sach sach = new Sach();
 				sach.setMaSach(rs.getString("MaSach"));
 				sach.setTenSach(rs.getNString("TenSach"));
-				sach.setDonGiaNhap(rs.getFloat("DonGiaNhap"));
-				sach.setDonGiaBan(rs.getFloat("DonGiaBan"));
+				sach.setDonGia(rs.getFloat("DonGia"));
 				sach.setSoLuong(rs.getInt("SoLuong"));
 				sach.setUrlHinh(rs.getString("UrlHinh"));
 				sach.setNoiDung(rs.getString("NoiDung"));
 				sach.setTacGia(rs.getString("TacGia"));
 				sach.setNamXB(rs.getInt("NamXB"));
 				sach.setnXB(rs.getString("NXB"));
-				sach.setMaHDN(rs.getString("MaHDN"));
 				sach.setMaLoaiSach(rs.getString("MaLoaiSach"));
 				
 				dsSachTheoTenSach.add(sach);
@@ -242,12 +254,17 @@ public class SachDao implements ITFSachDao{
 			conn.commit();
 			return dsSachTheoTenSach;
 		} catch (SQLException e) {
-			System.out.println("Lỗi truy vấn danh sách SachTheoTenSach: " + e.toString());
+			System.out.println("Loi truy van danh sach SachTheoTenSach: " + e.toString());
+			try {
+                conn.rollback();
+            } catch (SQLException ex1) {
+                System.out.println("Loi rollback");
+            }
 		}finally {
 			try {
 				pStatement.close();
 			} catch (SQLException e) {
-				System.out.println("Lỗi đóng kết nối PreparedStatement: " + e.toString());
+				System.out.println("Loi dong ket noi PreparedStatement: " + e.toString());
 			}
 			ketNoiDatabase.closeConnection(conn);
 		}
@@ -270,15 +287,13 @@ public class SachDao implements ITFSachDao{
 						Sach sach = new Sach();
 						sach.setMaSach(sChiTiet.get(j).getMaSach());
 						sach.setTenSach(sChiTiet.get(j).getTenSach());
-						sach.setDonGiaNhap(sChiTiet.get(j).getDonGiaNhap());
-						sach.setDonGiaBan(sChiTiet.get(j).getDonGiaBan());
+						sach.setDonGia(sChiTiet.get(j).getDonGia());
 						sach.setSoLuong(sChiTiet.get(j).getSoLuong());
 						sach.setUrlHinh(sChiTiet.get(j).getUrlHinh());
 						sach.setNoiDung(sChiTiet.get(j).getNoiDung());
 						sach.setTacGia(sChiTiet.get(j).getTacGia());
 						sach.setNamXB(sChiTiet.get(j).getNamXB());
 						sach.setnXB(sChiTiet.get(j).getnXB());
-						sach.setMaHDN(sChiTiet.get(j).getMaHDN());
 						sach.setMaLoaiSach(sChiTiet.get(j).getMaLoaiSach());
 						
 						listSach.add(sach);
@@ -298,7 +313,7 @@ public class SachDao implements ITFSachDao{
 		try {
 			conn = KetNoiDatabase.getConn();
 			conn.setAutoCommit(false);
-			String sql = "Select MaSach, TenSach, DonGiaNhap, DonGiaBan, SoLuong, UrlHinh, NoiDung, TacGia, NamXB, NXB, MaHDN, MaLoaiSach " + 
+			String sql = "Select MaSach, TenSach, DonGia, SoLuong, UrlHinh, NoiDung, TacGia, NamXB, NXB, MaLoaiSach " + 
 						 "From Sach " + 
 						 "Where TenSach like ? ";
 			pStatement = conn.prepareStatement(sql);
@@ -309,15 +324,13 @@ public class SachDao implements ITFSachDao{
 				Sach sach = new Sach();
 				sach.setMaSach(rs.getString("MaSach"));
 				sach.setTenSach(rs.getNString("TenSach"));
-				sach.setDonGiaNhap(rs.getFloat("DonGiaNhap"));
-				sach.setDonGiaBan(rs.getFloat("DonGiaBan"));
+				sach.setDonGia(rs.getFloat("DonGia"));
 				sach.setSoLuong(rs.getInt("SoLuong"));
 				sach.setUrlHinh(rs.getString("UrlHinh"));
 				sach.setNoiDung(rs.getString("NoiDung"));
 				sach.setTacGia(rs.getString("TacGia"));
 				sach.setNamXB(rs.getInt("NamXB"));
 				sach.setnXB(rs.getString("NXB"));
-				sach.setMaHDN(rs.getString("MaHDN"));
 				sach.setMaLoaiSach(rs.getString("MaLoaiSach"));
 
 				dsSach.add(sach);
@@ -325,12 +338,17 @@ public class SachDao implements ITFSachDao{
 			conn.commit();
 			return dsSach;
 		} catch (SQLException e) {
-			System.out.println("Lỗi truy vấn danh sách TimKiem: " + e.toString());
+			System.out.println("Loi truy van sach TimKiem: " + e.toString());
+			try {
+                conn.rollback();
+            } catch (SQLException ex1) {
+                System.out.println("Loi rollback");
+            }
 		}finally {
 			try {
 				pStatement.close();
 			} catch (SQLException e) {
-				System.out.println("Lỗi đóng kết nối PreparedStatement: " + e.toString());
+				System.out.println("Loi dong ket noi PreparedStatement: " + e.toString());
 			}
 			ketNoiDatabase.closeConnection(conn);
 		}
