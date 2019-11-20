@@ -220,7 +220,7 @@
 							            		<select name="namsinh" id="namsinh" class="col-xs-4 form-control">
 							            			<%
 							            				int namHT = Calendar.getInstance().get(Calendar.YEAR);
-							            				for(int i = 1900 ; i <= namHT; i++){
+							            				for(int i = 1920 ; i <= namHT; i++){
 							            					if(i == namSinh){
 							            			%>
 									            				<option value="<%=i%>" selected="true"><%=i%></option>
