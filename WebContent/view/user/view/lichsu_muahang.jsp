@@ -3,8 +3,9 @@
     pageEncoding="utf-8"%>
 <%@ page import="java.util.Calendar" %>
 <%@ page import="java.util.Date" %>
-<%@page import="model.HoaDonBan" %>
+<%@page import="model.HoaDon" %>
 <%@page import="java.util.List" %>
+<%@page import="java.util.Map" %>
 <%@page import="java.text.SimpleDateFormat" %>
 <%@page import="java.text.NumberFormat" %>
 <%@page import="java.text.DecimalFormat" %>
@@ -81,7 +82,7 @@
 			                    		<span>Lịch sử mua hàng</span>
 			                    	</h2>
 			                    	<%
-										List<HoaDonBan> dsHoaDon = (List<HoaDonBan>)request.getAttribute("DanhSachHoaDon");
+										List<Object> dsHoaDon = (List<Object>)request.getAttribute("DanhSachDonHang");
 										if( dsHoaDon == null || (dsHoaDon != null && dsHoaDon.size() == 0 ) ){
 									%>
 									<div class="col-xs-12">
@@ -107,28 +108,29 @@
 										<tbody>
 											<%
 												for(int i = 0; i < dsHoaDon.size(); i++){
-													HoaDonBan hoaDonBan = dsHoaDon.get(i);
+													Map<String, Object> danhSachHoaDon = (Map<String, Object>)dsHoaDon.get(i);
+													HoaDon hoaDon = (HoaDon)danhSachHoaDon.get("HoaDon");
 											%>
 												<tr>
 													<td><%=i+1 %></td>
-													<td><%=hoaDonBan.getSoHD() %></td>
+													<td><%=hoaDon.getSoHD() %></td>
 													<td>
 														<%
 															SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-															out.print(dateFormat.format(hoaDonBan.getNgayDat()));
+															out.print(dateFormat.format((Date)hoaDon.getNgayDat()));
 														%>
 													</td>
 													<td>
 														<%
 															NumberFormat numberFormat = new DecimalFormat("###,###,###");
-															out.print(numberFormat.format(hoaDonBan.getTongTien()+hoaDonBan.getPhiGiaoHang()) + " đ");
+															out.print(numberFormat.format(hoaDon.getTongTien()+hoaDon.getPhiGiaoHang()) + " đ");
 														
 														%>
 													</td>
-													<td><%=hoaDonBan.getTinhTrangDH() %></td>
+													<td><%=hoaDon.getTinhTrangDH() %></td>
 													<td>
 														<form action="/SachKyAnh/XemDonHang" method="post">
-															<input type="hidden" name="maDH" value="<%=hoaDonBan.getSoHD() %>" />
+															<input type="hidden" name="maDH" value="<%=hoaDon.getSoHD() %>" />
 															<button type="submit" class="btn btn-link">Xem chi tiết</button>
 														</form>
 													</td>
