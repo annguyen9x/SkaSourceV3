@@ -1,5 +1,7 @@
+<%@page import="model.NguoiNhanHang"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8" %>
+<%@page import="java.util.Map"%>
 <%@page import="java.util.HashMap" %>
 <%@page import="java.util.List" %>
 <%@page import="java.util.Date" %>
@@ -7,10 +9,10 @@
 <%@page import="java.text.NumberFormat" %>
 <%@page import="java.text.DecimalFormat" %>
 <%@page import="java.text.SimpleDateFormat" %>
-<%@page import="model.HoaDonBan" %>
+<%@page import="model.HoaDon" %>
 <%@page import="model.KhachHang" %>
 <%@page import="model.Sach" %>
-<%@page import="model.ChiTietHoaDonBan" %>
+<%@page import="model.ChiTietHoaDon" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:url var="url" value="/view/user"></c:url>
 
@@ -71,10 +73,9 @@
 					            	<button type="submit" class="btn">Xem ngay</button>
 								</form>
 								<%
-									HashMap<String, Object> thongTinDonHang = (HashMap<String, Object>)session.getAttribute("ThongTinDonHang");
+									Map<String, Object> thongTinDonHang = (HashMap<String, Object>)session.getAttribute("ThongTinDonHang");
 									String trangThai = (String)session.getAttribute("TrangThai");
-									
-									if( (thongTinDonHang != null && thongTinDonHang.size() == 0) && (trangThai != null && trangThai.equals("DaTimKiemDH")) ){
+									if( ((thongTinDonHang != null && thongTinDonHang.size() == 0) && (trangThai != null && trangThai.equals("DaTimKiemDH"))) || (thongTinDonHang == null && trangThai != null && trangThai.equals("DaTimKiemDH")) ){
 								%>
 									<div class="alert alert-danger">
 										<strong>Không tìm thấy đơn hàng trong hệ thống.</strong> Vui lòng kiểm tra lại mã đơn hàng của bạn !
@@ -83,13 +84,30 @@
 										session.removeAttribute("TrangThai");
 									}
 									if( thongTinDonHang != null && thongTinDonHang.size() > 0 ){
-										HoaDonBan hoaDonBan = (HoaDonBan)thongTinDonHang.get("HoaDonBan");
-										List<HashMap> dsChiTietHoaDonBan = (List<HashMap>)thongTinDonHang.get("DanhSachChiTietHoaDonBan");
+										HoaDon hoaDon = (HoaDon)thongTinDonHang.get("HoaDon");
+										NguoiNhanHang nguoiNhanHang = (NguoiNhanHang)thongTinDonHang.get("NguoiNhanHang");
+										KhachHang khachHang = (KhachHang)thongTinDonHang.get("KhachHang");
+										
+										List<HashMap> dsChiTietHoaDonBan = (List<HashMap>)thongTinDonHang.get("DanhSachChiTietHoaDon");
 										NumberFormat numberFormat = new DecimalFormat("###,###,###");
 								%>
 									<!-- thong_tin_dh -->
 									<div class="thong_tin_dh">
-										<h4>Thông tin đơn hàng số: <%=hoaDonBan.getSoHD() %></h4>
+										<div class="text-center" style="margin-bottom:22px;"><h3>Thông tin chi tiết đơn hàng</h3></div>
+										<div class="col-md-12 col-sm-12 col-xs-12" style="margin-bottom:10px; padding:0px;">
+											<div class="col-md-4 col-sm-4 col-xs-12" style="padding:0px;">
+												Mã ĐH: <%=hoaDon.getSoHD() %>
+											</div>
+											<div class="col-md-8 col-sm-8 col-xs-12" style="float:right; padding:0px; text-align:right;">
+												<%
+												if( hoaDon.getMaKH() != 0 ){
+													out.print("Người đặt: " + khachHang.getTenKH() + ", Email: " + khachHang.getEmail());
+												}else{
+													out.print("Người đặt: " + nguoiNhanHang.getTenNN() + ", Email: " + nguoiNhanHang.getEmail());
+												}
+												%>
+											</div>
+										</div>
 										<table class="table my_border">
 											<thead>
 												<tr>
@@ -113,9 +131,9 @@
 											<tbody>
 												<%
 													for(int i = 0; i < dsChiTietHoaDonBan.size() ; i++){
-														HashMap map = dsChiTietHoaDonBan.get(i);
-														ChiTietHoaDonBan chiTiet = (ChiTietHoaDonBan)map.get("ChiTiet");
-														Sach sach = (Sach)map.get("Sach");
+														Map mapSachVaChiTiet = dsChiTietHoaDonBan.get(i);
+														ChiTietHoaDon chiTietHoaDon = (ChiTietHoaDon)mapSachVaChiTiet.get("ChiTietHoaDon");
+														Sach sach = (Sach)mapSachVaChiTiet.get("Sach");
 												%>
 														<tr>
 															<td class="ten_sp">
@@ -125,13 +143,13 @@
 																<img src="${url}/static/img/sanpham/<%=sach.getUrlHinh() %>" alt="anh">
 															</td>
 															<td class="tien">
-																<%=numberFormat.format(chiTiet.getDonGia()) %> <span class="text_underline">đ</span>
+																<%=numberFormat.format(chiTietHoaDon.getDonGia()) %> <span class="text_underline">đ</span>
 															</td>
 															<td class="so_luong">
-																<%=chiTiet.getSoLuong() %>
+																<%=chiTietHoaDon.getSoLuong() %>
 															</td>
 															<td class="tien">
-																<%=numberFormat.format(chiTiet.getDonGia()*chiTiet.getSoLuong()) %> <span class="text_underline">đ</span>
+																<%=numberFormat.format(chiTietHoaDon.getDonGia()*chiTietHoaDon.getSoLuong()) %> <span class="text_underline">đ</span>
 															</td>
 														</tr>
 												<%
@@ -144,23 +162,23 @@
 												<p>
 													<b>Phí giao hàng: </b>
 													<span class="tien">
-														<%=numberFormat.format(hoaDonBan.getPhiGiaoHang())%> <span class="text_underline">đ</span>
+														<%=numberFormat.format(hoaDon.getPhiGiaoHang())%> <span class="text_underline">đ</span>
 													</span>
 												</p>
 												<b>Tổng tiền: </b>
 												<span class="tien">
-													<%=numberFormat.format(hoaDonBan.getPhiGiaoHang() + hoaDonBan.getTongTien()) %> <span class="text_underline">đ</span>
+													<%=numberFormat.format(hoaDon.getPhiGiaoHang() + hoaDon.getTongTien()) %> <span class="text_underline">đ</span>
 												</span>
 											</div>
 											<div class="thongtin_giaohang">
-												<h4>Thông tin giao hàng</h4>
+												<h4 class="text-center">Thông tin giao hàng</h4>
 												<table class="table">
 													<tr>
 														<td>
-															<b>Tên khách hàng: </b><%=hoaDonBan.getTenNN() %>
+															<b>Tên người nhận: </b><%=nguoiNhanHang.getTenNN() %>
 														</td>
 														<td>
-															<b>Số điện thoại: </b><%=hoaDonBan.getDienThoai() %>
+															<b>Số điện thoại: </b><%=nguoiNhanHang.getDienThoai() %>
 														</td>
 													</tr>
 													<tr>
@@ -168,18 +186,18 @@
 															<b>Ngày đặt: </b>
 															<%
 																SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-																out.print( simpleDateFormat.format(hoaDonBan.getNgayDat()) );
+																out.print( simpleDateFormat.format(hoaDon.getNgayDat()) );
 															%>
 														</td>
 														<td>
-															<b>Email: </b><%=hoaDonBan.getEmail() %>
+															<b>Email: </b><%=nguoiNhanHang.getEmail() %>
 														</td>
 													</tr>
 													<tr>
 														<td>
 															<%
-																if( hoaDonBan.getNgayGiao() == null ){
-																	Date ngayDat = hoaDonBan.getNgayDat();
+																if( hoaDon.getNgayGiao() == null ){
+																	Date ngayDat = hoaDon.getNgayDat();
 																	
 											            			Calendar calendar = Calendar.getInstance();
 											            			calendar.setTime(ngayDat);
@@ -189,23 +207,23 @@
 											            			
 																	out.print("<b>Ngày giao (dự kiến): </b>" +  ngayGiao);
 																}else{
-																	String ngayGiao = simpleDateFormat.format(hoaDonBan.getNgayGiao());
+																	String ngayGiao = simpleDateFormat.format(hoaDon.getNgayGiao());
 																	out.print("<b>Ngày giao: </b>" + ngayGiao);
 																}
 															%>
 														</td>
 														<td>
-															<b>Địa chỉ: </b><%=hoaDonBan.getDiaChi() %>											</td>
+															<b>Địa chỉ: </b><%=nguoiNhanHang.getDiaChi() %>											</td>
 													</tr>
 													<tr>
 														<td>
-															<b>Tình trạng đơn hàng: </b><%=hoaDonBan.getTinhTrangDH() %>
+															<b>Tình trạng đơn hàng: </b><%=hoaDon.getTinhTrangDH() %>
 														</td>
 														<td>
 															<%
-																if( !hoaDonBan.getTinhTrangDH().equals("Đang giao") && !hoaDonBan.getTinhTrangDH().equals("Đã giao thành công") && !hoaDonBan.getTinhTrangDH().equals("Trả lại hàng")){
-																	KhachHang khachHang = (KhachHang)session.getAttribute("TaiKhoan");
-																	if( khachHang != null && (khachHang.getEmail()).equals(hoaDonBan.getEmail()) ){
+																if( hoaDon.getTinhTrangDH().equals("Đợi xác nhận đơn hàng") || hoaDon.getTinhTrangDH().equals("Đang chuẩn bị hàng") || hoaDon.getTinhTrangDH().equals("Đợi người giao lấy hàng")){
+																	KhachHang khachHangSession = (KhachHang)session.getAttribute("TaiKhoan");
+																	if( khachHangSession != null && khachHang != null && (khachHangSession.getEmail()).equals(khachHang.getEmail()) ){
 															%>
 																		<a href="/SachKyAnh/CapNhatDonHang" class="btn btn-default">Cập nhật đơn hàng?</a>
 															<%
