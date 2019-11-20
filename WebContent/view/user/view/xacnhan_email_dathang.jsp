@@ -1,7 +1,10 @@
+<%@page import="model.KhachHang"%>
+<%@page import="model.NguoiNhanHang"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8" %>
 <%@page import="java.util.HashMap" %>
-<%@page import="model.HoaDonBan" %>
+<%@page import="java.util.Map" %>
+<%@page import="model.HoaDon" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:url var="url" value="/view/user"></c:url>
 
@@ -55,10 +58,12 @@
 						<div class="col-md-12 padding-0 nd_trang">
 							<div class="row margin-0 xacnhan_email_dathang">
 								<%
-									HashMap<String, Object> thongTinDonHang = (HashMap<String, Object>)session.getAttribute("ThongTinDonHang");
-									HoaDonBan hoaDonBan = (HoaDonBan)thongTinDonHang.get("HoaDonBan");
+									Map<String, Object> thongTinDonHang = (HashMap<String, Object>)session.getAttribute("ThongTinDonHang");
+									HoaDon hoaDon = (HoaDon)thongTinDonHang.get("HoaDon");
+									NguoiNhanHang nguoiNhanHang = (NguoiNhanHang)thongTinDonHang.get("NguoiNhanHang");
+									KhachHang khachHang = (KhachHang)thongTinDonHang.get("KhachHang");
 								%>
-								<h3 class="text-center">Xác nhận email đã đặt hàng để cập nhật đơn hàng số <%=hoaDonBan.getSoHD() %></h3><br/>
+								<h3 class="text-center">Đăng nhập hoặc xác nhận email đã đặt hàng để cập nhật đơn hàng số <%=hoaDon.getSoHD() %></h3><br/>
 								
 								<div class="col-md-7 col-sm-7 col-xs-10 col-md-offset-3 col-sm-offset-3 col-xs-offset-1">
 									<%
@@ -74,7 +79,12 @@
 									%>
 									<form method="post" action="/SachKyAnh/XacNhanEmailDatHang" id="formTDDH">
 							            <div class="form-group">
-							            	<label for="email">Đăng nhập vào email <span style="color:#F47920;">&quot;<%=hoaDonBan.getEmail() %>&quot;</span> để lấy mã xác nhận</label>
+							            	<label for="email">Đăng nhập vào email <span style="color:#F47920;">&quot;
+							            	<% if( khachHang != null ){
+							            		out.print(khachHang.getEmail());
+							            	}else{
+							            		out.print(nguoiNhanHang.getEmail());
+							            	}%>&quot;</span> để lấy mã xác nhận</label>
 							            </div>
 							            <div class="form-group">
 						            		<label class="col-md-4 col-sm-4 col-xs-12" style="padding:0px">Nhập mã xác nhận: </label>
