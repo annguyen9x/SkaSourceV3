@@ -167,7 +167,7 @@
 							            		<select name="namsinh" id="namsinh" class="col-xs-4 form-control">
 							            			<%
 							            				int namHT = Calendar.getInstance().get(Calendar.YEAR);
-							            				for(int i = 1900 ; i <= namHT; i++){
+							            				for(int i = namHT - 100 ; i <= namHT; i++){
 							            			%>
 							            				<option value="<%=i%>"><%=i%></option>
 							            			<%
