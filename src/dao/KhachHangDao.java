@@ -39,12 +39,17 @@ public class KhachHangDao implements ITFKhachHangDao{
 				return true;
 			}
 		} catch (SQLException e) {
-			System.out.println("Lỗi insert tài khoản KhachHang: " + e.toString());
+			System.out.println("Loi insert tai khoan KhachHang: " + e.toString());
+			try {
+                conn.rollback();
+            } catch (SQLException ex1) {
+                System.out.println("Loi rollback");
+            }
 		}finally {
 			try {
 				pStatement.close();
 			} catch (SQLException e) {
-				System.out.println("Lỗi đóng kết nối PreparedStatement: " + e.toString());
+				System.out.println("Loi dong ket noi PreparedStatement: " + e.toString());
 			}
 			ketNoiDatabase.closeConnection(conn);
 		}
@@ -75,12 +80,17 @@ public class KhachHangDao implements ITFKhachHangDao{
 				return true;
 			}
 		} catch (SQLException e) {
-			System.out.println("Lỗi update tài khoản KhachHang: " + e.toString());
+			System.out.println("Loi update tai khoan KhachHang: " + e.toString());
+			try {
+                conn.rollback();
+            } catch (SQLException ex1) {
+                System.out.println("Loi rollback");
+            }
 		}finally {
 			try {
 				pStatement.close();
 			} catch (SQLException e) {
-				System.out.println("Lỗi đóng kết nối PreparedStatement: " + e.toString());
+				System.out.println("Loi dong ket noi PreparedStatement: " + e.toString());
 			}
 			ketNoiDatabase.closeConnection(conn);
 		}
@@ -102,12 +112,17 @@ public class KhachHangDao implements ITFKhachHangDao{
 				return true;
 			}
 		} catch (SQLException e) {
-			System.out.println("Lỗi delete tài khoản KhachHang: " + e.toString());
+			System.out.println("Loi delete tai khoan KhachHang: " + e.toString());
+			try {
+                conn.rollback();
+            } catch (SQLException ex1) {
+                System.out.println("Loi rollback");
+            }
 		}finally {
 			try {
 				pStatement.close();
 			} catch (SQLException e) {
-				System.out.println("Lỗi đóng kết nối PreparedStatement: " + e.toString());
+				System.out.println("Loi dong ket noi PreparedStatement: " + e.toString());
 			}
 			ketNoiDatabase.closeConnection(conn);
 		}
@@ -139,12 +154,17 @@ public class KhachHangDao implements ITFKhachHangDao{
 			conn.commit();
 			return kh;
 		} catch (SQLException e) {
-			System.out.println("Lỗi truy vấn lấy ra KhachHang theo Email: " + e.toString());
+			System.out.println("Loi truy van lay ra KhachHang theo Email: " + e.toString());
+			try {
+                conn.rollback();
+            } catch (SQLException ex1) {
+                System.out.println("Loi rollback");
+            }
 		}finally {
 			try {
 				pStatement.close();
 			} catch (SQLException e) {
-				System.out.println("Lỗi đóng kết nối PreparedStatement: " + e.toString());
+				System.out.println("Loi dong ket noi PreparedStatement: " + e.toString());
 			}
 			ketNoiDatabase.closeConnection(conn);
 		}
@@ -177,12 +197,17 @@ public class KhachHangDao implements ITFKhachHangDao{
 			conn.commit();
 			return kh;
 		} catch (SQLException e) {
-			System.out.println("Lỗi truy vấn lấy ra KhachHang theo MaKH: " + e.toString());
+			System.out.println("Loi truy van lay ra KhachHang theo MaKH: " + e.toString());
+			try {
+                conn.rollback();
+            } catch (SQLException ex1) {
+                System.out.println("Loi rollback");
+            }
 		}finally {
 			try {
 				pStatement.close();
 			} catch (SQLException e) {
-				System.out.println("Lỗi đóng kết nối PreparedStatement: " + e.toString());
+				System.out.println("Loi dong ket noi PreparedStatement: " + e.toString());
 			}
 			ketNoiDatabase.closeConnection(conn);
 		}
@@ -220,12 +245,17 @@ public class KhachHangDao implements ITFKhachHangDao{
 				return true;
 			}
 		} catch (SQLException e) {
-			System.out.println("Lỗi truy vấn email KhachHang: " + e.toString());
+			System.out.println("Loi truy van email KhachHang: " + e.toString());
+			try {
+                conn.rollback();
+            } catch (SQLException ex1) {
+                System.out.println("Loi rollback");
+            }
 		}finally {
 			try {
 				pStatement.close();
 			} catch (SQLException e) {
-				System.out.println("Lỗi đóng kết nối PreparedStatement: " + e.toString());
+				System.out.println("Loi dong ket noi PreparedStatement: " + e.toString());
 			}
 			ketNoiDatabase.closeConnection(conn);
 		}
@@ -248,12 +278,17 @@ public class KhachHangDao implements ITFKhachHangDao{
 				return true;
 			}
 		} catch (SQLException e) {
-			System.out.println("Lỗi truy vấn điện thoại KhachHang: " + e.toString());
+			System.out.println("Loi truy van dien thoai KhachHang: " + e.toString());
+			try {
+                conn.rollback();
+            } catch (SQLException ex1) {
+                System.out.println("Loi rollback");
+            }
 		}finally {
 			try {
 				pStatement.close();
 			} catch (SQLException e) {
-				System.out.println("Lỗi đóng kết nối PreparedStatement: " + e.toString());
+				System.out.println("Loi dong ket noi PreparedStatement: " + e.toString());
 			}
 			ketNoiDatabase.closeConnection(conn);
 		}
