@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@page import="java.util.Map" %>
+<%@page import="java.util.Date" %>
+<%@page import="java.text.NumberFormat" %>
+<%@page import="java.text.DecimalFormat" %>
+<%@page import="java.text.SimpleDateFormat" %>
+<%@page import="java.util.Calendar" %>
+<%@page import="model.NguoiNhanHang" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:url var="url" value="/view/user"></c:url>
 
@@ -56,27 +63,52 @@
 						<div class="row margin-0">
 							<!-- noi dung dat hang -->
 							<section class="dathang_hoantat">
-								<div class="alert alert-warning">
-									<strong>Đặt hàng thất bại.</strong> Lỗi thao tác ! 
-								</div>
-								<div class="alert alert-success">
-									<strong>Đặt hàng thành công.</strong> Thông tin về đơn hàng đã được gửi qua email của bạn ! 
-								</div>
-								<div class="row margin-0 my_border">
-									<div class="col-md-6 col-sm-6 col-xs-12">
-										<p><b>Mã đơn hàng của bạn: </b><span class="ma_dh">14566789</span></p>
-										<p><b>Tên khách hàng: </b>Nguyễn Văn An</p>
-										<p><b>Ngày đặt hàng: </b>12/12/2019</p>
-										<p><b>Ngày giao hàng (Dự kiến): </b>14/12/2019</p>
+								<%
+									Map<String, Object> gioHang = (Map<String,Object>) session.getAttribute("GioHang");
+									NumberFormat numberFormat = new DecimalFormat("###,###,###,###");
+									SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyy-MM-dd");
+									Date ngayDat = Calendar.getInstance().getTime();
+									Calendar calendar = Calendar.getInstance();
+			            			calendar.setTime(ngayDat);
+			            			
+									String hoanTatDonHang = (String)request.getAttribute("HoanTatDonHang");
+									if( hoanTatDonHang.equals("ThatBai")){
+								%>
+									<div class="alert alert-warning">
+										<strong>Đặt hàng thất bại.</strong> Lỗi server ! 
 									</div>
-									<div class="col-md-6 col-sm-6 col-xs-12">
-										<p><b>Email: </b>a@gmail.com</p>
-										<p><b>Điện thoại: </b>098342523</p>
-										<p><b>Địa chỉ: </b>Q.Hải Châu, TP.Đà Nẵng</p>
-										<p><b>Tổng thanh toán: </b>200.000<span class="text_underline"> đ</span></p>
+								<%
+									}else if( hoanTatDonHang.equals("ThanhCong") && gioHang != null){
+										NguoiNhanHang nguoiNhanHang = (NguoiNhanHang)gioHang.get("NguoiNhanHang");
+								%>
+									<div class="alert alert-success">
+										<strong>Đặt hàng thành công.</strong> Thông tin về đơn hàng đã được gửi qua email của bạn ! 
 									</div>
-									<a href="/SachKyAnh/userTrangChu" class="btn">Tiếp tục mua hàng</a>
-								</div>
+									<div class="row margin-0 my_border">
+										<div class="col-md-6 col-sm-6 col-xs-12">
+											<p><b>Mã đơn hàng: </b><span class="ma_dh"><%=gioHang.get("SoHD") %></span></p>
+											<p><b>Người nhận hàng: </b><%=nguoiNhanHang.getTenNN() %></p>
+											<p><b>Ngày đặt hàng: </b><%=simpleDateFormat.format(ngayDat) %></p>
+											<p><b>Ngày giao hàng (Dự kiến): </b>
+											<% 
+												calendar.add(Calendar.DAY_OF_MONTH, 3);
+												out.print(simpleDateFormat.format(calendar.getTime()));
+											%>
+											</p>
+										</div>
+										<div class="col-md-6 col-sm-6 col-xs-12">
+											<p><b>Email: </b><%=nguoiNhanHang.getEmail() %></p>
+											<p><b>Điện thoại: </b><%=nguoiNhanHang.getDienThoai()%></p>
+											<p><b>Địa chỉ: </b><%=nguoiNhanHang.getDiaChi() %></p>
+											<p><b>Tổng thanh toán: </b><%=numberFormat.format((float)gioHang.get("TongTien") + (float)gioHang.get("PhiGiaoHang")) %><span class="text_underline"> đ</span></p>
+										</div>
+										<a href="/SachKyAnh/userTrangChu" class="btn">Tiếp tục mua hàng</a>
+									</div>
+								<%
+										request.removeAttribute("HoanTatDonHang");
+									}
+									session.removeAttribute("GioHang");
+								%>
 						 	</section>
 						 	<!-- kt noi dung dat hang -->
 						</div>
