@@ -15,9 +15,9 @@ public class KetNoiDatabase {
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 			conn = DriverManager.getConnection(url, user, password);
 		} catch (ClassNotFoundException e) {
-			System.out.println("Lỗi load driver: " + e.toString());
+			System.out.println("Loi load driver: " + e.toString());
 		} catch (SQLException e) {
-			 System.out.println("Lỗi đường dẫn sqlserver: " + e.toString());
+			 System.out.println("Loi duong dan sqlserver: " + e.toString());
 		}
 	}
 	
@@ -25,7 +25,7 @@ public class KetNoiDatabase {
 		try {
 			conn.close();
 		} catch (SQLException e) {
-			System.out.println("Lỗi đóng kết nối");
+			System.out.println("Loi dong ket noi");
 		}
 	}
 	
