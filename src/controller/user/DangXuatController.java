@@ -15,7 +15,7 @@ public class DangXuatController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		if( session.getAttribute("TaiKhoan") != null ) {
-			session.invalidate();
+			session.removeAttribute("TaiKhoan");
 		}
 		response.sendRedirect("userTrangChu");
 	}
