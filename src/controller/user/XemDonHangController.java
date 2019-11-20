@@ -1,7 +1,7 @@
 package controller.user;
 
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,11 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.ChiTietHoaDonBanDao;
+import dao.ChiTietHoaDonDao;
+import dao.KhachHangDao;
+import dao.NguoiNhanHangDao;
+import model.HoaDon;
+import model.KhachHang;
+import model.NguoiNhanHang;
+import util.KiemTraKieuSo;
 
 @WebServlet("/XemDonHang")
 public class XemDonHangController extends HttpServlet {
-	ChiTietHoaDonBanDao chiTietHoaDonBanDao = new ChiTietHoaDonBanDao();
+	ChiTietHoaDonDao chiTietHoaDonDao = new ChiTietHoaDonDao();
+	KhachHangDao khachHangDao = new KhachHangDao();
+	NguoiNhanHangDao nguoiNhanHangDao = new NguoiNhanHangDao();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 		HttpSession session = request.getSession();
@@ -40,8 +48,18 @@ public class XemDonHangController extends HttpServlet {
 		}
 		
 		if( maDH != null ) {
-			HashMap<String, Object> thongTinDonHang =  chiTietHoaDonBanDao.xemThongTinDonHang(Integer.parseInt(maDH));
-			session.setAttribute("ThongTinDonHang", thongTinDonHang);
+			if(KiemTraKieuSo.ktKieuSo(maDH) == true) {
+				Map<String, Object> thongTinDonHang =  chiTietHoaDonDao.xemThongTinDonHang(Integer.parseInt(maDH));
+				if( thongTinDonHang != null && thongTinDonHang.size() > 0) {
+					HoaDon hoaDon = (HoaDon)thongTinDonHang.get("HoaDon");
+					KhachHang khachHang = khachHangDao.getKhachHang(hoaDon.getMaKH());
+					thongTinDonHang.put("KhachHang", khachHang);
+					
+					NguoiNhanHang nguoiNhanHang = nguoiNhanHangDao.getNguoiNhanHang(hoaDon.getIdNN());
+					thongTinDonHang.put("NguoiNhanHang", nguoiNhanHang);
+				}
+				session.setAttribute("ThongTinDonHang", thongTinDonHang);
+			}
 			session.setAttribute("TrangThai", "DaTimKiemDH");
 		}
 		req.getRequestDispatcher("/view/user/view/xem_donhang.jsp").forward(req, resp);
