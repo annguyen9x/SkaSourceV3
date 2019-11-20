@@ -51,12 +51,17 @@ public class LoaiSachDao implements ITFLoaiSachDao{
 			conn.commit();
 			return loaiSach;
 		} catch (SQLException e) {
-			System.out.println("Lỗi truy vấn danh sách LoaiSach: " + e.toString());
+			System.out.println("Loi truy van LoaiSach: " + e.toString());
+			try {
+                conn.rollback();
+            } catch (SQLException ex1) {
+                System.out.println("Loi rollback");
+            }
 		}finally {
 			try {
 				pStatement.close();
 			} catch (SQLException e) {
-				System.out.println("Lỗi đóng kết nối PreparedStatement: " + e.toString());
+				System.out.println("Loi dong ket noi PreparedStatement: " + e.toString());
 			}
 			ketNoiDatabase.closeConnection(conn);
 		}
@@ -83,12 +88,17 @@ public class LoaiSachDao implements ITFLoaiSachDao{
 			conn.commit();
 			return dsLoaiSach;
 		} catch (SQLException e) {
-			System.out.println("Lỗi truy vấn danh sách LoaiSach: " + e.toString());
+			System.out.println("Loi truy van danh sach LoaiSach: " + e.toString());
+			try {
+                conn.rollback();
+            } catch (SQLException ex1) {
+                System.out.println("Loi rollback");
+            }
 		}finally {
 			try {
 				pStatement.close();
 			} catch (SQLException e) {
-				System.out.println("Lỗi đóng kết nối PreparedStatement: " + e.toString());
+				System.out.println("Loi dong ket noi PreparedStatement: " + e.toString());
 			}
 			ketNoiDatabase.closeConnection(conn);
 		}
