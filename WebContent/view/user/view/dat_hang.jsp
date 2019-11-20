@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@ page import="java.util.Map" %>
+<%@ page import="java.util.Iterator" %>
+<%@ page import="java.text.NumberFormat" %>
+<%@ page import="java.text.DecimalFormat" %>
+<%@page import="model.KhachHang"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:url var="url" value="/view/user"></c:url>    
     
@@ -28,7 +33,6 @@
 <!-- end my css -->
 <!-- start my js -->
 	<script src="${url}/static/js/menuAnHien.js" type="text/javascript" charset="utf-8"></script>
-	<script src="${url}/static/js/formValidation.js" type="text/javascript" charset="utf-8"></script>
 <!-- end my js -->
 
 </head>
@@ -51,40 +55,123 @@
 						</div>
 					</div>
 					<!-- kt phần top -->
+					
+					<%
+						Map<String, Object> gioHang = (Map<String,Object>) session.getAttribute("GioHang");
+						Map<String, Object> danhSachChiTietGioHang = (Map<String, Object>) gioHang.get("DanhSachChiTietGioHang");
+						Iterator iterator = danhSachChiTietGioHang.entrySet().iterator();
+						NumberFormat numberFormat = new DecimalFormat("###,###,###,###");
+						
+						KhachHang khachHangSession = (KhachHang)session.getAttribute("TaiKhoan");
+						
+						String trangThaiDangNhap = "chuaDN";
+						if( khachHangSession != null){
+							trangThaiDangNhap = "DaDN";
+						}
+					%>
 					<!-- phần nội dung trang -->
 					<div class="col-md-12 padding-0 nd_trang">
 						<div class="row margin-0">
 							<!-- noi dung dat hang -->
 							<section class="dat_hang">
-								<form action="dathang_hoantat.jsp" method="post" id="datHang" class="form_dathang">
+								<form action="/SachKyAnh/DatHang" method="post" onsubmit="return ktDiaChiGiaoHang('<%=trangThaiDangNhap %>');" id="datHang" class="form_dathang">
 									<div class="col-md-4 col-xs-12 col-xs-12 padding-0 chon_diachi">
 										<h5>1. Loại tài khoản giao hàng</h5>
 										<div class="noi_dung my_border">
 											<p>Chọn tài khoản giao hàng</p>
-											<input type="radio" name="loai_diachi" value="dangky"> Địa chỉ tài khoản đã đăng ký<br/>
-											<input type="radio" name="loai_diachi" value="chinhsua"> Chỉnh sửa địa chỉ đã đăng ký<br/>
-											<input type="radio" name="loai_diachi" value="nguoikhac" checked="checked"> Giao hàng địa chỉ khác<br/>
+											<input onclick="diaChiGiaoHangTheoLoaiTaiKhoan('event','dangky')" id="loaitk_dangky" type="radio" name="loai_taikhoan" value="dangky"> Địa chỉ tài khoản đã đăng ký<br/>
+											<input onclick="diaChiGiaoHangTheoLoaiTaiKhoan('event','chinhsua')" id="loaitk_chinhsua" type="radio" name="loai_taikhoan" value="chinhsua"> Chỉnh sửa địa chỉ đã đăng ký<br/>
+											<input onclick="diaChiGiaoHangTheoLoaiTaiKhoan('event','nguoikhac')" id="loaitk_nguoikhac" type="radio" name="loai_taikhoan" value="nguoikhac" checked="checked"> Giao hàng địa chỉ khác<br/>
 										</div>
 									</div>
 									<div class="col-md-4 col-xs-12 col-xs-12 padding-0 chitiet_diachi">
 										<h5>2. Thông tin địa chỉ giao hàng</h5>
 										<div class="noi_dung my_border">
 											<p>Thông tin giao hàng</p>
-											<div class="form-group">
-												<label for="hoten">Họ tên</label>
-												<input class="form-control" type="text" name="ten" id="hoten" placeholder="Họ & tên" required="required">
+											<div class="thongtin_giaohang" id="dangky">
+												<p style="text-transform: none; font-weight:normal;">&quot;Địa chỉ tài khoản đã đăng ký&quot;</p>
+												<%
+													if( khachHangSession != null ){
+												%>
+													<div class="form-group">
+														<label for="hoten">Họ tên: </label>
+														<%=khachHangSession.getTenKH() %>
+													</div>
+													<div class="form-group">
+														<label for="email">Email: </label>
+														<%=khachHangSession.getEmail() %>
+													</div>
+													<div class="form-group">
+														<label for="dt">Điện thoại: </label>
+														<%=khachHangSession.getDienThoai() %>
+													</div>
+													<div class="form-group">
+														<label for="dc">Địa chỉ: </label>
+														<%=khachHangSession.getDiaChi() %>
+													</div>
+												<%
+													}else{
+												%>
+													<p style="text-transform: none; font-weight:normal;">Bạn chưa đăng nhập. Xin mời <a href="/SachKyAnh/userDangNhap">đăng nhập</a> vào tài khoản trước !</p>
+												<%
+													}
+												%>
 											</div>
-											<div class="form-group">
-												<label for="email">Email</label>
-												<input class="form-control" type="email" name="email" id="email" placeholder="Email" required="required">
+											<div class="thongtin_giaohang" id="chinhsua">
+												<p style="text-transform: none; font-weight:normal;">&quot;Chỉnh sửa địa chỉ đã đăng ký&quot;</p>
+												<%
+													if( khachHangSession != null ){
+												%>
+													<div class="form-group">
+														<label for="hoten">Họ tên</label>
+														<input class="form-control" type="text" name="ten" id="hoten" value="<%=khachHangSession.getTenKH() %>" placeholder="Họ & tên">
+														<span id="errorHoten" class="error"></span>
+													</div>
+													<div class="form-group">
+														<label for="email">Email</label>
+														<input class="form-control" type="email" name="email" id="email" value="<%=khachHangSession.getEmail() %>" placeholder="Email">
+														<span id="errorEmail" class="error"></span>
+													</div>
+													<div class="form-group">
+														<label for="dt">Điện thoại</label>
+														<input class="form-control" type="number" name="dienthoai" id="dienthoai" value="<%=khachHangSession.getDienThoai() %>" placeholder="Số điện thoại">
+														<span id="errorDienthoai" class="error"></span>
+													</div>
+													<div class="form-group">
+														<label for="dc">Địa chỉ</label>
+														<input class="form-control" type="text" name="diachi" id="diachi" value="<%=khachHangSession.getDiaChi() %>" placeholder="Địa chỉ">
+														<span id="errorDiachi" class="error"></span>
+													</div>
+												<%
+													}else{
+												%>
+													<p style="text-transform: none; font-weight:normal;">Bạn chưa đăng nhập. Xin mời <a href="/SachKyAnh/userDangNhap">đăng nhập</a> vào tài khoản trước !</p>
+												<%
+													}
+												%>
 											</div>
-											<div class="form-group">
-												<label for="dt">Điện thoại</label>
-												<input class="form-control" type="number" name="dienthoai" id="dt" placeholder="Số điện thoại" required="required">
-											</div>
-											<div class="form-group">
-												<label for="dc">Địa chỉ</label>
-												<input class="form-control" type="text" name="diachi" id="dc" placeholder="Địa chỉ" required="required">
+											<div class="thongtin_giaohang" id="nguoikhac">
+												<p style="text-transform: none; font-weight:normal;">&quot;Giao hàng địa chỉ khác&quot;</p>
+												<div class="form-group">
+													<label for="hoten">Họ tên</label>
+													<input class="form-control" type="text" name="ten2" id="hoten2" placeholder="Họ & tên">
+													<span id="errorHoten2" class="error"></span>
+												</div>
+												<div class="form-group">
+													<label for="email">Email</label>
+													<input class="form-control" type="email" name="email2" id="email2" placeholder="Email">
+													<span id="errorEmail2" class="error"></span>
+												</div>
+												<div class="form-group">
+													<label for="dt">Điện thoại</label>
+													<input class="form-control" type="number" name="dienthoai2" id="dienthoai2" placeholder="Số điện thoại">
+													<span id="errorDienthoai2" class="error"></span>
+												</div>
+												<div class="form-group">
+													<label for="dc">Địa chỉ</label>
+													<input class="form-control" type="text" name="diachi2" id="diachi2" placeholder="Địa chỉ">
+													<span id="errorDiachi2" class="error"></span>
+												</div>
 											</div>
 										</div>
 									</div>
@@ -92,50 +179,55 @@
 										<h5>3. Thông tin đơn hàng</h5>
 										<div class="noi_dung my_border">
 											<table class="table">
-												<tr>
-													<td class="hinh">
-														<img src="${url}/static/img/sanpham/c6.jpg" alt="anhsp">
-													</td>
-													<td class="tensp">
-														Tên sản phẩm x <span>2</span>
-													</td>
-													<td class="tien">
-														200.000 <span class="text_underline">đ</span>
-													</td>
-												</tr>
-												<tr>
-													<td class="hinh">
-														<img src="${url}/static/img/sanpham/c6.jpg" alt="anhsp">
-													</td>
-													<td class="tensp">
-														Tên sản phẩm x <span>2</span>
-													</td>
-													<td class="tien">
-														200.000 <span class="text_underline">đ</span>
-													</td>
-												</tr>
+												<%
+												float tongTien = 0;
+												float phiGH = 40000;
+												while(iterator.hasNext()){
+													Map.Entry mapEntry = (Map.Entry)iterator.next();
+													Map<String, Object> chiTietGioHang = (Map<String, Object>)mapEntry.getValue();
+												%>
+													<tr>
+														<td class="hinh">
+															<img src="${url}/static/img/sanpham/<%=chiTietGioHang.get("UrlHinh") %>" alt="anhsp">
+														</td>
+														<td class="tensp">
+															<%=chiTietGioHang.get("TenSach") %> <span style="color:#F47920; font-weight:bold;">x</span> <span><%=chiTietGioHang.get("SoLuong") %></span>
+														</td>
+														<td class="tien" style="white-space:nowrap; text-overflow: ellipsis;">
+															<%=numberFormat.format( (int)chiTietGioHang.get("SoLuong")*(float)chiTietGioHang.get("DonGia") ) %>
+															<span class="text_underline"> đ</span>
+														</td>
+													</tr>
+												<%
+													tongTien += (int)chiTietGioHang.get("SoLuong")*(float)chiTietGioHang.get("DonGia");
+												}
+												%>
 												<tr>
 													<td colspan="2">
 														Tổng tiền sách:
 													</td>
 													<td class="tien">
-														400.000 <span class="text_underline">đ</span>
+														<%=numberFormat.format(tongTien) %> <span class="text_underline">đ</span>
 													</td>
 												</tr>
 												<tr>
 													<td colspan="2">
-														Phí vận chuyển:
+														Phí giao hàng:
 													</td>
 													<td class="tien">
-														40.000 <span class="text_underline">đ</span>
+														<%=numberFormat.format(phiGH) %> <span class="text_underline">đ</span>
 													</td>
 												</tr>
 												<tr class="tong_tien">
 													<td colspan="2">
 														<b>Tổng tiền: </b>
 													</td>
-													<td class="tien">
-														<b>440.000 <span class="text_underline">đ</span></b>
+													<td class="tien" style="white-space:nowrap; text-overflow: ellipsis;">
+														<b><%=numberFormat.format(tongTien+phiGH) %> <span class="text_underline">đ</span></b>
+														<%
+															gioHang.put("TongTien", tongTien);
+															gioHang.put("PhiGiaoHang", phiGH);
+														%>
 													</td>
 												</tr>
 											</table>
@@ -157,5 +249,9 @@
 	<jsp:include page="block/footer.jsp" />
 	<!-- kt footer  -->
 </div>
+	<!-- start my js -->
+		<script src="${url}/static/js/diaChiGiaoHangTheoLoaiTaiKhoan.js" type="text/javascript" charset="utf-8"></script>
+		<script src="${url}/static/js/kiemTraDiaChiGiaoHang.js" type="text/javascript" charset="utf-8"></script>
+	<!-- end my js -->
 </body>
 </html>
