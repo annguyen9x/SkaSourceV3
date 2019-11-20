@@ -39,11 +39,7 @@ public class XoaGioHangController extends HttpServlet {
 			response.sendRedirect("/SachKyAnh/XemGioHang");
 		}
 		else {
-			PrintWriter writer = response.getWriter();
-			writer.print("<script type='text/javascript'>");
-			writer.print("alert('Giỏ hàng rỗng, vui lòng kiểm tra lại !');");
-			writer.print("location='userTrangChu';");
-			writer.print("</script>");
+			response.sendRedirect("/SachKyAnh/userTrangChu");
 		}
 	}
 
