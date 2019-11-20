@@ -3,6 +3,7 @@ package controller.user;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,30 +12,40 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.HoaDonBan;
+import model.HoaDon;
+import model.KhachHang;
+import model.NguoiNhanHang;
 import util.GuiMail;
 import util.RandomSoNguyen;
 
 @WebServlet(name = "XacNhanEmailDatHang", urlPatterns = { "/XacNhanEmailDatHang" })
 public class XacNhanEmailDatHangController extends HttpServlet {
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=UTF-8");
 		
 		HttpSession session = request.getSession();
-		HashMap<String, Object> thongTinDonHang = (HashMap<String, Object>)session.getAttribute("ThongTinDonHang");
+		Map<String, Object> thongTinDonHang = (Map<String, Object>)session.getAttribute("ThongTinDonHang");
 		
 		if(thongTinDonHang != null && thongTinDonHang.size() > 0 ) {
 			if( session.getAttribute("xacNhanEmailDatHang") != null ) {
 				session.removeAttribute("xacNhanEmailDatHang");
 			}
 			
-			HoaDonBan hoaDonBan = (HoaDonBan)thongTinDonHang.get("HoaDonBan");
-			String emailNhan = hoaDonBan.getEmail();
+			HoaDon hoaDon = (HoaDon)thongTinDonHang.get("HoaDon");
+			NguoiNhanHang nguoiNhanHang = (NguoiNhanHang)thongTinDonHang.get("NguoiNhanHang");
+			KhachHang khachHang = (KhachHang)thongTinDonHang.get("KhachHang");
+			String emailNhan = null;
+			if( khachHang != null ) {
+				emailNhan = khachHang.getEmail();
+			}else {
+				emailNhan = nguoiNhanHang.getEmail();
+			}
 			String tieuDe = "Xác nhận email đã đặt hàng tại [kyanhbooks.com] để cập nhật đơn hàng";
 			String maXacNhan = String.valueOf(RandomSoNguyen.randomSoNguyen());
-			String noiDung = "Mã xác nhận email đã đặt đơn hàng số " + hoaDonBan.getSoHD() + " là:"+ maXacNhan;
+			String noiDung = "Mã xác nhận email đã đặt đơn hàng số " + hoaDon.getSoHD() + " là:"+ maXacNhan;
 			
 			if( GuiMail.guiMail(emailNhan, tieuDe, noiDung) == true ) {
 				System.out.println("maXacNhanTuServer: " + maXacNhan);
@@ -55,7 +66,6 @@ public class XacNhanEmailDatHangController extends HttpServlet {
 			writer.print("location='userTrangChu';");
 			writer.print("</script>");
 		}
-		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
