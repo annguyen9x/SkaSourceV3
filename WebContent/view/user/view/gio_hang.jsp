@@ -72,10 +72,8 @@
 									}else{
 										Map<String, Object> danhSachChiTietGioHang = (Map<String, Object>)gioHang.get("DanhSachChiTietGioHang");
 										if( danhSachChiTietGioHang != null ){
-											
-									
 								%>
-									<form action="/SachKyAnh/CapNhatGioHang" method="post" id="gioHang" class="form_giohang">
+									<form action="/SachKyAnh/CapNhatGioHang" method="post" onsubmit="return ktSoLuongCapNhat();" id="gioHang" class="form_giohang">
 										<table class="table my_border">
 											<thead>
 												<tr>
@@ -102,26 +100,28 @@
 											<tbody>
 												<%
 												Iterator iterator = danhSachChiTietGioHang.entrySet().iterator();
-												float TongTien = 0;
+												float tongTien = 0;
 												while( iterator.hasNext()){
 													Map.Entry ketQua = (Map.Entry)iterator.next();	
-													Map<String, Object> chiTiet = (Map<String, Object>)ketQua.getValue();
+													Map<String, Object> chiTietGioHang = (Map<String, Object>)ketQua.getValue();
 												%>
 												<tr>
 													<td class="hinh">
-														<img src="${url}/static/img/sanpham/<%=chiTiet.get("UrlHinh") %>" alt="anh">
+														<img src="${url}/static/img/sanpham/<%=chiTietGioHang.get("UrlHinh") %>" alt="anh">
 													</td>
 													<td class="ten_sp">
-														<%=chiTiet.get("TenSach") %>
+														<%=chiTietGioHang.get("TenSach") %>
+														<input type="hidden" name="TenSachHidden" value="<%=(String)chiTietGioHang.get("TenSach") %>" class="TenSachHidden" >
 													</td>
 													<td class="tien">
-														<%=numberFormat.format((float)chiTiet.get("DonGia")) %> <span class="text_underline">đ</span>
+														<%=numberFormat.format((float)chiTietGioHang.get("DonGia")) %> <span class="text_underline">đ</span>
 													</td>
 													<td class="so_luong">
-														<input type="number" name="soLuong" value="<%=(int)chiTiet.get("SoLuong") %>" >
+														<input type="number" name="soLuong" value="<%=(int)chiTietGioHang.get("SoLuong") %>" class="soLuong">
+														<input type="hidden" name="TSLDB" value="<%=(int)chiTietGioHang.get("TongSoLuongDB") %>" class="TongSoLuongDB" >
 													</td>
 													<td class="tien">
-														<%=numberFormat.format((int)chiTiet.get("SoLuong")*(float)chiTiet.get("DonGia")) %> <span class="text_underline">đ</span>
+														<%=numberFormat.format((int)chiTietGioHang.get("SoLuong")*(float)chiTietGioHang.get("DonGia")) %> <span class="text_underline">đ</span>
 													</td>
 													<td class="trash">
 														<a href="/SachKyAnh/XoaGioHang?MaSach=<%=ketQua.getKey()%>">
@@ -130,7 +130,7 @@
 													</td>
 												</tr>
 												<%
-												 TongTien += (int)chiTiet.get("SoLuong")*(float)chiTiet.get("DonGia");
+												 tongTien += (int)chiTietGioHang.get("SoLuong")*(float)chiTietGioHang.get("DonGia");
 												}
 												%>
 											</tbody>
@@ -138,7 +138,7 @@
 										<div class="tong_tien">
 											<b>Tổng tiền tạm tính: </b>
 											<span class="tien">
-												<%=numberFormat.format(TongTien) %> <span class="text_underline">đ</span>
+												<%=numberFormat.format(tongTien) %> <span class="text_underline">đ</span>
 											</span>
 										</div>
 										<div class="nut">
@@ -165,5 +165,8 @@
 	<jsp:include page="block/footer.jsp" />
 	<!-- kt footer  -->
 </div>
+	<!-- start my js -->
+	<script src="${url}/static/js/kiemTraSoLuongCapNhat.js" type="text/javascript" charset="utf-8"></script>
+	<!-- start my js -->
 </body>
 </html>
