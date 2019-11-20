@@ -106,7 +106,7 @@
 							<span class="gia_goc">
 								<%
 									NumberFormat numberFormat = new DecimalFormat("###,###,###");
-									out.print(numberFormat.format(sach.getDonGiaBan()));
+									out.print(numberFormat.format(sach.getDonGia()));
 								%> đ
 							</span>
 							<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sach.getMaSach() %>" class="chi_tiet">
