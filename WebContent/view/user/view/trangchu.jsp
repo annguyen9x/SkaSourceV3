@@ -108,7 +108,7 @@
 															<span class="gia_goc">
 																<%
 																	NumberFormat numberFormat = new DecimalFormat("###,###,###");
-																	out.print(numberFormat.format(sach1.getDonGiaBan()));
+																	out.print(numberFormat.format(sach1.getDonGia()));
 																%> đ
 															</span>
 															<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sach1.getMaSach() %>" class="chi_tiet">
@@ -165,7 +165,7 @@
 														<div class="giasp">
 															<span class="gia_goc">
 																<%
-																	out.print(numberFormat.format(sach2.getDonGiaBan()));
+																	out.print(numberFormat.format(sach2.getDonGia()));
 																%> đ
 															</span>
 															<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sach2.getMaSach() %>" class="chi_tiet">
@@ -250,7 +250,7 @@
 													<div class="giasp">
 														<span class="gia_goc">
 															<%
-																out.print(numberFormat.format(sach.getDonGiaBan()));
+																out.print(numberFormat.format(sach.getDonGia()));
 															%> đ
 														</span>
 														<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sach.getMaSach() %>" class="chi_tiet">
@@ -317,7 +317,7 @@
 														<div class="giasp">
 															<span class="gia_goc">
 																<%
-																	out.print(numberFormat.format(sach.getDonGiaBan()));
+																	out.print(numberFormat.format(sach.getDonGia()));
 																%> đ
 															</span>
 															<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sach.getMaSach() %>" class="chi_tiet">
@@ -439,7 +439,7 @@
 															<div class="giasp">
 																<span class="gia_goc">
 																	<%
-																		out.print(numberFormat.format(sachDau.getDonGiaBan()));
+																		out.print(numberFormat.format(sachDau.getDonGia()));
 																	%> đ
 																</span>
 																<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sachDau.getMaSach() %>" class="chi_tiet">
@@ -510,7 +510,7 @@
 														<div class="giasp">
 															<span class="gia_goc">
 																<%
-																	out.print(numberFormat.format(sachDau.getDonGiaBan()));
+																	out.print(numberFormat.format(sachDau.getDonGia()));
 																%> đ
 															</span>
 															<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sachDau.getMaSach() %>" class="chi_tiet">
@@ -578,7 +578,7 @@
 														<div class="giasp">
 															<span class="gia_goc">
 																<%
-																	out.print(numberFormat.format(sachDau.getDonGiaBan()));
+																	out.print(numberFormat.format(sachDau.getDonGia()));
 																%> đ
 															</span>
 															<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sachDau.getMaSach() %>" class="chi_tiet">
