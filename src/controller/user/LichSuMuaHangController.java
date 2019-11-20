@@ -11,20 +11,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.HoaDonBanDao;
-import model.HoaDonBan;
+import dao.HoaDonDao;
+import model.HoaDon;
 import model.KhachHang;
 
 @WebServlet(name = "LichSuMuaHang", urlPatterns = { "/LichSuMuaHang" })
 public class LichSuMuaHangController extends HttpServlet {
-	HoaDonBanDao hoaDonBanDao = new HoaDonBanDao();
+	HoaDonDao hoaDonDao = new HoaDonDao();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		KhachHang khachHang = (KhachHang)session.getAttribute("TaiKhoan");
 		if(khachHang != null ) {
-			List<HoaDonBan> dsDonHang = hoaDonBanDao.dsDonHangTheoKhachHang(khachHang.getMaKH());
-			request.setAttribute("DanhSachHoaDon", dsDonHang);
+			List<Object> dsDonHang = hoaDonDao.dsDonHangTheoKhachHang(khachHang.getMaKH());
+			request.setAttribute("DanhSachDonHang", dsDonHang);
 			request.getRequestDispatcher("/view/user/view/lichsu_muahang.jsp").forward(request, response);;
 		}else {
 			PrintWriter writer = response.getWriter();
