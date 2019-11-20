@@ -5,35 +5,31 @@ import java.sql.Date;
 public class Sach {
 	private String maSach;
 	private String tenSach;
-	private float donGiaNhap;
-	private float donGiaBan;
+	private float donGia;
 	private int soLuong;
 	private String urlHinh;
 	private String noiDung;
 	private String tacGia;
 	private int namXB;
 	private String nXB;
-	private String maHDN;
 	private String maLoaiSach;
 	
 	public Sach() {
 		
 	}
 	
-	public Sach(String maSach, String tenSach, float donGiaNhap, float donGiaBan, int soLuong, String urlHinh,
-			String noiDung, String tacGia, int namXB, String nXB, String maHDN, String maLoaiSach) {
+	public Sach(String maSach, String tenSach, float donGia, int soLuong, String urlHinh,
+			String noiDung, String tacGia, int namXB, String nXB, String maLoaiSach) {
 		super();
 		this.maSach = maSach;
 		this.tenSach = tenSach;
-		this.donGiaNhap = donGiaNhap;
-		this.donGiaBan = donGiaBan;
+		this.donGia = donGia;
 		this.soLuong = soLuong;
 		this.urlHinh = urlHinh;
 		this.noiDung = noiDung;
 		this.tacGia = tacGia;
 		this.namXB = namXB;
 		this.nXB = nXB;
-		this.maHDN = maHDN;
 		this.maLoaiSach = maLoaiSach;
 	}
 
@@ -53,20 +49,12 @@ public class Sach {
 		this.tenSach = tenSach;
 	}
 
-	public float getDonGiaNhap() {
-		return donGiaNhap;
+	public float getDonGia() {
+		return donGia;
 	}
 
-	public void setDonGiaNhap(float donGiaNhap) {
-		this.donGiaNhap = donGiaNhap;
-	}
-
-	public float getDonGiaBan() {
-		return donGiaBan;
-	}
-
-	public void setDonGiaBan(float donGiaBan) {
-		this.donGiaBan = donGiaBan;
+	public void setDonGia(float donGia) {
+		this.donGia = donGia;
 	}
 
 	public int getSoLuong() {
@@ -115,14 +103,6 @@ public class Sach {
 
 	public void setnXB(String nXB) {
 		this.nXB = nXB;
-	}
-
-	public String getMaHDN() {
-		return maHDN;
-	}
-
-	public void setMaHDN(String maHDN) {
-		this.maHDN = maHDN;
 	}
 
 	public String getMaLoaiSach() {
