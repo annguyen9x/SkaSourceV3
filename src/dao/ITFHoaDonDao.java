@@ -11,7 +11,11 @@ public interface ITFHoaDonDao {
 	
 	boolean update(HoaDon hd);
 	
+	boolean updateTongTien(float tongTien, int soHD);
+	
 	boolean delete(int soHD);
+	
+	HoaDon getHoaDon(int soHD);
 	
 	List<HoaDon> dsDonHangTheoTinhTrang(String tinhTrangDH);
 	
