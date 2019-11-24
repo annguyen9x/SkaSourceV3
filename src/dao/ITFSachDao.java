@@ -11,6 +11,8 @@ public interface ITFSachDao {
 	
 	boolean update(Sach sach);
 	
+	boolean updateSoLuong(int soLuong, String maSach);
+	
 	boolean delete(Sach sach);
 	
 	Sach getSachTheoMaSach(String maSach);
