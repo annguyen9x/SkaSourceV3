@@ -25,6 +25,41 @@ public class SachDao implements ITFSachDao{
 
 	@Override
 	public boolean update(Sach sach) {
+				
+		return false;
+	}
+	
+	@Override
+	public boolean updateSoLuong(int soLuong, String maSach) {
+		ketNoiDatabase = new KetNoiDatabase();
+		try {
+			conn = ketNoiDatabase.getConn();
+			conn.setAutoCommit(false);
+			String sql = "Update Sach Set SoLuong=? Where MaSach= ?";
+			pStatement = conn.prepareStatement(sql);
+			pStatement.setInt(1, soLuong);
+			pStatement.setString(2, maSach);
+			int rows = pStatement.executeUpdate();
+			conn.commit();
+			if( rows > 0 ) {
+				return true;
+			}
+		} catch (SQLException e) {
+			System.out.println("Loi update soLuong Sach: " + e.toString());
+			try {
+                conn.rollback();
+            } catch (SQLException ex1) {
+                System.out.println("Loi rollback");
+            }
+		}finally {
+			try {
+				pStatement.close();
+			} catch (SQLException e) {
+				System.out.println("Loi dong ket noi PreparedStatement: " + e.toString());
+			}
+			ketNoiDatabase.closeConnection(conn);
+		}
+		
 		return false;
 	}
 
