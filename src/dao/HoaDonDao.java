@@ -13,6 +13,7 @@ import java.util.Map;
 
 import model.HoaDon;
 import model.NguoiNhanHang;
+import model.Sach;
 import util.KiemTraNgayThang;
 
 public class HoaDonDao implements ITFHoaDonDao{
@@ -72,13 +73,121 @@ public class HoaDonDao implements ITFHoaDonDao{
 		// TODO Auto-generated method stub
 		return false;
 	}
-
+	
 	@Override
-	public boolean delete(int soHD) {
-		// TODO Auto-generated method stub
+	public boolean updateTongTien(float tongTien, int soHD) {
+		ketNoiDatabase = new KetNoiDatabase();
+		try {
+			conn = ketNoiDatabase.getConn();
+			conn.setAutoCommit(false);
+			String sql = "Update HoaDon Set TongTien= ? Where SoHD= ?";
+			pStatement = conn.prepareStatement(sql);
+			pStatement.setFloat(1, tongTien);
+			pStatement.setInt(2, soHD);
+			int rows = pStatement.executeUpdate();
+			conn.commit();
+			if( rows > 0 ) {
+				return true;
+			}
+		} catch (SQLException e) {
+			System.out.println("Loi update tongTien HoaDon: " + e.toString());
+			try {
+                conn.rollback();
+            } catch (SQLException ex1) {
+                System.out.println("Loi rollback");
+            }
+		}finally {
+			try {
+				pStatement.close();
+			} catch (SQLException e) {
+				System.out.println("Loi dong ket noi PreparedStatement: " + e.toString());
+			}
+			ketNoiDatabase.closeConnection(conn);
+		}
+		
 		return false;
 	}
 
+	@Override
+	public boolean delete(int soHD) {
+		ketNoiDatabase = new KetNoiDatabase();
+		try {
+			conn = ketNoiDatabase.getConn();
+			conn.setAutoCommit(false);
+			String sql = "Delete From HoaDon Where SoHD= ?";
+			pStatement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			pStatement.setInt(1, soHD);
+			pStatement.executeUpdate();
+			int idnn = -1;
+			rs = pStatement.getGeneratedKeys();
+			conn.commit();
+			if( rs.next() ) {
+				return true;
+			}
+		} catch (SQLException e) {
+			System.out.println("Loi delete HoaDon: " + e.toString());
+			try {
+                conn.rollback();
+            } catch (SQLException ex1) {
+                System.out.println("Loi rollback");
+            }
+		}finally {
+			try {
+				pStatement.close();
+			} catch (SQLException e) {
+				System.out.println("Loi dong ket noi PreparedStatement: " + e.toString());
+			}
+			ketNoiDatabase.closeConnection(conn);
+		}
+		return false;
+	}
+	
+	@Override
+	public HoaDon getHoaDon(int soHD) {
+		ketNoiDatabase = new KetNoiDatabase();
+		HoaDon hoaDon = null;
+		try {
+			conn = KetNoiDatabase.getConn();
+			conn.setAutoCommit(false);
+			String sql = "Select SoHD, IDNN, PhiGiaoHang, TongTien, NgayDat, NgayGiao, TinhTrangDH, MaNVGiao, MaKH " + 
+						 "From HoaDon " + 
+						 "Where SoHD= ?";
+			pStatement = conn.prepareStatement(sql);
+			pStatement.setInt(1, soHD);
+			rs = pStatement.executeQuery();
+			hoaDon = new HoaDon();
+			if( rs.next() ) {
+				hoaDon.setSoHD(rs.getInt("SoHD"));
+				hoaDon.setIdNN(rs.getInt("IDNN"));
+				hoaDon.setPhiGiaoHang(rs.getFloat("PhiGiaoHang"));
+				hoaDon.setTongTien(rs.getFloat("TongTien"));
+				hoaDon.setNgayDat(rs.getDate("NgayDat"));
+				hoaDon.setNgayGiao(rs.getDate("NgayGiao"));
+				hoaDon.setTinhTrangDH(rs.getString("TinhTrangDH"));
+				hoaDon.setMaNVGiao(rs.getInt("MaNVGiao"));
+				hoaDon.setMaKH(rs.getInt("MaKH"));
+			}
+			conn.commit();
+			return hoaDon;
+		} catch (SQLException e) {
+			System.out.println("Loi truy van Sach trong table Sach: " + e.toString());
+			try {
+                conn.rollback();
+            } catch (SQLException ex1) {
+                System.out.println("Loi rollback");
+            }
+		}finally {
+			try {
+				pStatement.close();
+			} catch (SQLException e) {
+				System.out.println("Loi dong ket noi PreparedStatement: " + e.toString());
+			}
+			ketNoiDatabase.closeConnection(conn);
+		}
+	
+		return null;
+	}
+	
 	@Override
 	public List<HoaDon> dsDonHangTheoTinhTrang(String tinhTrangDH) {
 		// TODO Auto-generated method stub
