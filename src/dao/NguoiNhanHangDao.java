@@ -57,11 +57,71 @@ public class NguoiNhanHangDao implements ITFNguoiNhanHangDao{
 
 	@Override
 	public boolean update(NguoiNhanHang nnh) {
+		ketNoiDatabase = new KetNoiDatabase();
+		try {
+			conn = ketNoiDatabase.getConn();
+			conn.setAutoCommit(false);
+			String sql = "Update NguoiNhanHang Set TenNN = ?, Email= ?, DienThoai= ?, DiaChi= ? Where IDNN= ?";
+			pStatement = conn.prepareStatement(sql);
+			pStatement.setNString(1, nnh.getTenNN());
+			pStatement.setNString(2, nnh.getEmail());
+			pStatement.setNString(3, nnh.getDienThoai());
+			pStatement.setNString(4, nnh.getDiaChi());
+			pStatement.setInt(5, nnh.getIdNN());
+			int rows = pStatement.executeUpdate();
+			conn.commit();
+			if( rows > 0 ) {
+				return true;
+			}
+		} catch (SQLException e) {
+			System.out.println("Loi update NguoiNhanHang: " + e.toString());
+			try {
+                conn.rollback();
+            } catch (SQLException ex1) {
+                System.out.println("Loi rollback");
+            }
+		}finally {
+			try {
+				pStatement.close();
+			} catch (SQLException e) {
+				System.out.println("Loi dong ket noi PreparedStatement: " + e.toString());
+			}
+			ketNoiDatabase.closeConnection(conn);
+		}
 		return false;
 	}
 
 	@Override
 	public boolean delete(int idNN) {
+		ketNoiDatabase = new KetNoiDatabase();
+		try {
+			conn = ketNoiDatabase.getConn();
+			conn.setAutoCommit(false);
+			String sql = "Delete From NguoiNhanHang Where IDNN= ?";
+			pStatement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			pStatement.setInt(1, idNN);
+			pStatement.executeUpdate();
+			int idnn = -1;
+			rs = pStatement.getGeneratedKeys();
+			conn.commit();
+			if( rs.next() ) {
+				return true;
+			}
+		} catch (SQLException e) {
+			System.out.println("Loi delete NguoiNhanHang: " + e.toString());
+			try {
+                conn.rollback();
+            } catch (SQLException ex1) {
+                System.out.println("Loi rollback");
+            }
+		}finally {
+			try {
+				pStatement.close();
+			} catch (SQLException e) {
+				System.out.println("Loi dong ket noi PreparedStatement: " + e.toString());
+			}
+			ketNoiDatabase.closeConnection(conn);
+		}
 		return false;
 	}
 
