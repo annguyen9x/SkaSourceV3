@@ -27,7 +27,8 @@ public class XoaGioHangController extends HttpServlet {
 		if(gioHang != null ) {
 			if( MaSach != null && MaSach.equals("XoaTatCa") ) {
 				session.removeAttribute("GioHang");
-			}else {
+			}
+			else if( MaSach != null && !MaSach.equals("XoaTatCa") ){
 				Map<String, Object> danhSachChiTietGioHang = (Map<String, Object>)gioHang.get("DanhSachChiTietGioHang");
 				if( danhSachChiTietGioHang != null && MaSach != null) {
 					danhSachChiTietGioHang.remove(MaSach);
