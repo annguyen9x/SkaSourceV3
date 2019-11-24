@@ -56,7 +56,7 @@ public class XacNhanEmailDatHangController extends HttpServlet {
 				PrintWriter writer = response.getWriter();
 				writer.print("<script type='text/javascript'>");
 				writer.print("alert('Lỗi khi gửi mail xác nhận từ server, vui lòng kiểm tra kết nối internet !!!');");
-				writer.print("location='userDangKy'");
+				writer.print("location='userTrangChu'");
 				writer.print("</script>");
 			}
 		}else {
@@ -78,7 +78,7 @@ public class XacNhanEmailDatHangController extends HttpServlet {
 		}
 		
 		if(maXacNhanTuServer.equals(maXacNhanTuClient)) {
-			response.sendRedirect("/SachKyAnh/CapNhatDonHang");
+			response.sendRedirect("/SachKyAnh/XemCapNhatDonHang");
 		}else {
 			session.setAttribute("xacNhanEmailDatHang", "mxnSai");
 			response.sendRedirect("/SachKyAnh/view/user/view/xacnhan_email_dathang.jsp");
