@@ -221,11 +221,11 @@
 														</td>
 														<td>
 															<%
-																if( hoaDon.getTinhTrangDH().equals("Đợi xác nhận đơn hàng") || hoaDon.getTinhTrangDH().equals("Đang chuẩn bị hàng") || hoaDon.getTinhTrangDH().equals("Đợi người giao lấy hàng")){
+																if( hoaDon.getTinhTrangDH().equals("Đợi xác nhận đơn hàng") || hoaDon.getTinhTrangDH().equals("Đang chuẩn bị hàng") ){
 																	KhachHang khachHangSession = (KhachHang)session.getAttribute("TaiKhoan");
 																	if( khachHangSession != null && khachHang != null && (khachHangSession.getEmail()).equals(khachHang.getEmail()) ){
 															%>
-																		<a href="/SachKyAnh/CapNhatDonHang" class="btn btn-default">Cập nhật đơn hàng?</a>
+																		<a href="/SachKyAnh/XemCapNhatDonHang" class="btn btn-default">Cập nhật đơn hàng?</a>
 															<%
 																	}else{
 															%>
