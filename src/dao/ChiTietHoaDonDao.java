@@ -60,11 +60,70 @@ public class ChiTietHoaDonDao implements ITFChiTietHoaDonDao{
 	
 	@Override
 	public boolean update(ChiTietHoaDon cthd) {
+		ketNoiDatabase = new KetNoiDatabase();
+		try {
+			conn = ketNoiDatabase.getConn();
+			conn.setAutoCommit(false);
+			String sql = "Update ChiTietHoaDon Set SoLuong= ?, DonGia= ? Where SoHD= ? And MaSach= ?";
+			pStatement = conn.prepareStatement(sql);
+			pStatement.setInt(1, cthd.getSoLuong());
+			pStatement.setFloat(2, cthd.getDonGia());
+			pStatement.setInt(3, cthd.getSoHD());
+			pStatement.setString(4, cthd.getMaSach());
+			int rows = pStatement.executeUpdate();
+			conn.commit();
+			if( rows > 0 ) {
+				return true;
+			}
+		} catch (SQLException e) {
+			System.out.println("Loi update ChiTietHoaDon: " + e.toString());
+			try {
+                conn.rollback();
+            } catch (SQLException ex1) {
+                System.out.println("Loi rollback");
+            }
+		}finally {
+			try {
+				pStatement.close();
+			} catch (SQLException e) {
+				System.out.println("Loi dong ket noi PreparedStatement: " + e.toString());
+			}
+			ketNoiDatabase.closeConnection(conn);
+		}
 		return false;
 	}
 	
 	@Override
 	public boolean delete(int soHD, String maSach) {
+		ketNoiDatabase = new KetNoiDatabase();
+		try {
+			conn = ketNoiDatabase.getConn();
+			conn.setAutoCommit(false);
+			String sql = "Delete From ChiTietHoaDon Where SoHD= ? And MaSach= ?";
+			pStatement = conn.prepareStatement(sql);
+			pStatement.setInt(1, soHD);
+			pStatement.setString(2, maSach);
+			int rows = pStatement.executeUpdate();
+			conn.commit();
+			if( rows > 0 ) {
+				return true;
+			}
+		} catch (SQLException e) {
+			System.out.println("Loi delete ChiTietHoaDon: " + e.toString());
+			try {
+                conn.rollback();
+            } catch (SQLException ex1) {
+                System.out.println("Loi rollback");
+            }
+		}finally {
+			try {
+				pStatement.close();
+			} catch (SQLException e) {
+				System.out.println("Loi dong ket noi PreparedStatement: " + e.toString());
+			}
+			ketNoiDatabase.closeConnection(conn);
+		}
+		
 		return false;
 	}
 	
