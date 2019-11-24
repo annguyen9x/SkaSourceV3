@@ -18,7 +18,12 @@ import model.Sach;
 public class XemGioHangController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.sendRedirect("/SachKyAnh/view/user/view/gio_hang.jsp");
+		HttpSession session = request.getSession();
+		if( session.getAttribute("CapNhatDonHang") != null ) {
+			response.sendRedirect("/SachKyAnh/view/user/view/capnhat_donhang.jsp");
+		}else {
+			response.sendRedirect("/SachKyAnh/view/user/view/gio_hang.jsp");
+		}
 	}
 
 }
