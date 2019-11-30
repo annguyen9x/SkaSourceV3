@@ -74,7 +74,7 @@
 										if( danhSachChiTietGioHang != null ){
 								%>
 									<form action="/SachKyAnh/CapNhatGioHang" method="post" onsubmit="return ktSoLuongCapNhat();" id="gioHang" class="form_giohang">
-										<table class="table my_border">
+										<table class="table table-bordered">
 											<thead>
 												<tr>
 													<th>

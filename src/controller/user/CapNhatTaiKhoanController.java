@@ -35,12 +35,12 @@ public class CapNhatTaiKhoanController extends HttpServlet {
 		String dienThoai = req.getParameter("dienthoai").trim();
 		String gioiTinh = req.getParameter("gioitinh").trim();
 		String strNgaySinh =  req.getParameter("namsinh")+ "-" +req.getParameter("thangsinh") + "-" + req.getParameter("ngaysinh") ;
-		String diaChi = req.getParameter("diachi").trim();		
+		String diaChi = req.getParameter("diachi").trim();	
+		HttpSession session = req.getSession();
 		
 		if( tenKH.length() >= 2 && matKhau.length() >= 6 && email.length() > 0 && dienThoai.length() >= 10 && !gioiTinh.equals("") 
 			&& KiemTraNgayThang.ktNgayThang(strNgaySinh)== true && !diaChi.equals("")) {
-			
-			HttpSession session = req.getSession();
+
 			KhachHang khachHang = (KhachHang) session.getAttribute("TaiKhoan");
 			int  maKH = khachHang.getMaKH();
 			
@@ -52,13 +52,12 @@ public class CapNhatTaiKhoanController extends HttpServlet {
 				e.printStackTrace();
 			}
 			
-			HttpSession sessionKQ = req.getSession();
 			KhachHang kh = new KhachHang(maKH, tenKH, matKhau, email, dienThoai, gioiTinh, ngaySinh, diaChi);
 			if( khachHangDao.update(kh) == true ) {
-				sessionKQ.setAttribute("thanhCong", "Cập nhật thông tin tài khoản thành công.");
+				session.setAttribute("thanhCong", "Cập nhật thông tin tài khoản thành công.");
 				session.setAttribute("TaiKhoan", kh);
 			}else {
-				sessionKQ.setAttribute("thatBai", "Cập nhật thông tin tài khoản thất bại !!!");
+				session.setAttribute("thatBai", "Cập nhật thông tin tài khoản thất bại !!!");
 			}
 			resp.sendRedirect("userCapNhatTaiKhoan");
 		}else {

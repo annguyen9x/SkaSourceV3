@@ -22,7 +22,12 @@ import util.MahoaMD5;
 @WebServlet(urlPatterns = "/userDangNhap")
 public class DangNhapController extends HttpServlet{
 	private KhachHangDao khachHangDao = new KhachHangDao(); 
-
+	
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.getRequestDispatcher("/view/user/view/dangnhap.jsp").forward(req, resp);
+	}
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setCharacterEncoding("utf-8");
 		request.setCharacterEncoding("utf-8");
@@ -45,11 +50,6 @@ public class DangNhapController extends HttpServlet{
 			request.setAttribute("errorEmail", "Email không tồn tại");
 			request.getRequestDispatcher("/view/user/view/dangnhap.jsp").forward(request, response);
 		}
-	}
-	
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.getRequestDispatcher("/view/user/view/dangnhap.jsp").forward(req, resp);
 	}
 	
 }

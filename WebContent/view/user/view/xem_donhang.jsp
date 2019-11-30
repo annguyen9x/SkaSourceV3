@@ -1,4 +1,3 @@
-<%@page import="model.NguoiNhanHang"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8" %>
 <%@page import="java.util.Map"%>
@@ -11,6 +10,7 @@
 <%@page import="java.text.SimpleDateFormat" %>
 <%@page import="model.HoaDon" %>
 <%@page import="model.KhachHang" %>
+<%@page import="model.NguoiNhanHang"%>
 <%@page import="model.Sach" %>
 <%@page import="model.ChiTietHoaDon" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -108,7 +108,7 @@
 												%>
 											</div>
 										</div>
-										<table class="table my_border">
+										<table class="table table-bordered">
 											<thead>
 												<tr>
 													<th>

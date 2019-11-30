@@ -93,6 +93,7 @@
 			                    	
 			                    	<%
 				            			KhachHang khachHang = (KhachHang) session.getAttribute("TaiKhoan");
+				            			if( khachHang != null ){
 			                    	%>
 									<form method="post" action="/SachKyAnh/userCapNhatTaiKhoan" id="formCN" onsubmit="return validation();" class="form-horizontal">
 										<div class="form-group">
@@ -251,6 +252,9 @@
 							            	</div>
 							            </div>
 									</form>
+									<%
+			                    		}
+									%>
 			                    </div>
 							</div>
 						</div>

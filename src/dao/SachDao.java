@@ -20,12 +20,86 @@ public class SachDao implements ITFSachDao{
 	
 	@Override
 	public boolean insert(Sach sach) {
+		ketNoiDatabase = new KetNoiDatabase();
+		try {
+			conn = ketNoiDatabase.getConn();
+			conn.setAutoCommit(false);
+			String sql = "Insert into Sach(MaSach, TenSach, DonGia, SoLuong, UrlHinh, NoiDung, TacGia, NamXB, NXB, MaLoaiSach) "
+					+ "Values(?,?,?,?,?,?,?,?,?,?)";
+			pStatement = conn.prepareStatement(sql);
+			pStatement.setString(1, sach.getMaSach());
+			pStatement.setString(2, sach.getTenSach());
+			pStatement.setFloat(3, sach.getDonGia());
+			pStatement.setInt(4, 0);
+			pStatement.setString(5, sach.getUrlHinh());
+			pStatement.setString(6, sach.getNoiDung());
+			pStatement.setString(7, sach.getTacGia());
+			pStatement.setInt(8, sach.getNamXB());
+			pStatement.setString(9, sach.getnXB());
+			pStatement.setString(10, sach.getMaLoaiSach());
+			int rows = pStatement.executeUpdate();
+			conn.commit();
+			if( rows > 0 ) {
+				return true;
+			}
+		} catch (SQLException e) {
+			System.out.println("Loi insert Sach: " + e.toString());
+			try {
+                conn.rollback();
+            } catch (SQLException ex1) {
+                System.out.println("Loi rollback");
+            }
+		}finally {
+			try {
+				pStatement.close();
+			} catch (SQLException e) {
+				System.out.println("Loi dong ket noi PreparedStatement: " + e.toString());
+			}
+			ketNoiDatabase.closeConnection(conn);
+		}
+		
 		return false;
 	}
 
 	@Override
 	public boolean update(Sach sach) {
-				
+		ketNoiDatabase = new KetNoiDatabase();
+		try {
+			conn = ketNoiDatabase.getConn();
+			conn.setAutoCommit(false);
+			String sql = "Update Sach Set TenSach=?, DonGia=?, UrlHinh=?, NoiDung=?, TacGia=?, NamXB=?, NXB=?, MaLoaiSach=?  "
+						+ "Where MaSach= ?";
+			pStatement = conn.prepareStatement(sql);
+			pStatement.setString(1, sach.getTenSach());
+			pStatement.setFloat(2, sach.getDonGia());
+			pStatement.setString(3, sach.getUrlHinh());
+			pStatement.setString(4, sach.getNoiDung());
+			pStatement.setString(5, sach.getTacGia());
+			pStatement.setInt(6, sach.getNamXB());
+			pStatement.setString(7, sach.getnXB());
+			pStatement.setString(8, sach.getMaLoaiSach());
+			pStatement.setString(9, sach.getMaSach());
+			int rows = pStatement.executeUpdate();
+			conn.commit();
+			if( rows > 0 ) {
+				return true;
+			}
+		} catch (SQLException e) {
+			System.out.println("Loi update Sach: " + e.toString());
+			try {
+                conn.rollback();
+            } catch (SQLException ex1) {
+                System.out.println("Loi rollback");
+            }
+		}finally {
+			try {
+				pStatement.close();
+			} catch (SQLException e) {
+				System.out.println("Loi dong ket noi PreparedStatement: " + e.toString());
+			}
+			ketNoiDatabase.closeConnection(conn);
+		}
+		
 		return false;
 	}
 	
@@ -64,11 +138,75 @@ public class SachDao implements ITFSachDao{
 	}
 
 	@Override
-	public boolean delete(Sach sach) {
+	public boolean delete(String maSach) {
+		ketNoiDatabase = new KetNoiDatabase();
+		try {
+			conn = ketNoiDatabase.getConn();
+			conn.setAutoCommit(false);
+			String sql = "Delete From Sach Where MaSach= ?";
+			pStatement = conn.prepareStatement(sql);
+			pStatement.setString(1, maSach);
+			int rows = pStatement.executeUpdate();
+			conn.commit();
+			if( rows > 0 ) {
+				return true;
+			}
+		} catch (SQLException e) {
+			System.out.println("Loi delete Sach: " + e.toString());
+			try {
+                conn.rollback();
+            } catch (SQLException ex1) {
+                System.out.println("Loi rollback");
+            }
+		}finally {
+			try {
+				pStatement.close();
+			} catch (SQLException e) {
+				System.out.println("Loi dong ket noi PreparedStatement: " + e.toString());
+			}
+			ketNoiDatabase.closeConnection(conn);
+		}
+		
 		return false;
 	}
 	
 
+	@Override
+	public boolean kiemTraSachTheoMaSach(String maSach) {
+		ketNoiDatabase = new KetNoiDatabase();
+		Sach sach = null;
+		try {
+			conn = KetNoiDatabase.getConn();
+			conn.setAutoCommit(false);
+			String sql = "Select * " + 
+						 "From Sach " + 
+						 "Where MaSach= ?";
+			pStatement = conn.prepareStatement(sql);
+			pStatement.setString(1, maSach);
+			rs = pStatement.executeQuery();
+			conn.commit();
+			if( rs.next() ) {
+				return true;
+			}
+		} catch (SQLException e) {
+			System.out.println("Loi truy van Sach trong table Sach: " + e.toString());
+			try {
+                conn.rollback();
+            } catch (SQLException ex1) {
+                System.out.println("Loi rollback");
+            }
+		}finally {
+			try {
+				pStatement.close();
+			} catch (SQLException e) {
+				System.out.println("Loi dong ket noi PreparedStatement: " + e.toString());
+			}
+			ketNoiDatabase.closeConnection(conn);
+		}
+	
+		return false;
+	}
+	
 	@Override
 	public Sach getSachTheoMaSach(String maSach) {
 		ketNoiDatabase = new KetNoiDatabase();
@@ -99,6 +237,55 @@ public class SachDao implements ITFSachDao{
 			return sach;
 		} catch (SQLException e) {
 			System.out.println("Loi truy van Sach trong table Sach: " + e.toString());
+			try {
+                conn.rollback();
+            } catch (SQLException ex1) {
+                System.out.println("Loi rollback");
+            }
+		}finally {
+			try {
+				pStatement.close();
+			} catch (SQLException e) {
+				System.out.println("Loi dong ket noi PreparedStatement: " + e.toString());
+			}
+			ketNoiDatabase.closeConnection(conn);
+		}
+	
+		return null;
+	}
+	
+	@Override
+	public List<Sach> dsSach() {
+		ketNoiDatabase = new KetNoiDatabase();
+		List<Sach> dsSach = null;
+		try {
+			conn = KetNoiDatabase.getConn();
+			conn.setAutoCommit(false);
+			String sql = "Select MaSach, TenSach, DonGia, SoLuong, UrlHinh, NoiDung, TacGia, NamXB, NXB, MaLoaiSach " + 
+						 "From Sach " + 
+						 "Order By MaSach DESC ";
+			pStatement = conn.prepareStatement(sql);
+			rs = pStatement.executeQuery();
+			dsSach = new ArrayList();
+			while( rs.next() ) {
+				Sach sach = new Sach();
+				sach.setMaSach(rs.getString("MaSach"));
+				sach.setTenSach(rs.getNString("TenSach"));
+				sach.setDonGia(rs.getFloat("DonGia"));
+				sach.setSoLuong(rs.getInt("SoLuong"));
+				sach.setUrlHinh(rs.getString("UrlHinh"));
+				sach.setNoiDung(rs.getString("NoiDung"));
+				sach.setTacGia(rs.getString("TacGia"));
+				sach.setNamXB(rs.getInt("NamXB"));
+				sach.setnXB(rs.getString("NXB"));
+				sach.setMaLoaiSach(rs.getString("MaLoaiSach"));
+				
+				dsSach.add(sach);
+			}
+			conn.commit();
+			return dsSach;
+		} catch (SQLException e) {
+			System.out.println("Loi truy van danh sach Sach: " + e.toString());
 			try {
                 conn.rollback();
             } catch (SQLException ex1) {
@@ -214,6 +401,56 @@ public class SachDao implements ITFSachDao{
 		return null;
 	}
 
+	@Override
+	public List<Sach> dsSachTheoLoaiSach(String maLoaiSach) {
+		ketNoiDatabase = new KetNoiDatabase();
+		List<Sach> dsSachTheoLoaiSach = null;
+		try {
+			conn = KetNoiDatabase.getConn();
+			conn.setAutoCommit(false);
+			String sql = "Select MaSach, TenSach, DonGia, SoLuong, UrlHinh, NoiDung, TacGia, NamXB, NXB, MaLoaiSach " + 
+						 "From Sach " + 
+						 "Where MaLoaiSach= ? ";
+			pStatement = conn.prepareStatement(sql);
+			pStatement.setString(1, maLoaiSach);
+			rs = pStatement.executeQuery();
+			dsSachTheoLoaiSach = new ArrayList<Sach>();
+			while( rs.next() ) {
+				Sach sach = new Sach();
+				sach.setMaSach(rs.getString("MaSach"));
+				sach.setTenSach(rs.getNString("TenSach"));
+				sach.setDonGia(rs.getFloat("DonGia"));
+				sach.setSoLuong(rs.getInt("SoLuong"));
+				sach.setUrlHinh(rs.getString("UrlHinh"));
+				sach.setNoiDung(rs.getString("NoiDung"));
+				sach.setTacGia(rs.getString("TacGia"));
+				sach.setNamXB(rs.getInt("NamXB"));
+				sach.setnXB(rs.getString("NXB"));
+				sach.setMaLoaiSach(rs.getString("MaLoaiSach"));
+
+				dsSachTheoLoaiSach.add(sach);
+			}
+			conn.commit();
+			return dsSachTheoLoaiSach;
+		} catch (SQLException e) {
+			System.out.println("Loi truy van danh sach SachTheoLoaiSach: " + e.toString());
+			try {
+                conn.rollback();
+            } catch (SQLException ex1) {
+                System.out.println("Loi rollback");
+            }
+		}finally {
+			try {
+				pStatement.close();
+			} catch (SQLException e) {
+				System.out.println("Loi dong ket noi PreparedStatement: " + e.toString());
+			}
+			ketNoiDatabase.closeConnection(conn);
+		}
+	
+		return null;
+	}
+	
 	@Override
 	public List<Sach> dsTenSachTheoLoaiSach(String maLoaiSach) {
 		ketNoiDatabase = new KetNoiDatabase();
@@ -390,4 +627,5 @@ public class SachDao implements ITFSachDao{
 	
 		return null;
 	}
+
 }

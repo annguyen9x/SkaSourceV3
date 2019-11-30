@@ -303,7 +303,7 @@ N'<p>
 - Cuốn sách này tập hợp những câu chuyện vô cùng thú vị về chú mèo máy Doraemon: Viên cảm tình, Câu chuyện cảm động, Mây tạo tuyết...
 </p>', 
 N'Fujiko-F-Fujio', 2015, N'Nhà Xuất Bản Kim Đồng', 'LS07')
-Insert into Sach Values('STN024', N'Doraemon (Tập 11)', 18000, 10, 'tn3.jpg', 
+Insert into Sach Values('STN024', N'Doraemon (Tập 11)', 18000, 10, 'tn4.jpg', 
 N'<p>
 - Những câu chuyện về chú mèo máy thông minh Doraemon và nhóm bạn Nobita, Shizuka, Suneo, Jaian, Dekisugi sẽ đưa chúng ta bước vào thế giới hồn nhiên, trong sáng đầy ắp tiếng cười với một kho bảo bối kì diệu - những bảo bối biến ước mơ của chúng ta thành sự thật. Nhưng trên tất cả Doraemon là hiện thân của tình bạn cao đẹp, của niềm khát khao vương tới những tầm cao.
 </p>
@@ -360,9 +360,9 @@ MaKH int foreign key references KhachHang(MaKH)
 )
 Go
 
-Insert into HoaDon Values(1001, 40000, 414000, '2019-11-20', '2019-11-23', N'Đã giao thành công', 1001, null)
+Insert into HoaDon Values(1001, 40000, 414000, '2019-11-20', '2019-11-23', N'Hoàn tất', 1001, null)
 Insert into HoaDon Values(1002, 40000, 214000, '2019-11-20', '2019-11-23', N'Trả lại hàng', 1005, null)
-Insert into HoaDon Values(1003, 40000, 299000, '2019-11-25', null, N'Đang giao', 1005, null)
+Insert into HoaDon Values(1003, 40000, 299000, '2019-11-25', null, N'Đang giao hàng', 1005, null)
 Insert into HoaDon Values(1004, 40000, 200000, '2019-11-25', null, N'Đang chuẩn bị hàng', 1001, null)
 Insert into HoaDon Values(1005, 40000, 365000, '2019-12-01', null, N'Đang chuẩn bị hàng', 1001, 1001)
 

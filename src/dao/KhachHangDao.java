@@ -245,7 +245,7 @@ public class KhachHangDao implements ITFKhachHangDao{
 				return true;
 			}
 		} catch (SQLException e) {
-			System.out.println("Loi truy van email KhachHang: " + e.toString());
+			System.out.println("Loi truy van theo email KhachHang: " + e.toString());
 			try {
                 conn.rollback();
             } catch (SQLException ex1) {
@@ -278,7 +278,7 @@ public class KhachHangDao implements ITFKhachHangDao{
 				return true;
 			}
 		} catch (SQLException e) {
-			System.out.println("Loi truy van dien thoai KhachHang: " + e.toString());
+			System.out.println("Loi truy van theo dien thoai KhachHang: " + e.toString());
 			try {
                 conn.rollback();
             } catch (SQLException ex1) {

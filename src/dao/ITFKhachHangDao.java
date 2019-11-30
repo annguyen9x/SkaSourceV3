@@ -23,5 +23,5 @@ public interface ITFKhachHangDao {
 	
 	boolean kiemTraEmailTonTai(String email);
 	
-	boolean kiemTraDienThoaiTonTai(String email);
+	boolean kiemTraDienThoaiTonTai(String dienThoai);
 }

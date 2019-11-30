@@ -69,8 +69,43 @@ public class HoaDonDao implements ITFHoaDonDao{
 	}
 
 	@Override
-	public boolean update(HoaDon hd) {
-		// TODO Auto-generated method stub
+	public boolean xulyDonHang(int soHD, int maNVGiao,  String tinhTrangDonHang) {
+		ketNoiDatabase = new KetNoiDatabase();
+		try {
+			conn = ketNoiDatabase.getConn();
+			conn.setAutoCommit(false);
+			String sql = "Update HoaDon Set MaNVGiao= ?, TinhTrangDH= ? Where SoHD= ?";
+			pStatement = conn.prepareStatement(sql);
+			pStatement.setFloat(1, maNVGiao);
+			pStatement.setNString(2, tinhTrangDonHang);
+			pStatement.setInt(3, soHD);
+			int rows = pStatement.executeUpdate();
+			conn.commit();
+			if( rows > 0 ) {
+				return true;
+			}
+		} catch (SQLException e) {
+			System.out.println("Loi xu ly HoaDon: " + e.toString());
+			try {
+                conn.rollback();
+            } catch (SQLException ex1) {
+                System.out.println("Loi rollback");
+            }
+		}finally {
+			try {
+				pStatement.close();
+			} catch (SQLException e) {
+				System.out.println("Loi dong ket noi PreparedStatement: " + e.toString());
+			}
+			ketNoiDatabase.closeConnection(conn);
+		}
+		
+		return false;
+	}
+	
+	@Override
+	public boolean updateTinhTrangDonHang(int soHD, String tinhTrangDonHang) {
+		
 		return false;
 	}
 	
@@ -255,8 +290,61 @@ public class HoaDonDao implements ITFHoaDonDao{
 	}
 
 	@Override
-	public List<HoaDon> dsDonHang() {
-		// TODO Auto-generated method stub
+	public List<Object> dsDonHangVaKhachHang() {
+		ketNoiDatabase = new KetNoiDatabase();
+		List<Object> dsDonHangVaKhachHang = null;
+		try {
+			conn = KetNoiDatabase.getConn();
+			conn.setAutoCommit(false);
+			String sql = "Select SoHD, HoaDon.IDNN, TenNN, Email, DienThoai, DiaChi, PhiGiaoHang, TongTien, NgayDat, NgayGiao, TinhTrangDH, MaNVGiao, MaKH " + 
+						 "From HoaDon Join NguoiNhanHang " + 
+						 "On HoaDon.IDNN = NguoiNhanHang.IDNN";
+			pStatement = conn.prepareStatement(sql);
+			rs = pStatement.executeQuery();
+			dsDonHangVaKhachHang = new ArrayList();
+			while( rs.next() ) {
+				Map<String, Object>  chiTietDonHang = new HashMap();
+				
+				NguoiNhanHang nguoiNhanHang = new NguoiNhanHang();
+				nguoiNhanHang.setIdNN(rs.getInt("IDNN"));
+				nguoiNhanHang.setTenNN((rs.getString("TenNN")));
+				nguoiNhanHang.setEmail(rs.getString("Email"));
+				nguoiNhanHang.setDienThoai(rs.getString("DienThoai"));
+				nguoiNhanHang.setDiaChi(rs.getString("DiaChi"));
+				
+				HoaDon hdb = new HoaDon();
+				hdb.setSoHD(rs.getInt("SoHD"));
+				hdb.setIdNN(rs.getInt("IDNN"));
+				hdb.setPhiGiaoHang(rs.getFloat("PhiGiaoHang"));
+				hdb.setTongTien(rs.getFloat("TongTien"));
+				hdb.setNgayDat(rs.getDate("NgayDat"));
+				hdb.setNgayGiao(rs.getDate("NgayGiao"));
+				hdb.setTinhTrangDH(rs.getString("TinhTrangDH"));
+				hdb.setMaNVGiao(rs.getInt("MaNVGiao"));
+				hdb.setMaKH(rs.getInt("MaKH"));
+				
+				chiTietDonHang.put("HoaDon",hdb);
+				chiTietDonHang.put("NguoiNhanHang",nguoiNhanHang);
+				dsDonHangVaKhachHang.add(chiTietDonHang);
+			}
+			conn.commit();
+			return dsDonHangVaKhachHang;
+		} catch (SQLException e) {
+			System.out.println("Loi truy van danh sach DonHang: " + e.toString());
+			try {
+                conn.rollback();
+            } catch (SQLException ex1) {
+                System.out.println("Loi rollback");
+            }
+		}finally {
+			try {
+				pStatement.close();
+			} catch (SQLException e) {
+				System.out.println("Loi dong ket noi PreparedStatement: " + e.toString());
+			}
+			ketNoiDatabase.closeConnection(conn);
+		}
+		
 		return null;
 	}
 

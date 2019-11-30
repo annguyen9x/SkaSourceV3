@@ -9,7 +9,9 @@ public interface ITFHoaDonDao {
 	
 	int insert(HoaDon hd);
 	
-	boolean update(HoaDon hd);
+	boolean xulyDonHang(int soHD, int maNVGiao, String tinhTrangDonHang);
+	
+	boolean updateTinhTrangDonHang(int soHD, String tinhTrangDonHang);
 	
 	boolean updateTongTien(float tongTien, int soHD);
 	
@@ -21,5 +23,5 @@ public interface ITFHoaDonDao {
 	
 	List<Object> dsDonHangTheoKhachHang(int maKH);
 	
-	List<HoaDon> dsDonHang();
+	List<Object> dsDonHangVaKhachHang();
 }

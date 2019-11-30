@@ -18,6 +18,20 @@ public class Sach {
 		
 	}
 	
+	public Sach(String maSach, String tenSach, float donGia, String urlHinh,
+			String noiDung, String tacGia, int namXB, String nXB, String maLoaiSach) {
+		super();
+		this.maSach = maSach;
+		this.tenSach = tenSach;
+		this.donGia = donGia;
+		this.urlHinh = urlHinh;
+		this.noiDung = noiDung;
+		this.tacGia = tacGia;
+		this.namXB = namXB;
+		this.nXB = nXB;
+		this.maLoaiSach = maLoaiSach;
+	}
+	
 	public Sach(String maSach, String tenSach, float donGia, int soLuong, String urlHinh,
 			String noiDung, String tacGia, int namXB, String nXB, String maLoaiSach) {
 		super();

@@ -5,10 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 import model.LoaiSach;
+import util.KiemTraNgayThang;
 
 public class LoaiSachDao implements ITFLoaiSachDao{
 	private KetNoiDatabase ketNoiDatabase;
@@ -19,16 +21,100 @@ public class LoaiSachDao implements ITFLoaiSachDao{
 	
 	@Override
 	public boolean insert(LoaiSach ls) {
+		ketNoiDatabase = new KetNoiDatabase();
+		try {
+			conn = ketNoiDatabase.getConn();
+			conn.setAutoCommit(false);
+			String sql = "Insert into LoaiSach(MaLoaiSach, TenLoaiSach) Values(?,?)";
+			pStatement = conn.prepareStatement(sql);
+			pStatement.setString(1, ls.getMaLoaiSach());
+			pStatement.setNString(2, ls.getTenLoaiSach());
+			int rows = pStatement.executeUpdate();
+			conn.commit();
+			if( rows > 0 ) {
+				return true;
+			}
+		} catch (SQLException e) {
+			System.out.println("Loi insert LoaiSach: " + e.toString());
+			try {
+                conn.rollback();
+            } catch (SQLException ex1) {
+                System.out.println("Loi rollback");
+            }
+		}finally {
+			try {
+				pStatement.close();
+			} catch (SQLException e) {
+				System.out.println("Loi dong ket noi PreparedStatement: " + e.toString());
+			}
+			ketNoiDatabase.closeConnection(conn);
+		}
 		return false;
 	}
 
 	@Override
 	public boolean update(LoaiSach ls) {
+		ketNoiDatabase = new KetNoiDatabase();
+		try {
+			conn = ketNoiDatabase.getConn();
+			conn.setAutoCommit(false);
+			String sql = "Update LoaiSach Set MaLoaiSach= ?, TenLoaiSach= ? Where MaLoaiSach=?";
+			pStatement = conn.prepareStatement(sql);
+			pStatement.setString(1, ls.getMaLoaiSach());
+			pStatement.setNString(2, ls.getTenLoaiSach());
+			pStatement.setString(3, ls.getMaLoaiSach());
+			int rows = pStatement.executeUpdate();
+			conn.commit();
+			if( rows > 0 ) {
+				return true;
+			}
+		} catch (SQLException e) {
+			System.out.println("Loi update LoaiSach: " + e.toString());
+			try {
+                conn.rollback();
+            } catch (SQLException ex1) {
+                System.out.println("Loi rollback");
+            }
+		}finally {
+			try {
+				pStatement.close();
+			} catch (SQLException e) {
+				System.out.println("Loi dong ket noi PreparedStatement: " + e.toString());
+			}
+			ketNoiDatabase.closeConnection(conn);
+		}
 		return false;
 	}
 
 	@Override
-	public boolean delete(LoaiSach ls) {
+	public boolean delete(String maLoaiSach) {
+		ketNoiDatabase = new KetNoiDatabase();
+		try {
+			conn = ketNoiDatabase.getConn();
+			conn.setAutoCommit(false);
+			String sql = "Delete From LoaiSach Where MaLoaiSach=?";
+			pStatement = conn.prepareStatement(sql);
+			pStatement.setString(1, maLoaiSach);
+			int rows = pStatement.executeUpdate();
+			conn.commit();
+			if( rows > 0 ) {
+				return true;
+			}
+		} catch (SQLException e) {
+			System.out.println("Loi delete LoaiSach: " + e.toString());
+			try {
+                conn.rollback();
+            } catch (SQLException ex1) {
+                System.out.println("Loi rollback");
+            }
+		}finally {
+			try {
+				pStatement.close();
+			} catch (SQLException e) {
+				System.out.println("Loi dong ket noi PreparedStatement: " + e.toString());
+			}
+			ketNoiDatabase.closeConnection(conn);
+		}
 		return false;
 	}
 

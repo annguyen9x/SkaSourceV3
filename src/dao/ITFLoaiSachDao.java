@@ -10,7 +10,7 @@ public interface ITFLoaiSachDao {
 	
 	boolean update(LoaiSach ls);
 	
-	boolean delete(LoaiSach ls);
+	boolean delete(String maLoaiSach);
 	
 	LoaiSach getLoaiSach(String maLS);
 	

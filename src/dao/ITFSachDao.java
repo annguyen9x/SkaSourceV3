@@ -13,13 +13,19 @@ public interface ITFSachDao {
 	
 	boolean updateSoLuong(int soLuong, String maSach);
 	
-	boolean delete(Sach sach);
+	boolean delete(String maSach);
+	
+	boolean kiemTraSachTheoMaSach(String maSach);
 	
 	Sach getSachTheoMaSach(String maSach);
+	
+	List<Sach> dsSach();
 	
 	List<Sach> dsSachNoiBat(int soLuong);
 	
 	List<Sach> dsSachMoi(int soLuong);
+	
+	List<Sach> dsSachTheoLoaiSach(String maLoaiSach);
 	
 	List<Sach> dsTenSachTheoLoaiSach(String maLoaiSach);
 	
