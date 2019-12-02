@@ -221,7 +221,7 @@
 														</td>
 														<td>
 															<%
-																if( hoaDon.getTinhTrangDH().equals("Đợi xác nhận đơn hàng") || hoaDon.getTinhTrangDH().equals("Đang chuẩn bị hàng") ){
+																if( hoaDon.getTinhTrangDH().equals("Đợi xác nhận đơn hàng") || hoaDon.getTinhTrangDH().equals("Đang chuẩn bị hàng") || hoaDon.getTinhTrangDH().equals("Đợi người giao lấy hàng")){
 																	KhachHang khachHangSession = (KhachHang)session.getAttribute("TaiKhoan");
 																	if( khachHangSession != null && khachHang != null && (khachHangSession.getEmail()).equals(khachHang.getEmail()) ){
 															%>
