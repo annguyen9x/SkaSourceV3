@@ -11,7 +11,9 @@ public interface ITFHoaDonDao {
 	
 	boolean xulyDonHang(int soHD, int maNVGiao, String tinhTrangDonHang);
 	
-	boolean updateTinhTrangDonHang(int soHD, String tinhTrangDonHang);
+	boolean updateTinhTrangDonHang(int soHD, String tinhTrangDonHang, String ngayGiao);
+	
+	boolean khoUpdateTinhTrangDonHang(int soHD, String tinhTrangDonHango);
 	
 	boolean updateTongTien(float tongTien, int soHD);
 	
@@ -22,6 +24,8 @@ public interface ITFHoaDonDao {
 	List<HoaDon> dsDonHangTheoTinhTrang(String tinhTrangDH);
 	
 	List<Object> dsDonHangTheoKhachHang(int maKH);
+	
+	List<Object> dsDonHangVaKhachHangTheoNVGiao(int maNV);
 	
 	List<Object> dsDonHangVaKhachHang();
 }
