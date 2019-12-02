@@ -1,7 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+<%@page import="java.util.Map"%>
+<%@page import="java.util.HashMap" %>
+<%@page import="java.util.List" %>
+<%@page import="java.util.Date" %>
+<%@page import="java.util.Calendar" %>
+<%@page import="java.text.NumberFormat" %>
+<%@page import="java.text.DecimalFormat" %>
+<%@page import="java.text.SimpleDateFormat" %>
+<%@page import="model.HoaDon" %>
+<%@page import="model.NguoiNhanHang"%>
+<%@page import="model.Sach" %>
+<%@page import="model.ChiTietHoaDon" %>
+<%@page import="model.NhanVien"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:url var="url" value="/view/admin"></c:url>
+<c:url var="urlSanPham" value="/view/user"></c:url>
 
 <!DOCTYPE html>
 <html>
@@ -25,27 +39,31 @@
 <!-- end my js -->
 </head>
 <body>
+	<%
+		NhanVien nhanVien = (NhanVien)session.getAttribute("NhanVien");
+		if( nhanVien != null ){
+	%>
 	<section class="noidung">
 		<div class="container-fluid">
 			<div class="row content">
 				<div class="col-md-2 col-sm-3 col-xs-12 sidenav nd_left">
-					<h2 class="loainv_icon"><li class="fa fa-th-large"></li><span class="loainv"> Nhân viên Kho</span></h2>
+					<h2 class="loainv_icon"><li class="fa fa-th-large"></li><span class="loainv"> Nhân viên <% if(nhanVien != null) {out.print(nhanVien.getChucVu());} %></span></h2>
 					<div class="tennv_anh">
 						<span class="anh">
 							<img class="img-circle" alt="hinhNV" src="${url}/static/img/hinhMacdinh.png">
 						</span>
 						
 						<span class="ten_nv">Xin chào, <br/>
-							<span class="ten">An Nguyễn</span>
+							<span class="ten"><% if(nhanVien != null) {out.print(nhanVien.getTenNV());} %></span>
 						</span>
 					</div>
 					<ul class="nav nav-pills nav-stacked">
-						<li><a href="kho_trangchu.jsp"><i class="fa fa-home"></i> Trang chủ</a></li>
-						<li><a href="kho_xem_dh_canchuanbi.jsp"><i class="fa fa-table"></i> Đơn hàng cần chuẩn bị</a></li>
-						<li><a href="kho_cn_tinhtrang_dh.jsp"><i class="fa fa-edit"></i> Cập nhật tình trạng ĐH</a></li>
-						<li><a href="kho_nhap_sach.jsp"><i class="fa fa-edit"></i> Nhập sách</a></li>
-						<li><a href="quantri_capnhat_taikhoan.jsp"><i class="fa fa-address-book"></i> Cập nhật tài khoản</a></li>
-						<li><a href="/SachKyAnh/quantriDangXuat"><i class="fa fa-power-off"></i> Đăng xuất</a></li>
+						<li><a href="/SachKyAnh/KhoTrangChu"><i class="fa fa-home"></i> Trang chủ</a></li>
+						<li><a href="/SachKyAnh/KhoXemDonHangChuanBi"><i class="fa fa-table"></i> Đơn hàng cần chuẩn bị</a></li>
+						<li><a href="/SachKyAnh/KhoCapNhatTTDH"><i class="fa fa-edit"></i> Cập nhật tình trạng ĐH</a></li>
+						<li><a href="/SachKyAnh/KhoNhapSach"><i class="fa fa-edit"></i> Nhập sách</a></li>
+						<li><a href="/SachKyAnh/KhoCapNhatTaiKhoan"><i class="fa fa-address-book"></i> Cập nhật tài khoản</a></li>
+						<li><a href="/SachKyAnh/KhoDangXuat"><i class="fa fa-power-off"></i> Đăng xuất</a></li>
 					</ul>
 					<br>
 				</div>
@@ -62,25 +80,24 @@
 					</header>
 
 				<!-- Phần nội dung chính -->
-					<section class="content trang_nhap_sach">
+					<section class="content trang_thong_tin_dh">
 						<hr>
 						<div class="noidung_chinh">
 							<p class="tieude_bang">Thông tin chi tiết đơn hàng</p>
-							<%-- <%
-								Map<String, Object> thongTinDonHang = (HashMap<String, Object>)session.getAttribute("ThongTinDonHang");
-								String trangThai = (String)session.getAttribute("TrangThai");
-								if( ((thongTinDonHang != null && thongTinDonHang.size() == 0) && (trangThai != null && trangThai.equals("DaTimKiemDH"))) || (thongTinDonHang == null && trangThai != null && trangThai.equals("DaTimKiemDH")) ){
-								if( thongTinDonHang != null && thongTinDonHang.size() > 0 ){
-										HoaDon hoaDon = (HoaDon)thongTinDonHang.get("HoaDon");
-										NguoiNhanHang nguoiNhanHang = (NguoiNhanHang)thongTinDonHang.get("NguoiNhanHang");
-										KhachHang khachHang = (KhachHang)thongTinDonHang.get("KhachHang");
-										
-										List<HashMap> dsChiTietHoaDonBan = (List<HashMap>)thongTinDonHang.get("DanhSachChiTietHoaDon");
-										NumberFormat numberFormat = new DecimalFormat("###,###,###");
-							%> --%>
+
 							<!-- Thông tin đơn hàng -->
 							<div class="bang">
-								<div class="col-md-12 col-sm-12 col-xs-12" style="margin-bottom:10px; padding:0px;">Mã ĐH: <span>123456</span>
+								<%
+									Map<String, Object> thongTinDonHang = (HashMap<String, Object>)session.getAttribute("ThongTinDonHang");
+									if( thongTinDonHang != null && thongTinDonHang.size() > 0 ){
+											HoaDon hoaDon = (HoaDon)thongTinDonHang.get("HoaDon");
+											NguoiNhanHang nguoiNhanHang = (NguoiNhanHang)thongTinDonHang.get("NguoiNhanHang");
+											
+											List<HashMap> dsChiTietHoaDonBan = (List<HashMap>)thongTinDonHang.get("DanhSachChiTietHoaDon");
+											NumberFormat numberFormat = new DecimalFormat("###,###,###");
+								%>
+								<div class="col-md-12 col-sm-12 col-xs-12" style="margin-bottom:7px; padding:0px; margin-top:-20px;">
+									<span style="font-weight:bold;">Mã ĐH: </span><span><%=hoaDon.getSoHD() %></span>
 								</div>
 								<!-- Chi tiết Đh -->
 								<table class="table table-bordered">
@@ -104,7 +121,7 @@
 										</tr>
 									</thead>
 									<tbody>
-										<%-- <%
+										<%
 											for(int i = 0; i < dsChiTietHoaDonBan.size() ; i++){
 												Map mapSachVaChiTiet = dsChiTietHoaDonBan.get(i);
 												ChiTietHoaDon chiTietHoaDon = (ChiTietHoaDon)mapSachVaChiTiet.get("ChiTietHoaDon");
@@ -115,7 +132,7 @@
 													<%=sach.getTenSach() %>
 													</td>
 													<td class="hinh">
-														<img src="${url}/static/img/sanpham/<%=sach.getUrlHinh() %>" alt="anh">
+														<img src="${urlSanPham}/static/img/sanpham/<%=sach.getUrlHinh() %>" alt="anh">
 													</td>
 													<td class="tien">
 														<%=numberFormat.format(chiTietHoaDon.getDonGia()) %> <span class="text_underline">đ</span>
@@ -129,14 +146,14 @@
 												</tr>
 										<%
 											}
-										%> --%>
+										%>
 									</tbody>
 								</table>
 								<!-- kt chi tiết Đh -->
 								<!-- thong tin Nguoi Nhan -->
 								<div class="thongtin_giaohang_tongtien">
 									<div class="tong_tien">
-										<%-- <p>
+										<p>
 											<b>Phí giao hàng: </b>
 											<span class="tien">
 												<%=numberFormat.format(hoaDon.getPhiGiaoHang())%> <span class="text_underline">đ</span>
@@ -145,11 +162,11 @@
 										<b>Tổng tiền: </b>
 										<span class="tien">
 											<%=numberFormat.format(hoaDon.getPhiGiaoHang() + hoaDon.getTongTien()) %> <span class="text_underline">đ</span>
-										</span> --%>
+										</span>
 									</div>
 									<div class="thongtin_giaohang">
 										<h4 class="text-center">Thông tin giao hàng</h4>
-										<%-- <table class="table">
+										<table class="table">
 											<tr>
 												<td>
 													<b>Tên người nhận: </b><%=nguoiNhanHang.getTenNN() %>
@@ -196,27 +213,17 @@
 												<td>
 													<b>Tình trạng đơn hàng: </b><%=hoaDon.getTinhTrangDH() %>
 												</td>
-												<td>
-													<%
-														if( hoaDon.getTinhTrangDH().equals("Đợi xác nhận đơn hàng") || hoaDon.getTinhTrangDH().equals("Đang chuẩn bị hàng") ){
-															KhachHang khachHangSession = (KhachHang)session.getAttribute("TaiKhoan");
-															if( khachHangSession != null && khachHang != null && (khachHangSession.getEmail()).equals(khachHang.getEmail()) ){
-													%>
-																<a href="/SachKyAnh/XemCapNhatDonHang" class="btn btn-default">Cập nhật đơn hàng?</a>
-													<%
-															}else{
-													%>
-																<a href="/SachKyAnh/XacNhanEmailDatHang" class="btn btn-default">Cập nhật đơn hàng?</a>
-													<%
-															}
-														}
-													%>
-												</td>
 											</tr>
-										</table> --%>
+										</table>
 									</div>
-							</div><!-- kt bang -->
-						</div>
+								</div><!-- kt thong tin Nguoi Nhan -->
+								<%
+									}
+									else{
+										response.sendRedirect("/SachKyAnh/view/admin/view/admin_trangchu.jsp");
+									}
+								%>
+							</div><!-- Thông tin đơn hàng -->
 					</section>
 				<!-- kt phần nội dung chính -->
 
@@ -225,5 +232,11 @@
 			</div>
 		</div>
 	</section>	
+	<%
+	}
+	else{
+		response.sendRedirect("/SachKyAnh/view/admin/view/quantri_dangnhap.jsp");
+	}
+	%>
 </body>
 </html>
