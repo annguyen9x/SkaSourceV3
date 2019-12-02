@@ -1,6 +1,6 @@
 package model;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class NhapSach {
 	private String maNS;
@@ -45,11 +45,11 @@ public class NhapSach {
 		this.maSach = maSach;
 	}
 
-	public int getSoLuong() {
+	public int getSoLuongNhap() {
 		return soLuongNhap;
 	}
 
-	public void setSoLuong(int soLuongNhap) {
+	public void setSoLuongNhap(int soLuongNhap) {
 		this.soLuongNhap = soLuongNhap;
 	}
 
