@@ -40,7 +40,7 @@ public class AdminThongTinDHController extends HttpServlet {
 			session.setAttribute("ThongTinDonHang", thongTinDonHang);
 			response.sendRedirect("/SachKyAnh/view/admin/view/admin_xem_thongtin_dh.jsp");
 		}
-		else {log("null");
+		else {
 			response.sendRedirect("/SachKyAnh/view/admin/view/admin_trangchu.jsp");
 		}
 		
