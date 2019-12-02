@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+<%@page import="model.NguoiNhanHang"%>
+<%@page import="model.HoaDon"%>
+<%@page import="model.NhanVien"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.Map"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:url var="url" value="/view/admin"></c:url>
 
@@ -22,27 +27,37 @@
 <!-- kt my css -->
 </head>
 <body>
+	<%
+	NhanVien nhanVien = (NhanVien)session.getAttribute("NhanVien");
+	List dsDonHangVaKhachHang = (List)session.getAttribute("DsDonHangVaKhachHang");
+	Map<Integer, NhanVien> mapNVGiaoHang = (Map<Integer, NhanVien>)session.getAttribute("MapNVGiaoHang");
+	String dsDonHangChon = (String)session.getAttribute("DsDonHangChon");
+	if( dsDonHangChon == null ){
+		dsDonHangChon = "Đang chuẩn bị hàng";
+	}
+	if( dsDonHangVaKhachHang != null && nhanVien != null ){
+	%>
 	<section class="noidung">
 		<div class="container-fluid">
 			<div class="row content">
 				<div class="col-md-2 col-sm-3 col-xs-12 sidenav nd_left">
-					<h2 class="loainv_icon"><li class="fa fa-th-large"></li><span class="loainv"> Nhân viên Kho</span></h2>
+					<h2 class="loainv_icon"><li class="fa fa-th-large"></li><span class="loainv"> Nhân viên <% if(nhanVien != null) {out.print(nhanVien.getChucVu());} %></span></h2>
 					<div class="tennv_anh">
 						<span class="anh">
 							<img class="img-circle" alt="hinhNV" src="${url}/static/img/hinhMacdinh.png">
 						</span>
 						
 						<span class="ten_nv">Xin chào, <br/>
-							<span class="ten">An Nguyễn</span>
+							<span class="ten"><% if(nhanVien != null) {out.print(nhanVien.getTenNV());} %></span>
 						</span>
 					</div>
 					<ul class="nav nav-pills nav-stacked">
-						<li><a href="kho_trangchu.jsp"><i class="fa fa-home"></i> Trang chủ</a></li>
-						<li><a href="kho_xem_dh_canchuanbi.jsp"><i class="fa fa-table"></i> Đơn hàng cần chuẩn bị</a></li>
-						<li><a href="kho_cn_tinhtrang_dh.jsp" class="active"><i class="fa fa-edit"></i> Cập nhật tình trạng ĐH</a></li>
-						<li><a href="kho_nhap_sach.jsp"><i class="fa fa-edit"></i> Nhập sách</a></li>
-						<li><a href="quantri_capnhat_taikhoan.jsp"><i class="fa fa-address-book"></i> Cập nhật tài khoản</a></li>
-						<li><a href="/SachKyAnh/quantriDangXuat"><i class="fa fa-power-off"></i> Đăng xuất</a></li>
+						<li><a href="/SachKyAnh/KhoTrangChu"><i class="fa fa-home"></i> Trang chủ</a></li>
+						<li><a href="/SachKyAnh/KhoXemDonHangChuanBi"><i class="fa fa-table"></i> Đơn hàng cần chuẩn bị</a></li>
+						<li><a href="/SachKyAnh/KhoCapNhatTTDH" class="active"><i class="fa fa-edit"></i> Cập nhật tình trạng ĐH</a></li>
+						<li><a href="/SachKyAnh/KhoNhapSach"><i class="fa fa-edit"></i> Nhập sách</a></li>
+						<li><a href="/SachKyAnh/KhoCapNhatTaiKhoan"><i class="fa fa-address-book"></i> Cập nhật tài khoản</a></li>
+						<li><a href="/SachKyAnh/KhoDangXuat"><i class="fa fa-power-off"></i> Đăng xuất</a></li>
 					</ul>
 					<br>
 				</div>
@@ -64,11 +79,23 @@
 						<div class="noidung_chinh">
 							<p class="tieude_bang">Cập nhật tình trạng đơn hàng</p>
 							<div class="tim_kiem">
-								<form action="" method="get" accept-charset="utf-8">
+								<form action="/SachKyAnh/KhoCapNhatTTDH" method="post" accept-charset="utf-8">
 									<div class="col-md-4 col-sm-5 col-xs-12 col-md-offset-3 col-md-offset-3" style="padding:0px; ">
-										<select name="DsDonHang" class="form-control">
-											<option value="hoantat">Đang chuẩn bị hàng</option>
-											<option value="danggiao">Đang giao</option>
+										<select name="DsDonHangChon" class="form-control">
+											<%
+												if( dsDonHangChon.equals("Đang chuẩn bị hàng") ){
+											%>
+												<option value="Đang chuẩn bị hàng" selected="selected">Đang chuẩn bị hàng</option>
+												<option value="Đợi người giao lấy hàng">Đợi người giao lấy hàng</option>
+											<%
+												}
+												else if( dsDonHangChon.equals("Đợi người giao lấy hàng") ){
+											%>
+												<option value="Đang chuẩn bị hàng">Đang chuẩn bị hàng</option>
+												<option value="Đợi người giao lấy hàng" selected="selected">Đợi người giao lấy hàng</option>
+											<%
+												}
+											%>
 										</select>
 									</div>
 									<div class="col-md-2 col-sm-3 col-xs-12" style="padding:0px; ">
@@ -77,7 +104,34 @@
 								</form>
 							</div>
 							<div class="bang">
-								<form action="" method="get" accept-charset="utf-8">
+								<%
+									String TrangThaiXuLyCapNhatTTDH = (String)session.getAttribute("TrangThaiXuLyCapNhatTTDH");
+									if(TrangThaiXuLyCapNhatTTDH != null){
+										List DsDHCNTTDHloi = (List)session.getAttribute("DsDHCNTTDHloi");
+										if( DsDHCNTTDHloi != null ){
+								%>
+											<div class="alert alert-danger">
+												<p><strong>Cập nhật tình trạng đơn hàng bị lỗi.</strong> Các đơn hàng cập nhật bị lỗi là: </p>
+												<%
+													for(int i=0; i< DsDHCNTTDHloi.size(); i++){
+														out.print(DsDHCNTTDHloi.get(i)+",");
+													}
+												%>
+											</div>
+								<%			
+											session.removeAttribute("DsDHCNTTDHloi");
+										}
+										else{
+								%>	
+											<div class="alert alert-success">
+												<p><strong>Cập nhật tình trạng đơn hàng thành công !</strong></p>
+											</div>
+								<%		
+										}
+										session.removeAttribute("TrangThaiXuLyCapNhatTTDH");
+									}
+								%>
+								<form action="/SachKyAnh/KhoXuLyCapNhatTTDH" method="post" accept-charset="utf-8">
 									<table class="table table-bordered">
 										<thead>
 											<tr>
@@ -89,66 +143,137 @@
 											</tr>
 										</thead>
 										<tbody>
-											<tr>
-												<td style="font-weight:bold; ">
-													<a href="quantriThongTinDH?SoHD=">1234567</a>
-												</td>
-												<td>Nguyễn Văn An</td>
-												<td>Nguyễn Văn H</td>
-												<td>
-													<table class="table"  style="border:none; margin:0px;">
+											<%
+												boolean dhTrongDanhSach = false;
+												for(int i=0; i< dsDonHangVaKhachHang.size(); i++){
+													Map<String, Object> chiTietDonHang = (Map<String, Object>)dsDonHangVaKhachHang.get(i);
+													NguoiNhanHang nguoiNhanHang = (NguoiNhanHang)chiTietDonHang.get("NguoiNhanHang");
+													HoaDon hoaDon = (HoaDon)chiTietDonHang.get("HoaDon");
+													if (hoaDon != null && nguoiNhanHang != null ){
+														if( dsDonHangChon.equals(hoaDon.getTinhTrangDH()) ){
+															dhTrongDanhSach = true;
+											%>
 														<tr>
-															<td style="border:none; padding:0px;">
-																<input type="radio" name="TinhTrangDH" value="Đang chuẩn bị hàng" checked="checked">Đang chuẩn bị hàng
+															<td style="font-weight:bold; ">
+																<a href="/SachKyAnh/KhoThongTinDH?SoHD=<%=hoaDon.getSoHD()%>&IDNN=<%=nguoiNhanHang.getIdNN()%>">
+																	<%=hoaDon.getSoHD() %>
+																</a>
 															</td>
-															<td style="border:none; padding:0px;">
-																<input type="radio" name="TinhTrangDH" value="Đang giao hàng">Đang giao hàng
+															<td><%=nguoiNhanHang.getTenNN() %></td>
+															<td>
+																<%
+																	NhanVien nhanVienGH = mapNVGiaoHang.get(hoaDon.getMaNVGiao());
+																	out.print(nhanVienGH.getTenNV());
+																%>
 															</td>
+															<td>
+																<input type="hidden" name="SoHD" value="<%=hoaDon.getSoHD()%>">
+																<table class="table"  style="border:none; margin:0px;">
+																	<%
+																		if( dsDonHangChon.equals("Đang chuẩn bị hàng") ){
+																	%>
+																		<tr>
+																			<td style="border:none; padding:0px;">
+																				<input type="radio" name="TinhTrangDH<%=hoaDon.getSoHD() %>" value="1" checked="checked">Đang chuẩn bị hàng
+																			</td>
+																			<td style="border:none; padding:0px;">
+																				<input type="radio" name="TinhTrangDH<%=hoaDon.getSoHD() %>" value="2">Đợi người giao lấy hàng
+																			</td>
+																		</tr>
+																		<tr>
+																			<td style="border:none; padding:0px;">
+																				<input type="radio" name="TinhTrangDH<%=hoaDon.getSoHD() %>" value="3">Trả lại hàng về kho
+																			</td>
+																			<td style="border:none; padding:0px;">
+																				<input type="radio" name="TinhTrangDH<%=hoaDon.getSoHD() %>" value="4">Hoàn tất
+																			</td>
+																		</tr>
+																	<%
+																		}
+																		else if( dsDonHangChon.equals("Đợi người giao lấy hàng") ){
+																	%>
+																		<tr>
+																			<td style="border:none; padding:0px;">
+																				<input type="radio" name="TinhTrangDH<%=hoaDon.getSoHD() %>" value="1">Đang chuẩn bị hàng
+																			</td>
+																			<td style="border:none; padding:0px;">
+																				<input type="radio" name="TinhTrangDH<%=hoaDon.getSoHD() %>" value="2" checked="checked">Đợi người giao lấy hàng
+																			</td>
+																		</tr>
+																		<tr>
+																			<td style="border:none; padding:0px;">
+																				<input type="radio" name="TinhTrangDH<%=hoaDon.getSoHD() %>" value="3">Trả lại hàng về kho
+																			</td>
+																			<td style="border:none; padding:0px;">
+																				<input type="radio" name="TinhTrangDH<%=hoaDon.getSoHD() %>" value="4">Hoàn tất
+																			</td>
+																		</tr>
+																	<%
+																		}
+																		else if( dsDonHangChon.equals("Trả lại hàng về kho") ){
+																	%>
+																		<tr>
+																			<td style="border:none; padding:0px;">
+																				<input type="radio" name="TinhTrangDH<%=hoaDon.getSoHD() %>" value="1">Đang chuẩn bị hàng
+																			</td>
+																			<td style="border:none; padding:0px;">
+																				<input type="radio" name="TinhTrangDH<%=hoaDon.getSoHD() %>" value="2">Đợi người giao lấy hàng
+																			</td>
+																		</tr>
+																		<tr>
+																			<td style="border:none; padding:0px;">
+																				<input type="radio" name="TinhTrangDH<%=hoaDon.getSoHD() %>" value="3" checked="checked">Trả lại hàng về kho
+																			</td>
+																			<td style="border:none; padding:0px;">
+																				<input type="radio" name="TinhTrangDH<%=hoaDon.getSoHD() %>" value="4">Hoàn tất
+																			</td>
+																		</tr>
+																	<%
+																		}
+																		else if( dsDonHangChon.equals("Hoàn tất") ){
+																	%>
+																		<tr>
+																			<td style="border:none; padding:0px;">
+																				<input type="radio" name="TinhTrangDH<%=hoaDon.getSoHD() %>" value="1">Đang chuẩn bị hàng
+																			</td>
+																			<td style="border:none; padding:0px;">
+																				<input type="radio" name="TinhTrangDH<%=hoaDon.getSoHD() %>" value="2">Đợi người giao lấy hàng
+																			</td>
+																		</tr>
+																		<tr>
+																			<td style="border:none; padding:0px;">
+																				<input type="radio" name="TinhTrangDH<%=hoaDon.getSoHD() %>" value="3">Trả lại hàng về kho
+																			</td>
+																			<td style="border:none; padding:0px;">
+																				<input type="radio" name="TinhTrangDH<%=hoaDon.getSoHD() %>" value="4" checked="checked">Hoàn tất
+																			</td>
+																		</tr>
+																	<%
+																		}
+																	%>
+																</table>
+															</td>
+															<td><%=hoaDon.getNgayDat() %></td>
 														</tr>
-														<tr>
-															<td style="border:none; padding:0px;">
-																<input type="radio" name="TinhTrangDH" value="Đang đợi người giao lấy hàng">Đang đợi người giao lấy hàng
-															</td>
-															<td style="border:none; padding:0px;">
-																<input type="radio" name="TinhTrangDH" value="Đang trả hàng về kho">Đang trả hàng về kho
-															</td>
-														</tr>
-													</table>
-												</td>
-												<td>23/12/2016</td>
-											</tr>
-											<tr>
-												<td style="font-weight:bold; ">
-													<a href="quantriThongTinDH?SoHD=">1234567</a>
-												</td>
-												<td>Nguyễn Văn An</td>
-												<td>Nguyễn Văn B</td>
-												<td>
-													<table class="table"  style="border:none; margin:0px;">
-														<tr>
-															<td style="border:none; padding:0px;">
-																<input type="radio" name="TinhTrangDH" value="Đang chuẩn bị hàng" checked="checked">Đang chuẩn bị hàng
-															</td>
-															<td style="border:none; padding:0px;">
-																<input type="radio" name="TinhTrangDH" value="Đang giao hàng">Đang giao hàng
-															</td>
-														</tr>
-														<tr>
-															<td style="border:none; padding:0px;">
-																<input type="radio" name="TinhTrangDH" value="Đang đợi người giao lấy hàng">Đang đợi người giao lấy hàng
-															</td>
-															<td style="border:none; padding:0px;">
-																<input type="radio" name="TinhTrangDH" value="Đang trả hàng về kho">Đang trả hàng về kho
-															</td>
-														</tr>
-													</table>
-												</td>
-												<td>23/12/2016</td>
-											</tr>
+													<%	
+															}
+														}
+														else{
+															response.sendRedirect("/SachKyAnh/view/admin/view/quantri_dangnhap.jsp");
+														}
+													}
+													if( dhTrongDanhSach == false){
+													%>
+													<tr>
+														<td colspan="5" class="alert alert-warning text-center">Không có đơn hàng nào trong danh sách !</td>
+													</tr>
+											<%
+												}
+											%>
 										</tbody>
 									</table>
 									<div class="nut" style="text-align:center;">
-										<a class="btn btn-default" href="/SachKyAnh/">Thoát</a>
+										<a class="btn btn-default" href="/SachKyAnh/KhoTrangChu">Thoát</a>
 										<button type="submit" class="btn mybtn" style="background:#F47920; color:#fff;">Lưu</button>
 									</div>
 								</form>
@@ -162,5 +287,11 @@
 			</div>
 		</div>
 	</section>	
+	<%
+	}
+	else{
+		response.sendRedirect("/SachKyAnh/view/admin/view/quantri_dangnhap.jsp");
+	}
+	%>
 </body>
 </html>
