@@ -3,8 +3,6 @@
 	pageEncoding="utf-8"%>
 <%@page import="model.NguoiNhanHang"%>
 <%@page import="model.HoaDon"%>
-<%@page import="model.Sach"%>
-<%@page import="model.LoaiSach"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.Map"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
