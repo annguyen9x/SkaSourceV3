@@ -38,6 +38,7 @@
 <body>
 	<%
 		NhanVien nhanVien = (NhanVien)session.getAttribute("NhanVien");
+		if( nhanVien != null ){
 	%>
 	<section class="noidung">
 		<div class="container-fluid">
@@ -219,13 +220,13 @@
 										</table>
 									</div>
 								</div><!-- kt thong tin Nguoi Nhan -->
+								<%
+									}
+									else{
+										response.sendRedirect("/SachKyAnh/view/admin/view/admin_trangchu.jsp");
+									}
+								%>
 						</div><!-- Thông tin đơn hàng -->
-						<%
-							}
-							else{
-								response.sendRedirect("/SachKyAnh/view/admin/view/admin_trangchu.jsp");
-							}
-						%>
 					</section>
 				<!-- kt phần nội dung chính -->
 
@@ -234,5 +235,11 @@
 			</div>
 		</div>
 	</section>	
+	<%
+	}
+	else{
+		response.sendRedirect("/SachKyAnh/view/admin/view/quantri_dangnhap.jsp");
+	}
+	%>
 </body>
 </html>
