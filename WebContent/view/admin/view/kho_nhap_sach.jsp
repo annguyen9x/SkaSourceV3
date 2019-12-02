@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+<%@page import="model.NguoiNhanHang"%>
+<%@page import="model.HoaDon"%>
+<%@page import="model.NhanVien"%>
+<%@page import="model.Sach"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.Map"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:url var="url" value="/view/admin"></c:url>
 
@@ -25,27 +31,33 @@
 <!-- end my js -->
 </head>
 <body>
+	<%
+	NhanVien nhanVien = (NhanVien)session.getAttribute("NhanVien");
+	List<Sach> dsSach = (List<Sach>)session.getAttribute("DsSach");
+	String KetQuaNhapSach = (String)session.getAttribute("KetQuaNhapSach");
+	if( nhanVien != null && dsSach != null ){
+	%>
 	<section class="noidung">
 		<div class="container-fluid">
 			<div class="row content">
 				<div class="col-md-2 col-sm-3 col-xs-12 sidenav nd_left">
-					<h2 class="loainv_icon"><li class="fa fa-th-large"></li><span class="loainv"> Nhân viên Kho</span></h2>
+					<h2 class="loainv_icon"><li class="fa fa-th-large"></li><span class="loainv"> Nhân viên <% if(nhanVien != null) {out.print(nhanVien.getChucVu());} %></span></h2>
 					<div class="tennv_anh">
 						<span class="anh">
 							<img class="img-circle" alt="hinhNV" src="${url}/static/img/hinhMacdinh.png">
 						</span>
 						
 						<span class="ten_nv">Xin chào, <br/>
-							<span class="ten">An Nguyễn</span>
+							<span class="ten"><% if(nhanVien != null) {out.print(nhanVien.getTenNV());} %></span>
 						</span>
 					</div>
 					<ul class="nav nav-pills nav-stacked">
-						<li><a href="kho_trangchu.jsp"><i class="fa fa-home"></i> Trang chủ</a></li>
-						<li><a href="kho_xem_dh_canchuanbi.jsp"><i class="fa fa-table"></i> Đơn hàng cần chuẩn bị</a></li>
-						<li><a href="kho_cn_tinhtrang_dh.jsp"><i class="fa fa-edit"></i> Cập nhật tình trạng ĐH</a></li>
-						<li><a href="kho_nhap_sach.jsp" class="active"><i class="fa fa-edit"></i> Nhập sách</a></li>
-						<li><a href="quantri_capnhat_taikhoan.jsp"><i class="fa fa-address-book"></i> Cập nhật tài khoản</a></li>
-						<li><a href="/SachKyAnh/quantriDangXuat"><i class="fa fa-power-off"></i> Đăng xuất</a></li>
+						<li><a href="/SachKyAnh/KhoTrangChu"><i class="fa fa-home"></i> Trang chủ</a></li>
+						<li><a href="/SachKyAnh/KhoXemDonHangChuanBi"><i class="fa fa-table"></i> Đơn hàng cần chuẩn bị</a></li>
+						<li><a href="/SachKyAnh/KhoCapNhatTTDH"><i class="fa fa-edit"></i> Cập nhật tình trạng ĐH</a></li>
+						<li><a href="/SachKyAnh/KhoNhapSach" class="active"><i class="fa fa-edit"></i> Nhập sách</a></li>
+						<li><a href="/SachKyAnh/KhoCapNhatTaiKhoan"><i class="fa fa-address-book"></i> Cập nhật tài khoản</a></li>
+						<li><a href="/SachKyAnh/KhoDangXuat"><i class="fa fa-power-off"></i> Đăng xuất</a></li>
 					</ul>
 					<br>
 				</div>
@@ -67,22 +79,44 @@
 						<div class="noidung_chinh">
 							<p class="tieude_bang">Nhập sách</p>
 							<div class="bang">
-								<form action="" method="get"  onsubmit="return ktNhapSach();" accept-charset="utf-8">
+								<%
+									if( KetQuaNhapSach != null && KetQuaNhapSach.equals("ThanhCong")){
+								%>
+									<div class="col-xs-12 alert alert-success">
+										<p><strong>Nhập sách thành công.</strong> Số lượng sách đã được cập nhật !</p>			
+									</div>
+								<%
+										session.removeAttribute("KetQuaNhapSach");
+									}
+								%>
+								<form action="/SachKyAnh/KhoNhapSach" method="post"  onsubmit="return ktNhapSach();" accept-charset="utf-8">
 									<table class="table table-bordered">
 										<tr>
 											<th scope="col">Mã Nhập</th>
 											<td>
 												<input type="text" name="manhapsach" id="manhapsach" class="form-control" placeholder="Mã nhập sách gồm 6 chữ số (VD: NS0011)">
 												<span id="errorMaNhapSach" class="col-xs-12 error warning"></span>
-												<!-- <span class="col-xs-12 error warning">Mã nhập sách đã tồn tại, vui lòng nhập mã khác !</span> -->
+												<%
+													if( KetQuaNhapSach != null && KetQuaNhapSach.equals("TrungMaNS")){
+												%>
+													 <span class="col-xs-12 error warning">Mã nhập sách đã tồn tại, vui lòng nhập mã khác !</span>
+												<%
+														session.removeAttribute("KetQuaNhapSach");
+													}
+												%>
 											</td>
 										</tr>
 										<tr>
 											<th>Mã Sách</th>
 											<td>
-												<select name="loaisach" id="masach" class="form-control">
-													<option value="LS01">MS01</option>
-													<option value="LS01">MS01</option>
+												<select name="masach" id="masach" class="form-control">
+												<%
+													for(Sach sach: dsSach){
+												%>
+													<option value="<%=sach.getMaSach()%>"><%=sach.getMaSach()%></option>
+												<%
+													}
+												%>
 												</select>
 											</td>
 										</tr>
@@ -115,5 +149,11 @@
 			</div>
 		</div>
 	</section>	
+	<%
+	}
+	else{
+		response.sendRedirect("/SachKyAnh/view/admin/view/quantri_dangnhap.jsp");
+	}
+	%>
 </body>
 </html>
