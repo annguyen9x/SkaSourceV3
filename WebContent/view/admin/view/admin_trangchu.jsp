@@ -97,6 +97,7 @@
 													<option value="Đợi người giao lấy hàng">Đợi người giao lấy hàng</option>
 													<option value="Đang giao hàng">Đang giao hàng</option>
 													<option value="Trả lại hàng">Trả lại hàng</option>
+													<option value="Giao hàng thành công">Giao hàng thành công</option>
 													<option value="Trả lại hàng về kho">Trả lại hàng về kho</option>
 													<option value="Hoàn tất">Hoàn tất</option>
 											<%
@@ -108,6 +109,7 @@
 												<option value="Đợi người giao lấy hàng">Đợi người giao lấy hàng</option>
 												<option value="Đang giao hàng">Đang giao hàng</option>
 												<option value="Trả lại hàng">Trả lại hàng</option>
+												<option value="Giao hàng thành công">Giao hàng thành công</option>
 												<option value="Trả lại hàng về kho">Trả lại hàng về kho</option>
 												<option value="Hoàn tất">Hoàn tất</option>
 											<%
@@ -119,6 +121,7 @@
 												<option value="Đợi người giao lấy hàng" selected="selected">Đợi người giao lấy hàng</option>
 												<option value="Đang giao hàng">Đang giao hàng</option>
 												<option value="Trả lại hàng">Trả lại hàng</option>
+												<option value="Giao hàng thành công">Giao hàng thành công</option>
 												<option value="Trả lại hàng về kho">Trả lại hàng về kho</option>
 												<option value="Hoàn tất">Hoàn tất</option>
 											<%
@@ -130,6 +133,7 @@
 												<option value="Đợi người giao lấy hàng">Đợi người giao lấy hàng</option>
 												<option value="Đang giao hàng" selected="selected">Đang giao hàng</option>
 												<option value="Trả lại hàng">Trả lại hàng</option>
+												<option value="Giao hàng thành công">Giao hàng thành công</option>
 												<option value="Trả lại hàng về kho">Trả lại hàng về kho</option>
 												<option value="Hoàn tất">Hoàn tất</option>
 											<%
@@ -141,6 +145,19 @@
 												<option value="Đợi người giao lấy hàng">Đợi người giao lấy hàng</option>
 												<option value="Đang giao hàng">Đang giao hàng</option>
 												<option value="Trả lại hàng" selected="selected">Trả lại hàng</option>
+												<option value="Giao hàng thành công">Giao hàng thành công</option>
+												<option value="Trả lại hàng về kho">Trả lại hàng về kho</option>
+												<option value="Hoàn tất">Hoàn tất</option>
+											<%
+												}
+												else if( dsDonHangChon.equals("Giao hàng thành công") ){
+											%>
+												<option value="Đợi xác nhận đơn hàng">Đợi xác nhận đơn hàng</option>
+												<option value="Đang chuẩn bị hàng">Đang chuẩn bị hàng</option>
+												<option value="Đợi người giao lấy hàng">Đợi người giao lấy hàng</option>
+												<option value="Đang giao hàng">Đang giao hàng</option>
+												<option value="Trả lại hàng">Trả lại hàng</option>
+												<option value="Giao hàng thành công" selected="selected">Giao hàng thành công</option>
 												<option value="Trả lại hàng về kho">Trả lại hàng về kho</option>
 												<option value="Hoàn tất">Hoàn tất</option>
 											<%
@@ -152,6 +169,7 @@
 												<option value="Đợi người giao lấy hàng">Đợi người giao lấy hàng</option>
 												<option value="Đang giao hàng">Đang giao hàng</option>
 												<option value="Trả lại hàng">Trả lại hàng</option>
+												<option value="Giao hàng thành công">Giao hàng thành công</option>
 												<option value="Trả lại hàng về kho" selected="selected">Trả lại hàng về kho</option>
 												<option value="Hoàn tất">Hoàn tất</option>
 											<%
@@ -163,6 +181,7 @@
 												<option value="Đợi người giao lấy hàng">Đợi người giao lấy hàng</option>
 												<option value="Đang giao hàng">Đang giao hàng</option>
 												<option value="Trả lại hàng">Trả lại hàng</option>
+												<option value="Giao hàng thành công">Giao hàng thành công</option>
 												<option value="Trả lại hàng về kho">Trả lại hàng về kho</option>
 												<option value="Hoàn tất" selected="selected">Hoàn tất</option>
 											<%
