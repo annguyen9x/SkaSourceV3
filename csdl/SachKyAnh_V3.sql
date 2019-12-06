@@ -19,9 +19,9 @@ Go
 Insert into KhachHang(TenKH, MatKhau, Email, DienThoai, GioiTinh, NgaySinh, DiaChi) 
 Values(N'Phan Mỹ Tâm','e10adc3949ba59abbe56e057f20f883e','pmtam@gmail.com', '0981246789', N'Nữ', '1991-1-16',N'30 Trần Hưng Đạo, Q.1, TP. Hồ Chí Minh')
 Insert into KhachHang(TenKH, MatKhau, Email, DienThoai, GioiTinh, NgaySinh, DiaChi) 
-Values(N'Lê Vĩnh Hưng','e10adc3949ba59abbe56e057f20f883e','lvhung@gmail.com', '0341238756', N'Nam','1987-12-22', N'P. Hưng lợi, Q. Ninh Kiều, TP. Cần Thơ')
+Values(N'Đàm Vĩnh Hưng','e10adc3949ba59abbe56e057f20f883e','lvhung@gmail.com', '0341238756', N'Nam','1987-12-22', N'P. Hưng lợi, Q. Ninh Kiều, TP. Cần Thơ')
 Insert into KhachHang(TenKH, MatKhau, Email, DienThoai, GioiTinh, NgaySinh, DiaChi) 
-Values(N'Nguyễn Văn An','e10adc3949ba59abbe56e057f20f883e','nguyenva09@gmail.com', '0971246469', N'Nam', '1997-10-19',N'P. Sông Trí, Tx. Kỳ Anh, T. Hà Tĩnh')
+Values(N'Nguyễn Văn An','e10adc3949ba59abbe56e057f20f883e','nguyenva09@gmail.com', '0971246469', N'Nam', '1997-10-19',N'P. 10, TP. Đà Lạt, T. Lâm Đồng')
 Insert into KhachHang(TenKH, MatKhau, Email, DienThoai, GioiTinh, NgaySinh, DiaChi) 
 Values(N'Bùi Thu Thủy','e10adc3949ba59abbe56e057f20f883e','btthuy@gmail.com', '0241338777', N'Nữ','1999-02-16', N'P. Nam Hà, TP. Hà Tĩnh, T. Hà Tĩnh')
 Insert into KhachHang(TenKH, MatKhau, Email, DienThoai, GioiTinh, NgaySinh, DiaChi) 
@@ -33,7 +33,7 @@ TenNV nvarchar(30) not null,
 ChucVu nvarchar(30) not null,
 MatKhau varchar(50) not null,
 Email varchar(30) not null unique,
-DienThoai varchar(11) not null unique
+DienThoai varchar(10) not null unique
 check (DienThoai like'[0-9][0-9][0-9]%'
 and isNumeric(DienThoai) = 1 ),
 GioiTinh nvarchar(10) not null,
@@ -43,15 +43,15 @@ DiaChi nvarchar(100) not null
 Go
 
 Insert into NhanVien(TenNV, ChucVu, MatKhau, Email, DienThoai, GioiTinh, NgaySinh, DiaChi) 
-Values(N'Lê Văn Vinh', N'Giao Hàng', 'e10adc3949ba59abbe56e057f20f883e', 'lvvinh@gmail.com', '0963455277', N'Nam', '1991-11-15',N'P. Sông Trí, Tx. Kỳ Anh, T. Hà Tĩnh')
+Values(N'Hoàng Thái Vinh', N'Giao Hàng', 'e10adc3949ba59abbe56e057f20f883e', 'giaohang2@gmail.com', '0963455277', N'Nam', '1991-11-15',N'P. Sông Trí, Tx. Kỳ Anh, T. Hà Tĩnh')
 Insert into NhanVien(TenNV, ChucVu, MatKhau, Email, DienThoai, GioiTinh, NgaySinh, DiaChi) 
 Values(N'Nguyễn Văn An', N'Admin', 'e10adc3949ba59abbe56e057f20f883e', 'admin@gmail.com', '0969667709', N'Nam', '1997-11-28',N'P. Thuận Phước, Q. Hải Châu, TP. Đà Nẵng')
 Insert into NhanVien(TenNV, ChucVu, MatKhau, Email, DienThoai, GioiTinh, NgaySinh, DiaChi) 
-Values(N'Hồ Thị Thảo', N'Kho', 'e10adc3949ba59abbe56e057f20f883e', 'thao@gmail.com', '0233456666', N'Nữ', '1999-01-19',N'P. Sông Trí, Tx. Kỳ Anh, T. Hà Tĩnh')
+Values(N'Hồ Thị Thảo', N'Kho', 'e10adc3949ba59abbe56e057f20f883e', 'kho2@gmail.com', '0233456666', N'Nữ', '1999-01-19',N'P. Sông Trí, Tx. Kỳ Anh, T. Hà Tĩnh')
 Insert into NhanVien(TenNV, ChucVu, MatKhau, Email, DienThoai, GioiTinh, NgaySinh, DiaChi) 
 Values(N'Hà Việt Anh', N'Kho', 'e10adc3949ba59abbe56e057f20f883e', 'kho@gmail.com', '0366777899', N'Nữ', '1998-05-10',N'P. Đại Nài, TP. Hà Tĩnh, T. Hà Tĩnh')
 Insert into NhanVien(TenNV, ChucVu, MatKhau, Email, DienThoai, GioiTinh, NgaySinh, DiaChi) 
-Values(N'Hồ Đức Hiếu', N'Giao Hàng', 'e10adc3949ba59abbe56e057f20f883e', 'giaohang@gmail.com', '0123887756', N'Nam', '1996-12-05',N'P. Kỳ Liên, Tx. Kỳ Anh, T. Hà Tĩnh')
+Values(N'Nguyễn Trọng Hiếu', N'Giao Hàng', 'e10adc3949ba59abbe56e057f20f883e', 'giaohang@gmail.com', '0123887756', N'Nam', '1996-12-05',N'P. Kỳ Liên, Tx. Kỳ Anh, T. Hà Tĩnh')
 
 Create table LoaiSach(
 MaLoaiSach varchar(4) primary key,
@@ -333,22 +333,22 @@ Insert into NhapSach Values('NS0009', 1004, 'SKT009', 10,  '2019-11-25')
 Insert into NhapSach Values('NS0010', 1003, 'SKT010', 10,  '2019-12-25')
 
 Create table NguoiNhanHang(
-IDNN int identity(1001,1) primary key,
+IDNN int primary key identity(1001,1),
 TenNN nvarchar(50),
 Email varchar(30),
-DienThoai varchar(11),
+DienThoai varchar(10),
 DiaChi nvarchar(100)
 )
 Go
 
 Insert into NguoiNhanHang Values(N'Lê Thanh Bình','ltbinh@gmail.com', '0987655577', N'P. Kỳ Long, Tx. Kỳ Anh, T. Hà Tĩnh')
-Insert into NguoiNhanHang Values(N'Hồ Ngọc Trâm','hntram@gmail.com', '09777890244', N'P. Sông Trí, Tx. Kỳ Anh, T. Hà Tĩnh')
-Insert into NguoiNhanHang Values(N'Lý Quang Đăng','lqdang@gmail.com', '0123776599', N'P. Đại Nài, TP. Hà Tĩnh, T. Hà Tĩnh')
+Insert into NguoiNhanHang Values(N'Hồ Ngọc Trâm','hntram@gmail.com', '0977789044', N'P. Sông Trí, Tx. Kỳ Anh, T. Hà Tĩnh')
+Insert into NguoiNhanHang Values(N'Bùi Thu Thủy','btthuy@gmail.com', '0241338777', N'P. Nam Hà, TP. Hà Tĩnh, T. Hà Tĩnh')
 Insert into NguoiNhanHang Values(N'Nguyễn Anh Quốc','naquoc@gmail.com', '0966798765', N'P. Hà Huy Tập, TP. Hà Tĩnh, T. Hà Tĩnh')
 Insert into NguoiNhanHang Values(N'Phan Mỹ Tâm','pmtam@gmail.com', '0981246789',N'30 Trần Hưng Đạo, Q.1, TP. Hồ Chí Minh')
 
 Create table HoaDon(
-SoHD int identity(10000001,1) primary key,
+SoHD int primary key identity(10000001,1),
 IDNN int foreign key references NguoiNhanHang(IDNN),
 PhiGiaoHang decimal(18,2),
 TongTien decimal(18,2),
@@ -360,10 +360,10 @@ MaKH int foreign key references KhachHang(MaKH)
 )
 Go
 
-Insert into HoaDon Values(1001, 40000, 414000, '2019-11-20', '2019-11-23', N'Hoàn tất', 1001, null)
-Insert into HoaDon Values(1002, 40000, 214000, '2019-11-20', '2019-11-23', N'Trả lại hàng', 1005, null)
-Insert into HoaDon Values(1003, 40000, 299000, '2019-11-25', null, N'Đang giao hàng', 1005, null)
-Insert into HoaDon Values(1004, 40000, 200000, '2019-11-25', null, N'Đang chuẩn bị hàng', 1001, null)
+Insert into HoaDon Values(1001, 40000, 414000, '2019-11-20', '2019-11-23', N'Hoàn tất', 1001, 1001)
+Insert into HoaDon Values(1002, 40000, 214000, '2019-11-20', '2019-11-23', N'Trả lại hàng', 1005, 1002)
+Insert into HoaDon Values(1003, 40000, 299000, '2019-11-25', null, N'Đang giao hàng', 1005, 1004)
+Insert into HoaDon Values(1004, 40000, 200000, '2019-11-25', null, N'Đợi người giao lấy hàng', 1001, 1003)
 Insert into HoaDon Values(1005, 40000, 365000, '2019-12-01', null, N'Đang chuẩn bị hàng', 1001, 1001)
 
 Create table ChiTietHoaDon(
