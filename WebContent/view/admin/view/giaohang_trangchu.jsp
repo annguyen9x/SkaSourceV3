@@ -114,6 +114,7 @@
 											%>
 												<option value="Đợi người giao lấy hàng" selected="selected">Đợi người giao lấy hàng</option>
 												<option value="Đang giao hàng">Đang giao hàng</option>
+												<option value="Giao hàng thành công">Giao hàng thành công</option>
 												<option value="Trả lại hàng">Trả lại hàng</option>
 											<%
 												}
@@ -121,6 +122,15 @@
 											%>
 												<option value="Đợi người giao lấy hàng">Đợi người giao lấy hàng</option>
 												<option value="Đang giao hàng" selected="selected">Đang giao hàng</option>
+												<option value="Giao hàng thành công">Giao hàng thành công</option>
+												<option value="Trả lại hàng">Trả lại hàng</option>
+											<%
+												}
+												else if( dsDonHangChon.equals("Giao hàng thành công") ){
+											%>
+												<option value="Đợi người giao lấy hàng">Đợi người giao lấy hàng</option>
+												<option value="Đang giao hàng">Đang giao hàng</option>
+												<option value="Giao hàng thành công" selected="selected">Giao hàng thành công</option>
 												<option value="Trả lại hàng">Trả lại hàng</option>
 											<%
 												}
@@ -128,6 +138,7 @@
 											%>
 												<option value="Đợi người giao lấy hàng">Đợi người giao lấy hàng</option>
 												<option value="Đang giao hàng">Đang giao hàng</option>
+												<option value="Giao hàng thành công">Giao hàng thành công</option>
 												<option value="Trả lại hàng" selected="selected">Trả lại hàng</option>
 											<%
 												}
