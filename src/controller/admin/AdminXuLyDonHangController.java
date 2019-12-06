@@ -57,29 +57,35 @@ public class AdminXuLyDonHangController extends HttpServlet {
 		String[] dsSoHD = request.getParameterValues("SoHD");
 		List DsDHXLloi = new ArrayList<>();
 		
-		for(int i=0; i < dsSoHD.length; i++) {
-			int soHD = Integer.parseInt(dsSoHD[i]);
-			int maNVGiao = Integer.parseInt(dsMaNV[i]);
-			String tinhTrangDH = "Đang chuẩn bị hàng";
-			
-			if(hoaDonDao.xulyDonHang(soHD, maNVGiao, tinhTrangDH) == false) {
-				DsDHXLloi.add(soHD);
+		if( dsSoHD == null ) {
+			response.sendRedirect("/SachKyAnh/view/admin/view/admin_trangchu.jsp");
+		}
+		else
+		{
+			for(int i=0; i < dsSoHD.length; i++) {
+				int soHD = Integer.parseInt(dsSoHD[i]);
+				int maNVGiao = Integer.parseInt(dsMaNV[i]);
+				String tinhTrangDH = "Đang chuẩn bị hàng";
+				
+				if(hoaDonDao.xulyDonHang(soHD, maNVGiao, tinhTrangDH) == false) {
+					DsDHXLloi.add(soHD);
+				}
+				session.setAttribute("TrangThaiXuLy", "DaXuLyDH");
 			}
-			session.setAttribute("TrangThaiXuLy", "DaXuLyDH");
+			
+			//update lại thông tin
+			if( session.getAttribute("DsDonHangVaKhachHang") != null) {
+				session.removeAttribute("DsDonHangVaKhachHang");
+			}
+			List<Object> dsDonHangVaKhachHang = hoaDonDao.dsDonHangVaKhachHang();
+			session.setAttribute("DsDonHangVaKhachHang", dsDonHangVaKhachHang);
+			
+			if(DsDHXLloi.size() > 0) {
+				session.setAttribute("DsDHXLloi", DsDHXLloi);
+			}
+			
+			response.sendRedirect("/SachKyAnh/view/admin/view/admin_xl_donhang.jsp");
 		}
-		
-		//update lại thông tin
-		if( session.getAttribute("DsDonHangVaKhachHang") != null) {
-			session.removeAttribute("DsDonHangVaKhachHang");
-		}
-		List<Object> dsDonHangVaKhachHang = hoaDonDao.dsDonHangVaKhachHang();
-		session.setAttribute("DsDonHangVaKhachHang", dsDonHangVaKhachHang);
-		
-		if(DsDHXLloi.size() > 0) {
-			session.setAttribute("DsDHXLloi", DsDHXLloi);
-		}
-		
-		response.sendRedirect("/SachKyAnh/view/admin/view/admin_xl_donhang.jsp");
 		
 	}
 
