@@ -36,55 +36,69 @@ public class GiaoHangXuLyCapNhatTTDHController extends HttpServlet {
 		}
 		
 		String[] dsSoHD = request.getParameterValues("SoHD");
-		
-		SimpleDateFormat dateFormat = new SimpleDateFormat(KiemTraNgayThang.DATE_FORMAT);
-		String ngayGiao = "";
-		Date ngayHienTai = Calendar.getInstance().getTime();
-		List DsDHCNTTDHloi = new ArrayList<>();
-		
-		for(int i=0; i < dsSoHD.length; i++) {
-			int soHD = Integer.parseInt(dsSoHD[i]);
-			String tinhTrangDH =  request.getParameter("TinhTrangDH"+soHD);
+		if( dsSoHD == null ) {
+			response.sendRedirect("/SachKyAnh/view/admin/view/giaohang_trangchu.jsp");
+		}
+		else {
+			SimpleDateFormat dateFormat = new SimpleDateFormat(KiemTraNgayThang.DATE_FORMAT);
+			String ngayGiao = "";
+			Date ngayHienTai = Calendar.getInstance().getTime();
+			List DsDHCNTTDHloi = new ArrayList<>();
 			
-			if( "1".equals(tinhTrangDH) ) {
-				tinhTrangDH = "Đợi người giao lấy hàng";
-				ngayGiao = "";
-			}
-			if( "2".equals(tinhTrangDH)) {
-				tinhTrangDH = "Đang giao hàng";
-				ngayGiao = dateFormat.format(ngayHienTai);
-			}
-			if( "3".equals(tinhTrangDH)) {
-				tinhTrangDH = "Trả lại hàng";
-				Date ngayGiaoDB = hoaDonDao.getHoaDon(soHD).getNgayGiao();
-				if( ngayGiaoDB == null) {
+			for(int i=0; i < dsSoHD.length; i++) {
+				int soHD = Integer.parseInt(dsSoHD[i]);
+				String tinhTrangDH =  request.getParameter("TinhTrangDH"+soHD);
+				
+				if( "1".equals(tinhTrangDH) ) {
+					tinhTrangDH = "Đợi người giao lấy hàng";
+					ngayGiao = "";
+				}
+				if( "2".equals(tinhTrangDH)) {
+					tinhTrangDH = "Đang giao hàng";
 					ngayGiao = dateFormat.format(ngayHienTai);
 				}
-				else {
-					ngayGiao = dateFormat.format(ngayGiaoDB);
+				if( "3".equals(tinhTrangDH)) {
+					tinhTrangDH = "Trả lại hàng";
+					Date ngayGiaoDB = hoaDonDao.getHoaDon(soHD).getNgayGiao();
+					if( ngayGiaoDB == null) {
+						ngayGiao = dateFormat.format(ngayHienTai);
+					}
+					else {
+						ngayGiao = dateFormat.format(ngayGiaoDB);
+					}
 				}
+				if( "4".equals(tinhTrangDH)) {
+					tinhTrangDH = "Giao hàng thành công";
+					Date ngayGiaoDB = hoaDonDao.getHoaDon(soHD).getNgayGiao();
+					if( ngayGiaoDB == null) {
+						ngayGiao = dateFormat.format(ngayHienTai);
+					}
+					else {
+						ngayGiao = dateFormat.format(ngayGiaoDB);
+					}
+				}
+				
+				if(hoaDonDao.updateTinhTrangDonHang(soHD, tinhTrangDH, ngayGiao) == false) {
+					DsDHCNTTDHloi.add(soHD);
+				}
+				session.setAttribute("TrangThaiXuLyCapNhatTTDH", "DaCapNhatTTDH");
 			}
 			
-			if(hoaDonDao.updateTinhTrangDonHang(soHD, tinhTrangDH, ngayGiao) == false) {
-				DsDHCNTTDHloi.add(soHD);
+			//update lại thông tin
+			if( session.getAttribute("DsDonHangVaKhachHang") != null) {
+				session.removeAttribute("DsDonHangVaKhachHang");
 			}
-			session.setAttribute("TrangThaiXuLyCapNhatTTDH", "DaCapNhatTTDH");
+			NhanVien nhanvien = (NhanVien)session.getAttribute("NhanVien");
+			int maNV = nhanvien.getMaNV();
+			List<Object> dsDonHangVaKhachHang = hoaDonDao.dsDonHangVaKhachHangTheoNVGiao(maNV);
+			session.setAttribute("DsDonHangVaKhachHang", dsDonHangVaKhachHang);
+			
+			if(DsDHCNTTDHloi.size() > 0) {
+				session.setAttribute("DsDHCNTTDHloi", DsDHCNTTDHloi);
+			}
+			
+			response.sendRedirect("/SachKyAnh/view/admin/view/giaohang_cn_tinhtrang_dh.jsp");
 		}
-		
-		//update lại thông tin
-		if( session.getAttribute("DsDonHangVaKhachHang") != null) {
-			session.removeAttribute("DsDonHangVaKhachHang");
-		}
-		NhanVien nhanvien = (NhanVien)session.getAttribute("NhanVien");
-		int maNV = nhanvien.getMaNV();
-		List<Object> dsDonHangVaKhachHang = hoaDonDao.dsDonHangVaKhachHangTheoNVGiao(maNV);
-		session.setAttribute("DsDonHangVaKhachHang", dsDonHangVaKhachHang);
-		
-		if(DsDHCNTTDHloi.size() > 0) {
-			session.setAttribute("DsDHCNTTDHloi", DsDHCNTTDHloi);
-		}
-		
-		response.sendRedirect("/SachKyAnh/view/admin/view/giaohang_cn_tinhtrang_dh.jsp");
 	}
 
 }
