@@ -36,44 +36,55 @@ public class KhoXuLyCapNhatTTDHController extends HttpServlet {
 		}
 		
 		String[] dsSoHD = request.getParameterValues("SoHD");
-		
-		List DsDHCNTTDHloi = new ArrayList<>();
-		for(int i=0; i < dsSoHD.length; i++) {
-			int soHD = Integer.parseInt(dsSoHD[i]);
-			String tinhTrangDH =  request.getParameter("TinhTrangDH"+soHD);
+		if( dsSoHD == null) {
+			response.sendRedirect("/SachKyAnh/view/admin/view/kho_trangchu.jsp");
+		}
+		else 
+		{
+			List DsDHCNTTDHloi = new ArrayList<>();
+			for(int i=0; i < dsSoHD.length; i++) {
+				int soHD = Integer.parseInt(dsSoHD[i]);
+				String tinhTrangDH =  request.getParameter("TinhTrangDH"+soHD);
+				
+				if( "1".equals(tinhTrangDH) ) {
+					tinhTrangDH = "Đang chuẩn bị hàng";
+				}
+				else if( "2".equals(tinhTrangDH)) {
+					tinhTrangDH = "Đợi người giao lấy hàng";
+				}
+				else if( "3".equals(tinhTrangDH)) {
+					tinhTrangDH = "Trả lại hàng";
+				}
+				else if( "4".equals(tinhTrangDH)) {
+					tinhTrangDH = "Giao hàng thành công";
+				}
+				else if( "5".equals(tinhTrangDH)) {
+					tinhTrangDH = "Hoàn tất";
+				}
+				else if( "6".equals(tinhTrangDH)) {
+					tinhTrangDH = "Trả lại hàng về kho";
+				}
+				
+				
+				if(hoaDonDao.khoUpdateTinhTrangDonHang(soHD, tinhTrangDH) == false) {
+					DsDHCNTTDHloi.add(soHD);
+				}
+				session.setAttribute("TrangThaiXuLyCapNhatTTDH", "DaCapNhatTTDH");
+			}
 			
-			if( "1".equals(tinhTrangDH) ) {
-				tinhTrangDH = "Đang chuẩn bị hàng";
+			//update lại thông tin
+			if( session.getAttribute("DsDonHangVaKhachHang") != null) {
+				session.removeAttribute("DsDonHangVaKhachHang");
 			}
-			else if( "2".equals(tinhTrangDH)) {
-				tinhTrangDH = "Đợi người giao lấy hàng";
-			}
-			else if( "3".equals(tinhTrangDH)) {
-				tinhTrangDH = "Trả lại hàng về kho";
-			}
-			else if( "4".equals(tinhTrangDH)) {
-				tinhTrangDH = "Hoàn tất";
-			}
+			List<Object> dsDonHangVaKhachHang = hoaDonDao.dsDonHangVaKhachHang();
+			session.setAttribute("DsDonHangVaKhachHang", dsDonHangVaKhachHang);
 			
-			
-			if(hoaDonDao.khoUpdateTinhTrangDonHang(soHD, tinhTrangDH) == false) {
-				DsDHCNTTDHloi.add(soHD);
+			if(DsDHCNTTDHloi.size() > 0) {
+				session.setAttribute("DsDHCNTTDHloi", DsDHCNTTDHloi);
 			}
-			session.setAttribute("TrangThaiXuLyCapNhatTTDH", "DaCapNhatTTDH");
+			response.sendRedirect("/SachKyAnh/view/admin/view/kho_cn_tinhtrang_dh.jsp");
 		}
 		
-		//update lại thông tin
-		if( session.getAttribute("DsDonHangVaKhachHang") != null) {
-			session.removeAttribute("DsDonHangVaKhachHang");
-		}
-		List<Object> dsDonHangVaKhachHang = hoaDonDao.dsDonHangVaKhachHang();
-		session.setAttribute("DsDonHangVaKhachHang", dsDonHangVaKhachHang);
-		
-		if(DsDHCNTTDHloi.size() > 0) {
-			session.setAttribute("DsDHCNTTDHloi", DsDHCNTTDHloi);
-		}
-		
-		response.sendRedirect("/SachKyAnh/view/admin/view/kho_cn_tinhtrang_dh.jsp");
 	}
 
 }
