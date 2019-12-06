@@ -85,21 +85,12 @@
 											%>
 												<option value="Đợi người giao lấy hàng" selected="selected">Đợi người giao lấy hàng</option>
 												<option value="Đang giao hàng">Đang giao hàng</option>
-												<option value="Trả lại hàng">Trả lại hàng</option>
 											<%
 												}
 												else if( dsDonHangChon.equals("Đang giao hàng") ){
 											%>
 												<option value="Đợi người giao lấy hàng">Đợi người giao lấy hàng</option>
 												<option value="Đang giao hàng" selected="selected">Đang giao hàng</option>
-												<option value="Trả lại hàng">Trả lại hàng</option>
-											<%
-												}
-												else if( dsDonHangChon.equals("Trả lại hàng") ){
-											%>
-												<option value="Đợi người giao lấy hàng">Đợi người giao lấy hàng</option>
-												<option value="Đang giao hàng">Đang giao hàng</option>
-												<option value="Trả lại hàng" selected="selected">Trả lại hàng</option>
 											<%
 												}
 											%>
@@ -175,16 +166,11 @@
 																	if( dsDonHangChon.equals("Đợi người giao lấy hàng") ){
 																%>
 																	<tr>
-																		<td colspan="2" style="border:none; padding:0px;">
+																		<td style="border:none; padding:0px;">
 																			<input type="radio" name="TinhTrangDH<%=hoaDon.getSoHD() %>" value="1" checked="checked">Đợi người giao lấy hàng
 																		</td>
-																	</tr>
-																	<tr>
 																		<td style="border:none; padding:0px;">
 																			<input type="radio" name="TinhTrangDH<%=hoaDon.getSoHD() %>" value="2">Đang giao hàng
-																		</td>
-																		<td style="border:none; padding:0px;">
-																			<input type="radio" name="TinhTrangDH<%=hoaDon.getSoHD() %>" value="3">Trả lại hàng
 																		</td>
 																	</tr>
 																<%
@@ -193,32 +179,15 @@
 																%>
 																	<tr>
 																		<td colspan="2" style="border:none; padding:0px;">
-																			<input type="radio" name="TinhTrangDH<%=hoaDon.getSoHD() %>" value="1">Đợi người giao lấy hàng
+																			<input type="radio" name="TinhTrangDH<%=hoaDon.getSoHD() %>" value="2" checked="checked">Đang giao hàng
 																		</td>
 																	</tr>
 																	<tr>
-																		<td style="border:none; padding:0px;">
-																			<input type="radio" name="TinhTrangDH<%=hoaDon.getSoHD() %>" value="2" checked="checked">Đang giao hàng
-																		</td>
 																		<td style="border:none; padding:0px;">
 																			<input type="radio" name="TinhTrangDH<%=hoaDon.getSoHD() %>" value="3">Trả lại hàng
 																		</td>
-																	</tr>
-																<%
-																	}
-																	else if( dsDonHangChon.equals("Trả lại hàng") ){
-																%>
-																	<tr>
-																		<td colspan="2" style="border:none; padding:0px;">
-																			<input type="radio" name="TinhTrangDH<%=hoaDon.getSoHD() %>" value="1">Đợi người giao lấy hàng
-																		</td>
-																	</tr>
-																	<tr>
 																		<td style="border:none; padding:0px;">
-																			<input type="radio" name="TinhTrangDH<%=hoaDon.getSoHD() %>" value="2">Đang giao hàng
-																		</td>
-																		<td style="border:none; padding:0px;">
-																			<input type="radio" name="TinhTrangDH<%=hoaDon.getSoHD() %>" value="3" checked="checked">Trả lại hàng
+																			<input type="radio" name="TinhTrangDH<%=hoaDon.getSoHD() %>" value="4">Giao hàng thành công
 																		</td>
 																	</tr>
 																<%
