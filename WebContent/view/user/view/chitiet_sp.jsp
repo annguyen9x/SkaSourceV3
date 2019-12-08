@@ -49,28 +49,28 @@
 				<div class="row">
 				<%
 					List<Sach> dsSach = (List<Sach>)request.getAttribute("DsSachCungTen");
-					Sach sachDau = dsSach.get(0);
-					
-					LoaiSach loaiSach = (LoaiSach)request.getAttribute("LoaiSach");
-					
-					int soLuongDB;
-					Map<String, Object> gioHang = (Map)session.getAttribute("GioHang");
-					if( gioHang== null ){
-						soLuongDB = sachDau.getSoLuong();
-					}
-					else{
-						Map<String, Object> danhSachChiTietGioHang = (Map)gioHang.get("DanhSachChiTietGioHang");
-						if( danhSachChiTietGioHang.get(sachDau.getMaSach())== null ){
-							soLuongDB = sachDau.getSoLuong();
-						}
-						else{
-							Map<String, Integer> chiTiet = (Map<String, Integer>)danhSachChiTietGioHang.get(sachDau.getMaSach());
-							soLuongDB = chiTiet.get("SoLuongDB");
-							if(soLuongDB > sachDau.getSoLuong()){
+							Sach sachDau = dsSach.get(0);
+							
+							LoaiSach loaiSach = (LoaiSach)request.getAttribute("LoaiSach");
+							
+							int soLuongDB;
+							Map<String, Object> gioHang = (Map)session.getAttribute("GioHang");
+							if( gioHang== null ){
 								soLuongDB = sachDau.getSoLuong();
 							}
-						}
-					}
+							else{
+								Map<String, Object> danhSachChiTietGioHang = (Map)gioHang.get("DanhSachChiTietGioHang");
+								if( danhSachChiTietGioHang.get(sachDau.getMaSach())== null ){
+									soLuongDB = sachDau.getSoLuong();
+								}
+								else{
+									Map<String, Integer> chiTiet = (Map<String, Integer>)danhSachChiTietGioHang.get(sachDau.getMaSach());
+									soLuongDB = chiTiet.get("SoLuongDB");
+									if(soLuongDB > sachDau.getSoLuong()){
+										soLuongDB = sachDau.getSoLuong();
+									}
+								}
+							}
 				%>
 					<!-- phần top -->
 					<div class="col-md-12 col-sm-12 col-xs-12 padding-0 top_nd_trang">

@@ -34,22 +34,26 @@
 <body>
 	<%
 		NhanVien nhanVien = (NhanVien)session.getAttribute("NhanVien");
-		List<LoaiSach> dsLoaiSach = (List<LoaiSach>)session.getAttribute("DsLoaiSach");
-		String LoiThemSach = (String)session.getAttribute("LoiThemSach");
-		if( nhanVien != null && dsLoaiSach != null){
+			List<LoaiSach> dsLoaiSach = (List<LoaiSach>)session.getAttribute("DsLoaiSach");
+			String LoiThemSach = (String)session.getAttribute("LoiThemSach");
+			if( nhanVien != null && dsLoaiSach != null){
 	%>
 	<section class="noidung">
 		<div class="container-fluid">
 			<div class="row content">
 				<div class="col-md-2 col-sm-3 col-xs-12 sidenav nd_left">
-					<h2 class="loainv_icon"><li class="fa fa-th-large"></li><span class="loainv"> Nhân viên <% if(nhanVien != null) {out.print(nhanVien.getChucVu());} %></span></h2>
+					<h2 class="loainv_icon"><li class="fa fa-th-large"></li><span class="loainv"> Nhân viên <%
+						if(nhanVien != null) {out.print(nhanVien.getChucVu());}
+					%></span></h2>
 					<div class="tennv_anh">
 						<span class="anh">
 							<img class="img-circle" alt="hinhNV" src="${url}/static/img/hinhMacdinh.png">
 						</span>
 						
 						<span class="ten_nv">Xin chào, <br/>
-							<span class="ten"><% if(nhanVien != null) {out.print(nhanVien.getTenNV());} %></span>
+							<span class="ten"><%
+								if(nhanVien != null) {out.print(nhanVien.getTenNV());}
+							%></span>
 						</span>
 					</div>
 					<ul class="nav nav-pills nav-stacked">
@@ -98,8 +102,8 @@
 												%>
 													 <span class="col-xs-12 error warning">Mã sách đã tồn tại, vui lòng nhập mã sách khác !</span>
 												<%
-														session.removeAttribute("LoiThemSach");
-													}
+													session.removeAttribute("LoiThemSach");
+																							}
 												%>
 											</td>
 										</tr>
@@ -127,8 +131,8 @@
 												%>
 													 <span class="col-xs-12 error warning">Tên hình ảnh đã tồn tại, vui lòng đổi tên hình !</span>
 												<%
-														session.removeAttribute("LoiThemSach");
-													}
+													session.removeAttribute("LoiThemSach");
+																							}
 												%>
 											</td>
 										</tr>
@@ -168,7 +172,7 @@
 											<td>
 												<select name="maloaisach" id="maloaisach" class="form-control">
 													<%
-													for(LoaiSach loaiSach: dsLoaiSach){
+														for(LoaiSach loaiSach: dsLoaiSach){
 													%>
 														<option value="<%=loaiSach.getMaLoaiSach()%>"><%=loaiSach.getTenLoaiSach()%></option>
 													<%

@@ -60,58 +60,58 @@
 									<div class="col-md-12 col-sm-6 col-xs-12 padding-0 grid_group_sp">
 										<%
 											List<Sach> sachNoiBat = (List<Sach>)application.getAttribute("SachNoiBat");
-											Sach sach1 = sachNoiBat.get(0);
+																			Sach sach1 = sachNoiBat.get(0);
 										%>
 											<!-- sản phẩm 1 -->
 											<div class="col-md-12 col-sm-6 col-xs-12 padding-0">
 												<div class="group_sp my_border">
 													<div class="anh_sp">
-														<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sach1.getMaSach() %>" class="">
+														<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sach1.getMaSach()%>" class="">
 															<img class="anh" src="${url}/static/img/sanpham/<%=sach1.getUrlHinh() %>" title="sp" alt="anhsp">
 															<%
-															int soLuongDB;
-															Map<String, Object> gioHang = (Map)session.getAttribute("GioHang");
-															if( gioHang== null ){
-																soLuongDB = sach1.getSoLuong();
-															}
-															else{
-																Map<String, Object> danhSachChiTietGioHang = (Map)gioHang.get("DanhSachChiTietGioHang");
-																if( danhSachChiTietGioHang.get(sach1.getMaSach())== null ){
-																	soLuongDB = sach1.getSoLuong();
-																}
-																else{
-																	Map<String, Integer> chiTiet = (Map<String, Integer>)danhSachChiTietGioHang.get(sach1.getMaSach());
-																	soLuongDB = chiTiet.get("SoLuongDB");
-																	if(soLuongDB > sach1.getSoLuong()){
-																		soLuongDB = sach1.getSoLuong();
-																	}
-																}
-															}
-															if(soLuongDB >= 1){
+																int soLuongDB;
+																												Map<String, Object> gioHang = (Map)session.getAttribute("GioHang");
+																												if( gioHang== null ){
+																													soLuongDB = sach1.getSoLuong();
+																												}
+																												else{
+																													Map<String, Object> danhSachChiTietGioHang = (Map)gioHang.get("DanhSachChiTietGioHang");
+																													if( danhSachChiTietGioHang.get(sach1.getMaSach())== null ){
+																														soLuongDB = sach1.getSoLuong();
+																													}
+																													else{
+																														Map<String, Integer> chiTiet = (Map<String, Integer>)danhSachChiTietGioHang.get(sach1.getMaSach());
+																														soLuongDB = chiTiet.get("SoLuongDB");
+																														if(soLuongDB > sach1.getSoLuong()){
+																															soLuongDB = sach1.getSoLuong();
+																														}
+																													}
+																												}
+																												if(soLuongDB >= 1){
 															%>
-																<a href="/SachKyAnh/ThemSachVaoGioHang?MaSach=<%=sach1.getMaSach() %>&SoLuong=1" class="them_gh text-a" >
+																<a href="/SachKyAnh/ThemSachVaoGioHang?MaSach=<%=sach1.getMaSach()%>&SoLuong=1" class="them_gh text-a" >
 																	<span class="glyphicon glyphicon-shopping-cart"></span>
 																	<span class="text"> Thêm vào giỏ</span>
 																</a>
 															<%
-															}
+																}
 															%>
 														</a>
 													</div>
 													<div class="tensp_giasp">
 														<h3 class="tensp">
-															<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sach1.getMaSach() %>" class="text-a">
-																<%=sach1.getTenSach() %>
+															<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sach1.getMaSach()%>" class="text-a">
+																<%=sach1.getTenSach()%>
 															</a>
 														</h3>	
 														<div class="giasp">
 															<span class="gia_goc">
 																<%
 																	NumberFormat numberFormat = new DecimalFormat("###,###,###");
-																	out.print(numberFormat.format(sach1.getDonGia()));
+																															out.print(numberFormat.format(sach1.getDonGia()));
 																%> đ
 															</span>
-															<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sach1.getMaSach() %>" class="chi_tiet">
+															<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sach1.getMaSach()%>" class="chi_tiet">
 																Chi Tiết
 															</a>
 														</div>
@@ -126,40 +126,40 @@
 											<div class="col-md-12 col-sm-6 col-xs-12 padding-0 margin_top_10">
 												<div class="group_sp my_border">
 													<div class="anh_sp">
-														<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sach2.getMaSach() %>" class="">
+														<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sach2.getMaSach()%>" class="">
 															<img class="anh" src="${url}/static/img/sanpham/<%=sach2.getUrlHinh() %>" title="sp" alt="anhsp">
 															<%
-															if( gioHang== null ){
-																soLuongDB = sach2.getSoLuong();
-															}
-															else{
-																Map<String, Object> danhSachChiTietGioHang = (Map)gioHang.get("DanhSachChiTietGioHang");
-																if( danhSachChiTietGioHang.get(sach2.getMaSach())== null ){
-																	soLuongDB = sach2.getSoLuong();
-																}
-																else{
-																	Map<String, Integer> chiTiet = (Map<String, Integer>)danhSachChiTietGioHang.get(sach2.getMaSach());
-																	soLuongDB = chiTiet.get("SoLuongDB");
-																	if(soLuongDB > sach2.getSoLuong()){
-																		soLuongDB = sach2.getSoLuong();
-																	}
-																}
-															}
-															if(soLuongDB >= 1){
+																if( gioHang== null ){
+																													soLuongDB = sach2.getSoLuong();
+																												}
+																												else{
+																													Map<String, Object> danhSachChiTietGioHang = (Map)gioHang.get("DanhSachChiTietGioHang");
+																													if( danhSachChiTietGioHang.get(sach2.getMaSach())== null ){
+																														soLuongDB = sach2.getSoLuong();
+																													}
+																													else{
+																														Map<String, Integer> chiTiet = (Map<String, Integer>)danhSachChiTietGioHang.get(sach2.getMaSach());
+																														soLuongDB = chiTiet.get("SoLuongDB");
+																														if(soLuongDB > sach2.getSoLuong()){
+																															soLuongDB = sach2.getSoLuong();
+																														}
+																													}
+																												}
+																												if(soLuongDB >= 1){
 															%>
-																<a href="/SachKyAnh/ThemSachVaoGioHang?MaSach=<%=sach2.getMaSach() %>&SoLuong=1" class="them_gh text-a" >
+																<a href="/SachKyAnh/ThemSachVaoGioHang?MaSach=<%=sach2.getMaSach()%>&SoLuong=1" class="them_gh text-a" >
 																	<span class="glyphicon glyphicon-shopping-cart"></span>
 																	<span class="text"> Thêm vào giỏ</span>
 																</a>
 															<%
-															}
+																}
 															%>
 														</a>
 													</div>
 													<div class="tensp_giasp">
 														<h3 class="tensp">
-															<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sach2.getMaSach() %>" class="text-a">
-																<%=sach2.getTenSach() %>
+															<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sach2.getMaSach()%>" class="text-a">
+																<%=sach2.getTenSach()%>
 															</a>
 														</h3>	
 														<div class="giasp">
@@ -168,7 +168,7 @@
 																	out.print(numberFormat.format(sach2.getDonGia()));
 																%> đ
 															</span>
-															<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sach2.getMaSach() %>" class="chi_tiet">
+															<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sach2.getMaSach()%>" class="chi_tiet">
 																Chi Tiết
 															</a>
 														</div>
@@ -194,57 +194,55 @@
 									</div>
 								</div>
 								
-									<%!
-										List<Sach> sachMoi;
-									%>
+									<%!List<Sach> sachMoi;%>
 									<%
 										sachMoi = (List<Sach>)application.getAttribute("SachMoi");
 									%>
 								<div class="col-md-12 col-sm-12 col-xs-12 group-right-list-sp">
 									<%
 										for(int i = 0; i < 4; i++)
-										{
-											Sach sach = sachMoi.get(i);
+																	{
+																		Sach sach = sachMoi.get(i);
 									%>
 									<!-- sản phẩm  -->
 									<div class="col-md-3 col-sm-3 col-xs-12 padding-0 grid_group_sp">
 										<div class="col-md-12 col-sm-12 col-xs-12 padding-0">
 											<div class="group_sp my_border">
 												<div class="anh_sp">
-													<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sach.getMaSach() %>" class="">
+													<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sach.getMaSach()%>" class="">
 														<img class="anh" src="${url}/static/img/sanpham/<%=sach.getUrlHinh() %>" title="sp" alt="anhsp">
 														<%
-														if( gioHang== null ){
-															soLuongDB = sach.getSoLuong();
-														}
-														else{
-															Map<String, Object> danhSachChiTietGioHang = (Map)gioHang.get("DanhSachChiTietGioHang");
-															if( danhSachChiTietGioHang.get(sach.getMaSach())== null ){
-																soLuongDB = sach.getSoLuong();
-															}
-															else{
-																Map<String, Integer> chiTiet = (Map<String, Integer>)danhSachChiTietGioHang.get(sach.getMaSach());
-																soLuongDB = chiTiet.get("SoLuongDB");
-																if(soLuongDB > sach.getSoLuong()){
-																	soLuongDB = sach.getSoLuong();
-																}
-															}
-														}
-														if(soLuongDB >= 1){
+															if( gioHang== null ){
+																											soLuongDB = sach.getSoLuong();
+																										}
+																										else{
+																											Map<String, Object> danhSachChiTietGioHang = (Map)gioHang.get("DanhSachChiTietGioHang");
+																											if( danhSachChiTietGioHang.get(sach.getMaSach())== null ){
+																												soLuongDB = sach.getSoLuong();
+																											}
+																											else{
+																												Map<String, Integer> chiTiet = (Map<String, Integer>)danhSachChiTietGioHang.get(sach.getMaSach());
+																												soLuongDB = chiTiet.get("SoLuongDB");
+																												if(soLuongDB > sach.getSoLuong()){
+																													soLuongDB = sach.getSoLuong();
+																												}
+																											}
+																										}
+																										if(soLuongDB >= 1){
 														%>
-															<a href="/SachKyAnh/ThemSachVaoGioHang?MaSach=<%=sach.getMaSach() %>&SoLuong=1" class="them_gh text-a" >
+															<a href="/SachKyAnh/ThemSachVaoGioHang?MaSach=<%=sach.getMaSach()%>&SoLuong=1" class="them_gh text-a" >
 																<span class="glyphicon glyphicon-shopping-cart"></span>
 																<span class="text"> Thêm vào giỏ</span>
 															</a>
 														<%
-														}
+															}
 														%>
 													</a>
 												</div>
 												<div class="tensp_giasp">
 													<h3 class="tensp">
-														<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sach.getMaSach() %>" class="text-a">
-															<%=sach.getTenSach() %>
+														<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sach.getMaSach()%>" class="text-a">
+															<%=sach.getTenSach()%>
 														</a>
 													</h3>	
 													<div class="giasp">
@@ -253,7 +251,7 @@
 																out.print(numberFormat.format(sach.getDonGia()));
 															%> đ
 														</span>
-														<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sach.getMaSach() %>" class="chi_tiet">
+														<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sach.getMaSach()%>" class="chi_tiet">
 															Chi Tiết
 														</a>
 													</div>
@@ -270,48 +268,48 @@
 								<div class="col-md-12 col-sm-12 col-xs-12 group-right-list-sp">
 									<%
 										for(int i = 4; i < sachMoi.size(); i++)
-										{
-											Sach sach = sachMoi.get(i);
+																	{
+																		Sach sach = sachMoi.get(i);
 									%>
 									<!-- sản phẩm  -->
 									<div class="col-md-3 col-sm-3 col-xs-12 padding-0 grid_group_sp">
 											<div class="col-md-12 col-sm-12 col-xs-12 padding-0">
 												<div class="group_sp my_border">
 													<div class="anh_sp">
-														<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sach.getMaSach() %>" class="">
+														<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sach.getMaSach()%>" class="">
 															<img class="anh" src="${url}/static/img/sanpham/<%=sach.getUrlHinh() %>" title="sp" alt="anhsp">
 															<%
-															if( gioHang== null ){
-																soLuongDB = sach.getSoLuong();
-															}
-															else{
-																Map<String, Object> danhSachChiTietGioHang = (Map)gioHang.get("DanhSachChiTietGioHang");
-																if( danhSachChiTietGioHang.get(sach.getMaSach())== null ){
-																	soLuongDB = sach.getSoLuong();
-																}
-																else{
-																	Map<String, Integer> chiTiet = (Map<String, Integer>)danhSachChiTietGioHang.get(sach.getMaSach());
-																	soLuongDB = chiTiet.get("SoLuongDB");
-																	if(soLuongDB > sach.getSoLuong()){
-																		soLuongDB = sach.getSoLuong();
-																	}
-																}
-															}
-															if(soLuongDB >= 1){
+																if( gioHang== null ){
+																													soLuongDB = sach.getSoLuong();
+																												}
+																												else{
+																													Map<String, Object> danhSachChiTietGioHang = (Map)gioHang.get("DanhSachChiTietGioHang");
+																													if( danhSachChiTietGioHang.get(sach.getMaSach())== null ){
+																														soLuongDB = sach.getSoLuong();
+																													}
+																													else{
+																														Map<String, Integer> chiTiet = (Map<String, Integer>)danhSachChiTietGioHang.get(sach.getMaSach());
+																														soLuongDB = chiTiet.get("SoLuongDB");
+																														if(soLuongDB > sach.getSoLuong()){
+																															soLuongDB = sach.getSoLuong();
+																														}
+																													}
+																												}
+																												if(soLuongDB >= 1){
 															%>
-																<a href="/SachKyAnh/ThemSachVaoGioHang?MaSach=<%=sach.getMaSach() %>&SoLuong=1" class="them_gh text-a">
+																<a href="/SachKyAnh/ThemSachVaoGioHang?MaSach=<%=sach.getMaSach()%>&SoLuong=1" class="them_gh text-a">
 																	<span class="glyphicon glyphicon-shopping-cart"></span>
 																	<span class="text"> Thêm vào giỏ</span>
 																</a>
 															<%
-															}
+																}
 															%>
 														</a>
 													</div>
 													<div class="tensp_giasp">
 														<h3 class="tensp">
-															<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sach.getMaSach() %>" class="text-a">
-																<%=sach.getTenSach() %>
+															<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sach.getMaSach()%>" class="text-a">
+																<%=sach.getTenSach()%>
 															</a>
 														</h3>	
 														<div class="giasp">
@@ -320,7 +318,7 @@
 																	out.print(numberFormat.format(sach.getDonGia()));
 																%> đ
 															</span>
-															<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sach.getMaSach() %>" class="chi_tiet">
+															<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sach.getMaSach()%>" class="chi_tiet">
 																Chi Tiết
 															</a>
 														</div>
@@ -365,7 +363,7 @@
 							<div class="col-md-12 col-sm-12 col-xs-12 padding-0 top-list-sp">
 								<div class="top_sp_cungloai">
 									<%
-										LoaiSach loaiSachVanHoc = (LoaiSach)application.getAttribute("LoaiSachVanHoc");
+									LoaiSach loaiSachVanHoc = (LoaiSach)application.getAttribute("LoaiSachVanHoc");
 									%>
 									<h2>
 										<a href="SachTheoLoaiSach?MaLoaiSach=<%=loaiSachVanHoc.getMaLoaiSach() %>" class="text-a">

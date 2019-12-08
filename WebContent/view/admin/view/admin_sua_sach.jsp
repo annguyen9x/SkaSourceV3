@@ -35,23 +35,27 @@
 <body>
 	<%
 		NhanVien nhanVien = (NhanVien)session.getAttribute("NhanVien");
-		List<LoaiSach> dsLoaiSach = (List<LoaiSach>)session.getAttribute("DsLoaiSach");
-		Sach sach = (Sach)session.getAttribute("Sach");
-		String LoiSuaSach = (String)session.getAttribute("LoiSuaSach");
-		if( nhanVien != null && dsLoaiSach != null && sach != null){
+			List<LoaiSach> dsLoaiSach = (List<LoaiSach>)session.getAttribute("DsLoaiSach");
+			Sach sach = (Sach)session.getAttribute("Sach");
+			String LoiSuaSach = (String)session.getAttribute("LoiSuaSach");
+			if( nhanVien != null && dsLoaiSach != null && sach != null){
 	%>
 	<section class="noidung">
 		<div class="container-fluid">
 			<div class="row content">
 				<div class="col-md-2 col-sm-3 col-xs-12 sidenav nd_left">
-					<h2 class="loainv_icon"><li class="fa fa-th-large"></li><span class="loainv"> Nhân viên <% if(nhanVien != null) {out.print(nhanVien.getChucVu());} %></span></h2>
+					<h2 class="loainv_icon"><li class="fa fa-th-large"></li><span class="loainv"> Nhân viên <%
+						if(nhanVien != null) {out.print(nhanVien.getChucVu());}
+					%></span></h2>
 					<div class="tennv_anh">
 						<span class="anh">
 							<img class="img-circle" alt="hinhNV" src="${url}/static/img/hinhMacdinh.png">
 						</span>
 						
 						<span class="ten_nv">Xin chào, <br/>
-							<span class="ten"><% if(nhanVien != null) {out.print(nhanVien.getTenNV());} %></span>
+							<span class="ten"><%
+								if(nhanVien != null) {out.print(nhanVien.getTenNV());}
+							%></span>
 						</span>
 					</div>
 					<ul class="nav nav-pills nav-stacked">
@@ -93,7 +97,7 @@
 										<tr>
 											<th scope="col">Mã Sách</th>
 											<td>
-												<input type="text" name="masach" id="masach" class="form-control" value="<%=sach.getMaSach() %>" disabled>
+												<input type="text" name="masach" id="masach" class="form-control" value="<%=sach.getMaSach()%>" disabled>
 											</td>
 										</tr>
 										<tr>
@@ -123,8 +127,8 @@
 												%>
 													 <span class="col-xs-12 error warning">Tên hình ảnh đã tồn tại, vui lòng đổi tên hình !</span>
 												<%
-														session.removeAttribute("LoiSuaSach");
-													}
+													session.removeAttribute("LoiSuaSach");
+																							}
 												%>
 											</td>
 										</tr>
@@ -166,8 +170,8 @@
 											<td>
 												<select name="maloaisach" id="maloaisach" class="form-control">
 													<%
-													for(LoaiSach loaiSach: dsLoaiSach){
-														if( (loaiSach.getMaLoaiSach()).equals(sach.getMaLoaiSach()) ){
+														for(LoaiSach loaiSach: dsLoaiSach){
+																									if( (loaiSach.getMaLoaiSach()).equals(sach.getMaLoaiSach()) ){
 													%>
 															<option value="<%=loaiSach.getMaLoaiSach()%>" selected="selected"><%=loaiSach.getTenLoaiSach()%></option>
 													<%
