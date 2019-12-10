@@ -73,7 +73,7 @@
 					            	<button type="submit" class="btn">Xem ngay</button>
 								</form>
 								<%
-									Map<String, Object> thongTinDonHang = (HashMap<String, Object>)session.getAttribute("ThongTinDonHang");
+									Map<String, Object> thongTinDonHang = (Map<String, Object>)session.getAttribute("ThongTinDonHang");
 									String trangThai = (String)session.getAttribute("TrangThai");
 									if( ((thongTinDonHang != null && thongTinDonHang.size() == 0) && (trangThai != null && trangThai.equals("DaTimKiemDH"))) || (thongTinDonHang == null && trangThai != null && trangThai.equals("DaTimKiemDH")) ){
 								%>
