@@ -3,6 +3,9 @@
 <%@ page import="java.util.Calendar" %>
 <%@ page import="java.util.Date" %>
 <%@page import="model.NhanVien"%>
+<%@page import="java.util.List" %>
+<%@page import="java.text.NumberFormat" %>
+<%@page import="java.text.DecimalFormat" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:url var="url" value="/view/admin"></c:url>
 
@@ -29,10 +32,11 @@
 </head>
 <body>
 	<%
-		NhanVien nhanVien = (NhanVien)session.getAttribute("NhanVien");
-		String thanhCong = (String)session.getAttribute("thanhCong");
-		String thatBai = (String)session.getAttribute("thatBai");
-		if( nhanVien != null ){
+	NhanVien nhanVien = (NhanVien)session.getAttribute("NhanVien");
+	List<NhanVien> dsNhanVien = (List<NhanVien>)session.getAttribute("DsNhanVien");
+	String LoiXoaNhanVien = (String)session.getAttribute("LoiXoaNhanVien");
+	NumberFormat numberFormat = new DecimalFormat("###,###,###");
+	if( nhanVien != null && dsNhanVien != null ){
 	%>
 	<section class="noidung">
 		<div class="container-fluid">
@@ -59,7 +63,8 @@
 								<li><a href="/SachKyAnh/AdminCapNhatSach">Cập nhật sách</a></li>
 							</ul>
 						</li>
-						<li><a href="/SachKyAnh/AdminCapNhatTaiKhoan" class="active"><i class="fa fa-address-book"></i> Cập nhật tài khoản</a></li>
+						<li><a href="/SachKyAnh/AdminCapNhatTaiKhoan" class="active"><i class="fa fa-address-book"></i> Cập nhật nhân viên</a></li>
+						<li><a href="/SachKyAnh/AdminSuaMatKhau"><i class="fa fa-key"></i> Thay đổi mật khẩu</a></li>
 						<li><a href="/SachKyAnh/AdminDangXuat"><i class="fa fa-power-off"></i> Đăng xuất</a></li>
 					</ul>
 					<br>
@@ -80,179 +85,71 @@
 					<section class="content trang_cn_taikhoan">
 						<hr>
 						<div class="noidung_chinh">
-							<p class="tieude_bang">Cập nhật tài khoản</p>
-							
-							<%
-		                    	if(  thanhCong != null ){
-	                    	%>
-	                    			<div class="col-xs-12 alert alert-success"><%=thanhCong %></div>
-	                    	<%
-	                    			session.removeAttribute("thanhCong");
-	                    		}
-		                    	if(  thatBai != null ){
-	                    	%>
-	                    		<div class="col-xs-12 alert alert-danger"><%=thatBai %></div>
-	                    	<%
-	                    		session.removeAttribute("thatBai");
-	                    	}
-	                    	%>
-							<form method="post" action="/SachKyAnh/AdminCapNhatTaiKhoan" id="formCN" onsubmit="return validation();" class="form-horizontal">
-								<div class="form-group">
-					                <label for="name" class="col-sm-3 control-label">Họ tên (<span class="warning">*</span>)</label>
-					                <div class="col-sm-9">
-					                    <input type="text" class="form-control" name="hoten" id="hoten" value="<%=nhanVien.getTenNV() %>" />
-					                    <span id="errorHoten" class="col-xs-12 error warning"></span>
-					                </div>
-					            </div>
-					            <div class="form-group">
-					            	<label for="pwd" class="col-sm-3 control-label">Mật khẩu (<span class="warning">*</span>)</label>
-					            	<div class="col-sm-9">
-					            		<input type="password" class="form-control" name="matkhau" id="matkhau" placeholder="Vui lòng nhập mật khẩu cần thay đổi" >
-					            		<span id="errorMatkhau" class="col-xs-12 error warning"></span>
-					            	</div>
-					            </div>
-					            <div class="form-group">
-					            	<label for="rePassword" class="col-sm-3 control-label">Nhập lại mật khẩu (<span class="warning">*</span>)</label>
-					            	<div class="col-sm-9">
-					            		<input type="password" class="form-control" name="nlMatkhau" id="nlMatkhau" placeholder="Nhập lại mật khẩu" >
-					            		<span id="errorNlMatkhau" class="col-xs-12 error warning"></span>
-					            	</div>
-					            </div>
-					            <div class="form-group">
-					            	<label for="email" class="col-sm-3 control-label">Email (<span class="warning">*</span>)</label>
-					            	<div class="col-sm-9">
-					            		<input type="email" class="form-control" name="email" id="email" value="<%=nhanVien.getEmail() %>" >
-					            		<span id="errorEmail" class="col-xs-12 error warning"></span>
-					            	</div>
-					            </div>
-					            <div class="form-group">
-					            	<label for="dienthoai" class="col-sm-3 control-label">Điện thoại (<span class="warning">*</span>)</label>
-					            	<div class="col-sm-9">
-					            		<input type="text" class="form-control" name="dienthoai" id="dienthoai" value="<%=nhanVien.getDienThoai() %>" >
-					            		<span id="errorDienthoai" class="col-xs-12 error warning"></span>
-					            	</div>
-					            </div>
-					            <div class="form-group form-inline">
-					            	<label for="" class="col-sm-3 control-label">Giới Tính</label>
-					            	<div class="col-sm-9">
-					            		<%
-					            			String gioiTinh = nhanVien.getGioiTinh(); 
-					            			if( gioiTinh.equals("Nam") ){
-					            		%>
-					            		<div class="col-xs-2">
-					            			<input class="form-control" type="radio" name="gioitinh" value="Nam" checked="checked">Nam
-					            		</div>
-					            		<div class="col-xs-2">
-						            		<input class="form-control" type="radio" name="gioitinh" value="Nữ">Nữ
-						            	</div>
-						            	<div class="col-xs-2">
-						            		<input class="form-control" type="radio" name="gioitinh" value="Khác">Khác
-						            	</div>
-					            		<%
-					            			}else if( gioiTinh.equals("Nữ") ){
-					            		%>
-						            	<div class="col-xs-2">
-					            			<input class="form-control" type="radio" name="gioitinh" value="Nam">Nam
-					            		</div>
-					            		<div class="col-xs-2">
-						            		<input class="form-control" type="radio" name="gioitinh" value="Nữ" checked="checked">Nữ
-						            	</div>
-						            	<div class="col-xs-2">
-						            		<input class="form-control" type="radio" name="gioitinh" value="Khác">Khác
-						            	</div>
-						            	<%
-					            			}else if( gioiTinh.equals("Khác") ){
-					            		%>
-						            	<div class="col-xs-2">
-					            			<input class="form-control" type="radio" name="gioitinh" value="Nam">Nam
-					            		</div>
-					            		<div class="col-xs-2">
-						            		<input class="form-control" type="radio" name="gioitinh" value="Nữ">Nữ
-						            	</div>
-						            	<div class="col-xs-2">
-						            		<input class="form-control" type="radio" name="gioitinh" value="Khác" checked="checked">Khác
-						            	</div>
-						            	<%
-					            			}
-					            		%>
-					            	</div>
-					            </div>
-					            <div class="form-group form-inline">
-					            	<label for="ngaysinh" class="col-sm-3 control-label">Ngày sinh (<span class="warning">*</span>)</label>
-					            	<div class="col-sm-9">
-					            		<%
-					            			Date ngaySinhDB = nhanVien.getNgaySinh();
-					            			Calendar calendar = Calendar.getInstance();
-					            			calendar.setTime(ngaySinhDB);
-					            			
-						            		int ngaySinh = calendar.get(Calendar.DAY_OF_MONTH);
-						            		int thangSinh = calendar.get(Calendar.MONTH)+1;
-						            		int namSinh = calendar.get(Calendar.YEAR);
-					            		%>
-					            		<select name="ngaysinh" id="ngaysinh" class="col-xs-4 form-control">
-					            			<%
-					            				for(int i = 1; i <= 31; i++){
-					            					if(i == ngaySinh){
-					            			%>
-							            				<option value="<%=i%>" selected="true"><%=i%></option>
-							            	<%
-					            					}else{
-					            			%>
-					            						<option value="<%=i%>"><%=i%></option>
-					            			<%
-					            					}
-					            				}
-					            			%>
-					            		</select>
-					            		<select name="thangsinh" id="thangsinh" class="col-xs-4 form-control">
-					            			<%
-					            				for(int i = 1; i <= 12; i++){
-							            			if(i == thangSinh){
-					            			%>
-							            				<option value="<%=i%>" selected="true"><%=i%></option>
-							            	<%
-					            					}else{
-					            			%>
-					            						<option value="<%=i%>"><%=i%></option>
-					            			<%
-					            					}
-					            				}
-					            			%>
-					            		</select>
-					            		<select name="namsinh" id="namsinh" class="col-xs-4 form-control">
-					            			<%
-					            				int namHT = Calendar.getInstance().get(Calendar.YEAR);
-					            				for(int i = 1920 ; i <= namHT; i++){
-					            					if(i == namSinh){
-					            			%>
-							            				<option value="<%=i%>" selected="true"><%=i%></option>
-							            	<%
-					            					}else{
-					            			%>
-					            						<option value="<%=i%>"><%=i%></option>
-					            			<%
-					            					}
-					            				}
-					            			%>
-					            		</select>
-					            		<span id="errorNgaysinh" class="col-xs-12 error warning"></span>
-					            	</div>
-					            </div>
-					             <div class="form-group">
-					            	<label for="diachi" class="col-sm-3 control-label">Địa chỉ (<span class="warning">*</span>)</label>
-					            	<div class="col-sm-9">
-					            		<input type="text"class="form-control" name="diachi" id="diachi" value="<%=nhanVien.getDiaChi() %>" >
-					            		<span id="errorDiachi" class="col-xs-12 error warning"></span>
-					            	</div>
-					            </div>
-					            <div class="form-group">
-					            	<div class="col-xs-8 col-xs-offset-4">
-					            		<button type="submit" class="btn">
-					            			Cập nhật
-					            		</button>
-					            	</div>
-					            </div>
-							</form>
+							<p class="tieude_bang">Cập nhật nhân viên</p>
+							<div class="bang">
+								<table class="table table-bordered">
+									<thead class="bg_xanhla">
+										<tr class="text-center">
+											<th style="white-space:nowrap">Mã NV</th>
+											<th style="white-space:nowrap">Tên nhân viên</th>
+											<th style="white-space:nowrap">Chức vụ</th>
+											<th style="white-space:nowrap">Email</th>
+											<th style="white-space:nowrap">Điện thoại</th>
+											<th style="white-space:nowrap">Giới tính</th>
+											<th style="white-space:nowrap">Ngày sinh</th>
+											<th style="white-space:nowrap">Địa chỉ</th>
+											<th colspan="2" class="text-center">
+												<a type="button" href="/SachKyAnh/AdminThemTaiKhoanNhanVien" class="btn btn-default" style="background:#F47920; color:#fff">Thêm nhân viên</a>
+											</th>
+										</tr>
+									</thead>
+									<tbody>
+										<%
+										for(int i= 0; i < dsNhanVien.size(); i++){
+											NhanVien nv = dsNhanVien.get(i);
+										%>
+											<tr>
+												<th><%=nv.getMaNV()%></th>
+												<th><%=nv.getTenNV()%></th>
+												<th><%=nv.getChucVu()%></th>
+												<th><%=nv.getEmail()%></th>
+												<th><%=nv.getDienThoai()%></th>
+												<th><%=nv.getGioiTinh()%></th>
+												<th><%=nv.getNgaySinh()%></th>
+												<th><%=nv.getDiaChi()%></th>
+												<th class="text-center">
+													<a type="button" href="/SachKyAnh/AdminSuaTaiKhoanNhanVien?MaNV=<%=nv.getMaNV() %>" class="btn btn-primary">Sửa</a>
+												</th class="text-center">
+												<th>
+													<a type="button" onclick="return xacNhanXoaNhanVien();" href="/SachKyAnh/AdminXoaTaiKhoanNhanVien?MaNV=<%=nv.getMaNV() %>" class="btn btn-danger" style="color:#111">Xóa</a>
+													<script type="text/javascript">
+														function xacNhanXoaNhanVien(){
+															var xacNhan = confirm("Bạn có chắc chắn muốn xóa nhân viên này không ?");
+															if( xacNhan == true ){
+																return true;
+															}else{
+																return false;
+															}
+														}		
+													</script>
+												</th>
+											</tr>
+										<%
+										}
+										%>
+									</tbody>
+								</table>
+								<%
+								if(LoiXoaNhanVien != null){
+								%>
+									<script type="text/javascript">
+										alert('Lỗi khóa ngoại khi xóa nhân viên, vui lòng xóa nhân viên có ở các table bên một trước !');
+									</script>
+								<%
+									session.removeAttribute("LoiXoaNhanVien");
+								}
+								%>
+							</div>
 						</div>
 					</section>
 				<!-- kt phần nội dung chính -->

@@ -17,6 +17,19 @@ public class NhanVien {
 		
 	}
 
+	public NhanVien(String tenNV, String chucVu, String matKhau, String email, String dienThoai,
+			String gioiTinh, Date ngaySinh, String diaChi) {
+		super();
+		this.tenNV = tenNV;
+		this.chucVu = chucVu;
+		this.matKhau = matKhau;
+		this.email = email;
+		this.dienThoai = dienThoai;
+		this.gioiTinh = gioiTinh;
+		this.ngaySinh = ngaySinh;
+		this.diaChi = diaChi;
+	}
+	
 	public NhanVien(int maNV, String tenNV, String chucVu, String matKhau, String email, String dienThoai,
 			String gioiTinh, Date ngaySinh, String diaChi) {
 		super();

@@ -180,7 +180,7 @@
 							             <div class="form-group">
 							            	<label for="diachi" class="col-sm-3 control-label">Địa chỉ<span class="warning"> (*)</span></label>
 							            	<div class="col-sm-9">
-							            		<input type="text"class="form-control" name="diachi" id="diachi"  placeholder="Vui lòng nhập địa chỉ">
+							            		<input type="text"class="form-control" name="diachi" id="diachi" placeholder="Vui lòng nhập địa chỉ">
 							            		<span id="errorDiachi" class="col-xs-12 error warning"></span>
 							            	</div>
 							            </div>

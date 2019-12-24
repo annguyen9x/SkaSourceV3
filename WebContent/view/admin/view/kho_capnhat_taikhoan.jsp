@@ -24,7 +24,7 @@
 <link rel="stylesheet" type="text/css" href="${url}/static/css/quantri.css"/>
 <!-- kt my css -->
 <!-- start my js -->
-	<script src="${url}/static/js/formValidation.js" type="text/javascript" charset="utf-8"></script>
+	<script src="${url}/static/js/formValidationAll.js" type="text/javascript" charset="utf-8"></script>
 <!-- end my js -->
 </head>
 <body>
@@ -90,7 +90,7 @@
 	                    		session.removeAttribute("thatBai");
 	                    	}
 	                    	%>
-	                    	<form method="post" action="/SachKyAnh/KhoCapNhatTaiKhoan" id="formCN" onsubmit="return validation();" class="form-horizontal">
+	                    	<form method="post" action="/SachKyAnh/KhoCapNhatTaiKhoan" id="formCN" onsubmit="return formValidationAll();" class="form-horizontal">
 								<div class="form-group">
 					                <label for="name" class="col-sm-3 control-label">Họ tên (<span class="warning">*</span>)</label>
 					                <div class="col-sm-9">
