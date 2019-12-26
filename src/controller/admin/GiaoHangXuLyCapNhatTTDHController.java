@@ -49,15 +49,11 @@ public class GiaoHangXuLyCapNhatTTDHController extends HttpServlet {
 				int soHD = Integer.parseInt(dsSoHD[i]);
 				String tinhTrangDH =  request.getParameter("TinhTrangDH"+soHD);
 				
-				if( "1".equals(tinhTrangDH) ) {
-					tinhTrangDH = "Đợi người giao lấy hàng";
-					ngayGiao = "";
-				}
-				if( "2".equals(tinhTrangDH)) {
+				if( "1".equals(tinhTrangDH)) {
 					tinhTrangDH = "Đang giao hàng";
 					ngayGiao = dateFormat.format(ngayHienTai);
 				}
-				if( "3".equals(tinhTrangDH)) {
+				if( "2".equals(tinhTrangDH)) {
 					tinhTrangDH = "Trả lại hàng";
 					Date ngayGiaoDB = hoaDonDao.getHoaDon(soHD).getNgayGiao();
 					if( ngayGiaoDB == null) {
@@ -67,7 +63,7 @@ public class GiaoHangXuLyCapNhatTTDHController extends HttpServlet {
 						ngayGiao = dateFormat.format(ngayGiaoDB);
 					}
 				}
-				if( "4".equals(tinhTrangDH)) {
+				if( "3".equals(tinhTrangDH)) {
 					tinhTrangDH = "Giao hàng thành công";
 					Date ngayGiaoDB = hoaDonDao.getHoaDon(soHD).getNgayGiao();
 					if( ngayGiaoDB == null) {
