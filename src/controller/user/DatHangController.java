@@ -161,8 +161,9 @@ public class DatHangController extends HttpServlet {
 						ChiTietHoaDon chiTietHoaDon = new ChiTietHoaDon(soHD, maSach, soLuongMua, donGia);
 						
 						if( chiTietHoaDonDao.insert(chiTietHoaDon) == true) {
-							//Thêm trừ số lượng sách Theo từng MaSach
 							hoanTatThemChiTietDH = true;
+							//Thêm trừ số lượng sách Theo từng MaSach
+							sachDao.updateSoLuong(sach.getSoLuong() - soLuongMua, maSach);
 						}
 						else {
 							hoanTatThemChiTietDH = false;
