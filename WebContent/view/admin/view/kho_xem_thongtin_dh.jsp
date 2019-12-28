@@ -97,7 +97,9 @@
 											NumberFormat numberFormat = new DecimalFormat("###,###,###");
 								%>
 								<div class="col-md-12 col-sm-12 col-xs-12" style="margin-bottom:7px; padding:0px; margin-top:-20px;">
-									<span style="font-weight:bold;">Mã ĐH: </span><span><%=hoaDon.getSoHD() %></span>
+									<span style="font-weight:bold;">Mã ĐH: </span><span><%=hoaDon.getSoHD() %></span>&nbsp; &nbsp;
+									<a target="_black" href="/SachKyAnh/KhoXuatHoaDon?soHD=<%=hoaDon.getSoHD()%>&IDNN=<%=nguoiNhanHang.getIdNN()%>" class="btn btn-danger">
+									<span class="glyphicon glyphicon-print"></span> In hóa đơn </a>
 								</div>
 								<!-- Chi tiết Đh -->
 								<table class="table table-bordered">
