@@ -221,7 +221,7 @@ FROM "ChiTietHoaDon"
 				<text><![CDATA[Địa chỉ: P. Sông Trí, Tx. Kỳ Anh, T. Hà Tĩnh]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="203" y="216" width="205" height="20" uuid="b4f150ab-fa3e-4ffb-b367-007fb3e6712b"/>
+				<reportElement x="192" y="216" width="205" height="20" uuid="b4f150ab-fa3e-4ffb-b367-007fb3e6712b"/>
 				<textElement>
 					<font fontName="DejaVu Sans" size="14" isBold="true"/>
 				</textElement>
