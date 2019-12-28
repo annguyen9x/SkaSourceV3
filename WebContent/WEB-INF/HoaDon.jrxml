@@ -331,12 +331,6 @@ FROM "ChiTietHoaDon"
 	</detail>
 	<columnFooter>
 		<band height="161" splitType="Stretch">
-			<line>
-				<reportElement positionType="FixRelativeToBottom" x="0" y="160" width="555" height="1" uuid="1133a906-5b71-476e-9f3e-bc97c97058c1"/>
-				<graphicElement>
-					<pen lineWidth="0.5" lineColor="#999999"/>
-				</graphicElement>
-			</line>
 			<staticText>
 				<reportElement x="365" y="24" width="63" height="19" uuid="1eb58a9c-81e7-4246-b098-8ee72dcd0ec4"/>
 				<textElement>
