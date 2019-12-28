@@ -16,7 +16,7 @@ import javax.websocket.Session;
 
 import dao.KhachHangDao;
 import model.KhachHang;
-import sun.security.provider.certpath.ResponderId;
+//import sun.security.provider.certpath.ResponderId;
 import util.MahoaMD5;
 
 @WebServlet(urlPatterns = "/userDangNhap")
