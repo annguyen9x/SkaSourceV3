@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.sun.corba.se.impl.encoding.OSFCodeSetRegistry.Entry;
+//import com.sun.corba.se.impl.encoding.OSFCodeSetRegistry.Entry;
 
 @WebServlet(name = "CapNhatGioHang", urlPatterns = { "/CapNhatGioHang" })
 public class CapNhatGioHangController extends HttpServlet {
