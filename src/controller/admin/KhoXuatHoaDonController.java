@@ -7,6 +7,7 @@ import java.io.OutputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -44,6 +45,10 @@ public class KhoXuatHoaDonController extends HttpServlet {
 		String soHD = request.getParameter("soHD").trim();
 		String IDNN = request.getParameter("IDNN").trim();
 		
+		String nam = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
+		String thang = String.valueOf(Calendar.getInstance().get(Calendar.MONTH) + 1);
+		String ngay = String.valueOf(Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
+		
 		try {
 			String user = "sa";
 			String password = "123456";
@@ -57,6 +62,9 @@ public class KhoXuatHoaDonController extends HttpServlet {
 			Map parameters = new HashMap();
 			parameters.put("soHD", soHD);
 			parameters.put("IDNN", IDNN);
+			parameters.put("nam", nam);
+			parameters.put("thang", thang);
+			parameters.put("ngay", ngay);
 	
 			String path = getServletContext().getRealPath("/WEB-INF/");
 			jasperDesign = JRXmlLoader.load(path + "/HoaDon.jrxml");
