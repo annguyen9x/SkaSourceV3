@@ -236,7 +236,7 @@ FROM "ChiTietHoaDon"
 				<textElement>
 					<font fontName="DejaVu Sans" size="11" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Tổng thanh toán: " + new DecimalFormat("###,###,##0").format($F{TongTien}) +" đ"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Tổng thanh toán: " + new DecimalFormat("###,###,##0").format($F{TongTien}.floatValue()+$F{PhiGiaoHang}.floatValue()) +" đ"]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>
