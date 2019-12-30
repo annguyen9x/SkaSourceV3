@@ -229,14 +229,14 @@ FROM "ChiTietHoaDon"
 				<textElement>
 					<font fontName="DejaVu Sans" size="11"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Phí giao hàng: " + $F{PhiGiaoHang} +" đ"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Phí giao hàng: " + new DecimalFormat("###,###,##0").format($F{PhiGiaoHang}) +" đ"]]></textFieldExpression>
 			</textField>
 			<textField pattern="###,###,##0;#,##0">
 				<reportElement x="328" y="319" width="225" height="20" uuid="dfefccdb-87d9-4774-9460-38daa94afe5e"/>
 				<textElement>
 					<font fontName="DejaVu Sans" size="11" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Tổng thanh toán: " + $F{TongTien} +" đ"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Tổng thanh toán: " + new DecimalFormat("###,###,##0").format($F{TongTien}) +" đ"]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>
@@ -321,7 +321,7 @@ FROM "ChiTietHoaDon"
 					<textElement>
 						<font fontName="DejaVu Sans" size="11"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{DonGia}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[new DecimalFormat("###,###,##0").format($F{DonGia})]]></textFieldExpression>
 				</textField>
 				<textField textAdjust="StretchHeight">
 					<reportElement style="Detail" positionType="Float" x="16" y="1" width="38" height="18" uuid="aa6413a7-8eb4-449f-9aab-a52db692e3b3">
@@ -339,7 +339,7 @@ FROM "ChiTietHoaDon"
 					<textElement>
 						<font fontName="DejaVu Sans" size="11"/>
 					</textElement>
-					<textFieldExpression><![CDATA[new Float($F{SoLuong}.intValue()*$F{DonGia}.floatValue())]]></textFieldExpression>
+					<textFieldExpression><![CDATA[new DecimalFormat("###,###,##0").format(new Float($F{SoLuong}.intValue()*$F{DonGia}.floatValue()))]]></textFieldExpression>
 				</textField>
 			</frame>
 		</band>
