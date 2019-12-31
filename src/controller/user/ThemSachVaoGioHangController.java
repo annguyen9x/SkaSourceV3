@@ -56,7 +56,9 @@ public class ThemSachVaoGioHangController extends HttpServlet {
 				chiTietGioHang.put("SoLuong", soLuong);
 				
 				float tongTienMoi = hoaDonDao.getHoaDon(soHD).getTongTien() + soLuong*sach.getDonGia();
-				hoaDonDao.updateTongTien(tongTienMoi, soHD);
+				
+				//hoaDonDao.updateTongTien(tongTienMoi, soHD);//Dung khi khong dung Trigger tinh TongTien
+				
 				sachDao.updateSoLuong(sach.getSoLuong() - soLuong, maSach);
 				ChiTietHoaDon chiTietHoaDon = new ChiTietHoaDon(soHD, maSach, soLuong, sach.getDonGia());
 				chiTietHoaDonDao.insert(chiTietHoaDon);
