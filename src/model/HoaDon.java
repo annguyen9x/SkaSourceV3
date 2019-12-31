@@ -16,6 +16,15 @@ public class HoaDon {
 	public HoaDon() {
 	}
 	
+	public HoaDon( int idNN, float phiGiaoHang, Date ngayDat, String tinhTrangDH, int maKH) {
+		super();
+		this.idNN = idNN;
+		this.phiGiaoHang = phiGiaoHang;
+		this.ngayDat = ngayDat;
+		this.tinhTrangDH = tinhTrangDH;
+		this.maKH = maKH;
+	}
+	
 	public HoaDon( int idNN, float phiGiaoHang, float tongTien, Date ngayDat, String tinhTrangDH, int maKH) {
 		super();
 		this.idNN = idNN;
