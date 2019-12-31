@@ -22,25 +22,70 @@ public class HoaDonDao implements ITFHoaDonDao{
 	private PreparedStatement pStatement;
 	private ResultSet rs;
 	
+	//Dung khi khong dung Trigger tinh TongTien
+//	@Override
+//	public int insert(HoaDon hd) {
+//		ketNoiDatabase = new KetNoiDatabase();
+//		try {
+//			conn = ketNoiDatabase.getConn();
+//			conn.setAutoCommit(false);
+//			String sql = "Insert into HoaDon(IDNN, PhiGiaoHang, TongTien, NgayDat, TinhTrangDH, MaKH) Values(?,?,?,?,?,?)";
+//			pStatement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+//			pStatement.setInt(1, hd.getIdNN());
+//			pStatement.setFloat(2, hd.getPhiGiaoHang());
+//			pStatement.setFloat(3, hd.getTongTien());
+//			SimpleDateFormat dateFormat = new SimpleDateFormat(KiemTraNgayThang.DATE_FORMAT);
+//			pStatement.setString(4, dateFormat.format(hd.getNgayDat()));
+//			pStatement.setNString(5, hd.getTinhTrangDH());
+//			if( hd.getMaKH() == 0 ) {
+//				pStatement.setNull(6, java.sql.Types.INTEGER);
+//			}else {
+//				pStatement.setInt(6, hd.getMaKH());
+//			}
+//			pStatement.executeUpdate();
+//			int soHD = -1;
+//			rs = pStatement.getGeneratedKeys();
+//			if( rs.next() ) {
+//				soHD = rs.getInt(1);
+//			}
+//			conn.commit();
+//			return soHD;
+//		} catch (SQLException e) {
+//			System.out.println("Loi insert HoaDon: " + e.toString());
+//			try {
+//                conn.rollback();
+//            } catch (SQLException ex1) {
+//                System.out.println("Loi rollback");
+//            }
+//		}finally {
+//			try {
+//				pStatement.close();
+//			} catch (SQLException e) {
+//				System.out.println("Loi dong ket noi PreparedStatement: " + e.toString());
+//			}
+//			ketNoiDatabase.closeConnection(conn);
+//		}
+//		return -1;
+//	}
 	
+	//Dung khi co Trigger tinh TongTien
 	@Override
 	public int insert(HoaDon hd) {
 		ketNoiDatabase = new KetNoiDatabase();
 		try {
 			conn = ketNoiDatabase.getConn();
 			conn.setAutoCommit(false);
-			String sql = "Insert into HoaDon(IDNN, PhiGiaoHang, TongTien, NgayDat, TinhTrangDH, MaKH) Values(?,?,?,?,?,?)";
+			String sql = "Insert into HoaDon(IDNN, PhiGiaoHang, NgayDat, TinhTrangDH, MaKH) Values(?,?,?,?,?)";
 			pStatement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			pStatement.setInt(1, hd.getIdNN());
 			pStatement.setFloat(2, hd.getPhiGiaoHang());
-			pStatement.setFloat(3, hd.getTongTien());
 			SimpleDateFormat dateFormat = new SimpleDateFormat(KiemTraNgayThang.DATE_FORMAT);
-			pStatement.setString(4, dateFormat.format(hd.getNgayDat()));
-			pStatement.setNString(5, hd.getTinhTrangDH());
+			pStatement.setString(3, dateFormat.format(hd.getNgayDat()));
+			pStatement.setNString(4, hd.getTinhTrangDH());
 			if( hd.getMaKH() == 0 ) {
-				pStatement.setNull(6, java.sql.Types.INTEGER);
+				pStatement.setNull(5, java.sql.Types.INTEGER);
 			}else {
-				pStatement.setInt(6, hd.getMaKH());
+				pStatement.setInt(5, hd.getMaKH());
 			}
 			pStatement.executeUpdate();
 			int soHD = -1;
