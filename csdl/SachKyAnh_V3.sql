@@ -351,7 +351,7 @@ Create table HoaDon(
 SoHD int primary key identity(10000001,1),
 IDNN int foreign key references NguoiNhanHang(IDNN),
 PhiGiaoHang decimal(18,2),
-TongTien decimal(18,2),
+TongTien decimal(18,2) default(0),
 NgayDat date,
 NgayGiao date,
 TinhTrangDH nvarchar(50),
@@ -385,12 +385,33 @@ Insert into ChiTietHoaDon Values( 10000004, 'SKC003', 1, 200000.00)
 Insert into ChiTietHoaDon Values( 10000005, 'SKC003', 1, 200000.00)
 Insert into ChiTietHoaDon Values( 10000005, 'SKC006', 1, 165000.00)
 Go
--- TRIGGER
--- Tính tổng tiền HDN
-/*Create Trigger tongTienHDN on Sach for Insert
+
+
+
+------------------------------------- PHẦN TRIGGER
+
+-- Trigger tính “TongTien” trong bảng “hoadon” khi thêm “chitiethoadon”
+Use SachKyAnh
+Go
+
+Create Function thanhTien(@soHD int, @maSach varchar(6))
+Returns decimal(18,2)
 As
 	Begin
-		Update HoaDonNhap Set TongTienNhap = TongTienNhap + (Select Sum(DonGiaNhap) From Sach Where Sach.MaHDN = (Select MaHDN From Inserted) )
+		Declare @thanhTien decimal(18,2)
+		Select @thanhTien = (SoLuong*DonGia) From dbo.ChiTietHoaDon Where SoHD = @soHD And MaSach = @maSach
+		Return @thanhTien
 	End
 Go
-*/
+
+
+Create Trigger tongTien on ChiTietHoaDon For Insert
+As
+	Begin
+		Declare @soHD int, @maSach varchar(6)
+		Select  @soHD = SoHD From inserted
+		Select  @maSach= MaSach From inserted
+		Update dbo.HoaDon Set TongTien = TongTien + dbo.thanhTien( @soHD,@maSach)
+		Where SoHD = @soHD
+	End
+Go
