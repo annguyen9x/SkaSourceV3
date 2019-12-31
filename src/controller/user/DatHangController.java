@@ -136,7 +136,13 @@ public class DatHangController extends HttpServlet {
 				String tinhTrangDH = "Đợi xác nhận đơn hàng";
 				
 				HoaDonDao hoaDonDao = new HoaDonDao();
-				HoaDon hoaDon = new HoaDon(idNN, phiGiaoHang, tongTien, ngayDat, tinhTrangDH, maKH);
+				
+				//Dung khi khong co Trigger tinh TongTien
+//				HoaDon hoaDon = new HoaDon(idNN, phiGiaoHang, tongTien, ngayDat, tinhTrangDH, maKH);
+//				int soHD = hoaDonDao.insert(hoaDon);
+				
+				//Dung khi co Trigger tinh TongTien
+				HoaDon hoaDon = new HoaDon(idNN, phiGiaoHang, ngayDat, tinhTrangDH, maKH);
 				int soHD = hoaDonDao.insert(hoaDon);
 				
 				if( soHD != -1 ) {
