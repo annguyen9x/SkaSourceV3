@@ -55,7 +55,13 @@ public class XemDonHangController extends HttpServlet {
 					KhachHang khachHang = khachHangDao.getKhachHang(hoaDon.getMaKH());
 					thongTinDonHang.put("KhachHang", khachHang);
 					
-					NguoiNhanHang nguoiNhanHang = nguoiNhanHangDao.getNguoiNhanHang(hoaDon.getIdNN());
+					NguoiNhanHang nguoiNhanHang = null;
+					if( hoaDon.getThayDoiNN().equals("Co") ) {
+						nguoiNhanHang = nguoiNhanHangDao.getNguoiNhanHang(hoaDon.getSoHD());
+					}
+					else if( hoaDon.getThayDoiNN().equals("Khong") ) {
+						nguoiNhanHang = new NguoiNhanHang(hoaDon.getSoHD(), khachHang.getTenKH(), khachHang.getDienThoai(), khachHang.getDiaChi());
+					}
 					thongTinDonHang.put("NguoiNhanHang", nguoiNhanHang);
 				}
 				session.setAttribute("ThongTinDonHang", thongTinDonHang);

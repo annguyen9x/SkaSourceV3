@@ -103,7 +103,7 @@
 												if( hoaDon.getMaKH() != 0 ){
 													out.print("Người đặt: " + khachHang.getTenKH() + ", Email: " + khachHang.getEmail());
 												}else{
-													out.print("Người đặt: " + nguoiNhanHang.getTenNN() + ", Email: " + nguoiNhanHang.getEmail());
+													out.print("Người đặt: Lỗi thông tin người đặt");
 												}
 												%>
 											</div>
@@ -188,9 +188,6 @@
 																SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 																out.print( simpleDateFormat.format(hoaDon.getNgayDat()) );
 															%>
-														</td>
-														<td>
-															<b>Email: </b><%=nguoiNhanHang.getEmail() %>
 														</td>
 													</tr>
 													<tr>

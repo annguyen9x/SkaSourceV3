@@ -11,7 +11,7 @@ function diaChiGiaoHangTheoLoaiTaiKhoan(evt, loaiTaiKhoan){
 	//loaiTaiKhoan được chọn hiển thị giá tương ứng
 	document.getElementById(loaiTaiKhoan).style.display = "block";
 }
-document.getElementById("loaitk_chinhsua").click();//hiển thị giá mặc định 
+document.getElementById("loaitk_diachicu").click();//hiển thị giá mặc định 
 
 
 

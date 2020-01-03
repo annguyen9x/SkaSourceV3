@@ -10,7 +10,7 @@ public interface ITFNguoiNhanHangDao {
 	
 	boolean update(NguoiNhanHang nnh);
 	
-	boolean delete(int idNN);
+	boolean delete(int soHD);
 	
-	NguoiNhanHang getNguoiNhanHang(int idNN);
+	NguoiNhanHang getNguoiNhanHang(int soHD);
 }

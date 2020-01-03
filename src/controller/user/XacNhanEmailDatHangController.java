@@ -35,13 +35,10 @@ public class XacNhanEmailDatHangController extends HttpServlet {
 			}
 			
 			HoaDon hoaDon = (HoaDon)thongTinDonHang.get("HoaDon");
-			NguoiNhanHang nguoiNhanHang = (NguoiNhanHang)thongTinDonHang.get("NguoiNhanHang");
 			KhachHang khachHang = (KhachHang)thongTinDonHang.get("KhachHang");
 			String emailNhan = null;
 			if( khachHang != null ) {
 				emailNhan = khachHang.getEmail();
-			}else {
-				emailNhan = nguoiNhanHang.getEmail();
 			}
 			String tieuDe = "Xác nhận email đã đặt hàng tại [kyanhbooks.com] để cập nhật đơn hàng";
 			String maXacNhan = String.valueOf(RandomSoNguyen.randomSoNguyen());

@@ -23,10 +23,10 @@ public class NguoiNhanHangDao implements ITFNguoiNhanHangDao{
 		try {
 			conn = ketNoiDatabase.getConn();
 			conn.setAutoCommit(false);
-			String sql = "Insert into NguoiNhanHang(TenNN, Email, DienThoai, DiaChi) Values(?,?,?,?)";
+			String sql = "Insert into NguoiNhanHang(SoHD, TenNN, DienThoai, DiaChi) Values(?,?,?,?)";
 			pStatement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-			pStatement.setNString(1, nnh.getTenNN());
-			pStatement.setNString(2, nnh.getEmail());
+			pStatement.setInt(1, nnh.getSoHD());
+			pStatement.setNString(2, nnh.getTenNN());
 			pStatement.setNString(3, nnh.getDienThoai());
 			pStatement.setNString(4, nnh.getDiaChi());
 			pStatement.executeUpdate();
@@ -61,13 +61,12 @@ public class NguoiNhanHangDao implements ITFNguoiNhanHangDao{
 		try {
 			conn = ketNoiDatabase.getConn();
 			conn.setAutoCommit(false);
-			String sql = "Update NguoiNhanHang Set TenNN = ?, Email= ?, DienThoai= ?, DiaChi= ? Where IDNN= ?";
+			String sql = "Update NguoiNhanHang Set TenNN = ?, DienThoai= ?, DiaChi= ? Where SoHD= ?";
 			pStatement = conn.prepareStatement(sql);
 			pStatement.setNString(1, nnh.getTenNN());
-			pStatement.setNString(2, nnh.getEmail());
-			pStatement.setNString(3, nnh.getDienThoai());
-			pStatement.setNString(4, nnh.getDiaChi());
-			pStatement.setInt(5, nnh.getIdNN());
+			pStatement.setNString(2, nnh.getDienThoai());
+			pStatement.setNString(3, nnh.getDiaChi());
+			pStatement.setInt(4, nnh.getSoHD());
 			int rows = pStatement.executeUpdate();
 			conn.commit();
 			if( rows > 0 ) {
@@ -92,14 +91,14 @@ public class NguoiNhanHangDao implements ITFNguoiNhanHangDao{
 	}
 
 	@Override
-	public boolean delete(int idNN) {
+	public boolean delete(int soHD) {
 		ketNoiDatabase = new KetNoiDatabase();
 		try {
 			conn = ketNoiDatabase.getConn();
 			conn.setAutoCommit(false);
-			String sql = "Delete From NguoiNhanHang Where IDNN= ?";
+			String sql = "Delete From NguoiNhanHang Where SoHD= ?";
 			pStatement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-			pStatement.setInt(1, idNN);
+			pStatement.setInt(1, soHD);
 			pStatement.executeUpdate();
 			int idnn = -1;
 			rs = pStatement.getGeneratedKeys();
@@ -126,21 +125,21 @@ public class NguoiNhanHangDao implements ITFNguoiNhanHangDao{
 	}
 
 	@Override
-	public NguoiNhanHang getNguoiNhanHang(int idNN) {
+	public NguoiNhanHang getNguoiNhanHang(int soHD) {
 		ketNoiDatabase = new KetNoiDatabase();
 		NguoiNhanHang nnh = null;
 		try {
 			conn = ketNoiDatabase.getConn();
 			conn.setAutoCommit(false);
-			String sql = "Select IDNN, TenNN, Email, DienThoai, DiaChi From NguoiNhanHang Where IDNN=?";
+			String sql = "Select IDNN, SoHD, TenNN, DienThoai, DiaChi From NguoiNhanHang Where SoHD=?";
 			pStatement = conn.prepareStatement(sql);
-			pStatement.setInt(1, idNN);
+			pStatement.setInt(1, soHD);
 			rs = pStatement.executeQuery();
 			if( rs.next() ) {
 				nnh = new NguoiNhanHang();
 				nnh.setIdNN(rs.getInt("IDNN"));
+				nnh.setSoHD(rs.getInt("SoHD"));
 				nnh.setTenNN(rs.getString("TenNN"));
-				nnh.setEmail(rs.getString("Email"));
 				nnh.setDienThoai(rs.getString("DienThoai"));
 				nnh.setDiaChi(rs.getString("DiaChi"));
 			}

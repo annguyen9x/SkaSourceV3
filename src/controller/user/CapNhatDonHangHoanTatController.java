@@ -57,14 +57,19 @@ public class CapNhatDonHangHoanTatController extends HttpServlet {
 		String dienThoai = null;
 		String diaChi = null;
 		int maKH = 0;
+		String thayDoiNN = null;
 		
-		if( loai_taikhoan.equals("chinhsua")) {
-			tenNN = request.getParameter("ten").trim();
-			email = request.getParameter("email").trim();
-			dienThoai = request.getParameter("dienthoai").trim();
-			diaChi = request.getParameter("diachi").trim();
+		Map<String, Object> gioHang = (Map<String, Object>)session.getAttribute("GioHang");
+		KhachHang khachHangDonHang = (KhachHang)gioHang.get("KhachHang");
+		HoaDon hoaDon =(HoaDon)gioHang.get("HoaDon");
+		NguoiNhanHang nguoiNhanHang = (NguoiNhanHang)gioHang.get("NguoiNhanHang");
+		
+		if( loai_taikhoan.equals("diachicu")) {
+			tenNN = nguoiNhanHang.getTenNN();
+			dienThoai = nguoiNhanHang.getDienThoai();
+			diaChi = nguoiNhanHang.getDiaChi();
 			
-			if( tenNN.equals("") || email.equals("") || dienThoai.equals("") || diaChi.equals("") ) {
+			if( tenNN.equals("") || dienThoai.equals("") || diaChi.equals("") ) {
 				PrintWriter writer = response.getWriter();
 				writer.print("<script type='text/javascript'>");
 				writer.print("alert('Thông tin giao hàng không được rỗng, vui lòng thử lại !');");
@@ -73,12 +78,12 @@ public class CapNhatDonHangHoanTatController extends HttpServlet {
 			}
 		}
 		else if( loai_taikhoan.equals("nguoikhac")) {
+			thayDoiNN = "Co";
 			tenNN = request.getParameter("ten2").trim();
-			email = request.getParameter("email2").trim();
 			dienThoai = request.getParameter("dienthoai2").trim();
 			diaChi = request.getParameter("diachi2").trim();
 			
-			if( tenNN.equals("") || email.equals("") || dienThoai.equals("") || diaChi.equals("") ) {
+			if( tenNN.equals("") || dienThoai.equals("") || diaChi.equals("") ) {
 				PrintWriter writer = response.getWriter();
 				writer.print("<script type='text/javascript'>");
 				writer.print("alert('Thông tin giao hàng không được rỗng, vui lòng thử lại !');");
@@ -87,62 +92,61 @@ public class CapNhatDonHangHoanTatController extends HttpServlet {
 			}
 		}
 		
-		Map<String, Object> gioHang = (Map<String, Object>)session.getAttribute("GioHang");
-		KhachHang khachHangDonHang = (KhachHang)gioHang.get("KhachHang");
-		HoaDon hoaDon =(HoaDon)gioHang.get("HoaDon");
 		int soHD = hoaDon.getSoHD();
 		if( gioHang != null) {
-			
-			int idNN = hoaDon.getIdNN();
-			NguoiNhanHangDao nguoiNhanHangDao = new NguoiNhanHangDao();
-			NguoiNhanHang nguoiNhanHang = new NguoiNhanHang(idNN ,tenNN, email, dienThoai, diaChi);
-			gioHang.put("NguoiNhanHang", nguoiNhanHang);
-			
-			if( nguoiNhanHangDao.update(nguoiNhanHang) ) {
-				float phiGiaoHang = (float)gioHang.get("PhiGiaoHang");
-				float tongTien = (float)gioHang.get("TongTien");
-				Date ngayDat = Calendar.getInstance().getTime();
+			if( loai_taikhoan.equals("nguoikhac") && hoaDon.getThayDoiNN().equals("Khong")) {
+				//Update lai TrangThaiThayDoiNN cua HoaDon va Insert bang NguoiNhanHang
 				
-				String emailNhan = null;
-				if( khachHangDonHang != null ) {
-					emailNhan = khachHangDonHang.getEmail();
-				}else {
-					emailNhan = email;
+			}
+			else if( loai_taikhoan.equals("nguoikhac") && hoaDon.getThayDoiNN().equals("Co")) {
+				//Chi Update lai bang NguoiNhanHang
+				
+				NguoiNhanHangDao nguoiNhanHangDao = new NguoiNhanHangDao();
+				NguoiNhanHang nguoiNhanHangMoi = new NguoiNhanHang(soHD,tenNN, dienThoai, diaChi);
+				gioHang.put("NguoiNhanHang", nguoiNhanHangMoi);
+				if(nguoiNhanHangDao.update(nguoiNhanHang)) {
+					float phiGiaoHang = (float)gioHang.get("PhiGiaoHang");
+					float tongTien = (float)gioHang.get("TongTien");
+					Date ngayDat = Calendar.getInstance().getTime();
+					
+					String emailNhan = khachHangDonHang.getEmail();
+					
+					String tieuDe = "Hoàn tất cập nhật đơn hàng \"" + soHD + "\" bạn đã đặt mua tại [kyanhbooks.com]";
+					NumberFormat numberFormat = new DecimalFormat("###,###,###,###");
+					SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyy-MM-dd");
+					Calendar calendar = Calendar.getInstance();
+	    			calendar.setTime(ngayDat);
+	    			calendar.add(Calendar.DAY_OF_MONTH, 3);
+					String noiDung = "Thông tin đơn hàng đã cập nhật: \n" + "Mã ĐH: " + soHD + "\nTổng tiền thanh toán: "
+									+ numberFormat.format(tongTien+phiGiaoHang)+" đ" + "\nNgày đặt: " 
+									+ simpleDateFormat.format(ngayDat)
+									+ " -----> Ngày giao (dự kiến): " + simpleDateFormat.format(calendar.getTime())
+									+ "\nTên người nhận: " + tenNN 
+									+ ", Điện thoại: " + dienThoai 
+									+ "\nĐịa chỉ: " + diaChi;
+					
+					if( GuiMail.guiMail(emailNhan, tieuDe, noiDung) == true ) {
+						System.out.println("mail: " + emailNhan + " noi dung: " + noiDung);
+						gioHang.put("SoHD", soHD);
+						request.setAttribute("HoanTatDonHang", "ThanhCong");
+						request.getRequestDispatcher("/view/user/view/dathang_hoantat_capnhat.jsp").forward(request, response);
+						return;
+					}else {
+						request.setAttribute("HoanTatDonHang", "ThatBai");
+						PrintWriter writer = response.getWriter();
+						writer.print("<script type='text/javascript'>");
+						writer.print("alert('Đã cập nhật đơn hàng thành công. Lỗi khi gửi mail thông tin đơn hàng từ server, vui lòng kiểm tra kết nối internet !!!');");
+						writer.print("location='userTrangChu'");
+						writer.print("</script>");
+					}
 				}
-				String tieuDe = "Hoàn tất cập nhật đơn hàng \"" + soHD + "\" bạn đã đặt mua tại [kyanhbooks.com]";
-				NumberFormat numberFormat = new DecimalFormat("###,###,###,###");
-				SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyy-MM-dd");
-				Calendar calendar = Calendar.getInstance();
-    			calendar.setTime(ngayDat);
-    			calendar.add(Calendar.DAY_OF_MONTH, 3);
-				String noiDung = "Thông tin đơn hàng đã cập nhật: \n" + "Mã ĐH: " + soHD + "\nTổng tiền thanh toán: "
-								+ numberFormat.format(tongTien+phiGiaoHang)+" đ" + "\nNgày đặt: " 
-								+ simpleDateFormat.format(ngayDat)
-								+ " -----> Ngày giao (dự kiến): " + simpleDateFormat.format(calendar.getTime())
-								+ "\nTên người nhận: " + tenNN + ", Email: " + email
-								+ ", Điện thoại: " + dienThoai + "\nĐịa chỉ: " + diaChi;
-				
-				if( GuiMail.guiMail(emailNhan, tieuDe, noiDung) == true ) {
-					System.out.println("mail: " + emailNhan + " noi dung: " + noiDung);
-					gioHang.put("SoHD", soHD);
-					request.setAttribute("HoanTatDonHang", "ThanhCong");
-					request.getRequestDispatcher("/view/user/view/dathang_hoantat_capnhat.jsp").forward(request, response);
-					return;
-				}else {
-					request.setAttribute("HoanTatDonHang", "ThatBai");
+				else {
 					PrintWriter writer = response.getWriter();
 					writer.print("<script type='text/javascript'>");
-					writer.print("alert('Đã cập nhật đơn hàng thành công. Lỗi khi gửi mail thông tin đơn hàng từ server, vui lòng kiểm tra kết nối internet !!!');");
-					writer.print("location='userTrangChu'");
+					writer.print("alert('Lỗi server update NguoiNhanHang, vui lòng thử lại !');");
+					writer.print("location='userTrangChu';");
 					writer.print("</script>");
 				}
-			}
-			else {
-				PrintWriter writer = response.getWriter();
-				writer.print("<script type='text/javascript'>");
-				writer.print("alert('Lỗi server update NguoiNhanHang, vui lòng thử lại !');");
-				writer.print("location='userTrangChu';");
-				writer.print("</script>");
 			}
 		}
 		else {

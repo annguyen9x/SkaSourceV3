@@ -97,7 +97,7 @@
 											</p>
 										</div>
 										<div class="col-md-6 col-sm-6 col-xs-12">
-											<p><b>Email: </b><%=nguoiNhanHang.getEmail() %></p>
+											<p> </p>
 											<p><b>Điện thoại: </b><%=nguoiNhanHang.getDienThoai()%></p>
 											<p><b>Địa chỉ: </b><%=nguoiNhanHang.getDiaChi() %></p>
 											<p><b>Tổng thanh toán: </b><%=numberFormat.format((float)gioHang.get("TongTien") + (float)gioHang.get("PhiGiaoHang")) %><span class="text_underline"> đ</span></p>

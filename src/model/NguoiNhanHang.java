@@ -2,27 +2,27 @@ package model;
 
 public class NguoiNhanHang {
 	private int idNN;
+	private int soHD;
 	private String tenNN;
-	private String email;
 	private String dienThoai;
 	private String diaChi;
 	
 	public NguoiNhanHang() {
 	}
 	
-	public NguoiNhanHang(String tenNN, String email, String dienThoai, String diaChi) {
+	public NguoiNhanHang(int soHD, String tenNN, String dienThoai, String diaChi) {
 		super();
+		this.soHD = soHD;
 		this.tenNN = tenNN;
-		this.email = email;
 		this.dienThoai = dienThoai;
 		this.diaChi = diaChi;
 	}
 
-	public NguoiNhanHang(int idNN, String tenNN, String email, String dienThoai, String diaChi) {
+	public NguoiNhanHang(int idNN, int soHD, String tenNN, String dienThoai, String diaChi) {
 		super();
 		this.idNN = idNN;
+		this.soHD = soHD;
 		this.tenNN = tenNN;
-		this.email = email;
 		this.dienThoai = dienThoai;
 		this.diaChi = diaChi;
 	}
@@ -43,12 +43,12 @@ public class NguoiNhanHang {
 		this.tenNN = tenNN;
 	}
 
-	public String getEmail() {
-		return email;
+	public int getSoHD() {
+		return soHD;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setSoHD(int soHD) {
+		this.soHD = soHD;
 	}
 
 	public String getDienThoai() {

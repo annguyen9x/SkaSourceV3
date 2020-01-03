@@ -75,9 +75,9 @@ public class HoaDonDao implements ITFHoaDonDao{
 		try {
 			conn = ketNoiDatabase.getConn();
 			conn.setAutoCommit(false);
-			String sql = "Insert into HoaDon(IDNN, PhiGiaoHang, NgayDat, TinhTrangDH, MaKH) Values(?,?,?,?,?)";
+			String sql = "Insert into HoaDon(ThayDoiNN, PhiGiaoHang, NgayDat, TinhTrangDH, MaKH) Values(?,?,?,?,?)";
 			pStatement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-			pStatement.setInt(1, hd.getIdNN());
+			pStatement.setString(1, hd.getThayDoiNN());
 			pStatement.setFloat(2, hd.getPhiGiaoHang());
 			SimpleDateFormat dateFormat = new SimpleDateFormat(KiemTraNgayThang.DATE_FORMAT);
 			pStatement.setString(3, dateFormat.format(hd.getNgayDat()));
@@ -297,7 +297,7 @@ public class HoaDonDao implements ITFHoaDonDao{
 		try {
 			conn = KetNoiDatabase.getConn();
 			conn.setAutoCommit(false);
-			String sql = "Select SoHD, IDNN, PhiGiaoHang, TongTien, NgayDat, NgayGiao, TinhTrangDH, MaNVGiao, MaKH " + 
+			String sql = "Select SoHD, ThayDoiNN, PhiGiaoHang, TongTien, NgayDat, NgayGiao, TinhTrangDH, MaNVGiao, MaKH " + 
 						 "From HoaDon " + 
 						 "Where SoHD= ?";
 			pStatement = conn.prepareStatement(sql);
@@ -306,7 +306,7 @@ public class HoaDonDao implements ITFHoaDonDao{
 			hoaDon = new HoaDon();
 			if( rs.next() ) {
 				hoaDon.setSoHD(rs.getInt("SoHD"));
-				hoaDon.setIdNN(rs.getInt("IDNN"));
+				hoaDon.setThayDoiNN(rs.getString("ThayDoiNN"));
 				hoaDon.setPhiGiaoHang(rs.getFloat("PhiGiaoHang"));
 				hoaDon.setTongTien(rs.getFloat("TongTien"));
 				hoaDon.setNgayDat(rs.getDate("NgayDat"));
@@ -349,9 +349,9 @@ public class HoaDonDao implements ITFHoaDonDao{
 		try {
 			conn = KetNoiDatabase.getConn();
 			conn.setAutoCommit(false);
-			String sql = "Select SoHD, HoaDon.IDNN, TenNN, Email, DienThoai, DiaChi, PhiGiaoHang, TongTien, NgayDat, NgayGiao, TinhTrangDH, MaNVGiao, MaKH " + 
+			String sql = "Select HoaDon.SoHD, IDNN, TenNN, ThayDoiNN, DienThoai, DiaChi, PhiGiaoHang, TongTien, NgayDat, NgayGiao, TinhTrangDH, MaNVGiao, MaKH " + 
 						 "From HoaDon Join NguoiNhanHang " + 
-						 "On HoaDon.IDNN = NguoiNhanHang.IDNN And MaKH=? ";
+						 "On HoaDon.SoHD = NguoiNhanHang.SoHD And MaKH=? ";
 			pStatement = conn.prepareStatement(sql);
 			pStatement.setInt(1, maKH);
 			rs = pStatement.executeQuery();
@@ -362,13 +362,13 @@ public class HoaDonDao implements ITFHoaDonDao{
 				NguoiNhanHang nguoiNhanHang = new NguoiNhanHang();
 				nguoiNhanHang.setIdNN(rs.getInt("IDNN"));
 				nguoiNhanHang.setTenNN((rs.getString("TenNN")));
-				nguoiNhanHang.setEmail(rs.getString("Email"));
+				nguoiNhanHang.setSoHD(rs.getInt("SoHD"));
 				nguoiNhanHang.setDienThoai(rs.getString("DienThoai"));
 				nguoiNhanHang.setDiaChi(rs.getString("DiaChi"));
 				
 				HoaDon hdb = new HoaDon();
 				hdb.setSoHD(rs.getInt("SoHD"));
-				hdb.setIdNN(rs.getInt("IDNN"));
+				hdb.setThayDoiNN(rs.getString("ThayDoiNN"));
 				hdb.setPhiGiaoHang(rs.getFloat("PhiGiaoHang"));
 				hdb.setTongTien(rs.getFloat("TongTien"));
 				hdb.setNgayDat(rs.getDate("NgayDat"));
@@ -409,9 +409,9 @@ public class HoaDonDao implements ITFHoaDonDao{
 		try {
 			conn = KetNoiDatabase.getConn();
 			conn.setAutoCommit(false);
-			String sql = "Select SoHD, HoaDon.IDNN, TenNN, Email, DienThoai, DiaChi, PhiGiaoHang, TongTien, NgayDat, NgayGiao, TinhTrangDH, MaNVGiao, MaKH " + 
+			String sql = "Select HoaDon.SoHD, IDNN, TenNN, ThayDoiNN, DienThoai, DiaChi, PhiGiaoHang, TongTien, NgayDat, NgayGiao, TinhTrangDH, MaNVGiao, MaKH " + 
 						 "From HoaDon Join NguoiNhanHang " + 
-						 "On (HoaDon.IDNN = NguoiNhanHang.IDNN And MaNVGiao = ?)";
+						 "On (HoaDon.SoHD = NguoiNhanHang.SoHD And MaNVGiao = ?)";
 			pStatement = conn.prepareStatement(sql);
 			pStatement.setInt(1, maNV);
 			rs = pStatement.executeQuery();
@@ -422,13 +422,13 @@ public class HoaDonDao implements ITFHoaDonDao{
 				NguoiNhanHang nguoiNhanHang = new NguoiNhanHang();
 				nguoiNhanHang.setIdNN(rs.getInt("IDNN"));
 				nguoiNhanHang.setTenNN((rs.getString("TenNN")));
-				nguoiNhanHang.setEmail(rs.getString("Email"));
+				nguoiNhanHang.setSoHD(rs.getInt("SoHD"));
 				nguoiNhanHang.setDienThoai(rs.getString("DienThoai"));
 				nguoiNhanHang.setDiaChi(rs.getString("DiaChi"));
 				
 				HoaDon hdb = new HoaDon();
 				hdb.setSoHD(rs.getInt("SoHD"));
-				hdb.setIdNN(rs.getInt("IDNN"));
+				hdb.setThayDoiNN(rs.getString("ThayDoiNN"));
 				hdb.setPhiGiaoHang(rs.getFloat("PhiGiaoHang"));
 				hdb.setTongTien(rs.getFloat("TongTien"));
 				hdb.setNgayDat(rs.getDate("NgayDat"));
@@ -469,9 +469,9 @@ public class HoaDonDao implements ITFHoaDonDao{
 		try {
 			conn = KetNoiDatabase.getConn();
 			conn.setAutoCommit(false);
-			String sql = "Select SoHD, HoaDon.IDNN, TenNN, Email, DienThoai, DiaChi, PhiGiaoHang, TongTien, NgayDat, NgayGiao, TinhTrangDH, MaNVGiao, MaKH " + 
+			String sql = "Select HoaDon.SoHD, IDNN, TenNN, ThayDoiNN, DienThoai, DiaChi, PhiGiaoHang, TongTien, NgayDat, NgayGiao, TinhTrangDH, MaNVGiao, MaKH " + 
 					"From HoaDon Join NguoiNhanHang " + 
-					"On HoaDon.IDNN = NguoiNhanHang.IDNN";
+					"On HoaDon.SoHD = NguoiNhanHang.SoHD";
 			pStatement = conn.prepareStatement(sql);
 			rs = pStatement.executeQuery();
 			dsDonHangVaKhachHang = new ArrayList();
@@ -481,13 +481,13 @@ public class HoaDonDao implements ITFHoaDonDao{
 				NguoiNhanHang nguoiNhanHang = new NguoiNhanHang();
 				nguoiNhanHang.setIdNN(rs.getInt("IDNN"));
 				nguoiNhanHang.setTenNN((rs.getString("TenNN")));
-				nguoiNhanHang.setEmail(rs.getString("Email"));
+				nguoiNhanHang.setSoHD(rs.getInt("SoHD"));
 				nguoiNhanHang.setDienThoai(rs.getString("DienThoai"));
 				nguoiNhanHang.setDiaChi(rs.getString("DiaChi"));
 				
 				HoaDon hdb = new HoaDon();
 				hdb.setSoHD(rs.getInt("SoHD"));
-				hdb.setIdNN(rs.getInt("IDNN"));
+				hdb.setThayDoiNN(rs.getString("ThayDoiNN"));
 				hdb.setPhiGiaoHang(rs.getFloat("PhiGiaoHang"));
 				hdb.setTongTien(rs.getFloat("TongTien"));
 				hdb.setNgayDat(rs.getDate("NgayDat"));

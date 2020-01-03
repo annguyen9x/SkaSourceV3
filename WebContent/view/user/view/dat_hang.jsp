@@ -80,7 +80,6 @@
 										<div class="noi_dung my_border">
 											<p>Chọn tài khoản giao hàng</p>
 											<input onclick="diaChiGiaoHangTheoLoaiTaiKhoan('event','dangky')" id="loaitk_dangky" type="radio" name="loai_taikhoan" value="dangky"> Địa chỉ tài khoản đã đăng ký<br/>
-											<input onclick="diaChiGiaoHangTheoLoaiTaiKhoan('event','chinhsua')" id="loaitk_chinhsua" type="radio" name="loai_taikhoan" value="chinhsua"> Chỉnh sửa địa chỉ đã đăng ký<br/>
 											<input onclick="diaChiGiaoHangTheoLoaiTaiKhoan('event','nguoikhac')" id="loaitk_nguoikhac" type="radio" name="loai_taikhoan" value="nguoikhac" checked="checked"> Giao hàng địa chỉ khác<br/>
 										</div>
 									</div>
@@ -97,10 +96,7 @@
 														<label for="hoten">Họ tên: </label>
 														<%=khachHangSession.getTenKH() %>
 													</div>
-													<div class="form-group">
-														<label for="email">Email: </label>
-														<%=khachHangSession.getEmail() %>
-													</div>
+													
 													<div class="form-group">
 														<label for="dt">Điện thoại: </label>
 														<%=khachHangSession.getDienThoai() %>
@@ -117,51 +113,17 @@
 													}
 												%>
 											</div>
-											<div class="thongtin_giaohang" id="chinhsua">
-												<p style="text-transform: none; font-weight:normal;">&quot;Chỉnh sửa địa chỉ đã đăng ký&quot;</p>
+											<div class="thongtin_giaohang" id="nguoikhac">
+												<p style="text-transform: none; font-weight:normal;">&quot;Giao hàng địa chỉ khác&quot;</p>
 												<%
 													if( khachHangSession != null ){
 												%>
-													<div class="form-group">
-														<label for="hoten">Họ tên</label>
-														<input class="form-control" type="text" name="ten" id="hoten" value="<%=khachHangSession.getTenKH() %>" placeholder="Họ & tên">
-														<span id="errorHoten" class="error"></span>
-													</div>
-													<div class="form-group">
-														<label for="email">Email</label>
-														<input class="form-control" type="email" name="email" id="email" value="<%=khachHangSession.getEmail() %>" placeholder="Email">
-														<span id="errorEmail" class="error"></span>
-													</div>
-													<div class="form-group">
-														<label for="dt">Điện thoại</label>
-														<input class="form-control" type="number" name="dienthoai" id="dienthoai" value="<%=khachHangSession.getDienThoai() %>" placeholder="Số điện thoại">
-														<span id="errorDienthoai" class="error"></span>
-													</div>
-													<div class="form-group">
-														<label for="dc">Địa chỉ</label>
-														<input class="form-control" type="text" name="diachi" id="diachi" value="<%=khachHangSession.getDiaChi() %>" placeholder="Địa chỉ">
-														<span id="errorDiachi" class="error"></span>
-													</div>
-												<%
-													}else{
-												%>
-													<p style="text-transform: none; font-weight:normal;">Bạn chưa đăng nhập. Xin mời <a href="/SachKyAnh/userDangNhap">đăng nhập</a> vào tài khoản trước !</p>
-												<%
-													}
-												%>
-											</div>
-											<div class="thongtin_giaohang" id="nguoikhac">
-												<p style="text-transform: none; font-weight:normal;">&quot;Giao hàng địa chỉ khác&quot;</p>
 												<div class="form-group">
 													<label for="hoten">Họ tên</label>
 													<input class="form-control" type="text" name="ten2" id="hoten2" placeholder="Họ & tên">
 													<span id="errorHoten2" class="error"></span>
 												</div>
-												<div class="form-group">
-													<label for="email">Email</label>
-													<input class="form-control" type="email" name="email2" id="email2" placeholder="Email">
-													<span id="errorEmail2" class="error"></span>
-												</div>
+												
 												<div class="form-group">
 													<label for="dt">Điện thoại</label>
 													<input class="form-control" type="number" name="dienthoai2" id="dienthoai2" placeholder="Số điện thoại">
@@ -172,6 +134,13 @@
 													<input class="form-control" type="text" name="diachi2" id="diachi2" placeholder="Địa chỉ">
 													<span id="errorDiachi2" class="error"></span>
 												</div>
+												<%
+													}else{
+												%>
+													<p style="text-transform: none; font-weight:normal;">Bạn chưa đăng nhập. Xin mời <a href="/SachKyAnh/userDangNhap">đăng nhập</a> vào tài khoản trước !</p>
+												<%
+													}
+												%>
 											</div>
 										</div>
 									</div>

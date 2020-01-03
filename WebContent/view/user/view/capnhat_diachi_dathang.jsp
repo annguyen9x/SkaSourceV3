@@ -78,7 +78,7 @@
 										<h5>1. Loại tài khoản giao hàng</h5>
 										<div class="noi_dung my_border">
 											<p>Chọn tài khoản giao hàng</p>
-											<input onclick="diaChiGiaoHangTheoLoaiTaiKhoan('event','chinhsua')" id="loaitk_chinhsua" type="radio" name="loai_taikhoan" value="chinhsua"> Cập nhật địa chỉ giao hàng<br/>
+											<input onclick="diaChiGiaoHangTheoLoaiTaiKhoan('event','diachicu')" id="loaitk_diachicu" type="radio" name="loai_taikhoan" value="chinhsua"> Địa chỉ đã có<br/>
 											<input onclick="diaChiGiaoHangTheoLoaiTaiKhoan('event','nguoikhac')" id="loaitk_nguoikhac" type="radio" name="loai_taikhoan" value="nguoikhac" checked="checked"> Giao hàng địa chỉ khác<br/>
 										</div>
 									</div>
@@ -86,35 +86,27 @@
 										<h5>2. Thông tin địa chỉ giao hàng</h5>
 										<div class="noi_dung my_border">
 											<p>Thông tin giao hàng</p>
-											<div class="thongtin_giaohang" id="chinhsua">
+											<div class="thongtin_giaohang" id="diachicu">
 												<p style="text-transform: none; font-weight:normal;">&quot;Cập nhật địa chỉ giao hàng&quot;</p>
 												<%
 													if( nguoiNhanHang != null ){
 												%>
 													<div class="form-group">
-														<label for="hoten">Họ tên</label>
-														<input class="form-control" type="text" name="ten" id="hoten" value="<%=nguoiNhanHang.getTenNN() %>" placeholder="Họ & tên">
-														<span id="errorHoten" class="error"></span>
+														<label for="hoten">Họ tên: </label>
+														<%=nguoiNhanHang.getTenNN() %>
 													</div>
 													<div class="form-group">
-														<label for="email">Email</label>
-														<input class="form-control" type="email" name="email" id="email" value="<%=nguoiNhanHang.getEmail() %>" placeholder="Email">
-														<span id="errorEmail" class="error"></span>
-													</div>
-													<div class="form-group">
-														<label for="dt">Điện thoại</label>
-														<input class="form-control" type="number" name="dienthoai" id="dienthoai" value="<%=nguoiNhanHang.getDienThoai() %>" placeholder="Số điện thoại">
-														<span id="errorDienthoai" class="error"></span>
+														<label for="dt">Điện thoại: </label>
+														<%=nguoiNhanHang.getDienThoai() %>
 													</div>
 													<div class="form-group">
 														<label for="dc">Địa chỉ</label>
-														<input class="form-control" type="text" name="diachi" id="diachi" value="<%=nguoiNhanHang.getDiaChi() %>" placeholder="Địa chỉ">
-														<span id="errorDiachi" class="error"></span>
+														<%=nguoiNhanHang.getDiaChi() %>
 													</div>
 												<%
 													}else{
 												%>
-													<p style="text-transform: none; font-weight:normal;">Không thể cập nhật địa chỉ giao hàng. Xin mời chọn giao hàng địa chỉ khác !</p>
+													<p style="text-transform: none; font-weight:normal;"> Thông tin người nhận hàng rỗng !</p>
 												<%
 													}
 												%>
@@ -126,11 +118,7 @@
 													<input class="form-control" type="text" name="ten2" id="hoten2" placeholder="Họ & tên">
 													<span id="errorHoten2" class="error"></span>
 												</div>
-												<div class="form-group">
-													<label for="email">Email</label>
-													<input class="form-control" type="email" name="email2" id="email2" placeholder="Email">
-													<span id="errorEmail2" class="error"></span>
-												</div>
+												
 												<div class="form-group">
 													<label for="dt">Điện thoại</label>
 													<input class="form-control" type="number" name="dienthoai2" id="dienthoai2" placeholder="Số điện thoại">
