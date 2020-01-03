@@ -67,8 +67,10 @@ public class AdminXuLyDonHangController extends HttpServlet {
 				int maNVGiao = Integer.parseInt(dsMaNV[i]);
 				String tinhTrangDH = "Đang chuẩn bị hàng";
 				
-				if(hoaDonDao.xulyDonHang(soHD, maNVGiao, tinhTrangDH) == false) {
-					DsDHXLloi.add(soHD);
+				if( maNVGiao != -1 ) {
+					if(hoaDonDao.xulyDonHang(soHD, maNVGiao, tinhTrangDH) == false) {
+						DsDHXLloi.add(soHD);
+					}
 				}
 				session.setAttribute("TrangThaiXuLy", "DaXuLyDH");
 			}

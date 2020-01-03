@@ -139,6 +139,7 @@
 												<td><%=nguoiNhanHang.getTenNN() %></td>
 												<td>
 													<select name="NVGiaoHang" class="form-control">
+														<option value="-1">...</option>
 														<%
 														for(int j=0; j< dsNhanVienGiaoHang.size(); j++){
 															NhanVien nv = dsNhanVienGiaoHang.get(j);
@@ -162,7 +163,7 @@
 												if( dhTrongDanhSach == false){
 											%>
 												<tr>
-													<td colspan="5" class="alert alert-warning text-center">Không có đơn hàng nào cần xử lý !</td>
+													<td colspan="5" class="alert alert-warning text-center">Tất cả đơn hàng đã được xử lý !</td>
 												</tr>
 											<%
 												}
