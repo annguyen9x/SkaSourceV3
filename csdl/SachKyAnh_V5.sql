@@ -332,24 +332,9 @@ Insert into NhapSach Values('NS0008', 1004, 'STL008', 10, '2019-10-22')
 Insert into NhapSach Values('NS0009', 1004, 'SKT009', 10,  '2019-11-25')
 Insert into NhapSach Values('NS0010', 1003, 'SKT010', 10,  '2019-12-25')
 
-Create table NguoiNhanHang(
-IDNN int primary key identity(1001,1),
-TenNN nvarchar(50),
-Email varchar(30),
-DienThoai varchar(10),
-DiaChi nvarchar(100)
-)
-Go
-
-Insert into NguoiNhanHang Values(N'Lê Thanh Bình','ltbinh@gmail.com', '0987655577', N'P. Kỳ Long, Tx. Kỳ Anh, T. Hà Tĩnh')
-Insert into NguoiNhanHang Values(N'Hồ Ngọc Trâm','hntram@gmail.com', '0977789044', N'P. Sông Trí, Tx. Kỳ Anh, T. Hà Tĩnh')
-Insert into NguoiNhanHang Values(N'Bùi Thu Thủy','btthuy@gmail.com', '0241338777', N'P. Nam Hà, TP. Hà Tĩnh, T. Hà Tĩnh')
-Insert into NguoiNhanHang Values(N'Nguyễn Anh Quốc','naquoc@gmail.com', '0966798765', N'P. Hà Huy Tập, TP. Hà Tĩnh, T. Hà Tĩnh')
-Insert into NguoiNhanHang Values(N'Phan Mỹ Tâm','pmtam@gmail.com', '0981246789',N'30 Trần Hưng Đạo, Q.1, TP. Hồ Chí Minh')
-
 Create table HoaDon(
 SoHD int primary key identity(10000001,1),
-IDNN int foreign key references NguoiNhanHang(IDNN),
+ThayDoiNN varchar(6),
 PhiGiaoHang decimal(18,2),
 TongTien decimal(18,2) default(0),
 NgayDat date,
@@ -360,11 +345,11 @@ MaKH int foreign key references KhachHang(MaKH)
 )
 Go
 
-Insert into HoaDon Values(1001, 40000, 414000, '2019-11-20', '2019-11-23', N'Hoàn tất', 1001, 1001)
-Insert into HoaDon Values(1002, 40000, 214000, '2019-11-20', '2019-11-23', N'Trả lại hàng', 1005, 1002)
-Insert into HoaDon Values(1003, 40000, 299000, '2019-11-25', null, N'Đang giao hàng', 1005, 1004)
-Insert into HoaDon Values(1004, 40000, 200000, '2019-11-25', null, N'Đợi người giao lấy hàng', 1001, 1003)
-Insert into HoaDon Values(1005, 40000, 365000, '2019-12-01', null, N'Đang chuẩn bị hàng', 1001, 1001)
+Insert into HoaDon Values('Co', 40000, 414000, '2019-11-20', '2019-11-23', N'Hoàn tất', 1001, 1001)
+Insert into HoaDon Values('Khong', 40000, 214000, '2019-11-20', '2019-11-23', N'Trả lại hàng', 1005, 1002)
+Insert into HoaDon Values('Khong', 40000, 299000, '2019-11-25', null, N'Đang giao hàng', 1005, 1004)
+Insert into HoaDon Values('Co', 40000, 200000, '2019-11-25', null, N'Đợi người giao lấy hàng', 1001, 1003)
+Insert into HoaDon Values('Co', 40000, 365000, '2019-12-01', null, N'Đang chuẩn bị hàng', 1001, 1001)
 
 Create table ChiTietHoaDon(
 SoHD int foreign key references HoaDon(SoHD),
@@ -386,7 +371,18 @@ Insert into ChiTietHoaDon Values( 10000005, 'SKC003', 1, 200000.00)
 Insert into ChiTietHoaDon Values( 10000005, 'SKC006', 1, 165000.00)
 Go
 
+Create table NguoiNhanHang(
+IDNN int primary key identity(1001,1),
+SoHD int unique foreign key references HoaDon(SoHD),
+TenNN nvarchar(50),
+DienThoai varchar(10),
+DiaChi nvarchar(100)
+)
+Go
 
+Insert into NguoiNhanHang Values(10000001, N'Võ Hoài Linh', '0987655577', N'P. Cam Linh, TP. Cam Ranh, T. Khánh Hòa')
+Insert into NguoiNhanHang Values(10000004, N'Nguyễn Anh Quốc', '0966798765', N'P. Hà Huy Tập, TP. Hà Tĩnh, T. Hà Tĩnh')
+Insert into NguoiNhanHang Values(10000005 ,N'Hà Anh Tuấn', '0981246789',N'25 Nguyễn Văn Bình, Q.1, TP. Hồ Chí Minh')
 
 ------------------------------------- PHẦN TRIGGER
 
