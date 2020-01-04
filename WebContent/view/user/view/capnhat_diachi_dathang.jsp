@@ -78,7 +78,7 @@
 										<h5>1. Loại tài khoản giao hàng</h5>
 										<div class="noi_dung my_border">
 											<p>Chọn tài khoản giao hàng</p>
-											<input onclick="diaChiGiaoHangTheoLoaiTaiKhoan('event','diachicu')" id="loaitk_diachicu" type="radio" name="loai_taikhoan" value="chinhsua"> Địa chỉ đã có<br/>
+											<input onclick="diaChiGiaoHangTheoLoaiTaiKhoan('event','diachicu')" id="loaitk_diachicu" type="radio" name="loai_taikhoan" value="diachicu"> Địa chỉ đã có<br/>
 											<input onclick="diaChiGiaoHangTheoLoaiTaiKhoan('event','nguoikhac')" id="loaitk_nguoikhac" type="radio" name="loai_taikhoan" value="nguoikhac" checked="checked"> Giao hàng địa chỉ khác<br/>
 										</div>
 									</div>
@@ -100,7 +100,7 @@
 														<%=nguoiNhanHang.getDienThoai() %>
 													</div>
 													<div class="form-group">
-														<label for="dc">Địa chỉ</label>
+														<label for="dc">Địa chỉ: </label>
 														<%=nguoiNhanHang.getDiaChi() %>
 													</div>
 												<%

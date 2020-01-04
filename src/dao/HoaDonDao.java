@@ -149,6 +149,40 @@ public class HoaDonDao implements ITFHoaDonDao{
 	}
 	
 	@Override
+	public boolean updateThayDoiNN(int soHD, String thayDoiNN) {
+		ketNoiDatabase = new KetNoiDatabase();
+		try {
+			conn = ketNoiDatabase.getConn();
+			conn.setAutoCommit(false);
+			String sql = "Update HoaDon Set ThayDoiNN= ? Where SoHD= ?";
+			pStatement = conn.prepareStatement(sql);
+			pStatement.setNString(1, thayDoiNN);
+			pStatement.setInt(2, soHD);
+			int rows = pStatement.executeUpdate();
+			conn.commit();
+			if( rows > 0 ) {
+				return true;
+			}
+		} catch (SQLException e) {
+			System.out.println("Loi update thayDoiNN HoaDon: " + e.toString());
+			try {
+                conn.rollback();
+            } catch (SQLException ex1) {
+                System.out.println("Loi rollback");
+            }
+		}finally {
+			try {
+				pStatement.close();
+			} catch (SQLException e) {
+				System.out.println("Loi dong ket noi PreparedStatement: " + e.toString());
+			}
+			ketNoiDatabase.closeConnection(conn);
+		}
+		
+		return false;
+	}
+	
+	@Override
 	public boolean updateTinhTrangDonHang(int soHD, String tinhTrangDonHang, String ngayGiao) {
 		ketNoiDatabase = new KetNoiDatabase();
 		try {
@@ -349,22 +383,15 @@ public class HoaDonDao implements ITFHoaDonDao{
 		try {
 			conn = KetNoiDatabase.getConn();
 			conn.setAutoCommit(false);
-			String sql = "Select HoaDon.SoHD, IDNN, TenNN, ThayDoiNN, DienThoai, DiaChi, PhiGiaoHang, TongTien, NgayDat, NgayGiao, TinhTrangDH, MaNVGiao, MaKH " + 
-						 "From HoaDon Join NguoiNhanHang " + 
-						 "On HoaDon.SoHD = NguoiNhanHang.SoHD And MaKH=? ";
+			String sql = "Select HoaDon.SoHD, ThayDoiNN, PhiGiaoHang, TongTien, NgayDat, NgayGiao, TinhTrangDH, MaNVGiao, HoaDon.MaKH, TenKH, DienThoai, DiaChi " + 
+						 "From HoaDon Join KhachHang " + 
+						 "On HoaDon.MaKH = KhachHang.MaKH And HoaDon.MaKH=? ";
 			pStatement = conn.prepareStatement(sql);
 			pStatement.setInt(1, maKH);
 			rs = pStatement.executeQuery();
 			dsDonHang = new ArrayList<Object>();
 			while( rs.next() ) {
 				Map<String, Object>  chiTietDonHang = new HashMap<String, Object>();
-				
-				NguoiNhanHang nguoiNhanHang = new NguoiNhanHang();
-				nguoiNhanHang.setIdNN(rs.getInt("IDNN"));
-				nguoiNhanHang.setTenNN((rs.getString("TenNN")));
-				nguoiNhanHang.setSoHD(rs.getInt("SoHD"));
-				nguoiNhanHang.setDienThoai(rs.getString("DienThoai"));
-				nguoiNhanHang.setDiaChi(rs.getString("DiaChi"));
 				
 				HoaDon hdb = new HoaDon();
 				hdb.setSoHD(rs.getInt("SoHD"));
@@ -377,6 +404,19 @@ public class HoaDonDao implements ITFHoaDonDao{
 				hdb.setMaNVGiao(rs.getInt("MaNVGiao"));
 				hdb.setMaKH(rs.getInt("MaKH"));
 				
+				NguoiNhanHang nguoiNhanHang = null;
+				if(rs.getString("ThayDoiNN").equals("Co")) {//Nếu Nguoi Khac nhan thi truy xuat thêm Table NguoiNhanHang
+					NguoiNhanHangDao nguoiNhanHangDao = new NguoiNhanHangDao();
+					nguoiNhanHang = nguoiNhanHangDao.getNguoiNhanHang(rs.getInt("SoHD"));
+				}
+				else if(rs.getString("ThayDoiNN").equals("Khong")) {//Neu Chinh KhachHang nhan thi lay thong tin gan cho NguoiNhanHang
+					nguoiNhanHang = new NguoiNhanHang();
+					nguoiNhanHang.setTenNN((rs.getString("TenKH")));
+					nguoiNhanHang.setSoHD(rs.getInt("SoHD"));
+					nguoiNhanHang.setDienThoai(rs.getString("DienThoai"));
+					nguoiNhanHang.setDiaChi(rs.getString("DiaChi"));
+				}
+					
 				chiTietDonHang.put("HoaDon",hdb);
 				chiTietDonHang.put("NguoiNhanHang",nguoiNhanHang);
 				dsDonHang.add(chiTietDonHang);
@@ -409,22 +449,15 @@ public class HoaDonDao implements ITFHoaDonDao{
 		try {
 			conn = KetNoiDatabase.getConn();
 			conn.setAutoCommit(false);
-			String sql = "Select HoaDon.SoHD, IDNN, TenNN, ThayDoiNN, DienThoai, DiaChi, PhiGiaoHang, TongTien, NgayDat, NgayGiao, TinhTrangDH, MaNVGiao, MaKH " + 
-						 "From HoaDon Join NguoiNhanHang " + 
-						 "On (HoaDon.SoHD = NguoiNhanHang.SoHD And MaNVGiao = ?)";
+			String sql = "Select HoaDon.SoHD, ThayDoiNN, PhiGiaoHang, TongTien, NgayDat, NgayGiao, TinhTrangDH, MaNVGiao, HoaDon.MaKH,  TenKH, DienThoai, DiaChi " + 
+						 "From HoaDon Join KhachHang " + 
+						 "On (HoaDon.MaKH = KhachHang.MaKH And MaNVGiao = ?)";
 			pStatement = conn.prepareStatement(sql);
 			pStatement.setInt(1, maNV);
 			rs = pStatement.executeQuery();
 			dsDonHangVaKhachHang = new ArrayList();
 			while( rs.next() ) {
 				Map<String, Object>  chiTietDonHang = new HashMap();
-				
-				NguoiNhanHang nguoiNhanHang = new NguoiNhanHang();
-				nguoiNhanHang.setIdNN(rs.getInt("IDNN"));
-				nguoiNhanHang.setTenNN((rs.getString("TenNN")));
-				nguoiNhanHang.setSoHD(rs.getInt("SoHD"));
-				nguoiNhanHang.setDienThoai(rs.getString("DienThoai"));
-				nguoiNhanHang.setDiaChi(rs.getString("DiaChi"));
 				
 				HoaDon hdb = new HoaDon();
 				hdb.setSoHD(rs.getInt("SoHD"));
@@ -436,6 +469,19 @@ public class HoaDonDao implements ITFHoaDonDao{
 				hdb.setTinhTrangDH(rs.getString("TinhTrangDH"));
 				hdb.setMaNVGiao(rs.getInt("MaNVGiao"));
 				hdb.setMaKH(rs.getInt("MaKH"));
+				
+				NguoiNhanHang nguoiNhanHang = null;
+				if(rs.getString("ThayDoiNN").equals("Co")) {//Nếu Nguoi Khac nhan thi truy xuat thêm Table NguoiNhanHang
+					NguoiNhanHangDao nguoiNhanHangDao = new NguoiNhanHangDao();
+					nguoiNhanHang = nguoiNhanHangDao.getNguoiNhanHang(rs.getInt("SoHD"));
+				}
+				else if(rs.getString("ThayDoiNN").equals("Khong")) {//Neu Chinh KhachHang nhan thi lay thong tin gan cho NguoiNhanHang
+					nguoiNhanHang = new NguoiNhanHang();
+					nguoiNhanHang.setTenNN((rs.getString("TenKH")));
+					nguoiNhanHang.setSoHD(rs.getInt("SoHD"));
+					nguoiNhanHang.setDienThoai(rs.getString("DienThoai"));
+					nguoiNhanHang.setDiaChi(rs.getString("DiaChi"));
+				}
 				
 				chiTietDonHang.put("HoaDon",hdb);
 				chiTietDonHang.put("NguoiNhanHang",nguoiNhanHang);
@@ -469,21 +515,14 @@ public class HoaDonDao implements ITFHoaDonDao{
 		try {
 			conn = KetNoiDatabase.getConn();
 			conn.setAutoCommit(false);
-			String sql = "Select HoaDon.SoHD, IDNN, TenNN, ThayDoiNN, DienThoai, DiaChi, PhiGiaoHang, TongTien, NgayDat, NgayGiao, TinhTrangDH, MaNVGiao, MaKH " + 
-					"From HoaDon Join NguoiNhanHang " + 
-					"On HoaDon.SoHD = NguoiNhanHang.SoHD";
+			String sql = "Select HoaDon.SoHD, ThayDoiNN, PhiGiaoHang, TongTien, NgayDat, NgayGiao, TinhTrangDH, MaNVGiao, HoaDon.MaKH,  TenKH, DienThoai, DiaChi " + 
+					"From HoaDon Join KhachHang " + 
+					"On HoaDon.MaKH = KhachHang.MaKH";
 			pStatement = conn.prepareStatement(sql);
 			rs = pStatement.executeQuery();
 			dsDonHangVaKhachHang = new ArrayList();
 			while( rs.next() ) {
 				Map<String, Object>  chiTietDonHang = new HashMap();
-				
-				NguoiNhanHang nguoiNhanHang = new NguoiNhanHang();
-				nguoiNhanHang.setIdNN(rs.getInt("IDNN"));
-				nguoiNhanHang.setTenNN((rs.getString("TenNN")));
-				nguoiNhanHang.setSoHD(rs.getInt("SoHD"));
-				nguoiNhanHang.setDienThoai(rs.getString("DienThoai"));
-				nguoiNhanHang.setDiaChi(rs.getString("DiaChi"));
 				
 				HoaDon hdb = new HoaDon();
 				hdb.setSoHD(rs.getInt("SoHD"));
@@ -495,6 +534,19 @@ public class HoaDonDao implements ITFHoaDonDao{
 				hdb.setTinhTrangDH(rs.getString("TinhTrangDH"));
 				hdb.setMaNVGiao(rs.getInt("MaNVGiao"));
 				hdb.setMaKH(rs.getInt("MaKH"));
+				
+				NguoiNhanHang nguoiNhanHang = null;
+				if(rs.getString("ThayDoiNN").equals("Co")) {//Nếu Nguoi Khac nhan thi truy xuat thêm Table NguoiNhanHang
+					NguoiNhanHangDao nguoiNhanHangDao = new NguoiNhanHangDao();
+					nguoiNhanHang = nguoiNhanHangDao.getNguoiNhanHang(rs.getInt("SoHD"));
+				}
+				else if(rs.getString("ThayDoiNN").equals("Khong")) {//Neu Chinh KhachHang nhan thi lay thong tin gan cho NguoiNhanHang
+					nguoiNhanHang = new NguoiNhanHang();
+					nguoiNhanHang.setTenNN((rs.getString("TenKH")));
+					nguoiNhanHang.setSoHD(rs.getInt("SoHD"));
+					nguoiNhanHang.setDienThoai(rs.getString("DienThoai"));
+					nguoiNhanHang.setDiaChi(rs.getString("DiaChi"));
+				}
 				
 				chiTietDonHang.put("HoaDon",hdb);
 				chiTietDonHang.put("NguoiNhanHang",nguoiNhanHang);

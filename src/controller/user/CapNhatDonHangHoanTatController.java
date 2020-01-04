@@ -30,7 +30,9 @@ import util.GuiMail;
 
 @WebServlet(name = "CapNhatDonHangHoanTat", urlPatterns = { "/CapNhatDonHangHoanTat" })
 public class CapNhatDonHangHoanTatController extends HttpServlet {
-
+	NguoiNhanHangDao nguoiNhanHangDao = new NguoiNhanHangDao();
+	HoaDonDao hoaDonDao = new HoaDonDao();
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
@@ -94,24 +96,109 @@ public class CapNhatDonHangHoanTatController extends HttpServlet {
 		
 		int soHD = hoaDon.getSoHD();
 		if( gioHang != null) {
-			if( loai_taikhoan.equals("nguoikhac") && hoaDon.getThayDoiNN().equals("Khong")) {
-				//Update lai TrangThaiThayDoiNN cua HoaDon va Insert bang NguoiNhanHang
+			if( loai_taikhoan.equals("diachicu")) {
+				NguoiNhanHang nguoiNhanHang1 = new NguoiNhanHang(soHD, tenNN, dienThoai, diaChi);
+				gioHang.put("NguoiNhanHang", nguoiNhanHang1);
 				
+				float phiGiaoHang = (float)gioHang.get("PhiGiaoHang");
+				float tongTien = (float)gioHang.get("TongTien");
+				Date ngayDat = Calendar.getInstance().getTime();
+				String emailNhan = khachHangDonHang.getEmail();
+				String tieuDe = "Hoàn tất cập nhật đơn hàng \"" + soHD + "\" bạn đã đặt mua tại [kyanhbooks.com]";
+				
+				NumberFormat numberFormat = new DecimalFormat("###,###,###,###");
+				SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyy-MM-dd");
+				Calendar calendar = Calendar.getInstance();
+    			calendar.setTime(ngayDat);
+    			calendar.add(Calendar.DAY_OF_MONTH, 3);
+				String noiDung = "Thông tin đơn hàng đã cập nhật: \n" + "Mã ĐH: " + soHD + "\nTổng tiền thanh toán: "
+								+ numberFormat.format(tongTien+phiGiaoHang)+" đ" + "\nNgày đặt: " 
+								+ simpleDateFormat.format(ngayDat)
+								+ " -----> Ngày giao (dự kiến): " + simpleDateFormat.format(calendar.getTime())
+								+ "\nTên người nhận: " + tenNN 
+								+ ", Điện thoại: " + dienThoai 
+								+ "\nĐịa chỉ: " + diaChi;
+				
+				if( GuiMail.guiMail(emailNhan, tieuDe, noiDung) == true ) {
+					System.out.println("mail: " + emailNhan + " noi dung: " + noiDung);
+					gioHang.put("SoHD", soHD);
+					request.setAttribute("HoanTatDonHang", "ThanhCong");
+					request.getRequestDispatcher("/view/user/view/dathang_hoantat_capnhat.jsp").forward(request, response);
+					return;
+				}else {
+					request.setAttribute("HoanTatDonHang", "ThatBai");
+					PrintWriter writer = response.getWriter();
+					writer.print("<script type='text/javascript'>");
+					writer.print("alert('Đã cập nhật đơn hàng thành công. Lỗi khi gửi mail thông tin đơn hàng từ server, vui lòng kiểm tra kết nối internet !!!');");
+					writer.print("location='userTrangChu'");
+					writer.print("</script>");
+				}
+			}
+			else if( loai_taikhoan.equals("nguoikhac") && hoaDon.getThayDoiNN().equals("Khong")) {
+				if( hoaDonDao.updateThayDoiNN(soHD, thayDoiNN) == true) {
+					NguoiNhanHang nguoiNhanHang2 = new NguoiNhanHang(soHD, tenNN, dienThoai, diaChi);
+					if( nguoiNhanHangDao.insert(nguoiNhanHang2) != -1) {
+						gioHang.put("NguoiNhanHang", nguoiNhanHang2);
+						
+						float phiGiaoHang = (float)gioHang.get("PhiGiaoHang");
+						float tongTien = (float)gioHang.get("TongTien");
+						Date ngayDat = Calendar.getInstance().getTime();
+						String emailNhan = khachHangDonHang.getEmail();
+						String tieuDe = "Hoàn tất cập nhật đơn hàng \"" + soHD + "\" bạn đã đặt mua tại [kyanhbooks.com]";
+						
+						NumberFormat numberFormat = new DecimalFormat("###,###,###,###");
+						SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyy-MM-dd");
+						Calendar calendar = Calendar.getInstance();
+		    			calendar.setTime(ngayDat);
+		    			calendar.add(Calendar.DAY_OF_MONTH, 3);
+						String noiDung = "Thông tin đơn hàng đã cập nhật: \n" + "Mã ĐH: " + soHD + "\nTổng tiền thanh toán: "
+										+ numberFormat.format(tongTien+phiGiaoHang)+" đ" + "\nNgày đặt: " 
+										+ simpleDateFormat.format(ngayDat)
+										+ " -----> Ngày giao (dự kiến): " + simpleDateFormat.format(calendar.getTime())
+										+ "\nTên người nhận: " + tenNN 
+										+ ", Điện thoại: " + dienThoai 
+										+ "\nĐịa chỉ: " + diaChi;
+						
+						if( GuiMail.guiMail(emailNhan, tieuDe, noiDung) == true ) {
+							System.out.println("mail: " + emailNhan + " noi dung: " + noiDung);
+							gioHang.put("SoHD", soHD);
+							request.setAttribute("HoanTatDonHang", "ThanhCong");
+							request.getRequestDispatcher("/view/user/view/dathang_hoantat_capnhat.jsp").forward(request, response);
+							return;
+						}else {
+							request.setAttribute("HoanTatDonHang", "ThatBai");
+							PrintWriter writer = response.getWriter();
+							writer.print("<script type='text/javascript'>");
+							writer.print("alert('Đã cập nhật đơn hàng thành công. Lỗi khi gửi mail thông tin đơn hàng từ server, vui lòng kiểm tra kết nối internet !!!');");
+							writer.print("location='userTrangChu'");
+							writer.print("</script>");
+						}
+					}else {
+						PrintWriter writer = response.getWriter();
+						writer.print("<script type='text/javascript'>");
+						writer.print("alert('Lỗi insert NguoiNhanHang !!!');");
+						writer.print("location='userTrangChu'");
+						writer.print("</script>");
+					}
+				}else {
+					PrintWriter writer = response.getWriter();
+					writer.print("<script type='text/javascript'>");
+					writer.print("alert('Lỗi update ThayDoiNN NguoiNhanHang !!!');");
+					writer.print("location='userTrangChu'");
+					writer.print("</script>");
+				}
 			}
 			else if( loai_taikhoan.equals("nguoikhac") && hoaDon.getThayDoiNN().equals("Co")) {
-				//Chi Update lai bang NguoiNhanHang
-				
-				NguoiNhanHangDao nguoiNhanHangDao = new NguoiNhanHangDao();
 				NguoiNhanHang nguoiNhanHangMoi = new NguoiNhanHang(soHD,tenNN, dienThoai, diaChi);
-				gioHang.put("NguoiNhanHang", nguoiNhanHangMoi);
-				if(nguoiNhanHangDao.update(nguoiNhanHang)) {
+				if(nguoiNhanHangDao.update(nguoiNhanHangMoi)) {
+					gioHang.put("NguoiNhanHang", nguoiNhanHangMoi);
+					
 					float phiGiaoHang = (float)gioHang.get("PhiGiaoHang");
 					float tongTien = (float)gioHang.get("TongTien");
 					Date ngayDat = Calendar.getInstance().getTime();
-					
 					String emailNhan = khachHangDonHang.getEmail();
-					
 					String tieuDe = "Hoàn tất cập nhật đơn hàng \"" + soHD + "\" bạn đã đặt mua tại [kyanhbooks.com]";
+					
 					NumberFormat numberFormat = new DecimalFormat("###,###,###,###");
 					SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyy-MM-dd");
 					Calendar calendar = Calendar.getInstance();

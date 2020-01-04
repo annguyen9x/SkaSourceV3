@@ -11,6 +11,8 @@ public interface ITFHoaDonDao {
 	
 	boolean xulyDonHang(int soHD, int maNVGiao, String tinhTrangDonHang);
 	
+	boolean updateThayDoiNN(int soHD, String thayDoiNN);
+	
 	boolean updateTinhTrangDonHang(int soHD, String tinhTrangDonHang, String ngayGiao);
 	
 	boolean khoUpdateTinhTrangDonHang(int soHD, String tinhTrangDonHango);

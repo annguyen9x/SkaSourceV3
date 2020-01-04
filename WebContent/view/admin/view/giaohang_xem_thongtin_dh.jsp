@@ -167,22 +167,17 @@
 													<b>Tên người nhận: </b><%=nguoiNhanHang.getTenNN() %>
 												</td>
 												<td>
-													<b>Số điện thoại: </b><%=nguoiNhanHang.getDienThoai() %>
-												</td>
-											</tr>
-											<tr>
-												<td>
 													<b>Ngày đặt: </b>
 													<%
 														SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 														out.print( simpleDateFormat.format(hoaDon.getNgayDat()) );
 													%>
 												</td>
-												<td>
-													<b>Email: </b><%=nguoiNhanHang.getEmail() %>
-												</td>
 											</tr>
 											<tr>
+												<td>
+													<b>Số điện thoại: </b><%=nguoiNhanHang.getDienThoai() %>
+												</td>
 												<td>
 													<%
 														if( hoaDon.getNgayGiao() == null ){
@@ -201,10 +196,11 @@
 														}
 													%>
 												</td>
-												<td>
-													<b>Địa chỉ: </b><%=nguoiNhanHang.getDiaChi() %>											</td>
 											</tr>
 											<tr>
+												<td>
+													<b>Địa chỉ: </b><%=nguoiNhanHang.getDiaChi() %>	
+												</td>
 												<td>
 													<b>Tình trạng đơn hàng: </b><%=hoaDon.getTinhTrangDH() %>
 												</td>

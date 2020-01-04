@@ -11,7 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.ChiTietHoaDonDao;
+import dao.KhachHangDao;
 import dao.NguoiNhanHangDao;
+import model.HoaDon;
+import model.KhachHang;
 import model.NguoiNhanHang;
 import util.KiemTraKieuSo;
 
@@ -26,15 +29,29 @@ public class KhoThongTinDHController extends HttpServlet {
 		response.setContentType("text/html; charset=utf-8");
 		
 		String soHD = request.getParameter("SoHD");
-		String idNN = request.getParameter("IDNN");
 		HttpSession session = request.getSession();
 		if( session.getAttribute("ThongTinDonHang") != null) {
 			session.removeAttribute("ThongTinDonHang");
 		}
 		
-		if(KiemTraKieuSo.ktKieuSo(soHD) == true && KiemTraKieuSo.ktKieuSo(idNN) == true ) {
+		if(KiemTraKieuSo.ktKieuSo(soHD) == true) {
 			Map<String, Object> thongTinDonHang = chiTietHoaDonDao.xemThongTinDonHang(Integer.parseInt(soHD));
-			NguoiNhanHang nguoiNhanHang = nguoiNhanHangDao.getNguoiNhanHang(Integer.parseInt(idNN));
+			
+			HoaDon hoaDon = (HoaDon)thongTinDonHang.get("HoaDon");
+			int maKH = hoaDon.getMaKH();
+			NguoiNhanHang nguoiNhanHang = null;
+			if(hoaDon.getThayDoiNN().equals("Co")) {
+				nguoiNhanHang = nguoiNhanHangDao.getNguoiNhanHang(Integer.parseInt(soHD));
+			}
+			else if(hoaDon.getThayDoiNN().equals("Khong")) {
+				KhachHangDao khachHangDao= new KhachHangDao();
+				KhachHang khachHang = khachHangDao.getKhachHang(maKH);
+				String tenNN = khachHang.getTenKH();
+				String dienThoai = khachHang.getDienThoai();
+				String diaChi = khachHang.getDiaChi();
+				nguoiNhanHang = new NguoiNhanHang(Integer.parseInt(soHD), tenNN, dienThoai, diaChi);
+			}
+			
 			thongTinDonHang.put("NguoiNhanHang", nguoiNhanHang);
 			session.setAttribute("ThongTinDonHang", thongTinDonHang);
 			response.sendRedirect("/SachKyAnh/view/admin/view/kho_xem_thongtin_dh.jsp");

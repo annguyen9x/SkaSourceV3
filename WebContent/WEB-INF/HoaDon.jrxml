@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.11.0.final using JasperReports Library version 6.11.0-0c4056ccaa4d25a5a8c45672d2f764ea3498bebb  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="HoaDon" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="13acf49e-4913-4d1b-bccc-113817ad15d1">
-	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="HoaDon Data Adapter"/>
+	<property name="com.jaspersoft.studio.data.sql.tables">
+		<![CDATA[IlNhY2giICwxNDIsMzE1LDY0ZTdlZmMxLTYxMzAtNGMwMC05MzY1LTcyZmJlNjgwOWEzYTsiQ2hp
+VGlldEhvYURvbiIgLDE1LDIzNyw2ZjYzNDU3ZC1mMjNiLTQwNjktOTJkOS1kZDQ5ZjNiNGM3ZjY7
+IkhvYURvbiIgLDE0MiwxNSxhOTgzZmJjMy04NTEzLTRkZDAtYTRlNC00ZGM5NjMzNWI5NjI7]]>
+	</property>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter "/>
 	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false"/>
 	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false"/>
 	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true"/>
@@ -14,7 +18,9 @@
 		</conditionalStyle>
 	</style>
 	<parameter name="soHD" class="java.lang.String"/>
-	<parameter name="IDNN" class="java.lang.String"/>
+	<parameter name="TenNN" class="java.lang.String"/>
+	<parameter name="DienThoai" class="java.lang.String"/>
+	<parameter name="DiaChi" class="java.lang.String"/>
 	<parameter name="nam" class="java.lang.String"/>
 	<parameter name="thang" class="java.lang.String"/>
 	<parameter name="ngay" class="java.lang.String"/>
@@ -25,10 +31,6 @@ FROM "ChiTietHoaDon"
 	  ( 
 	 "ChiTietHoaDon"."SoHD" = "HoaDon"."SoHD" 
 	 AND "HoaDon"."SoHD" = $P{soHD}) 
-	INNER JOIN "NguoiNhanHang" ON 
-	  ( 
-	 "HoaDon"."IDNN" = "NguoiNhanHang"."IDNN" 
-	 AND "NguoiNhanHang"."IDNN" = $P{IDNN}) 
 	INNER JOIN "Sach" ON 
 	 "ChiTietHoaDon"."MaSach" = "Sach"."MaSach"]]>
 	</queryString>
@@ -43,12 +45,6 @@ FROM "ChiTietHoaDon"
 	</field>
 	<field name="DonGia" class="java.math.BigDecimal">
 		<property name="com.jaspersoft.studio.field.label" value="DonGia"/>
-	</field>
-	<field name="COLUMN_5" class="java.lang.Integer">
-		<property name="com.jaspersoft.studio.field.label" value="SoHD"/>
-	</field>
-	<field name="IDNN" class="java.lang.Integer">
-		<property name="com.jaspersoft.studio.field.label" value="IDNN"/>
 	</field>
 	<field name="PhiGiaoHang" class="java.math.BigDecimal">
 		<property name="com.jaspersoft.studio.field.label" value="PhiGiaoHang"/>
@@ -71,32 +67,8 @@ FROM "ChiTietHoaDon"
 	<field name="MaKH" class="java.lang.Integer">
 		<property name="com.jaspersoft.studio.field.label" value="MaKH"/>
 	</field>
-	<field name="COLUMN_14" class="java.lang.Integer">
-		<property name="com.jaspersoft.studio.field.label" value="IDNN"/>
-	</field>
-	<field name="TenNN" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="TenNN"/>
-	</field>
-	<field name="Email" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="Email"/>
-	</field>
-	<field name="DienThoai" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="DienThoai"/>
-	</field>
-	<field name="DiaChi" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="DiaChi"/>
-	</field>
-	<field name="COLUMN_19" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="MaSach"/>
-	</field>
 	<field name="TenSach" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="TenSach"/>
-	</field>
-	<field name="COLUMN_21" class="java.math.BigDecimal">
-		<property name="com.jaspersoft.studio.field.label" value="DonGia"/>
-	</field>
-	<field name="COLUMN_22" class="java.lang.Integer">
-		<property name="com.jaspersoft.studio.field.label" value="SoLuong"/>
 	</field>
 	<field name="UrlHinh" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="UrlHinh"/>
@@ -166,32 +138,25 @@ FROM "ChiTietHoaDon"
 				<reportElement x="0" y="194" width="555" height="1" uuid="e45214a5-894d-4fc5-b416-5134bfbbab0b"/>
 			</line>
 			<textField>
-				<reportElement x="22" y="269" width="241" height="20" uuid="3b4e2996-d24f-4983-b4e4-56a6649d8be2"/>
+				<reportElement x="22" y="269" width="298" height="20" uuid="3b4e2996-d24f-4983-b4e4-56a6649d8be2"/>
 				<textElement>
 					<font fontName="DejaVu Sans" size="11"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Tên người nhận: " + $F{TenNN}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Tên người nhận: " + $P{TenNN}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="23" y="294" width="241" height="20" uuid="58593056-cc03-47cb-a09a-5876d7e0516e"/>
+				<reportElement x="23" y="294" width="297" height="20" uuid="58593056-cc03-47cb-a09a-5876d7e0516e"/>
 				<textElement>
 					<font fontName="DejaVu Sans" size="11"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Số điện thoại: " + $F{DienThoai}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Số điện thoại: " + $P{DienThoai}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="24" y="344" width="241" height="20" uuid="ba4700ad-1fc1-463d-94ab-d991474b3f2a"/>
+				<reportElement x="24" y="321" width="296" height="20" uuid="ba4700ad-1fc1-463d-94ab-d991474b3f2a"/>
 				<textElement>
 					<font fontName="DejaVu Sans" size="11"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Địa chỉ: " + $F{DiaChi}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="24" y="319" width="241" height="20" uuid="3cca5332-33d9-4414-9fa4-ea674196fbe6"/>
-				<textElement>
-					<font fontName="DejaVu Sans" size="11"/>
-				</textElement>
-				<textFieldExpression><![CDATA["Email: " + $F{Email}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Địa chỉ: " + $P{DiaChi}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="0" y="419" width="555" height="1" uuid="4ee8ccde-0ebf-4a88-83ac-e0a7b22c15a3"/>
@@ -204,7 +169,7 @@ FROM "ChiTietHoaDon"
 				<textFieldExpression><![CDATA["Mã ĐH: " + $F{SoHD}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="24" y="368" width="241" height="20" uuid="7a4693ce-b1ff-4b5f-b7e0-f55c4e6acfea"/>
+				<reportElement x="24" y="345" width="296" height="20" uuid="7a4693ce-b1ff-4b5f-b7e0-f55c4e6acfea"/>
 				<textElement>
 					<font fontName="DejaVu Sans" size="11"/>
 				</textElement>

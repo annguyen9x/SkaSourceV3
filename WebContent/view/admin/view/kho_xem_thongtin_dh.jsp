@@ -98,7 +98,7 @@
 								%>
 								<div class="col-md-12 col-sm-12 col-xs-12" style="margin-bottom:7px; padding:0px; margin-top:-20px;">
 									<span style="font-weight:bold;">Mã ĐH: </span><span><%=hoaDon.getSoHD() %></span>&nbsp; &nbsp;
-									<a target="_black" href="/SachKyAnh/KhoXuatHoaDon?soHD=<%=hoaDon.getSoHD()%>&IDNN=<%=nguoiNhanHang.getIdNN()%>" class="btn btn-danger">
+									<a target="_black" href="/SachKyAnh/KhoXuatHoaDon?soHD=<%=hoaDon.getSoHD()%>" class="btn btn-danger">
 									<span class="glyphicon glyphicon-print"></span> In hóa đơn </a>
 								</div>
 								<!-- Chi tiết Đh -->
@@ -174,22 +174,17 @@
 													<b>Tên người nhận: </b><%=nguoiNhanHang.getTenNN() %>
 												</td>
 												<td>
-													<b>Số điện thoại: </b><%=nguoiNhanHang.getDienThoai() %>
-												</td>
-											</tr>
-											<tr>
-												<td>
 													<b>Ngày đặt: </b>
 													<%
 														SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 														out.print( simpleDateFormat.format(hoaDon.getNgayDat()) );
 													%>
 												</td>
-												<td>
-													<b>Email: </b><%=nguoiNhanHang.getEmail() %>
-												</td>
 											</tr>
 											<tr>
+												<td>
+													<b>Số điện thoại: </b><%=nguoiNhanHang.getDienThoai() %>
+												</td>
 												<td>
 													<%
 														if( hoaDon.getNgayGiao() == null ){
@@ -208,10 +203,11 @@
 														}
 													%>
 												</td>
-												<td>
-													<b>Địa chỉ: </b><%=nguoiNhanHang.getDiaChi() %>											</td>
 											</tr>
 											<tr>
+												<td>
+													<b>Địa chỉ: </b><%=nguoiNhanHang.getDiaChi() %>	
+												</td>
 												<td>
 													<b>Tình trạng đơn hàng: </b><%=hoaDon.getTinhTrangDH() %>
 												</td>

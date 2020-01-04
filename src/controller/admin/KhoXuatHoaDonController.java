@@ -17,7 +17,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.HoaDonDao;
 import dao.KetNoiDatabase;
+import dao.KhachHangDao;
+import dao.NguoiNhanHangDao;
+import model.HoaDon;
+import model.KhachHang;
+import model.NguoiNhanHang;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -43,7 +49,27 @@ public class KhoXuatHoaDonController extends HttpServlet {
 		response.setContentType("text/html; charset=utf-8");
 		
 		String soHD = request.getParameter("soHD").trim();
-		String IDNN = request.getParameter("IDNN").trim();
+		String TenNN = null;
+		String DiaChi = null;
+		String DienThoai = null;
+		
+		HoaDonDao hoaDonDao = new HoaDonDao();
+		HoaDon hoaDon = hoaDonDao.getHoaDon(Integer.parseInt(soHD));
+		if(hoaDon.getThayDoiNN().equals("Co")) {
+			NguoiNhanHangDao nguoiNhanHangDao = new NguoiNhanHangDao();
+			NguoiNhanHang nguoiNhanHang = nguoiNhanHangDao.getNguoiNhanHang(Integer.parseInt(soHD));
+			TenNN = nguoiNhanHang.getTenNN();
+			DiaChi = nguoiNhanHang.getDiaChi();
+			DienThoai = nguoiNhanHang.getDienThoai();
+		}
+		else if(hoaDon.getThayDoiNN().equals("Khong")) {
+			KhachHangDao khachHangDao = new KhachHangDao();
+			KhachHang khachHang = khachHangDao.getKhachHang(hoaDon.getMaKH());
+			TenNN = khachHang.getTenKH();
+			DiaChi = khachHang.getDiaChi();
+			DienThoai = khachHang.getDienThoai();
+		}
+		
 		
 		String nam = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
 		String thang = String.valueOf(Calendar.getInstance().get(Calendar.MONTH) + 1);
@@ -61,7 +87,9 @@ public class KhoXuatHoaDonController extends HttpServlet {
 			
 			Map parameters = new HashMap();
 			parameters.put("soHD", soHD);
-			parameters.put("IDNN", IDNN);
+			parameters.put("TenNN", TenNN);
+			parameters.put("DiaChi", DiaChi);
+			parameters.put("DienThoai", DienThoai);
 			parameters.put("nam", nam);
 			parameters.put("thang", thang);
 			parameters.put("ngay", ngay);

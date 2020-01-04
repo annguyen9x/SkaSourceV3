@@ -87,7 +87,12 @@
 									<div class="row margin-0 my_border">
 										<div class="col-md-6 col-sm-6 col-xs-12">
 											<p><b>Mã đơn hàng: </b><span class="ma_dh"><%=gioHang.get("SoHD") %></span></p>
-											<p><b>Người nhận hàng: </b><%=nguoiNhanHang.getTenNN() %></p>
+											<p><b>Người nhận: </b><%=nguoiNhanHang.getTenNN() %></p>
+											<p><b>Điện thoại: </b><%=nguoiNhanHang.getDienThoai()%></p>
+											<p><b>Địa chỉ: </b><%=nguoiNhanHang.getDiaChi() %></p>
+											</p>
+										</div>
+										<div class="col-md-6 col-sm-6 col-xs-12">
 											<p><b>Ngày đặt hàng: </b><%=simpleDateFormat.format(ngayDat) %></p>
 											<p><b>Ngày giao hàng (Dự kiến): </b>
 											<% 
@@ -95,11 +100,6 @@
 												out.print(simpleDateFormat.format(calendar.getTime()));
 											%>
 											</p>
-										</div>
-										<div class="col-md-6 col-sm-6 col-xs-12">
-											<p> </p>
-											<p><b>Điện thoại: </b><%=nguoiNhanHang.getDienThoai()%></p>
-											<p><b>Địa chỉ: </b><%=nguoiNhanHang.getDiaChi() %></p>
 											<p><b>Tổng thanh toán: </b><%=numberFormat.format((float)gioHang.get("TongTien") + (float)gioHang.get("PhiGiaoHang")) %><span class="text_underline"> đ</span></p>
 										</div>
 										<a href="/SachKyAnh/userTrangChu" class="btn">Tiếp tục mua hàng</a>

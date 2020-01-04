@@ -221,7 +221,7 @@
 														<td><%=nguoiNhanHang.getTenNN() %></td>
 														<td><%=hoaDon.getNgayDat() %></td>
 														<td><%=hoaDon.getTinhTrangDH() %></td>
-														<td><a href="/SachKyAnh/AdminThongTinDH?SoHD=<%=hoaDon.getSoHD()%>&IDNN=<%=nguoiNhanHang.getIdNN()%>">Xem chi tiết</a></td>
+														<td><a href="/SachKyAnh/AdminThongTinDH?SoHD=<%=hoaDon.getSoHD()%>">Xem chi tiết</a></td>
 													</tr>
 										<%	
 													}

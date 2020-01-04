@@ -39,7 +39,7 @@ public class XoaDonHangController extends HttpServlet {
 			NguoiNhanHangDao nguoiNhanHangDao = new NguoiNhanHangDao();
 			HoaDonDao hoaDonDao = new HoaDonDao();
 			int soHD = ((HoaDon)gioHang.get("HoaDon")).getSoHD();
-			int idNN = ((NguoiNhanHang)gioHang.get("NguoiNhanHang")).getIdNN();
+//			int idNN = ((NguoiNhanHang)gioHang.get("NguoiNhanHang")).getIdNN();
 			
 			if( maSach != null && maSach.equals("HuyDonHang") ) {
 				Iterator iterator = danhSachChiTietGioHang.entrySet().iterator();
@@ -53,8 +53,8 @@ public class XoaDonHangController extends HttpServlet {
 					sachDao.updateSoLuong(sachDB.getSoLuong() + soLuongDaMuaChiTiet, maSachChiTiet);
 					chiTietHoaDonDao.delete(soHD, maSachChiTiet);
 				}
+				nguoiNhanHangDao.delete(soHD);
 				hoaDonDao.delete(soHD);
-				nguoiNhanHangDao.delete(idNN);
 				session.removeAttribute("GioHang");
 				session.removeAttribute("CapNhatDonHang");
 				response.sendRedirect("/SachKyAnh/view/user/view/capnhat_donhang.jsp");
@@ -74,8 +74,8 @@ public class XoaDonHangController extends HttpServlet {
 					danhSachChiTietGioHang.remove(maSach);
 					
 					if( danhSachChiTietGioHang.size() == 0 ) {
+						nguoiNhanHangDao.delete(soHD);
 						hoaDonDao.delete(soHD);
-						nguoiNhanHangDao.delete(idNN);
 						session.removeAttribute("GioHang");
 						session.removeAttribute("CapNhatDonHang");
 						response.sendRedirect("/SachKyAnh/view/user/view/capnhat_donhang.jsp");

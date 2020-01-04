@@ -178,10 +178,12 @@
 															<b>Tên người nhận: </b><%=nguoiNhanHang.getTenNN() %>
 														</td>
 														<td>
-															<b>Số điện thoại: </b><%=nguoiNhanHang.getDienThoai() %>
 														</td>
 													</tr>
 													<tr>
+														<td>
+															<b>Số điện thoại: </b><%=nguoiNhanHang.getDienThoai() %>
+														</td>
 														<td>
 															<b>Ngày đặt: </b>
 															<%
@@ -191,6 +193,9 @@
 														</td>
 													</tr>
 													<tr>
+														<td>
+															<b>Địa chỉ: </b><%=nguoiNhanHang.getDiaChi() %>	
+														</td>
 														<td>
 															<%
 																if( hoaDon.getNgayGiao() == null ){
@@ -209,8 +214,6 @@
 																}
 															%>
 														</td>
-														<td>
-															<b>Địa chỉ: </b><%=nguoiNhanHang.getDiaChi() %>											</td>
 													</tr>
 													<tr>
 														<td>
