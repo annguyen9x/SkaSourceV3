@@ -335,7 +335,6 @@ Insert into NhapSach Values('NS0010', 1003, 'SKT010', 10,  '2019-12-25')
 Create table HoaDon(
 SoHD int primary key identity(10000001,1),
 ThayDoiNN varchar(6),
-PhiGiaoHang decimal(18,2),
 TongTien decimal(18,2) default(0),
 NgayDat date,
 NgayGiao date,
@@ -345,11 +344,11 @@ MaKH int foreign key references KhachHang(MaKH)
 )
 Go
 
-Insert into HoaDon Values('Co', 40000, 414000, '2019-11-20', '2019-11-23', N'Hoàn tất', 1001, 1001)
-Insert into HoaDon Values('Khong', 40000, 214000, '2019-11-20', '2019-11-23', N'Trả lại hàng', 1005, 1002)
-Insert into HoaDon Values('Khong', 40000, 299000, '2019-11-25', null, N'Đang giao hàng', 1005, 1004)
-Insert into HoaDon Values('Co', 40000, 200000, '2019-11-25', null, N'Đợi người giao lấy hàng', 1001, 1003)
-Insert into HoaDon Values('Co', 40000, 365000, '2019-12-01', null, N'Đang chuẩn bị hàng', 1001, 1001)
+Insert into HoaDon Values('Co', 414000, '2019-11-20', '2019-11-23', N'Hoàn tất', 1001, 1001)
+Insert into HoaDon Values('Khong', 214000, '2019-11-20', '2019-11-23', N'Trả lại hàng', 1005, 1002)
+Insert into HoaDon Values('Khong', 299000, '2019-11-25', null, N'Đang giao hàng', 1005, 1004)
+Insert into HoaDon Values('Co', 200000, '2019-11-25', null, N'Đợi người giao lấy hàng', 1001, 1003)
+Insert into HoaDon Values('Co', 365000, '2019-12-01', null, N'Đang chuẩn bị hàng', 1001, 1001)
 
 Create table ChiTietHoaDon(
 SoHD int foreign key references HoaDon(SoHD),
@@ -372,11 +371,11 @@ Insert into ChiTietHoaDon Values( 10000005, 'SKC006', 1, 165000.00)
 Go
 
 Create table NguoiNhanHang(
-IDNN int primary key identity(1001,1),
-SoHD int unique foreign key references HoaDon(SoHD),
+SoHD int foreign key references HoaDon(SoHD),
 TenNN nvarchar(50),
 DienThoai varchar(10),
 DiaChi nvarchar(100)
+primary key(SoHD) 
 )
 Go
 

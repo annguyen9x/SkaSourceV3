@@ -134,7 +134,7 @@
 											%>
 											<tr>
 												<td style="font-weight:bold; ">
-													<a href="/SachKyAnh/AdminThongTinDH?SoHD=<%=hoaDon.getSoHD()%>&IDNN=<%=nguoiNhanHang.getIdNN()%>"><%=hoaDon.getSoHD()%></a>
+													<a href="/SachKyAnh/AdminThongTinDH?SoHD=<%=hoaDon.getSoHD()%>"><%=hoaDon.getSoHD()%></a>
 												</td>
 												<td><%=nguoiNhanHang.getTenNN() %></td>
 												<td>

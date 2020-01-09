@@ -87,7 +87,7 @@
 										<div class="noi_dung my_border">
 											<p>Thông tin giao hàng</p>
 											<div class="thongtin_giaohang" id="diachicu">
-												<p style="text-transform: none; font-weight:normal;">&quot;Cập nhật địa chỉ giao hàng&quot;</p>
+												<p style="text-transform: none; font-weight:normal;">&quot;Địa chỉ đã có&quot;</p>
 												<%
 													if( nguoiNhanHang != null ){
 												%>
@@ -138,7 +138,6 @@
 											<table class="table">
 												<%
 												float tongTien = 0;
-												float phiGH = 40000;
 												while(iterator.hasNext()){
 													Map.Entry mapEntry = (Map.Entry)iterator.next();
 													Map<String, Object> chiTietGioHang = (Map<String, Object>)mapEntry.getValue();
@@ -159,31 +158,14 @@
 													tongTien += (int)chiTietGioHang.get("SoLuong")*(float)chiTietGioHang.get("DonGia");
 												}
 												%>
-												<tr>
-													<td colspan="2">
-														Tổng tiền sách:
-													</td>
-													<td class="tien">
-														<%=numberFormat.format(tongTien) %> <span class="text_underline">đ</span>
-													</td>
-												</tr>
-												<tr>
-													<td colspan="2">
-														Phí giao hàng:
-													</td>
-													<td class="tien">
-														<%=numberFormat.format(phiGH) %> <span class="text_underline">đ</span>
-													</td>
-												</tr>
 												<tr class="tong_tien">
 													<td colspan="2">
 														<b>Tổng tiền: </b>
 													</td>
 													<td class="tien" style="white-space:nowrap; text-overflow: ellipsis;">
-														<b><%=numberFormat.format(tongTien+phiGH) %> <span class="text_underline">đ</span></b>
+														<b><%=numberFormat.format(tongTien) %> <span class="text_underline">đ</span></b>
 														<%
 															gioHang.put("TongTien", tongTien);
-															gioHang.put("PhiGiaoHang", phiGH);
 														%>
 													</td>
 												</tr>

@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.11.0.final using JasperReports Library version 6.11.0-0c4056ccaa4d25a5a8c45672d2f764ea3498bebb  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="HoaDon" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="13acf49e-4913-4d1b-bccc-113817ad15d1">
-	<property name="com.jaspersoft.studio.data.sql.tables">
-		<![CDATA[IlNhY2giICwxNDIsMzE1LDY0ZTdlZmMxLTYxMzAtNGMwMC05MzY1LTcyZmJlNjgwOWEzYTsiQ2hp
-VGlldEhvYURvbiIgLDE1LDIzNyw2ZjYzNDU3ZC1mMjNiLTQwNjktOTJkOS1kZDQ5ZjNiNGM3ZjY7
-IkhvYURvbiIgLDE0MiwxNSxhOTgzZmJjMy04NTEzLTRkZDAtYTRlNC00ZGM5NjMzNWI5NjI7]]>
-	</property>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter "/>
 	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false"/>
 	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false"/>
@@ -45,9 +41,6 @@ FROM "ChiTietHoaDon"
 	</field>
 	<field name="DonGia" class="java.math.BigDecimal">
 		<property name="com.jaspersoft.studio.field.label" value="DonGia"/>
-	</field>
-	<field name="PhiGiaoHang" class="java.math.BigDecimal">
-		<property name="com.jaspersoft.studio.field.label" value="PhiGiaoHang"/>
 	</field>
 	<field name="TongTien" class="java.math.BigDecimal">
 		<property name="com.jaspersoft.studio.field.label" value="TongTien"/>
@@ -169,7 +162,7 @@ FROM "ChiTietHoaDon"
 				<textFieldExpression><![CDATA["Mã ĐH: " + $F{SoHD}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="24" y="345" width="296" height="20" uuid="7a4693ce-b1ff-4b5f-b7e0-f55c4e6acfea"/>
+				<reportElement x="328" y="321" width="227" height="20" uuid="7a4693ce-b1ff-4b5f-b7e0-f55c4e6acfea"/>
 				<textElement>
 					<font fontName="DejaVu Sans" size="11"/>
 				</textElement>
@@ -190,18 +183,11 @@ FROM "ChiTietHoaDon"
 				<text><![CDATA[Thông tin người nhận hàng]]></text>
 			</staticText>
 			<textField pattern="###,###,##0;#,##0">
-				<reportElement x="328" y="294" width="225" height="20" uuid="7f4e5e1f-38a9-411e-88eb-bb543494d0ea"/>
-				<textElement>
-					<font fontName="DejaVu Sans" size="11"/>
-				</textElement>
-				<textFieldExpression><![CDATA["Phí giao hàng: " + new DecimalFormat("###,###,##0").format($F{PhiGiaoHang}) +" đ"]]></textFieldExpression>
-			</textField>
-			<textField pattern="###,###,##0;#,##0">
-				<reportElement x="328" y="319" width="225" height="20" uuid="dfefccdb-87d9-4774-9460-38daa94afe5e"/>
+				<reportElement x="328" y="295" width="225" height="20" uuid="dfefccdb-87d9-4774-9460-38daa94afe5e"/>
 				<textElement>
 					<font fontName="DejaVu Sans" size="11" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Tổng thanh toán: " + new DecimalFormat("###,###,##0").format($F{TongTien}.floatValue()+$F{PhiGiaoHang}.floatValue()) +" đ"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Tổng thanh toán: " + new DecimalFormat("###,###,##0").format($F{TongTien}.floatValue()) +" đ"]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>

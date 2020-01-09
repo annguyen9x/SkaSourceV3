@@ -135,7 +135,7 @@ public class ChiTietHoaDonDao implements ITFChiTietHoaDonDao{
 			conn = ketNoiDatabase.getConn();
 			conn.setAutoCommit(false);
 			String sql = "Select ChiTietHoaDon.SoHD, ChiTietHoaDon.MaSach, ChiTietHoaDon.SoLuong, ChiTietHoaDon.DonGia, " +
-						 "Sach.TenSach, Sach.UrlHinh, HoaDon.ThayDoiNN, HoaDon.PhiGiaoHang, HoaDon.TongTien, HoaDon.NgayDat, " + 
+						 "Sach.TenSach, Sach.UrlHinh, HoaDon.ThayDoiNN, HoaDon.TongTien, HoaDon.NgayDat, " + 
 						 "HoaDon.NgayGiao, HoaDon.TinhTrangDH, HoaDon.MaKH " +
 						 "From ChiTietHoaDon " + 
 						 "Inner Join HoaDon On (ChiTietHoaDon.SoHD = HoaDon.SoHD And HoaDon.SoHD =?) " + 
@@ -149,7 +149,6 @@ public class ChiTietHoaDonDao implements ITFChiTietHoaDonDao{
 				HoaDon hd = new HoaDon();
 				hd.setSoHD(rs.getInt("SoHD"));
 				hd.setThayDoiNN(rs.getString("ThayDoiNN"));
-				hd.setPhiGiaoHang(rs.getFloat("PhiGiaoHang"));
 				hd.setTongTien(rs.getFloat("TongTien"));
 				hd.setNgayDat(rs.getDate("NgayDat"));
 				hd.setNgayGiao(rs.getDate("NgayGiao"));

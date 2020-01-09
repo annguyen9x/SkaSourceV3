@@ -5,7 +5,6 @@ import java.util.Date;
 public class HoaDon {
 	private int soHD;
 	private String thayDoiNN;
-	private float phiGiaoHang;
 	private float tongTien;
 	private Date ngayDat;
 	private Date ngayGiao;
@@ -16,31 +15,28 @@ public class HoaDon {
 	public HoaDon() {
 	}
 	
-	public HoaDon( String thayDoiNN, float phiGiaoHang, Date ngayDat, String tinhTrangDH, int maKH) {
+	public HoaDon( String thayDoiNN, Date ngayDat, String tinhTrangDH, int maKH) {
 		super();
 		this.thayDoiNN = thayDoiNN;
-		this.phiGiaoHang = phiGiaoHang;
 		this.ngayDat = ngayDat;
 		this.tinhTrangDH = tinhTrangDH;
 		this.maKH = maKH;
 	}
 	
-	public HoaDon( String thayDoiNN, float phiGiaoHang, float tongTien, Date ngayDat, String tinhTrangDH, int maKH) {
+	public HoaDon( String thayDoiNN, float tongTien, Date ngayDat, String tinhTrangDH, int maKH) {
 		super();
 		this.thayDoiNN = thayDoiNN;
-		this.phiGiaoHang = phiGiaoHang;
 		this.tongTien = tongTien;
 		this.ngayDat = ngayDat;
 		this.tinhTrangDH = tinhTrangDH;
 		this.maKH = maKH;
 	}
 	
-	public HoaDon(int soHD, String thayDoiNN, float phiGiaoHang, float tongTien, Date ngayDat, Date ngayGiao,
+	public HoaDon(int soHD, String thayDoiNN, float tongTien, Date ngayDat, Date ngayGiao,
 			String tinhTrangDH, int maNVGiao, int maKH) {
 		super();
 		this.soHD = soHD;
 		this.thayDoiNN = thayDoiNN;
-		this.phiGiaoHang = phiGiaoHang;
 		this.tongTien = tongTien;
 		this.ngayDat = ngayDat;
 		this.ngayGiao = ngayGiao;
@@ -63,14 +59,6 @@ public class HoaDon {
 
 	public void setThayDoiNN(String thayDoiNN) {
 		this.thayDoiNN = thayDoiNN;
-	}
-
-	public float getPhiGiaoHang() {
-		return phiGiaoHang;
-	}
-
-	public void setPhiGiaoHang(float phiGiaoHang) {
-		this.phiGiaoHang = phiGiaoHang;
 	}
 
 	public float getTongTien() {

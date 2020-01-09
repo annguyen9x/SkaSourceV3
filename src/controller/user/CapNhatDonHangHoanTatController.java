@@ -100,7 +100,6 @@ public class CapNhatDonHangHoanTatController extends HttpServlet {
 				NguoiNhanHang nguoiNhanHang1 = new NguoiNhanHang(soHD, tenNN, dienThoai, diaChi);
 				gioHang.put("NguoiNhanHang", nguoiNhanHang1);
 				
-				float phiGiaoHang = (float)gioHang.get("PhiGiaoHang");
 				float tongTien = (float)gioHang.get("TongTien");
 				Date ngayDat = Calendar.getInstance().getTime();
 				String emailNhan = khachHangDonHang.getEmail();
@@ -112,7 +111,7 @@ public class CapNhatDonHangHoanTatController extends HttpServlet {
     			calendar.setTime(ngayDat);
     			calendar.add(Calendar.DAY_OF_MONTH, 3);
 				String noiDung = "Thông tin đơn hàng đã cập nhật: \n" + "Mã ĐH: " + soHD + "\nTổng tiền thanh toán: "
-								+ numberFormat.format(tongTien+phiGiaoHang)+" đ" + "\nNgày đặt: " 
+								+ numberFormat.format(tongTien)+" đ" + "\nNgày đặt: " 
 								+ simpleDateFormat.format(ngayDat)
 								+ " -----> Ngày giao (dự kiến): " + simpleDateFormat.format(calendar.getTime())
 								+ "\nTên người nhận: " + tenNN 
@@ -140,7 +139,6 @@ public class CapNhatDonHangHoanTatController extends HttpServlet {
 					if( nguoiNhanHangDao.insert(nguoiNhanHang2) != -1) {
 						gioHang.put("NguoiNhanHang", nguoiNhanHang2);
 						
-						float phiGiaoHang = (float)gioHang.get("PhiGiaoHang");
 						float tongTien = (float)gioHang.get("TongTien");
 						Date ngayDat = Calendar.getInstance().getTime();
 						String emailNhan = khachHangDonHang.getEmail();
@@ -152,7 +150,7 @@ public class CapNhatDonHangHoanTatController extends HttpServlet {
 		    			calendar.setTime(ngayDat);
 		    			calendar.add(Calendar.DAY_OF_MONTH, 3);
 						String noiDung = "Thông tin đơn hàng đã cập nhật: \n" + "Mã ĐH: " + soHD + "\nTổng tiền thanh toán: "
-										+ numberFormat.format(tongTien+phiGiaoHang)+" đ" + "\nNgày đặt: " 
+										+ numberFormat.format(tongTien)+" đ" + "\nNgày đặt: " 
 										+ simpleDateFormat.format(ngayDat)
 										+ " -----> Ngày giao (dự kiến): " + simpleDateFormat.format(calendar.getTime())
 										+ "\nTên người nhận: " + tenNN 
@@ -193,7 +191,6 @@ public class CapNhatDonHangHoanTatController extends HttpServlet {
 				if(nguoiNhanHangDao.update(nguoiNhanHangMoi)) {
 					gioHang.put("NguoiNhanHang", nguoiNhanHangMoi);
 					
-					float phiGiaoHang = (float)gioHang.get("PhiGiaoHang");
 					float tongTien = (float)gioHang.get("TongTien");
 					Date ngayDat = Calendar.getInstance().getTime();
 					String emailNhan = khachHangDonHang.getEmail();
@@ -205,7 +202,7 @@ public class CapNhatDonHangHoanTatController extends HttpServlet {
 	    			calendar.setTime(ngayDat);
 	    			calendar.add(Calendar.DAY_OF_MONTH, 3);
 					String noiDung = "Thông tin đơn hàng đã cập nhật: \n" + "Mã ĐH: " + soHD + "\nTổng tiền thanh toán: "
-									+ numberFormat.format(tongTien+phiGiaoHang)+" đ" + "\nNgày đặt: " 
+									+ numberFormat.format(tongTien)+" đ" + "\nNgày đặt: " 
 									+ simpleDateFormat.format(ngayDat)
 									+ " -----> Ngày giao (dự kiến): " + simpleDateFormat.format(calendar.getTime())
 									+ "\nTên người nhận: " + tenNN 

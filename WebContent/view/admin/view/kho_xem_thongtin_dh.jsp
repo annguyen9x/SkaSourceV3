@@ -155,15 +155,9 @@
 								<!-- thong tin Nguoi Nhan -->
 								<div class="thongtin_giaohang_tongtien">
 									<div class="tong_tien">
-										<p>
-											<b>Phí giao hàng: </b>
-											<span class="tien">
-												<%=numberFormat.format(hoaDon.getPhiGiaoHang())%> <span class="text_underline">đ</span>
-											</span>
-										</p>
 										<b>Tổng tiền: </b>
 										<span class="tien">
-											<%=numberFormat.format(hoaDon.getPhiGiaoHang() + hoaDon.getTongTien()) %> <span class="text_underline">đ</span>
+											<%=numberFormat.format(hoaDon.getTongTien()) %> <span class="text_underline">đ</span>
 										</span>
 									</div>
 									<div class="thongtin_giaohang">

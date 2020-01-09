@@ -91,7 +91,6 @@ public class DatHangController extends HttpServlet {
 			Map<String, Object> gioHang = (Map<String, Object>)session.getAttribute("GioHang");
 			if( gioHang != null) {
 				
-					float phiGiaoHang = (float)gioHang.get("PhiGiaoHang");
 					float tongTien = (float)gioHang.get("TongTien");
 					Date ngayDat = Calendar.getInstance().getTime();
 					String tinhTrangDH = "Đợi xác nhận đơn hàng";
@@ -99,11 +98,11 @@ public class DatHangController extends HttpServlet {
 					HoaDonDao hoaDonDao = new HoaDonDao();
 					
 					//Dung khi khong co Trigger tinh TongTien
-	//				HoaDon hoaDon = new HoaDon(idNN, phiGiaoHang, tongTien, ngayDat, tinhTrangDH, maKH);
+	//				HoaDon hoaDon = new HoaDon(idNN, tongTien, ngayDat, tinhTrangDH, maKH);
 	//				int soHD = hoaDonDao.insert(hoaDon);
 					
 					//Dung khi co Trigger tinh TongTien
-					HoaDon hoaDon = new HoaDon(thayDoiNN, phiGiaoHang, ngayDat, tinhTrangDH, maKH);
+					HoaDon hoaDon = new HoaDon(thayDoiNN, ngayDat, tinhTrangDH, maKH);
 					int soHD = hoaDonDao.insert(hoaDon);
 					
 					if( soHD != -1 ) {
@@ -111,8 +110,8 @@ public class DatHangController extends HttpServlet {
 						if(loai_taikhoan.equals("nguoikhac")){
 							NguoiNhanHang nguoiNhanHang = new NguoiNhanHang(soHD, tenNN, dienThoai, diaChi);
 							gioHang.put("NguoiNhanHang", nguoiNhanHang);
-							int idNN =  nguoiNhanHangDao.insert(nguoiNhanHang);
-							if( idNN == -1 ) {
+							int rows =  nguoiNhanHangDao.insert(nguoiNhanHang);
+							if( rows == -1 ) {
 								PrintWriter writer = resp.getWriter();
 								writer.print("<script type='text/javascript'>");
 								writer.print("alert('Lỗi server insert NguoiNhanHang, vui lòng thử lại !');");
@@ -167,7 +166,7 @@ public class DatHangController extends HttpServlet {
 		        			calendar.setTime(ngayDat);
 		        			calendar.add(Calendar.DAY_OF_MONTH, 3);
 							String noiDung = "Thông tin đơn hàng: \n" + "Mã ĐH: " + soHD + "\nTổng tiền thanh toán: "
-											+ numberFormat.format(tongTien+phiGiaoHang)+" đ" + "\nNgày đặt: " 
+											+ numberFormat.format(tongTien)+" đ" + "\nNgày đặt: " 
 											+ simpleDateFormat.format(ngayDat)
 											+ " -----> Ngày giao (dự kiến): " + simpleDateFormat.format(calendar.getTime())
 											+ "\nTên người nhận: " + tenNN 

@@ -123,7 +123,7 @@
 													<td>
 														<%
 															NumberFormat numberFormat = new DecimalFormat("###,###,###");
-															out.print(numberFormat.format(hoaDon.getTongTien()+hoaDon.getPhiGiaoHang()) + " đ");
+															out.print(numberFormat.format(hoaDon.getTongTien()) + " đ");
 														
 														%>
 													</td>

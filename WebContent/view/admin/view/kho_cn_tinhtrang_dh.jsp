@@ -175,7 +175,7 @@
 											%>
 														<tr>
 															<td style="font-weight:bold; ">
-																<a href="/SachKyAnh/KhoThongTinDH?SoHD=<%=hoaDon.getSoHD()%>&IDNN=<%=nguoiNhanHang.getIdNN()%>">
+																<a href="/SachKyAnh/KhoThongTinDH?SoHD=<%=hoaDon.getSoHD()%>">
 																	<%=hoaDon.getSoHD() %>
 																</a>
 															</td>

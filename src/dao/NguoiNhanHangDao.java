@@ -6,10 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.SimpleDateFormat;
 
 import model.NguoiNhanHang;
-import util.KiemTraNgayThang;
 
 public class NguoiNhanHangDao implements ITFNguoiNhanHangDao{
 	private KetNoiDatabase ketNoiDatabase;
@@ -24,19 +22,18 @@ public class NguoiNhanHangDao implements ITFNguoiNhanHangDao{
 			conn = ketNoiDatabase.getConn();
 			conn.setAutoCommit(false);
 			String sql = "Insert into NguoiNhanHang(SoHD, TenNN, DienThoai, DiaChi) Values(?,?,?,?)";
-			pStatement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			pStatement = conn.prepareStatement(sql);
 			pStatement.setInt(1, nnh.getSoHD());
 			pStatement.setNString(2, nnh.getTenNN());
 			pStatement.setNString(3, nnh.getDienThoai());
 			pStatement.setNString(4, nnh.getDiaChi());
-			pStatement.executeUpdate();
-			int idnn = -1;
-			rs = pStatement.getGeneratedKeys();
-			if( rs.next() ) {
-				idnn = rs.getInt(1);
-			}
+			int rows = pStatement.executeUpdate();
 			conn.commit();
-			return idnn;
+			if( rows > 0 ) {
+				return 1;
+			}
+			
+			return -1;
 		} catch (SQLException e) {
 			System.out.println("Loi insert NguoiNhanHang: " + e.toString());
 			try {
@@ -131,13 +128,12 @@ public class NguoiNhanHangDao implements ITFNguoiNhanHangDao{
 		try {
 			conn = ketNoiDatabase.getConn();
 			conn.setAutoCommit(false);
-			String sql = "Select IDNN, SoHD, TenNN, DienThoai, DiaChi From NguoiNhanHang Where SoHD=?";
+			String sql = "Select SoHD, TenNN, DienThoai, DiaChi From NguoiNhanHang Where SoHD=?";
 			pStatement = conn.prepareStatement(sql);
 			pStatement.setInt(1, soHD);
 			rs = pStatement.executeQuery();
 			if( rs.next() ) {
 				nnh = new NguoiNhanHang();
-				nnh.setIdNN(rs.getInt("IDNN"));
 				nnh.setSoHD(rs.getInt("SoHD"));
 				nnh.setTenNN(rs.getString("TenNN"));
 				nnh.setDienThoai(rs.getString("DienThoai"));

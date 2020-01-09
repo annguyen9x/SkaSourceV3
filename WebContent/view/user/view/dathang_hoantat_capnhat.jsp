@@ -99,7 +99,7 @@
 												out.print(simpleDateFormat.format(calendar.getTime()));
 											%>
 											</p>
-											<p><b>Tổng thanh toán: </b><%=numberFormat.format((float)gioHang.get("TongTien") + (float)gioHang.get("PhiGiaoHang")) %><span class="text_underline"> đ</span></p>
+											<p><b>Tổng thanh toán: </b><%=numberFormat.format((float)gioHang.get("TongTien")) %><span class="text_underline"> đ</span></p>
 										</div>
 										<a href="/SachKyAnh/userTrangChu" class="btn">Tiếp tục mua hàng</a>
 									</div>

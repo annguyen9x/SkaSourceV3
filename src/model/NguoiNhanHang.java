@@ -1,7 +1,6 @@
 package model;
 
 public class NguoiNhanHang {
-	private int idNN;
 	private int soHD;
 	private String tenNN;
 	private String dienThoai;
@@ -16,23 +15,6 @@ public class NguoiNhanHang {
 		this.tenNN = tenNN;
 		this.dienThoai = dienThoai;
 		this.diaChi = diaChi;
-	}
-
-	public NguoiNhanHang(int idNN, int soHD, String tenNN, String dienThoai, String diaChi) {
-		super();
-		this.idNN = idNN;
-		this.soHD = soHD;
-		this.tenNN = tenNN;
-		this.dienThoai = dienThoai;
-		this.diaChi = diaChi;
-	}
-
-	public int getIdNN() {
-		return idNN;
-	}
-
-	public void setIdNN(int idNN) {
-		this.idNN = idNN;
 	}
 
 	public String getTenNN() {
