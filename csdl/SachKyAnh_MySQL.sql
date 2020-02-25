@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 25, 2020 at 10:02 AM
+-- Generation Time: Feb 25, 2020 at 11:08 AM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -56,11 +56,11 @@ INSERT INTO `chitiethoadon` (`SoHD`, `MaSach`, `SoLuong`, `DonGia`) VALUES
 
 CREATE TABLE IF NOT EXISTS `hoadon` (
 `SoHD` int(11) NOT NULL,
-  `ThayDoiNN` varchar(6) DEFAULT NULL,
+  `ThayDoiNN` varchar(6) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `TongTien` decimal(18,2) DEFAULT '0.00',
   `NgayDat` date DEFAULT NULL,
   `NgayGiao` date DEFAULT NULL,
-  `TinhTrangDH` varchar(50) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `TinhTrangDH` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `MaNVGiao` int(11) DEFAULT NULL,
   `MaKH` int(11) DEFAULT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10000009 ;
@@ -84,13 +84,13 @@ INSERT INTO `hoadon` (`SoHD`, `ThayDoiNN`, `TongTien`, `NgayDat`, `NgayGiao`, `T
 
 CREATE TABLE IF NOT EXISTS `khachhang` (
 `MaKH` int(11) NOT NULL,
-  `TenKH` varchar(30) CHARACTER SET utf8mb4 NOT NULL,
-  `MatKhau` varchar(50) NOT NULL,
-  `Email` varchar(30) NOT NULL,
-  `DienThoai` varchar(10) NOT NULL,
-  `GioiTinh` varchar(10) CHARACTER SET utf8mb4 NOT NULL,
+  `TenKH` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `MatKhau` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `Email` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `DienThoai` varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `GioiTinh` varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `NgaySinh` date NOT NULL,
-  `DiaChi` varchar(100) CHARACTER SET utf8mb4 NOT NULL
+  `DiaChi` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1007 ;
 
 --
@@ -112,7 +112,7 @@ INSERT INTO `khachhang` (`MaKH`, `TenKH`, `MatKhau`, `Email`, `DienThoai`, `Gioi
 
 CREATE TABLE IF NOT EXISTS `loaisach` (
   `MaLoaiSach` varchar(4) NOT NULL,
-  `TenLoaiSach` varchar(100) CHARACTER SET utf8mb4 NOT NULL
+  `TenLoaiSach` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -136,9 +136,9 @@ INSERT INTO `loaisach` (`MaLoaiSach`, `TenLoaiSach`) VALUES
 
 CREATE TABLE IF NOT EXISTS `nguoinhanhang` (
   `SoHD` int(11) NOT NULL,
-  `TenNN` varchar(50) CHARACTER SET utf8mb4 DEFAULT NULL,
-  `DienThoai` varchar(10) DEFAULT NULL,
-  `DiaChi` varchar(100) CHARACTER SET utf8mb4 DEFAULT NULL
+  `TenNN` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `DienThoai` varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `DiaChi` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -158,14 +158,14 @@ INSERT INTO `nguoinhanhang` (`SoHD`, `TenNN`, `DienThoai`, `DiaChi`) VALUES
 
 CREATE TABLE IF NOT EXISTS `nhanvien` (
 `MaNV` int(11) NOT NULL,
-  `TenNV` varchar(30) CHARACTER SET utf8mb4 NOT NULL,
-  `ChucVu` varchar(30) CHARACTER SET utf8mb4 NOT NULL,
-  `MatKhau` varchar(50) NOT NULL,
-  `Email` varchar(30) NOT NULL,
-  `DienThoai` varchar(10) NOT NULL,
-  `GioiTinh` varchar(10) CHARACTER SET utf8mb4 NOT NULL,
+  `TenNV` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `ChucVu` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `MatKhau` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `Email` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `DienThoai` varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `GioiTinh` varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `NgaySinh` date NOT NULL,
-  `DiaChi` varchar(100) CHARACTER SET utf8mb4 NOT NULL
+  `DiaChi` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1006 ;
 
 --
@@ -186,7 +186,7 @@ INSERT INTO `nhanvien` (`MaNV`, `TenNV`, `ChucVu`, `MatKhau`, `Email`, `DienThoa
 --
 
 CREATE TABLE IF NOT EXISTS `nhapsach` (
-  `MaNS` varchar(6) NOT NULL,
+  `MaNS` varchar(6) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `MaNVKho` int(11) DEFAULT NULL,
   `MaSach` varchar(6) DEFAULT NULL,
   `SoLuongNhap` int(11) DEFAULT NULL,
@@ -217,14 +217,14 @@ INSERT INTO `nhapsach` (`MaNS`, `MaNVKho`, `MaSach`, `SoLuongNhap`, `NgayNhap`) 
 
 CREATE TABLE IF NOT EXISTS `sach` (
   `MaSach` varchar(6) NOT NULL,
-  `TenSach` varchar(100) CHARACTER SET utf8mb4 NOT NULL,
+  `TenSach` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `DonGia` decimal(18,2) DEFAULT NULL,
   `SoLuong` int(11) NOT NULL,
   `UrlHinh` varchar(100) DEFAULT NULL,
-  `NoiDung` varchar(4000) CHARACTER SET utf8mb4 DEFAULT NULL,
-  `TacGia` varchar(100) CHARACTER SET utf8mb4 NOT NULL,
+  `NoiDung` varchar(4000) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `TacGia` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `NamXB` int(11) NOT NULL,
-  `NXB` varchar(100) CHARACTER SET utf8mb4 NOT NULL,
+  `NXB` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `MaLoaiSach` varchar(4) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
