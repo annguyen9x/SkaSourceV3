@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 24, 2020 at 06:07 PM
+-- Generation Time: Feb 25, 2020 at 10:02 AM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -19,6 +19,195 @@ SET time_zone = "+00:00";
 --
 -- Database: `sachkyanh`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `chitiethoadon`
+--
+
+CREATE TABLE IF NOT EXISTS `chitiethoadon` (
+  `SoHD` int(11) NOT NULL,
+  `MaSach` varchar(6) NOT NULL,
+  `SoLuong` int(11) NOT NULL,
+  `DonGia` bigint(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `chitiethoadon`
+--
+
+INSERT INTO `chitiethoadon` (`SoHD`, `MaSach`, `SoLuong`, `DonGia`) VALUES
+(10000001, 'SKC001', 1, 155000),
+(10000001, 'SKC002', 1, 59000),
+(10000001, 'SKC003', 1, 200000),
+(10000002, 'SKC001', 1, 155000),
+(10000002, 'SKC002', 1, 59000),
+(10000003, 'SKC004', 1, 299000),
+(10000004, 'SKC003', 1, 200000),
+(10000005, 'SKC003', 1, 200000),
+(10000005, 'SKC006', 1, 165000);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hoadon`
+--
+
+CREATE TABLE IF NOT EXISTS `hoadon` (
+`SoHD` int(11) NOT NULL,
+  `ThayDoiNN` varchar(6) DEFAULT NULL,
+  `TongTien` decimal(18,2) DEFAULT '0.00',
+  `NgayDat` date DEFAULT NULL,
+  `NgayGiao` date DEFAULT NULL,
+  `TinhTrangDH` varchar(50) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `MaNVGiao` int(11) DEFAULT NULL,
+  `MaKH` int(11) DEFAULT NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10000009 ;
+
+--
+-- Dumping data for table `hoadon`
+--
+
+INSERT INTO `hoadon` (`SoHD`, `ThayDoiNN`, `TongTien`, `NgayDat`, `NgayGiao`, `TinhTrangDH`, `MaNVGiao`, `MaKH`) VALUES
+(10000001, 'Co', '414000.00', '2019-11-20', '2019-11-23', 'Hoàn tất', 1001, 1001),
+(10000002, 'Khong', '214000.00', '2019-11-20', '2019-11-23', 'Trả lại hàng', 1005, 1002),
+(10000003, 'Khong', '299000.00', '2019-11-25', NULL, 'Đang giao hàng', 1005, 1004),
+(10000004, 'Co', '200000.00', '2019-11-25', NULL, 'Đợi người giao lấy hàng', 1001, 1003),
+(10000005, 'Co', '365000.00', '2019-12-01', NULL, 'Đang chuẩn bị hàng', 1001, 1001);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `khachhang`
+--
+
+CREATE TABLE IF NOT EXISTS `khachhang` (
+`MaKH` int(11) NOT NULL,
+  `TenKH` varchar(30) CHARACTER SET utf8mb4 NOT NULL,
+  `MatKhau` varchar(50) NOT NULL,
+  `Email` varchar(30) NOT NULL,
+  `DienThoai` varchar(10) NOT NULL,
+  `GioiTinh` varchar(10) CHARACTER SET utf8mb4 NOT NULL,
+  `NgaySinh` date NOT NULL,
+  `DiaChi` varchar(100) CHARACTER SET utf8mb4 NOT NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1007 ;
+
+--
+-- Dumping data for table `khachhang`
+--
+
+INSERT INTO `khachhang` (`MaKH`, `TenKH`, `MatKhau`, `Email`, `DienThoai`, `GioiTinh`, `NgaySinh`, `DiaChi`) VALUES
+(1001, 'Phan Mỹ Tâm', 'e10adc3949ba59abbe56e057f20f883e', 'pmtam@gmail.com', '0981246789', 'Nữ', '1991-01-16', '30 Trần Hưng Đạo, Q.1, TP. Hồ Chí Minh'),
+(1002, 'Đàm Vĩnh Hưng', 'e10adc3949ba59abbe56e057f20f883e', 'lvhung@gmail.com', '0341238756', 'Nam', '1987-12-22', 'P. Hưng lợi, Q. Ninh Kiều, TP. Cần Thơ'),
+(1003, 'Nguyễn Văn An', 'e10adc3949ba59abbe56e057f20f883e', 'nguyenva09@gmail.com', '0971246469', 'Nam', '1997-10-19', 'P. 10, TP. Đà Lạt, T. Lâm Đồng'),
+(1004, 'Bùi Thu Thủy', 'e10adc3949ba59abbe56e057f20f883e', 'btthuy@gmail.com', '0241338777', 'Nữ', '1999-02-16', 'P. Nam Hà, TP. Hà Tĩnh, T. Hà Tĩnh'),
+(1005, 'Lê Anh Minh', 'e10adc3949ba59abbe56e057f20f883e', 'laminh@gmail.com', '0123987056', 'Nam', '1980-11-25', 'P. Thuận Phước, Q. Hải Châu, TP. Đà Nẵng');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `loaisach`
+--
+
+CREATE TABLE IF NOT EXISTS `loaisach` (
+  `MaLoaiSach` varchar(4) NOT NULL,
+  `TenLoaiSach` varchar(100) CHARACTER SET utf8mb4 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `loaisach`
+--
+
+INSERT INTO `loaisach` (`MaLoaiSach`, `TenLoaiSach`) VALUES
+('LS01', 'Sách Khoa Học, Công Nghệ'),
+('LS02', 'Sách Tâm Lý'),
+('LS03', 'Sách Kinh Tế'),
+('LS04', 'Sách Giáo Khoa'),
+('LS05', 'Sách Học Ngoại Ngữ'),
+('LS06', 'Sách Văn Học'),
+('LS07', 'Sách Thiếu Nhi');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `nguoinhanhang`
+--
+
+CREATE TABLE IF NOT EXISTS `nguoinhanhang` (
+  `SoHD` int(11) NOT NULL,
+  `TenNN` varchar(50) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `DienThoai` varchar(10) DEFAULT NULL,
+  `DiaChi` varchar(100) CHARACTER SET utf8mb4 DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `nguoinhanhang`
+--
+
+INSERT INTO `nguoinhanhang` (`SoHD`, `TenNN`, `DienThoai`, `DiaChi`) VALUES
+(10000001, 'Võ Hoài Linh', '0987655577', 'P. Cam Linh, TP. Cam Ranh, T. Khánh Hòa'),
+(10000004, 'Nguyễn Anh Quốc', '0966798765', 'P. Hà Huy Tập, TP. Hà Tĩnh, T. Hà Tĩnh'),
+(10000005, 'Hà Anh Tuấn', '0981246789', '25 Nguyễn Văn Bình, Q.1, TP. Hồ Chí Minh');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `nhanvien`
+--
+
+CREATE TABLE IF NOT EXISTS `nhanvien` (
+`MaNV` int(11) NOT NULL,
+  `TenNV` varchar(30) CHARACTER SET utf8mb4 NOT NULL,
+  `ChucVu` varchar(30) CHARACTER SET utf8mb4 NOT NULL,
+  `MatKhau` varchar(50) NOT NULL,
+  `Email` varchar(30) NOT NULL,
+  `DienThoai` varchar(10) NOT NULL,
+  `GioiTinh` varchar(10) CHARACTER SET utf8mb4 NOT NULL,
+  `NgaySinh` date NOT NULL,
+  `DiaChi` varchar(100) CHARACTER SET utf8mb4 NOT NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1006 ;
+
+--
+-- Dumping data for table `nhanvien`
+--
+
+INSERT INTO `nhanvien` (`MaNV`, `TenNV`, `ChucVu`, `MatKhau`, `Email`, `DienThoai`, `GioiTinh`, `NgaySinh`, `DiaChi`) VALUES
+(1001, 'Hoàng Thái Vinh', 'Giao Hàng', 'e10adc3949ba59abbe56e057f20f883e', 'giaohang2@gmail.com', '0963455277', 'Nam', '1991-11-15', 'P. Sông Trí, Tx. Kỳ Anh, T. Hà Tĩnh'),
+(1002, 'Nguyễn Văn An', 'Admin', 'e10adc3949ba59abbe56e057f20f883e', 'admin@gmail.com', '0969667709', 'Nam', '1997-11-28', 'P. Thuận Phước, Q. Hải Châu, TP. Đà Nẵng'),
+(1003, 'Hồ Thị Thảo', 'Kho', 'e10adc3949ba59abbe56e057f20f883e', 'kho2@gmail.com', '0233456666', 'Nữ', '1999-01-19', 'P. Sông Trí, Tx. Kỳ Anh, T. Hà Tĩnh'),
+(1004, 'Hà Việt Anh', 'Kho', 'e10adc3949ba59abbe56e057f20f883e', 'kho@gmail.com', '0366777899', 'Nữ', '1998-05-10', 'P. Đại Nài, TP. Hà Tĩnh, T. Hà Tĩnh'),
+(1005, 'Nguyễn Trọng Hiếu', 'Giao Hàng', 'e10adc3949ba59abbe56e057f20f883e', 'giaohang@gmail.com', '0123887756', 'Nam', '1996-12-05', 'P. Kỳ Liên, Tx. Kỳ Anh, T. Hà Tĩnh');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `nhapsach`
+--
+
+CREATE TABLE IF NOT EXISTS `nhapsach` (
+  `MaNS` varchar(6) NOT NULL,
+  `MaNVKho` int(11) DEFAULT NULL,
+  `MaSach` varchar(6) DEFAULT NULL,
+  `SoLuongNhap` int(11) DEFAULT NULL,
+  `NgayNhap` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `nhapsach`
+--
+
+INSERT INTO `nhapsach` (`MaNS`, `MaNVKho`, `MaSach`, `SoLuongNhap`, `NgayNhap`) VALUES
+('NS0001', 1003, 'SKC001', 10, '2019-09-19'),
+('NS0002', 1004, 'SKC002', 10, '2019-10-19'),
+('NS0003', 1004, 'SKC003', 10, '2019-10-22'),
+('NS0004', 1004, 'SKC004', 10, '2019-11-25'),
+('NS0005', 1003, 'SKC005', 10, '2019-12-05'),
+('NS0006', 1003, 'SKC006', 10, '2019-09-19'),
+('NS0007', 1004, 'STL007', 10, '2019-10-19'),
+('NS0008', 1004, 'STL008', 10, '2019-10-22'),
+('NS0009', 1004, 'SKT009', 10, '2019-11-25'),
+('NS0010', 1003, 'SKT010', 10, '2019-12-25');
 
 -- --------------------------------------------------------
 
@@ -74,14 +263,102 @@ INSERT INTO `sach` (`MaSach`, `TenSach`, `DonGia`, `SoLuong`, `UrlHinh`, `NoiDun
 --
 
 --
+-- Indexes for table `chitiethoadon`
+--
+ALTER TABLE `chitiethoadon`
+ ADD PRIMARY KEY (`SoHD`,`MaSach`), ADD KEY `FK__ChiTietHo__MaSac__286302EC` (`MaSach`);
+
+--
+-- Indexes for table `hoadon`
+--
+ALTER TABLE `hoadon`
+ ADD PRIMARY KEY (`SoHD`), ADD KEY `FK__HoaDon__MaNV_NV` (`MaNVGiao`), ADD KEY `FK__HoaDon__MaKH__KH` (`MaKH`);
+
+--
+-- Indexes for table `khachhang`
+--
+ALTER TABLE `khachhang`
+ ADD PRIMARY KEY (`MaKH`), ADD UNIQUE KEY `UQ__KhachHan__1F0318762F4AE563` (`DienThoai`), ADD UNIQUE KEY `UQ__KhachHan__A9D10534F73F748B` (`Email`);
+
+--
+-- Indexes for table `loaisach`
+--
+ALTER TABLE `loaisach`
+ ADD PRIMARY KEY (`MaLoaiSach`);
+
+--
+-- Indexes for table `nguoinhanhang`
+--
+ALTER TABLE `nguoinhanhang`
+ ADD PRIMARY KEY (`SoHD`);
+
+--
+-- Indexes for table `nhanvien`
+--
+ALTER TABLE `nhanvien`
+ ADD PRIMARY KEY (`MaNV`), ADD UNIQUE KEY `UQ__NhanVien__1F0318769AFB27F6` (`DienThoai`), ADD UNIQUE KEY `UQ__NhanVien__A9D10534A1AEC144` (`Email`);
+
+--
+-- Indexes for table `nhapsach`
+--
+ALTER TABLE `nhapsach`
+ ADD PRIMARY KEY (`MaNS`), ADD KEY `FK__NhapSach_MaNV_NV` (`MaNVKho`), ADD KEY `FK__NhapSach__MaSach__Sach` (`MaSach`);
+
+--
 -- Indexes for table `sach`
 --
 ALTER TABLE `sach`
  ADD PRIMARY KEY (`MaSach`), ADD KEY `idx_sach` (`MaSach`,`TenSach`), ADD KEY `FK__Sach__MaLoaiSach__1BFD2C07` (`MaLoaiSach`);
 
 --
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `hoadon`
+--
+ALTER TABLE `hoadon`
+MODIFY `SoHD` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10000009;
+--
+-- AUTO_INCREMENT for table `khachhang`
+--
+ALTER TABLE `khachhang`
+MODIFY `MaKH` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1007;
+--
+-- AUTO_INCREMENT for table `nhanvien`
+--
+ALTER TABLE `nhanvien`
+MODIFY `MaNV` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1006;
+--
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `chitiethoadon`
+--
+ALTER TABLE `chitiethoadon`
+ADD CONSTRAINT `FK__ChiTietHo__MaSac__286302EC` FOREIGN KEY (`MaSach`) REFERENCES `sach` (`MaSach`) ON DELETE NO ACTION ON UPDATE CASCADE,
+ADD CONSTRAINT `FK__ChiTietHoa__SoHD__276EDEB3` FOREIGN KEY (`SoHD`) REFERENCES `hoadon` (`SoHD`) ON DELETE NO ACTION ON UPDATE CASCADE;
+
+--
+-- Constraints for table `hoadon`
+--
+ALTER TABLE `hoadon`
+ADD CONSTRAINT `FK__HoaDon__MaKH__KH` FOREIGN KEY (`MaKH`) REFERENCES `khachhang` (`MaKH`) ON DELETE NO ACTION ON UPDATE CASCADE,
+ADD CONSTRAINT `FK__HoaDon__MaNV_NV` FOREIGN KEY (`MaNVGiao`) REFERENCES `nhanvien` (`MaNV`) ON DELETE NO ACTION ON UPDATE CASCADE;
+
+--
+-- Constraints for table `nguoinhanhang`
+--
+ALTER TABLE `nguoinhanhang`
+ADD CONSTRAINT `FK__NNH__SoHD__HD` FOREIGN KEY (`SoHD`) REFERENCES `hoadon` (`SoHD`) ON DELETE NO ACTION ON UPDATE CASCADE;
+
+--
+-- Constraints for table `nhapsach`
+--
+ALTER TABLE `nhapsach`
+ADD CONSTRAINT `FK__NhapSach_MaNV_NV` FOREIGN KEY (`MaNVKho`) REFERENCES `nhanvien` (`MaNV`) ON DELETE NO ACTION ON UPDATE CASCADE,
+ADD CONSTRAINT `FK__NhapSach__MaSach__Sach` FOREIGN KEY (`MaSach`) REFERENCES `sach` (`MaSach`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
 -- Constraints for table `sach`
