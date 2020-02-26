@@ -2,7 +2,6 @@ package controller.admin;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,10 +22,10 @@ import dao.LoaiSachDao;
 import dao.SachDao;
 import model.LoaiSach;
 import model.Sach;
+import util.MyURL;
 
 @WebServlet(name = "AdminThemSach", urlPatterns = { "/AdminThemSach" })
 public class AdminThemSachController extends HttpServlet {
-	public static final String VITRILUU_HINHANH = "D:/HK119/JAVA/DACN/DACN/code/SachKyAnh/WebContent/view/user/static/img/sanpham";
 	SachDao sachDao = new SachDao();
 	LoaiSachDao loaiSachDao = new LoaiSachDao();
 	
@@ -128,7 +127,7 @@ public class AdminThemSachController extends HttpServlet {
 			Sach sach = new Sach(maSach, tenSach, donGia, urlHinh, noiDung, tacGia, namXB, nXB, maLoaiSach);
 			if(sachDao.insert(sach)) {
 				//Ghi hình ảnh vào thư mục
-				File file = new File(VITRILUU_HINHANH + File.separator + urlHinh);
+				File file = new File(MyURL.VITRILUU_HINHANH + File.separator + urlHinh);
 				for(FileItem item: items) {
 					if( !item.isFormField() ) {
 						try {
