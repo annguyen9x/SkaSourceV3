@@ -20,7 +20,7 @@ Mục tiêu của đề tài là “Xây dựng website bán sách cho hiệu s�
 <p align="center"><img src="image_test/csdl/db.png"></p>
 
 # Chức năng của các tác nhân
-1. Khách hàng<br/>
+##1. Khách hàng<br/>
 - Đăng ký thành viên<br/>
 - Đăng nhập<br/>
 - Cập nhật thông tin tài khoản<br/>
@@ -31,28 +31,28 @@ Mục tiêu của đề tài là “Xây dựng website bán sách cho hiệu s�
 - Cập nhật đơn hàng<br/>
 - Xem lịch sử mua hàng<br/>
 
-2. Người quản trị (Admin)<br/>
+##2. Người quản trị (Admin)<br/>
 - Đăng nhập<br/>
 - Xem danh sách đơn hàng<br/>
 - Xử lý đơn hàng<br/>
 - Cập nhật nhân viên<br/>
 - Cập nhật sách<br/>
 
-3. Nhân viên kho <br/>
+##3. Nhân viên kho <br/>
 - Đăng nhập<br/>
 - Xem danh sách đơn hàng cần chuẩn bị<br/>
 - Xem thông tin đơn hàng<br/>
 - Cập nhật tình trạng đơn hàng<br/>
 - Nhập sách<br/>
 
-4. Nhân viên giao hàng<br/>
+##4. Nhân viên giao hàng<br/>
 - Đăng nhập<br/>
 - Xem danh sách đơn hàng cần giao<br/>
 - Xem thông tin đơn hàng	<br/>
 - Cập nhật tình trạng đơn hàng<br/>
 
 # Một số giao diện
-a. Giao diện người dùng<br/>
+##a. Giao diện người dùng<br/>
 
 #### 1. Trang chủ
 
@@ -100,9 +100,9 @@ a. Giao diện người dùng<br/>
 	</kbd>
 </p>
 
-b. Giao diện quản trị<br/>
+##b. Giao diện quản trị<br/>
 
-#### 1. Xử lý đơn hàng(Admin)
+#### 1. Xử lý đơn hàng(admin)
 
 <p align="left">
 	<kbd>
@@ -110,7 +110,7 @@ b. Giao diện quản trị<br/>
 	</kbd>
 </p>
 
-#### 2. Cập nhật (thêm,sửa,xóa) sách 
+#### 2. Cập nhật (thêm,sửa,xóa) sách (admin)
 
 <p align="left">
 	<kbd>
@@ -118,7 +118,7 @@ b. Giao diện quản trị<br/>
 	</kbd>
 </p>
 
-#### 3. Cập nhật tình trạng đơn hàng(nv Kho)
+#### 3. Cập nhật tình trạng đơn hàng(nv kho)
 <p align="left">
 	<kbd>
 		<img src="image_test/giaoDien/cn_tt_dh_kho.png">
