@@ -20,7 +20,7 @@ Mục tiêu của đề tài là “Xây dựng website bán sách cho hiệu s�
 <p align="center"><img src="image_test/csdl/db.png"></p>
 
 # Chức năng của các tác nhân
-##1. Khách hàng<br/>
+## 1. Khách hàng ##
 - Đăng ký thành viên<br/>
 - Đăng nhập<br/>
 - Cập nhật thông tin tài khoản<br/>
@@ -31,28 +31,28 @@ Mục tiêu của đề tài là “Xây dựng website bán sách cho hiệu s�
 - Cập nhật đơn hàng<br/>
 - Xem lịch sử mua hàng<br/>
 
-##2. Người quản trị (Admin)<br/>
+## 2. Người quản trị (admin) ##
 - Đăng nhập<br/>
 - Xem danh sách đơn hàng<br/>
 - Xử lý đơn hàng<br/>
 - Cập nhật nhân viên<br/>
 - Cập nhật sách<br/>
 
-##3. Nhân viên kho <br/>
+## 3. Nhân viên kho ##
 - Đăng nhập<br/>
 - Xem danh sách đơn hàng cần chuẩn bị<br/>
 - Xem thông tin đơn hàng<br/>
 - Cập nhật tình trạng đơn hàng<br/>
 - Nhập sách<br/>
 
-##4. Nhân viên giao hàng<br/>
+## 4. Nhân viên giao hàng ##
 - Đăng nhập<br/>
 - Xem danh sách đơn hàng cần giao<br/>
 - Xem thông tin đơn hàng	<br/>
 - Cập nhật tình trạng đơn hàng<br/>
 
 # Một số giao diện
-##a. Giao diện người dùng<br/>
+## a. Giao diện người dùng ##
 
 #### 1. Trang chủ
 
@@ -100,7 +100,7 @@ Mục tiêu của đề tài là “Xây dựng website bán sách cho hiệu s�
 	</kbd>
 </p>
 
-##b. Giao diện quản trị<br/>
+## b. Giao diện quản trị ##
 
 #### 1. Xử lý đơn hàng(admin)
 
