@@ -88,7 +88,7 @@ Mục tiêu của đề tài là “Xây dựng website bán sách cho hiệu s�
 
 <p align="left">
 	<kbd>
-		<img src="image_test/giaoDien/xem_thongtin_dh.png">
+		<img src="image_test/giaoDien/dathang.png">
 	</kbd>
 </p>
 
