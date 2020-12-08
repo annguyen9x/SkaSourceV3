@@ -115,18 +115,18 @@ public class AdminSuaSachController extends HttpServlet {
 						}
 						if(kiemTraHinhAnh == true){
 							session.setAttribute("LoiSuaSach", "TrungHinhAnh");
-							response.sendRedirect("/SachKyAnh/view/admin/view/admin_sua_sach.jsp");
+							response.sendRedirect("/view/admin/view/admin_sua_sach.jsp");
 							return;
 						}
 					}
 				}
 			} catch (Exception ex) {
 				log("Loi upload" +ex.toString());
-				response.sendRedirect("/SachKyAnh/view/admin/view/admin_sua_sach.jsp");
+				response.sendRedirect("/view/admin/view/admin_sua_sach.jsp");
 			}
 		} else {
 			log("Loi khong tim thay duong dan");
-			response.sendRedirect("/SachKyAnh/view/admin/view/admin_sua_sach.jsp");
+			response.sendRedirect("/view/admin/view/admin_sua_sach.jsp");
 		}
 		
 		boolean isUrlHinhMoi = true;
@@ -193,7 +193,7 @@ public class AdminSuaSachController extends HttpServlet {
 			session.setAttribute("MapTenLoaiSachTheoMLS", mapTenLoaiSachTheoMLS);
 		}
 		
-		response.sendRedirect("/SachKyAnh/AdminCapNhatSach");
+		response.sendRedirect("/AdminCapNhatSach");
 	}
 
 }

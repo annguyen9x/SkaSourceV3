@@ -38,7 +38,7 @@ public class AdminSuaTaiKhoanNhanVienController extends HttpServlet {
 		matKhau = nhanVien.getMatKhau();
 		session.setAttribute("NhanVienSua", nhanVien);
 		
-		response.sendRedirect("/SachKyAnh/view/admin/view/admin_sua_taikhoan.jsp");
+		response.sendRedirect("/view/admin/view/admin_sua_taikhoan.jsp");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -86,11 +86,11 @@ public class AdminSuaTaiKhoanNhanVienController extends HttpServlet {
 					session.removeAttribute("NhanVienSua");
 				}
 				
-				response.sendRedirect("/SachKyAnh/AdminCapNhatTaiKhoan");
+				response.sendRedirect("/AdminCapNhatTaiKhoan");
 				return;
 			}else {
 				session.setAttribute("LoiSuaNhanVien", "Loi sua nhan vien");
-				response.sendRedirect("/SachKyAnh/view/admin/view/admin_sua_taikhoan.jsp");
+				response.sendRedirect("/view/admin/view/admin_sua_taikhoan.jsp");
 				return;
 			}
 		}else {

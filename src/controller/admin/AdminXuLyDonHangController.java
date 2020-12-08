@@ -37,7 +37,7 @@ public class AdminXuLyDonHangController extends HttpServlet {
 		}
 		
 		session.setAttribute("DsNhanVienGiaoHang", dsNhanVienGiaoHang);
-		response.sendRedirect("/SachKyAnh/view/admin/view/admin_xl_donhang.jsp");
+		response.sendRedirect("/view/admin/view/admin_xl_donhang.jsp");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -58,7 +58,7 @@ public class AdminXuLyDonHangController extends HttpServlet {
 		List DsDHXLloi = new ArrayList<>();
 		
 		if( dsSoHD == null ) {
-			response.sendRedirect("/SachKyAnh/view/admin/view/admin_trangchu.jsp");
+			response.sendRedirect("/view/admin/view/admin_trangchu.jsp");
 		}
 		else
 		{
@@ -86,7 +86,7 @@ public class AdminXuLyDonHangController extends HttpServlet {
 				session.setAttribute("DsDHXLloi", DsDHXLloi);
 			}
 			
-			response.sendRedirect("/SachKyAnh/view/admin/view/admin_xl_donhang.jsp");
+			response.sendRedirect("/view/admin/view/admin_xl_donhang.jsp");
 		}
 		
 	}

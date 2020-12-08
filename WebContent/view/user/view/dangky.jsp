@@ -50,9 +50,9 @@
 						        </span>
 						    </h2>
 						    <ul>
-						        <li class="list-li"><a href="/SachKyAnh/userDangNhap" class="text-a"><i class="fa fa-sign-in"></i> Đăng nhập</a></li>
-						        <li class="list-li"><a href="/SachKyAnh/userDangKy" class="text-a"><i class="fa fa-lock"></i> Đăng ký</a></li>
-						        <li class="list-li"><a href="/SachKyAnh/QuenMatKhau" class="text-a"><i class="fa fa-question"></i> Quên mật khẩu</a></li>
+						        <li class="list-li"><a href="/userDangNhap" class="text-a"><i class="fa fa-sign-in"></i> Đăng nhập</a></li>
+						        <li class="list-li"><a href="/userDangKy" class="text-a"><i class="fa fa-lock"></i> Đăng ký</a></li>
+						        <li class="list-li"><a href="/QuenMatKhau" class="text-a"><i class="fa fa-question"></i> Quên mật khẩu</a></li>
 						    </ul>
 						</div>
 					</div>
@@ -73,7 +73,7 @@
 			                    	<h2 class="col-xs-12 text-center">
 			                    		<span>Thông tin đăng ký tài khoản khách hàng</span>
 			                    	</h2>
-									<form method="post" action="/SachKyAnh/userDangKy" id="formDK" onsubmit="return validation();" class="form-horizontal">
+									<form method="post" action="/userDangKy" id="formDK" onsubmit="return validation();" class="form-horizontal">
 										<div class="form-group">
 							                <label for="name" class="col-sm-3 control-label">Họ tên<span class="warning"> (*)</span></label>
 							                <div class="col-sm-9">

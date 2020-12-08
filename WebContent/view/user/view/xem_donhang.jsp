@@ -65,7 +65,7 @@
 						<!-- phần nội dung trang -->
 						<div class="col-md-12 padding-0 nd_trang">
 							<div class="row margin-0">
-								<form method="post" action="/SachKyAnh/XemDonHang" class="form-inline">
+								<form method="post" action="/XemDonHang" class="form-inline">
 						            <div class="form-group">
 					            		<label>Nhập mã đơn hàng </label>
 					            		<input type="text" class="form-control" name="maDH" placeholder="Mã số đơn hàng (VD:10000001)" size="30" required="required">
@@ -219,11 +219,11 @@
 																	KhachHang khachHangSession = (KhachHang)session.getAttribute("TaiKhoan");
 																	if( khachHangSession != null && khachHang != null && (khachHangSession.getEmail()).equals(khachHang.getEmail()) ){
 															%>
-																		<a href="/SachKyAnh/XemCapNhatDonHang" class="btn btn-default">Cập nhật đơn hàng?</a>
+																		<a href="/XemCapNhatDonHang" class="btn btn-default">Cập nhật đơn hàng?</a>
 															<%
 																	}else{
 															%>
-																		<a href="/SachKyAnh/XacNhanEmailDatHang" class="btn btn-default">Cập nhật đơn hàng?</a>
+																		<a href="/XacNhanEmailDatHang" class="btn btn-default">Cập nhật đơn hàng?</a>
 															<%
 																	}
 																}
@@ -235,7 +235,7 @@
 											
 										</div>
 										<div class="nut" style="margin-top:15px;float: left;">
-											<a href="/SachKyAnh/userTrangChu" class="btn btn-default">Trở về trang chủ</a>
+											<a href="/userTrangChu" class="btn btn-default">Trở về trang chủ</a>
 										</div>
 									</div>
 									<!-- kt thong_tin_dh -->

@@ -101,7 +101,7 @@
 											</p>
 											<p><b>Tổng thanh toán: </b><%=numberFormat.format((float)gioHang.get("TongTien")) %><span class="text_underline"> đ</span></p>
 										</div>
-										<a href="/SachKyAnh/userTrangChu" class="btn">Tiếp tục mua hàng</a>
+										<a href="/userTrangChu" class="btn">Tiếp tục mua hàng</a>
 									</div>
 								<%
 										request.removeAttribute("HoanTatDonHang");

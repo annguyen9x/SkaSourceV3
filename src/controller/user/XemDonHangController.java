@@ -32,7 +32,7 @@ public class XemDonHangController extends HttpServlet {
 		if( session.getAttribute("TrangThai") != null ) {
 			session.removeAttribute("TrangThai");
 		}
-		response.sendRedirect("/SachKyAnh/view/user/view/xem_donhang.jsp");
+		response.sendRedirect("/view/user/view/xem_donhang.jsp");
 	}
 	
 	@Override

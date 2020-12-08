@@ -39,7 +39,7 @@ public class AdminXoaTaiKhoanNhanVienController extends HttpServlet {
 			session.setAttribute("LoiXoaNhanVien", "LoiKhoaNgoai");
 		}
 		
-		response.sendRedirect("/SachKyAnh/view/admin/view/admin_capnhat_taikhoan.jsp");
+		response.sendRedirect("/view/admin/view/admin_capnhat_taikhoan.jsp");
 	}
 
 }

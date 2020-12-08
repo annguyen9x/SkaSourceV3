@@ -73,7 +73,7 @@
 						<div class="row margin-0">
 							<!-- noi dung dat hang -->
 							<section class="dat_hang">
-								<form action="/SachKyAnh/CapNhatDonHangHoanTat" method="post" onsubmit="return ktDiaChiGiaoHangCapNhat();" id="datHang" class="form_dathang">
+								<form action="/CapNhatDonHangHoanTat" method="post" onsubmit="return ktDiaChiGiaoHangCapNhat();" id="datHang" class="form_dathang">
 									<div class="col-md-4 col-xs-12 col-xs-12 padding-0 chon_diachi">
 										<h5>1. Loại tài khoản giao hàng</h5>
 										<div class="noi_dung my_border">

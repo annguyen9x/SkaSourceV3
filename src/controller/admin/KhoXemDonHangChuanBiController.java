@@ -19,7 +19,7 @@ import model.NhanVien;
 public class KhoXemDonHangChuanBiController extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.sendRedirect("/SachKyAnh/view/admin/view/kho_xem_dh_canchuanbi.jsp");
+		response.sendRedirect("/view/admin/view/kho_xem_dh_canchuanbi.jsp");
 	}
 
 }

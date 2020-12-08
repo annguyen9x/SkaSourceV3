@@ -20,9 +20,9 @@ public class XemGioHangController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		if( session.getAttribute("CapNhatDonHang") != null ) {
-			response.sendRedirect("/SachKyAnh/view/user/view/capnhat_donhang.jsp");
+			response.sendRedirect("/view/user/view/capnhat_donhang.jsp");
 		}else {
-			response.sendRedirect("/SachKyAnh/view/user/view/gio_hang.jsp");
+			response.sendRedirect("/view/user/view/gio_hang.jsp");
 		}
 	}
 

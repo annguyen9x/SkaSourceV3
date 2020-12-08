@@ -48,7 +48,7 @@ public class XacNhanEmailDatHangController extends HttpServlet {
 				System.out.println("maXacNhanTuServer: " + maXacNhan);
 				session = request.getSession();	
 				session.setAttribute("MaXacNhan", maXacNhan);
-				response.sendRedirect("/SachKyAnh/view/user/view/xacnhan_email_dathang.jsp");
+				response.sendRedirect("/view/user/view/xacnhan_email_dathang.jsp");
 			}else {
 				PrintWriter writer = response.getWriter();
 				writer.print("<script type='text/javascript'>");
@@ -75,10 +75,10 @@ public class XacNhanEmailDatHangController extends HttpServlet {
 		}
 		
 		if(maXacNhanTuServer.equals(maXacNhanTuClient)) {
-			response.sendRedirect("/SachKyAnh/XemCapNhatDonHang");
+			response.sendRedirect("/XemCapNhatDonHang");
 		}else {
 			session.setAttribute("xacNhanEmailDatHang", "mxnSai");
-			response.sendRedirect("/SachKyAnh/view/user/view/xacnhan_email_dathang.jsp");
+			response.sendRedirect("/view/user/view/xacnhan_email_dathang.jsp");
 		}
 	}
 

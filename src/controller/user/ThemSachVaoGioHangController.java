@@ -170,14 +170,14 @@ public class ThemSachVaoGioHangController extends HttpServlet {
 		//Phần chuyển trang
 		String url = request.getParameter("DuongDan");
 		if( url != null &&  url.equals("/view/user/view/chitiet_sp.jsp")) {
-			response.sendRedirect("/SachKyAnh/ChiTietSach?MaSach="+maSach);
+			response.sendRedirect("/ChiTietSach?MaSach="+maSach);
 		}
 		else if( url != null && url.equals("/view/user/view/sp_cungloai.jsp")) {
 			String maLoaiSach = sachDao.getSachTheoMaSach(maSach).getMaLoaiSach();
-			response.sendRedirect("/SachKyAnh/SachTheoLoaiSach?MaLoaiSach="+maLoaiSach);
+			response.sendRedirect("/SachTheoLoaiSach?MaLoaiSach="+maLoaiSach);
 		}
 		else {
-			response.sendRedirect("/SachKyAnh/userTrangChu");
+			response.sendRedirect("/userTrangChu");
 		}
 	}
 

@@ -51,11 +51,11 @@
 						</span>
 					</div>
 					<ul class="nav nav-pills nav-stacked">
-						<li><a href="/SachKyAnh/GiaoHangTrangChu"><i class="fa fa-home"></i> Trang chủ</a></li>
-						<li><a href="/SachKyAnh/GiaoHangXemDonHangGiao"><i class="fa fa-table"></i> Đơn hàng cần giao</a></li>
-						<li><a href="/SachKyAnh/GiaoHangCapNhatTTDH" class="active"><i class="fa fa-edit"></i> Cập nhật tình trạng ĐH</a></li>
-						<li><a href="/SachKyAnh/GiaoHangCapNhatTaiKhoan"><i class="fa fa-address-book"></i> Cập nhật tài khoản</a></li>
-						<li><a href="/SachKyAnh/GiaoHangDangXuat"><i class="fa fa-power-off"></i> Đăng xuất</a></li>
+						<li><a href="/GiaoHangTrangChu"><i class="fa fa-home"></i> Trang chủ</a></li>
+						<li><a href="/GiaoHangXemDonHangGiao"><i class="fa fa-table"></i> Đơn hàng cần giao</a></li>
+						<li><a href="/GiaoHangCapNhatTTDH" class="active"><i class="fa fa-edit"></i> Cập nhật tình trạng ĐH</a></li>
+						<li><a href="/GiaoHangCapNhatTaiKhoan"><i class="fa fa-address-book"></i> Cập nhật tài khoản</a></li>
+						<li><a href="/GiaoHangDangXuat"><i class="fa fa-power-off"></i> Đăng xuất</a></li>
 					</ul>
 					<br>
 				</div>
@@ -77,7 +77,7 @@
 						<div class="noidung_chinh">
 							<p class="tieude_bang">Cập nhật tình trạng đơn hàng</p>
 							<div class="tim_kiem">
-								<form action="/SachKyAnh/GiaoHangCapNhatTTDH" method="post" accept-charset="utf-8">
+								<form action="/GiaoHangCapNhatTTDH" method="post" accept-charset="utf-8">
 									<div class="col-md-4 col-sm-5 col-xs-12 col-md-offset-3 col-md-offset-3" style="padding:0px; ">
 										<select name="DsDonHangChon" class="form-control">
 											<%
@@ -122,7 +122,7 @@
 										session.removeAttribute("TrangThaiXuLyCapNhatTTDH");
 									}
 								%>
-								<form action="/SachKyAnh/GiaoHangXuLyCapNhatTTDH" method="post" accept-charset="utf-8">
+								<form action="/GiaoHangXuLyCapNhatTTDH" method="post" accept-charset="utf-8">
 									<table class="table table-bordered">
 										<thead>
 											<tr>
@@ -146,7 +146,7 @@
 											%>
 														<tr>
 															<td style="font-weight:bold; ">
-																<a href="/SachKyAnh/GiaoHangThongTinDH?SoHD=<%=hoaDon.getSoHD()%>">
+																<a href="/GiaoHangThongTinDH?SoHD=<%=hoaDon.getSoHD()%>">
 																	<%=hoaDon.getSoHD() %>
 																</a>
 															</td>
@@ -182,7 +182,7 @@
 														}
 													}
 													else{
-														response.sendRedirect("/SachKyAnh/view/admin/view/quantri_dangnhap.jsp");
+														response.sendRedirect("/view/admin/view/quantri_dangnhap.jsp");
 													}
 												}
 												if( dhTrongDanhSach == false){
@@ -196,7 +196,7 @@
 										</tbody>
 									</table>
 									<div class="nut" style="text-align:center;">
-										<a class="btn btn-default" href="/SachKyAnh/GiaoHangTrangChu">Thoát</a>
+										<a class="btn btn-default" href="/GiaoHangTrangChu">Thoát</a>
 										<button type="submit" class="btn mybtn" style="background:#F47920; color:#fff;">Lưu</button>
 									</div>
 								</form>
@@ -213,7 +213,7 @@
 	<%
 	}
 	else{
-		response.sendRedirect("/SachKyAnh/view/admin/view/quantri_dangnhap.jsp");
+		response.sendRedirect("/view/admin/view/quantri_dangnhap.jsp");
 	}
 	%>
 </body>

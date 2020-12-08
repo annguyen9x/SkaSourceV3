@@ -32,7 +32,7 @@ public class KhoNhapSachController extends HttpServlet {
 		List<Sach> dsSach = sachDao.dsSach();
 		session.setAttribute("DsSach", dsSach);
 		
-		response.sendRedirect("/SachKyAnh/view/admin/view/kho_nhap_sach.jsp");
+		response.sendRedirect("/view/admin/view/kho_nhap_sach.jsp");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -92,7 +92,7 @@ public class KhoNhapSachController extends HttpServlet {
 			session.setAttribute("KetQuaNhapSach", "TrungMaNS");
 		}
 		
-		response.sendRedirect("/SachKyAnh/view/admin/view/kho_nhap_sach.jsp");
+		response.sendRedirect("/view/admin/view/kho_nhap_sach.jsp");
 	}
 
 }

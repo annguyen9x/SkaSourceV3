@@ -16,7 +16,7 @@ public class KhoCapNhatTTDHController extends HttpServlet {
 		if( session.getAttribute("DsDonHangChon") != null ) {
 			session.removeAttribute("DsDonHangChon");
 		}
-		response.sendRedirect("/SachKyAnh/view/admin/view/kho_cn_tinhtrang_dh.jsp");
+		response.sendRedirect("/view/admin/view/kho_cn_tinhtrang_dh.jsp");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -38,7 +38,7 @@ public class KhoCapNhatTTDHController extends HttpServlet {
 		}
 		session.setAttribute("DsDonHangChon", dsDonHangChon);
 		
-		response.sendRedirect("/SachKyAnh/view/admin/view/kho_cn_tinhtrang_dh.jsp");
+		response.sendRedirect("/view/admin/view/kho_cn_tinhtrang_dh.jsp");
 	}
 
 }

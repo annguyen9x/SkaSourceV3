@@ -57,7 +57,7 @@ public class XoaDonHangController extends HttpServlet {
 				hoaDonDao.delete(soHD);
 				session.removeAttribute("GioHang");
 				session.removeAttribute("CapNhatDonHang");
-				response.sendRedirect("/SachKyAnh/view/user/view/capnhat_donhang.jsp");
+				response.sendRedirect("/view/user/view/capnhat_donhang.jsp");
 				return;
 			}
 			else if( maSach != null && !maSach.equals("HuyDonHang") ){
@@ -78,15 +78,15 @@ public class XoaDonHangController extends HttpServlet {
 						hoaDonDao.delete(soHD);
 						session.removeAttribute("GioHang");
 						session.removeAttribute("CapNhatDonHang");
-						response.sendRedirect("/SachKyAnh/view/user/view/capnhat_donhang.jsp");
+						response.sendRedirect("/view/user/view/capnhat_donhang.jsp");
 						return;
 					}
 				}
 			}
-			response.sendRedirect("/SachKyAnh/XemGioHang");
+			response.sendRedirect("/XemGioHang");
 		}
 		else {
-			response.sendRedirect("/SachKyAnh/userTrangChu");
+			response.sendRedirect("/userTrangChu");
 		}
 
 

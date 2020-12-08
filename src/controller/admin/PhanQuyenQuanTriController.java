@@ -44,7 +44,7 @@ public class PhanQuyenQuanTriController extends HttpServlet {
 				session.setAttribute("DsLoaiSach", dsLoaiSach);
 				session.setAttribute("DsSach", dsSach);
 				
-				response.sendRedirect("/SachKyAnh/AdminTrangChu");
+				response.sendRedirect("/AdminTrangChu");
 			}
 			else if("Kho".equals(nhanvien.getChucVu()) ) {
 				List<Object> dsDonHangVaKhachHang = hoaDonDao.dsDonHangVaKhachHang();
@@ -59,21 +59,21 @@ public class PhanQuyenQuanTriController extends HttpServlet {
 				}
 				session.setAttribute("MapNVGiaoHang", mapNVGiaoHang);
 				
-				response.sendRedirect("/SachKyAnh/KhoTrangChu");
+				response.sendRedirect("/KhoTrangChu");
 			}
 			else if("Giao Hàng".equals(nhanvien.getChucVu()) ) {
 				int maNV = nhanvien.getMaNV();
 				List<Object> dsDonHangVaKhachHang = hoaDonDao.dsDonHangVaKhachHangTheoNVGiao(maNV);
 				session.setAttribute("DsDonHangVaKhachHang", dsDonHangVaKhachHang);
 				
-				response.sendRedirect("/SachKyAnh/GiaoHangTrangChu");
+				response.sendRedirect("/GiaoHangTrangChu");
 			}
 			else {
-				response.sendRedirect("/SachKyAnh/view/admin/view/quantri_dangnhap.jsp");
+				response.sendRedirect("/view/admin/view/quantri_dangnhap.jsp");
 			}
 		}
 		else {
-			response.sendRedirect("/SachKyAnh/view/admin/view/quantri_dangnhap.jsp");
+			response.sendRedirect("/view/admin/view/quantri_dangnhap.jsp");
 		}
 	}
 

@@ -48,7 +48,7 @@ public class KhoXuLyCapNhatTTDHController extends HttpServlet {
 		
 		String[] dsSoHD = request.getParameterValues("SoHD");
 		if( dsSoHD == null) {
-			response.sendRedirect("/SachKyAnh/view/admin/view/kho_trangchu.jsp");
+			response.sendRedirect("/view/admin/view/kho_trangchu.jsp");
 		}
 		else 
 		{
@@ -129,7 +129,7 @@ public class KhoXuLyCapNhatTTDHController extends HttpServlet {
 			if(DsDHCNTTDHloi.size() > 0) {
 				session.setAttribute("DsDHCNTTDHloi", DsDHCNTTDHloi);
 			}
-			response.sendRedirect("/SachKyAnh/view/admin/view/kho_cn_tinhtrang_dh.jsp");
+			response.sendRedirect("/view/admin/view/kho_cn_tinhtrang_dh.jsp");
 		}
 		
 	}

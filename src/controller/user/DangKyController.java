@@ -72,7 +72,7 @@ public class DangKyController extends HttpServlet {
 					HttpSession session = req.getSession();	
 					session.setAttribute("TaiKhoanDK", kh);
 					session.setAttribute("MaXacNhan", maXacNhan);
-					resp.sendRedirect("/SachKyAnh/view/user/view/xacthuc_dangky.jsp");
+					resp.sendRedirect("/view/user/view/xacthuc_dangky.jsp");
 				}else {
 					PrintWriter writer = resp.getWriter();
 					writer.print("<script type='text/javascript'>");
@@ -92,6 +92,6 @@ public class DangKyController extends HttpServlet {
 	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.sendRedirect("/SachKyAnh/view/user/view/dangky.jsp");
+		response.sendRedirect("/view/user/view/dangky.jsp");
 	}
 }

@@ -49,12 +49,12 @@
 						</span>
 					</div>
 					<ul class="nav nav-pills nav-stacked">
-						<li><a href="/SachKyAnh/KhoTrangChu"><i class="fa fa-home"></i> Trang chủ</a></li>
-						<li><a href="/SachKyAnh/KhoXemDonHangChuanBi"><i class="fa fa-table"></i> Đơn hàng cần chuẩn bị</a></li>
-						<li><a href="/SachKyAnh/KhoCapNhatTTDH"><i class="fa fa-edit"></i> Cập nhật tình trạng ĐH</a></li>
-						<li><a href="/SachKyAnh/KhoNhapSach"><i class="fa fa-edit"></i> Nhập sách</a></li>
-						<li><a href="/SachKyAnh/KhoCapNhatTaiKhoan" class="active"><i class="fa fa-address-book"></i> Cập nhật tài khoản</a></li>
-						<li><a href="/SachKyAnh/KhoDangXuat"><i class="fa fa-power-off"></i> Đăng xuất</a></li>
+						<li><a href="/KhoTrangChu"><i class="fa fa-home"></i> Trang chủ</a></li>
+						<li><a href="/KhoXemDonHangChuanBi"><i class="fa fa-table"></i> Đơn hàng cần chuẩn bị</a></li>
+						<li><a href="/KhoCapNhatTTDH"><i class="fa fa-edit"></i> Cập nhật tình trạng ĐH</a></li>
+						<li><a href="/KhoNhapSach"><i class="fa fa-edit"></i> Nhập sách</a></li>
+						<li><a href="/KhoCapNhatTaiKhoan" class="active"><i class="fa fa-address-book"></i> Cập nhật tài khoản</a></li>
+						<li><a href="/KhoDangXuat"><i class="fa fa-power-off"></i> Đăng xuất</a></li>
 					</ul>
 					<br>
 				</div>
@@ -90,7 +90,7 @@
 	                    		session.removeAttribute("thatBai");
 	                    	}
 	                    	%>
-	                    	<form method="post" action="/SachKyAnh/KhoCapNhatTaiKhoan" id="formCN" onsubmit="return formValidationAll();" class="form-horizontal">
+	                    	<form method="post" action="/KhoCapNhatTaiKhoan" id="formCN" onsubmit="return formValidationAll();" class="form-horizontal">
 								<div class="form-group">
 					                <label for="name" class="col-sm-3 control-label">Họ tên (<span class="warning">*</span>)</label>
 					                <div class="col-sm-9">
@@ -259,7 +259,7 @@
 	<%
 	}
 	else{
-		response.sendRedirect("/SachKyAnh/view/admin/view/quantri_dangnhap.jsp");
+		response.sendRedirect("/view/admin/view/quantri_dangnhap.jsp");
 	}
 	%>	
 </body>

@@ -40,7 +40,7 @@ public class AdminCapNhatSachController extends HttpServlet {
 		}
 		session.setAttribute("MapTenLoaiSachTheoMLS", mapTenLoaiSachTheoMLS);
 		
-		response.sendRedirect("/SachKyAnh/view/admin/view/admin_capnhat_sach.jsp");
+		response.sendRedirect("/view/admin/view/admin_capnhat_sach.jsp");
 	}
 
 }

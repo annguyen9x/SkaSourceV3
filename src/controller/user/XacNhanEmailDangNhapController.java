@@ -34,7 +34,7 @@ public class XacNhanEmailDangNhapController extends HttpServlet {
 		else {
 			session.setAttribute("xacNhanDangNhapQMK", "mxnSai");
 		}
-		response.sendRedirect("/SachKyAnh/view/user/view/quen_matkhau.jsp");
+		response.sendRedirect("/view/user/view/quen_matkhau.jsp");
 	}
 
 }

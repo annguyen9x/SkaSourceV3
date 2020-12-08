@@ -66,14 +66,14 @@
 									if( gioHang == null ){
 								%>
 									<div class="alert alert-danger">
-										<strong>Không có sản phẩm nào trong giỏ hàng.</strong> Nhấn <a href="/SachKyAnh/userTrangChu" class="text-a">"Quay lại"</a> để mua hàng !
+										<strong>Không có sản phẩm nào trong giỏ hàng.</strong> Nhấn <a href="/userTrangChu" class="text-a">"Quay lại"</a> để mua hàng !
 									</div>
 								<%
 									}else{
 										Map<String, Object> danhSachChiTietGioHang = (Map<String, Object>)gioHang.get("DanhSachChiTietGioHang");
 										if( danhSachChiTietGioHang != null ){
 								%>
-									<form action="/SachKyAnh/CapNhatGioHang" method="post" onsubmit="return ktSoLuongCapNhat();" id="gioHang" class="form_giohang">
+									<form action="/CapNhatGioHang" method="post" onsubmit="return ktSoLuongCapNhat();" id="gioHang" class="form_giohang">
 										<table class="table table-bordered">
 											<thead>
 												<tr>
@@ -124,7 +124,7 @@
 														<%=numberFormat.format((int)chiTietGioHang.get("SoLuong")*(float)chiTietGioHang.get("DonGia")) %> <span class="text_underline">đ</span>
 													</td>
 													<td class="trash">
-														<a href="/SachKyAnh/XoaGioHang?MaSach=<%=ketQua.getKey()%>">
+														<a href="/XoaGioHang?MaSach=<%=ketQua.getKey()%>">
 															<span class="glyphicon glyphicon-trash"></span>
 														</a>
 													</td>
@@ -142,9 +142,9 @@
 											</span>
 										</div>
 										<div class="nut">
-											<a href="/SachKyAnh/XoaGioHang?MaSach=XoaTatCa" class="btn btn-default mua_them">Xóa giỏ hàng</a>
+											<a href="/XoaGioHang?MaSach=XoaTatCa" class="btn btn-default mua_them">Xóa giỏ hàng</a>
 											<button type="submit" class="btn  btn-default cap_nhat">Cập nhật</button>
-											<a href="/SachKyAnh/DatHang" class="btn  btn-default dat_hang">Tiến hành đặt hàng</a>
+											<a href="/DatHang" class="btn  btn-default dat_hang">Tiến hành đặt hàng</a>
 										</div>
 									</form>
 									<%

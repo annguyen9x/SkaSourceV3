@@ -58,9 +58,9 @@
 						        </span>
 						    </h2>
 						    <ul>
-						        <li class="list-li"><a href="/SachKyAnh/userCapNhatTaiKhoan" class="text-a"><span class="glyphicon glyphicon-user"></span> Cập nhật tài khoản</a></li>
-						        <li class="list-li"><a href="/SachKyAnh/LichSuMuaHang" class="text-a"><i class="glyphicon glyphicon-list"></i> Xem lịch sử mua hàng</a></li>
-						        <li class="list-li"><a href="/SachKyAnh/userDangXuat" class="text-a"><i class="glyphicon glyphicon-log-out"></i> Đăng xuất</a></li>
+						        <li class="list-li"><a href="/userCapNhatTaiKhoan" class="text-a"><span class="glyphicon glyphicon-user"></span> Cập nhật tài khoản</a></li>
+						        <li class="list-li"><a href="/LichSuMuaHang" class="text-a"><i class="glyphicon glyphicon-list"></i> Xem lịch sử mua hàng</a></li>
+						        <li class="list-li"><a href="/userDangXuat" class="text-a"><i class="glyphicon glyphicon-log-out"></i> Đăng xuất</a></li>
 						    </ul>
 						</div>
 					</div>
@@ -129,7 +129,7 @@
 													</td>
 													<td><%=hoaDon.getTinhTrangDH() %></td>
 													<td>
-														<form action="/SachKyAnh/XemDonHang" method="post">
+														<form action="/XemDonHang" method="post">
 															<input type="hidden" name="maDH" value="<%=hoaDon.getSoHD() %>" />
 															<button type="submit" class="btn btn-link">Xem chi tiết</button>
 														</form>

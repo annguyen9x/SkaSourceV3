@@ -64,7 +64,7 @@
 			<div class="col-md-12 col-sm-12 col-xs-12 padding-0 grid_group_sp">
 				<div class="group_sp">
 					<div class="anh_sp">
-						<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sach.getMaSach() %>" class="">
+						<a href="/ChiTietSach?MaSach=<%=sach.getMaSach() %>" class="">
 							<img class="anh" src="${url}/static/img/sanpham/<%=sach.getUrlHinh() %>" title="sp" alt="anhsp">
 							<%
 							int soLuongDB;
@@ -87,7 +87,7 @@
 							}
 							if(soLuongDB >= 1){
 							%>
-								<a href="/SachKyAnh/ThemSachVaoGioHang?MaSach=<%=sach.getMaSach() %>&SoLuong=1" class="them_gh text-a" >
+								<a href="/ThemSachVaoGioHang?MaSach=<%=sach.getMaSach() %>&SoLuong=1" class="them_gh text-a" >
 									<span class="glyphicon glyphicon-shopping-cart"></span>
 									<span class="text"> Thêm vào giỏ</span>
 								</a>
@@ -98,7 +98,7 @@
 					</div>
 					<div class="tensp_giasp">
 						<h3 class="tensp">
-							<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sach.getMaSach() %>" class="text-a">
+							<a href="/ChiTietSach?MaSach=<%=sach.getMaSach() %>" class="text-a">
 								<%=sach.getTenSach() %>
 							</a>
 						</h3>	
@@ -109,7 +109,7 @@
 									out.print(numberFormat.format(sach.getDonGia()));
 								%> đ
 							</span>
-							<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sach.getMaSach() %>" class="chi_tiet">
+							<a href="/ChiTietSach?MaSach=<%=sach.getMaSach() %>" class="chi_tiet">
 								Chi Tiết
 							</a>
 						</div>

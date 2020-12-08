@@ -67,7 +67,7 @@ public class AdminXoaSachController extends HttpServlet {
 			session.setAttribute("LoiXoaSach", "LoiKhoaNgoai");
 		}
 		
-		response.sendRedirect("/SachKyAnh/view/admin/view/admin_capnhat_sach.jsp");
+		response.sendRedirect("/view/admin/view/admin_capnhat_sach.jsp");
 	}
 
 }

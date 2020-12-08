@@ -19,7 +19,7 @@ public class QuenMatKhauController extends HttpServlet {
 	KhachHangDao khachHangDao = new KhachHangDao();
 			
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.sendRedirect("/SachKyAnh/view/user/view/quen_matkhau.jsp");
+		response.sendRedirect("/view/user/view/quen_matkhau.jsp");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -58,7 +58,7 @@ public class QuenMatKhauController extends HttpServlet {
 		}else {
 			session.setAttribute("KiemTraEmailDangNhap", "EmailKhongTonTai");
 		}
-		response.sendRedirect("/SachKyAnh/view/user/view/quen_matkhau.jsp");
+		response.sendRedirect("/view/user/view/quen_matkhau.jsp");
 	}
 
 }

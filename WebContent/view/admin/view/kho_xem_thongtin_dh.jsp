@@ -58,12 +58,12 @@
 						</span>
 					</div>
 					<ul class="nav nav-pills nav-stacked">
-						<li><a href="/SachKyAnh/KhoTrangChu"><i class="fa fa-home"></i> Trang chủ</a></li>
-						<li><a href="/SachKyAnh/KhoXemDonHangChuanBi"><i class="fa fa-table"></i> Đơn hàng cần chuẩn bị</a></li>
-						<li><a href="/SachKyAnh/KhoCapNhatTTDH"><i class="fa fa-edit"></i> Cập nhật tình trạng ĐH</a></li>
-						<li><a href="/SachKyAnh/KhoNhapSach"><i class="fa fa-edit"></i> Nhập sách</a></li>
-						<li><a href="/SachKyAnh/KhoCapNhatTaiKhoan"><i class="fa fa-address-book"></i> Cập nhật tài khoản</a></li>
-						<li><a href="/SachKyAnh/KhoDangXuat"><i class="fa fa-power-off"></i> Đăng xuất</a></li>
+						<li><a href="/KhoTrangChu"><i class="fa fa-home"></i> Trang chủ</a></li>
+						<li><a href="/KhoXemDonHangChuanBi"><i class="fa fa-table"></i> Đơn hàng cần chuẩn bị</a></li>
+						<li><a href="/KhoCapNhatTTDH"><i class="fa fa-edit"></i> Cập nhật tình trạng ĐH</a></li>
+						<li><a href="/KhoNhapSach"><i class="fa fa-edit"></i> Nhập sách</a></li>
+						<li><a href="/KhoCapNhatTaiKhoan"><i class="fa fa-address-book"></i> Cập nhật tài khoản</a></li>
+						<li><a href="/KhoDangXuat"><i class="fa fa-power-off"></i> Đăng xuất</a></li>
 					</ul>
 					<br>
 				</div>
@@ -98,7 +98,7 @@
 								%>
 								<div class="col-md-12 col-sm-12 col-xs-12" style="margin-bottom:7px; padding:0px; margin-top:-20px;">
 									<span style="font-weight:bold;">Mã ĐH: </span><span><%=hoaDon.getSoHD() %></span>&nbsp; &nbsp;
-									<a target="_black" href="/SachKyAnh/KhoXuatHoaDon?soHD=<%=hoaDon.getSoHD()%>" class="btn btn-danger">
+									<a target="_black" href="/KhoXuatHoaDon?soHD=<%=hoaDon.getSoHD()%>" class="btn btn-danger">
 									<span class="glyphicon glyphicon-print"></span> In hóa đơn </a>
 								</div>
 								<!-- Chi tiết Đh -->
@@ -212,7 +212,7 @@
 								<%
 									}
 									else{
-										response.sendRedirect("/SachKyAnh/view/admin/view/admin_trangchu.jsp");
+										response.sendRedirect("/view/admin/view/admin_trangchu.jsp");
 									}
 								%>
 							</div><!-- Thông tin đơn hàng -->
@@ -227,7 +227,7 @@
 	<%
 	}
 	else{
-		response.sendRedirect("/SachKyAnh/view/admin/view/quantri_dangnhap.jsp");
+		response.sendRedirect("/view/admin/view/quantri_dangnhap.jsp");
 	}
 	%>
 </body>

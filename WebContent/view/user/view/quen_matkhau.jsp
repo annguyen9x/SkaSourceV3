@@ -50,9 +50,9 @@
 						        </span>
 						    </h2>
 						    <ul>
-						        <li class="list-li"><a href="/SachKyAnh/userDangNhap" class="text-a"><i class="fa fa-sign-in"></i> Đăng nhập</a></li>
-						        <li class="list-li"><a href="/SachKyAnh/userDangKy" class="text-a"><i class="fa fa-lock"></i> Đăng ký</a></li>
-						        <li class="list-li"><a href="/SachKyAnh/QuenMatKhau" class="text-a"><i class="fa fa-question"></i> Quên mật khẩu</a></li>
+						        <li class="list-li"><a href="/userDangNhap" class="text-a"><i class="fa fa-sign-in"></i> Đăng nhập</a></li>
+						        <li class="list-li"><a href="/userDangKy" class="text-a"><i class="fa fa-lock"></i> Đăng ký</a></li>
+						        <li class="list-li"><a href="/QuenMatKhau" class="text-a"><i class="fa fa-question"></i> Quên mật khẩu</a></li>
 						    </ul>
 						</div>
 					</div>
@@ -76,7 +76,7 @@
 									if(xacNhanDangNhapQMK != null && xacNhanDangNhapQMK.equals("mxnChinhXac")){
 									%>
 										<div class="alert alert-success">
-											<strong>Đăng nhập thành công.</strong> Vui lòng vào mục <a href="/SachKyAnh/userCapNhatTaiKhoan">cập nhật tài khoản</a> để đặt lại mật khẩu !
+											<strong>Đăng nhập thành công.</strong> Vui lòng vào mục <a href="/userCapNhatTaiKhoan">cập nhật tài khoản</a> để đặt lại mật khẩu !
 										</div>
 									<%
 										session.removeAttribute("xacNhanDangNhapQMK");
@@ -99,7 +99,7 @@
 				                    		<span class="lay_mk">Cung cấp email để đăng nhập bằng mã xác nhận</span>
 				                    	</h2>
 				                    	<div class="col-md-6 col-md-offset-3">
-											<form method="post" action="/SachKyAnh/QuenMatKhau" class="form-horizontal">
+											<form method="post" action="/QuenMatKhau" class="form-horizontal">
 												<div class="form-group">
 									            	<label for="email">Email</label>
 								            		<input type="email" class="form-control" name="email" value="<%if(email != null){out.print(email);} %>" placeholder="Email đăng nhập" required="required">
@@ -108,7 +108,7 @@
 									            		<button type="submit" class="btn" style="background:#70ba28;">
 									            			Gửi mã xác nhận
 									            		</button>
-									            		<a href="/SachKyAnh/userDangNhap">Quay lại đăng nhập</a>
+									            		<a href="/userDangNhap">Quay lại đăng nhập</a>
 									            		<%
 									            			if(kiemTraEmailDangNhap != null && kiemTraEmailDangNhap.equals("EmailTonTai")){
 									            		%>
@@ -125,7 +125,7 @@
 							            	  	if(kiemTraEmailDangNhap != null && kiemTraEmailDangNhap.equals("EmailTonTai")){
 							            	  		
 							            	  %>
-									          <form method="post" action="/SachKyAnh/XacNhanEmailDangNhap" class="form-horizontal">
+									          <form method="post" action="/XacNhanEmailDangNhap" class="form-horizontal">
 									            <div class="form-group">
 								            		<label>Nhập mã xác nhận</label>
 								            		<input type="text" class="form-control" name="maXN" placeholder="Nhập mã xác nhận được gửi về email" required="required">

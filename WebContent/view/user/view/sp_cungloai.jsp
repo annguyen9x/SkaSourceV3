@@ -78,7 +78,7 @@
 														<div class="col-md-12 col-sm-12 col-xs-12 padding-0">
 															<div class="group_sp my_border">
 																<div class="anh_sp">
-																	<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sachDau.getMaSach() %>" class="">
+																	<a href="/ChiTietSach?MaSach=<%=sachDau.getMaSach() %>" class="">
 																		<img class="anh" src="${url}/static/img/sanpham/<%=sachDau.getUrlHinh() %>" title="sp" alt="anhsp">
 																		<%
 																		int soLuongDB;
@@ -101,7 +101,7 @@
 																		}
 																		if(soLuongDB >= 1){
 																		%>
-																			<a href="/SachKyAnh/ThemSachVaoGioHang?MaSach=<%=sachDau.getMaSach() %>&SoLuong=1&DuongDan=<%= request.getServletPath() %>" class="them_gh text-a" >
+																			<a href="/ThemSachVaoGioHang?MaSach=<%=sachDau.getMaSach() %>&SoLuong=1&DuongDan=<%= request.getServletPath() %>" class="them_gh text-a" >
 																				<span class="glyphicon glyphicon-shopping-cart"></span>
 																				<span class="text"> Thêm vào giỏ</span>
 																			</a>
@@ -112,7 +112,7 @@
 																</div>
 																<div class="tensp_giasp">
 																	<h3 class="tensp">
-																		<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sachDau.getMaSach() %>" class="text-a">
+																		<a href="/ChiTietSach?MaSach=<%=sachDau.getMaSach() %>" class="text-a">
 																			<%=sachDau.getTenSach() %>
 																		</a>
 																	</h3>	
@@ -123,7 +123,7 @@
 																				out.print(numberFormat.format(sachDau.getDonGia()));
 																			%> đ
 																		</span>
-																		<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sachDau.getMaSach() %>" class="chi_tiet">
+																		<a href="/ChiTietSach?MaSach=<%=sachDau.getMaSach() %>" class="chi_tiet">
 																			Chi Tiết
 																		</a>
 																	</div>

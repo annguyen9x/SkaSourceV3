@@ -76,7 +76,7 @@
 					<div class="col-md-12 col-sm-12 col-xs-12 padding-0 top_nd_trang">
 						<div class="top">
 							<h2>
-								<a href="/SachKyAnh/SachTheoLoaiSach?MaLoaiSach=<%=loaiSach.getMaLoaiSach() %>" class="text-a"><%=loaiSach.getTenLoaiSach() %> </a>
+								<a href="/SachTheoLoaiSach?MaLoaiSach=<%=loaiSach.getMaLoaiSach() %>" class="text-a"><%=loaiSach.getTenLoaiSach() %> </a>
 								<span class="glyphicon glyphicon-chevron-right"></span>
 								<a href="#"  class="text-a"> <%=sachDau.getTenSach() %> </a>
 								<span class="glyphicon glyphicon-chevron-right"></span> Chi tiết sản phẩm
@@ -161,13 +161,13 @@
 												</p>
 											</div>
 											<div class="sl_button">
-												<form method="get" action="/SachKyAnh/ThemSachVaoGioHang" onsubmit="return ktSoLuongMua('<%=soLuongDB %>', '<%=sachDau.getTenSach() %>');" id="formChiTietSP">
+												<form method="get" action="/ThemSachVaoGioHang" onsubmit="return ktSoLuongMua('<%=soLuongDB %>', '<%=sachDau.getTenSach() %>');" id="formChiTietSP">
 												 	<span class="label_sl">Số lượng: </span>
 													<input type='number' name='SoLuong' value='1' class="sl_mua"><br/> 
 													<input type='hidden' name='DuongDan' value='<%= request.getServletPath() %>'><br/> 
 													<div class="col-md-12 col-sm-12 col-xs-12 padding-0 nut">
 														<div class="col-md-3 col-sm-4 col-xs-4 padding-0 margin_right">
-															<a href="/SachKyAnh/userTrangChu" class="">
+															<a href="/userTrangChu" class="">
 																<button type="button" class="btn btn-default">
 																	<span class="thoat">Thoát</span>
 																</button>

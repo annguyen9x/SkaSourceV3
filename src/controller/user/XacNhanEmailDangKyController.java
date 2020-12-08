@@ -38,7 +38,7 @@ public class XacNhanEmailDangKyController extends HttpServlet {
 			}else {
 				sessionKQ.setAttribute("maXacNhanDKSai", "Mã xác nhận không chính xác, mời nhập lại !");
 			}
-			response.sendRedirect("/SachKyAnh/view/user/view/xacthuc_dangky.jsp");
+			response.sendRedirect("/view/user/view/xacthuc_dangky.jsp");
 	}
 	
 }

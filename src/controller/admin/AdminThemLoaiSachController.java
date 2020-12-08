@@ -27,7 +27,7 @@ public class AdminThemLoaiSachController extends HttpServlet {
 			session.removeAttribute("LoiThemLoaiSach");
 		}
 		
-		response.sendRedirect("/SachKyAnh/view/admin/view/admin_them_loaisach.jsp");
+		response.sendRedirect("/view/admin/view/admin_them_loaisach.jsp");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -70,11 +70,11 @@ public class AdminThemLoaiSachController extends HttpServlet {
 				session.setAttribute("MapSlSachThuocLoai", mapSlSachThuocLoai);
 			}
 			
-			response.sendRedirect("/SachKyAnh/view/admin/view/admin_capnhat_loaisach.jsp");
+			response.sendRedirect("/view/admin/view/admin_capnhat_loaisach.jsp");
 		}
 		else if( loaiSachDB != null ){
 			session.setAttribute("LoiThemLoaiSach", "TrungMaLoaiSach");
-			response.sendRedirect("/SachKyAnh/view/admin/view/admin_them_loaisach.jsp");
+			response.sendRedirect("/view/admin/view/admin_them_loaisach.jsp");
 		}
 	}
 

@@ -61,12 +61,12 @@
 						</span>
 					</div>
 					<ul class="nav nav-pills nav-stacked">
-						<li><a href="/SachKyAnh/KhoTrangChu" class="active"><i class="fa fa-home"></i> Trang chủ</a></li>
-						<li><a href="/SachKyAnh/KhoXemDonHangChuanBi"><i class="fa fa-table"></i> Đơn hàng cần chuẩn bị</a></li>
-						<li><a href="/SachKyAnh/KhoCapNhatTTDH"><i class="fa fa-edit"></i> Cập nhật tình trạng ĐH</a></li>
-						<li><a href="/SachKyAnh/KhoNhapSach"><i class="fa fa-edit"></i> Nhập sách</a></li>
-						<li><a href="/SachKyAnh/KhoCapNhatTaiKhoan"><i class="fa fa-address-book"></i> Cập nhật tài khoản</a></li>
-						<li><a href="/SachKyAnh/KhoDangXuat"><i class="fa fa-power-off"></i> Đăng xuất</a></li>
+						<li><a href="/KhoTrangChu" class="active"><i class="fa fa-home"></i> Trang chủ</a></li>
+						<li><a href="/KhoXemDonHangChuanBi"><i class="fa fa-table"></i> Đơn hàng cần chuẩn bị</a></li>
+						<li><a href="/KhoCapNhatTTDH"><i class="fa fa-edit"></i> Cập nhật tình trạng ĐH</a></li>
+						<li><a href="/KhoNhapSach"><i class="fa fa-edit"></i> Nhập sách</a></li>
+						<li><a href="/KhoCapNhatTaiKhoan"><i class="fa fa-address-book"></i> Cập nhật tài khoản</a></li>
+						<li><a href="/KhoDangXuat"><i class="fa fa-power-off"></i> Đăng xuất</a></li>
 					</ul>
 					<br>
 				</div>
@@ -107,7 +107,7 @@
 						<div class="noidung_chinh">
 							<p class="tieude_bang">Danh sách đơn hàng</p>
 							<div class="tim_kiem">
-								<form action="/SachKyAnh/KhoTrangChu" method="post" accept-charset="utf-8">
+								<form action="/KhoTrangChu" method="post" accept-charset="utf-8">
 									<div class="col-md-4 col-sm-5 col-xs-12 col-md-offset-3 col-md-offset-3" style="padding:0px; ">
 										<select name="DsDonHangChon" class="form-control">
 											<%
@@ -224,13 +224,13 @@
 												<td><%=hoaDon.getNgayDat() %></td>
 												<td><%=hoaDon.getTinhTrangDH() %></td>
 												<td>
-													<a href="/SachKyAnh/KhoThongTinDH?SoHD=<%=hoaDon.getSoHD()%>">Xem chi tiết</a>
+													<a href="/KhoThongTinDH?SoHD=<%=hoaDon.getSoHD()%>">Xem chi tiết</a>
 												</td>
 											</tr>
 										<%	
 													}
 												}else{
-													response.sendRedirect("/SachKyAnh/view/admin/view/quantri_dangnhap.jsp");
+													response.sendRedirect("/view/admin/view/quantri_dangnhap.jsp");
 												}
 											}
 											if( dhTrongDanhSach == false){
@@ -256,7 +256,7 @@
 	<%
 	}
 	else{
-		response.sendRedirect("/SachKyAnh/view/admin/view/quantri_dangnhap.jsp");
+		response.sendRedirect("/view/admin/view/quantri_dangnhap.jsp");
 	}
 	%>
 </body>

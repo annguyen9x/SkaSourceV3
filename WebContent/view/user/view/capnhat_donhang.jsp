@@ -67,7 +67,7 @@
 									if( gioHang == null && capNhatDonHang == null){
 								%>
 									<div class="alert alert-danger">
-										<strong>Đơn hàng của bạn đã bị hủy.</strong> Nhấn <a href="/SachKyAnh/userTrangChu" class="text-a">"Quay lại"</a> để mua hàng và tạo đơn hàng mới !
+										<strong>Đơn hàng của bạn đã bị hủy.</strong> Nhấn <a href="/userTrangChu" class="text-a">"Quay lại"</a> để mua hàng và tạo đơn hàng mới !
 									</div>
 								<%
 									}
@@ -76,7 +76,7 @@
 										Map<String, Object> danhSachChiTietGioHang = (Map<String, Object>)gioHang.get("DanhSachChiTietGioHang");
 										if( danhSachChiTietGioHang != null ){
 								%>
-								<form action="/SachKyAnh/CapNhatDonHang" method="post" onsubmit="return ktSoLuongCapNhat();" id="gioHang" class="form_giohang">
+								<form action="/CapNhatDonHang" method="post" onsubmit="return ktSoLuongCapNhat();" id="gioHang" class="form_giohang">
 									<table class="table">
 										<thead>
 											<tr>
@@ -127,7 +127,7 @@
 													<%=numberFormat.format((int)chiTietGioHang.get("SoLuong")*(float)chiTietGioHang.get("DonGia")) %> <span class="text_underline">đ</span>
 												</td>
 												<td class="trash">
-													<a href="/SachKyAnh/XoaDonHang?MaSach=<%=ketQua.getKey()%>">
+													<a href="/XoaDonHang?MaSach=<%=ketQua.getKey()%>">
 														<span class="glyphicon glyphicon-trash"></span>
 													</a>
 												</td>
@@ -145,9 +145,9 @@
 										</span>
 									</div>
 									<div class="nut">
-										<a href="/SachKyAnh/XoaDonHang?MaSach=HuyDonHang" class="btn btn-default mua_them">Hủy đơn hàng</a>
+										<a href="/XoaDonHang?MaSach=HuyDonHang" class="btn btn-default mua_them">Hủy đơn hàng</a>
 										<button type="submit" class="btn  btn-default cap_nhat">Cập nhật</button>
-										<a href="/SachKyAnh/CapNhatDonHangHoanTat" class="btn  btn-default dat_hang">Bước tiếp theo</a>
+										<a href="/CapNhatDonHangHoanTat" class="btn  btn-default dat_hang">Bước tiếp theo</a>
 									</div>
 								</form>
 								<%

@@ -42,9 +42,9 @@ public class DatHangController extends HttpServlet {
 		HttpSession session = request.getSession();
 		Map<String, Object> gioHang = (Map<String, Object>)session.getAttribute("GioHang");
 		if( gioHang != null) {
-			response.sendRedirect("/SachKyAnh/view/user/view/dat_hang.jsp");
+			response.sendRedirect("/view/user/view/dat_hang.jsp");
 		}else {
-			response.sendRedirect("/SachKyAnh/userTrangChu");
+			response.sendRedirect("/userTrangChu");
 		}
 	}
 	

@@ -77,13 +77,14 @@
 										session.removeAttribute("xacNhanEmailDatHang");
 									}
 									%>
-									<form method="post" action="/SachKyAnh/XacNhanEmailDatHang" id="formTDDH">
+									<form method="post" action="/XacNhanEmailDatHang" id="formTDDH">
 							            <div class="form-group">
 							            	<label for="email">Đăng nhập vào email <span style="color:#F47920;">&quot;
 							            	<% if( khachHang != null ){
 							            		out.print(khachHang.getEmail());
 							            	}else{
-							            		out.print(nguoiNhanHang.getEmail());
+							            		/* out.print(nguoiNhanHang.getEmail()); */
+							            		out.print(khachHang.getEmail());
 							            	}%>&quot;</span> để lấy mã xác nhận</label>
 							            </div>
 							            <div class="form-group">
@@ -93,7 +94,7 @@
 						            		</div>
 							            </div>
 							            <div class="nut_cn">
-								            <a href="/SachKyAnh/userTrangChu" class="btn" style="background:#333333">Hủy cập nhật</a>
+								            <a href="/userTrangChu" class="btn" style="background:#333333">Hủy cập nhật</a>
 							            	<button type="submit" class="btn">Tiến hành cập nhật</button>
 							            </div>
 									</form>

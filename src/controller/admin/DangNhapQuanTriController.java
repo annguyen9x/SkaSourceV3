@@ -18,7 +18,7 @@ public class DangNhapQuanTriController extends HttpServlet {
 	NhanVienDao  nhanVienDao = new NhanVienDao();
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.sendRedirect("/SachKyAnh/view/admin/view/quantri_dangnhap.jsp");
+		response.sendRedirect("/view/admin/view/quantri_dangnhap.jsp");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -34,7 +34,7 @@ public class DangNhapQuanTriController extends HttpServlet {
 			if( nhanvien != null ) {
 				HttpSession session = request.getSession(true);
 				session.setAttribute("NhanVien", nhanvien);
-				response.sendRedirect("/SachKyAnh/PhanQuyenQuanTri");
+				response.sendRedirect("/PhanQuyenQuanTri");
 			}else {
 				request.setAttribute("errorMatkhau", "Mật khẩu không chính xác");
 				request.getRequestDispatcher("/view/admin/view/quantri_dangnhap.jsp").forward(request, response);
@@ -43,6 +43,6 @@ public class DangNhapQuanTriController extends HttpServlet {
 			request.setAttribute("errorEmail", "Email không tồn tại");
 			request.getRequestDispatcher("/view/admin/view/quantri_dangnhap.jsp").forward(request, response);
 		}
-	}
+	} 
 
 }

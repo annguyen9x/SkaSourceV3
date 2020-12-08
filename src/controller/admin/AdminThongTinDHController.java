@@ -54,10 +54,10 @@ public class AdminThongTinDHController extends HttpServlet {
 			
 			thongTinDonHang.put("NguoiNhanHang", nguoiNhanHang);
 			session.setAttribute("ThongTinDonHang", thongTinDonHang);
-			response.sendRedirect("/SachKyAnh/view/admin/view/admin_xem_thongtin_dh.jsp");
+			response.sendRedirect("/view/admin/view/admin_xem_thongtin_dh.jsp");
 		}
 		else {
-			response.sendRedirect("/SachKyAnh/view/admin/view/admin_trangchu.jsp");
+			response.sendRedirect("/view/admin/view/admin_trangchu.jsp");
 		}
 		
 	}

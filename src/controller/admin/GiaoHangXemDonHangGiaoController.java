@@ -19,7 +19,7 @@ import model.NhanVien;
 public class GiaoHangXemDonHangGiaoController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.sendRedirect("/SachKyAnh/view/admin/view/giaohang_xem_dh_giao.jsp");
+		response.sendRedirect("/view/admin/view/giaohang_xem_dh_giao.jsp");
 	}
 
 }

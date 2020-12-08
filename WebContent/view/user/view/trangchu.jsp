@@ -66,7 +66,7 @@
 											<div class="col-md-12 col-sm-6 col-xs-12 padding-0">
 												<div class="group_sp my_border">
 													<div class="anh_sp">
-														<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sach1.getMaSach()%>" class="">
+														<a href="/ChiTietSach?MaSach=<%=sach1.getMaSach()%>" class="">
 															<img class="anh" src="${url}/static/img/sanpham/<%=sach1.getUrlHinh() %>" title="sp" alt="anhsp">
 															<%
 																int soLuongDB;
@@ -89,7 +89,7 @@
 																												}
 																												if(soLuongDB >= 1){
 															%>
-																<a href="/SachKyAnh/ThemSachVaoGioHang?MaSach=<%=sach1.getMaSach()%>&SoLuong=1" class="them_gh text-a" >
+																<a href="/ThemSachVaoGioHang?MaSach=<%=sach1.getMaSach()%>&SoLuong=1" class="them_gh text-a" >
 																	<span class="glyphicon glyphicon-shopping-cart"></span>
 																	<span class="text"> Thêm vào giỏ</span>
 																</a>
@@ -100,7 +100,7 @@
 													</div>
 													<div class="tensp_giasp">
 														<h3 class="tensp">
-															<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sach1.getMaSach()%>" class="text-a">
+															<a href="/ChiTietSach?MaSach=<%=sach1.getMaSach()%>" class="text-a">
 																<%=sach1.getTenSach()%>
 															</a>
 														</h3>	
@@ -111,7 +111,7 @@
 																															out.print(numberFormat.format(sach1.getDonGia()));
 																%> đ
 															</span>
-															<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sach1.getMaSach()%>" class="chi_tiet">
+															<a href="/ChiTietSach?MaSach=<%=sach1.getMaSach()%>" class="chi_tiet">
 																Chi Tiết
 															</a>
 														</div>
@@ -126,7 +126,7 @@
 											<div class="col-md-12 col-sm-6 col-xs-12 padding-0 margin_top_10">
 												<div class="group_sp my_border">
 													<div class="anh_sp">
-														<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sach2.getMaSach()%>" class="">
+														<a href="/ChiTietSach?MaSach=<%=sach2.getMaSach()%>" class="">
 															<img class="anh" src="${url}/static/img/sanpham/<%=sach2.getUrlHinh() %>" title="sp" alt="anhsp">
 															<%
 																if( gioHang== null ){
@@ -147,7 +147,7 @@
 																												}
 																												if(soLuongDB >= 1){
 															%>
-																<a href="/SachKyAnh/ThemSachVaoGioHang?MaSach=<%=sach2.getMaSach()%>&SoLuong=1" class="them_gh text-a" >
+																<a href="/ThemSachVaoGioHang?MaSach=<%=sach2.getMaSach()%>&SoLuong=1" class="them_gh text-a" >
 																	<span class="glyphicon glyphicon-shopping-cart"></span>
 																	<span class="text"> Thêm vào giỏ</span>
 																</a>
@@ -158,7 +158,7 @@
 													</div>
 													<div class="tensp_giasp">
 														<h3 class="tensp">
-															<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sach2.getMaSach()%>" class="text-a">
+															<a href="/ChiTietSach?MaSach=<%=sach2.getMaSach()%>" class="text-a">
 																<%=sach2.getTenSach()%>
 															</a>
 														</h3>	
@@ -168,7 +168,7 @@
 																	out.print(numberFormat.format(sach2.getDonGia()));
 																%> đ
 															</span>
-															<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sach2.getMaSach()%>" class="chi_tiet">
+															<a href="/ChiTietSach?MaSach=<%=sach2.getMaSach()%>" class="chi_tiet">
 																Chi Tiết
 															</a>
 														</div>
@@ -209,7 +209,7 @@
 										<div class="col-md-12 col-sm-12 col-xs-12 padding-0">
 											<div class="group_sp my_border">
 												<div class="anh_sp">
-													<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sach.getMaSach()%>" class="">
+													<a href="/ChiTietSach?MaSach=<%=sach.getMaSach()%>" class="">
 														<img class="anh" src="${url}/static/img/sanpham/<%=sach.getUrlHinh() %>" title="sp" alt="anhsp">
 														<%
 															if( gioHang== null ){
@@ -230,7 +230,7 @@
 																										}
 																										if(soLuongDB >= 1){
 														%>
-															<a href="/SachKyAnh/ThemSachVaoGioHang?MaSach=<%=sach.getMaSach()%>&SoLuong=1" class="them_gh text-a" >
+															<a href="/ThemSachVaoGioHang?MaSach=<%=sach.getMaSach()%>&SoLuong=1" class="them_gh text-a" >
 																<span class="glyphicon glyphicon-shopping-cart"></span>
 																<span class="text"> Thêm vào giỏ</span>
 															</a>
@@ -241,7 +241,7 @@
 												</div>
 												<div class="tensp_giasp">
 													<h3 class="tensp">
-														<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sach.getMaSach()%>" class="text-a">
+														<a href="/ChiTietSach?MaSach=<%=sach.getMaSach()%>" class="text-a">
 															<%=sach.getTenSach()%>
 														</a>
 													</h3>	
@@ -251,7 +251,7 @@
 																out.print(numberFormat.format(sach.getDonGia()));
 															%> đ
 														</span>
-														<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sach.getMaSach()%>" class="chi_tiet">
+														<a href="/ChiTietSach?MaSach=<%=sach.getMaSach()%>" class="chi_tiet">
 															Chi Tiết
 														</a>
 													</div>
@@ -276,7 +276,7 @@
 											<div class="col-md-12 col-sm-12 col-xs-12 padding-0">
 												<div class="group_sp my_border">
 													<div class="anh_sp">
-														<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sach.getMaSach()%>" class="">
+														<a href="/ChiTietSach?MaSach=<%=sach.getMaSach()%>" class="">
 															<img class="anh" src="${url}/static/img/sanpham/<%=sach.getUrlHinh() %>" title="sp" alt="anhsp">
 															<%
 																if( gioHang== null ){
@@ -297,7 +297,7 @@
 																												}
 																												if(soLuongDB >= 1){
 															%>
-																<a href="/SachKyAnh/ThemSachVaoGioHang?MaSach=<%=sach.getMaSach()%>&SoLuong=1" class="them_gh text-a">
+																<a href="/ThemSachVaoGioHang?MaSach=<%=sach.getMaSach()%>&SoLuong=1" class="them_gh text-a">
 																	<span class="glyphicon glyphicon-shopping-cart"></span>
 																	<span class="text"> Thêm vào giỏ</span>
 																</a>
@@ -308,7 +308,7 @@
 													</div>
 													<div class="tensp_giasp">
 														<h3 class="tensp">
-															<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sach.getMaSach()%>" class="text-a">
+															<a href="/ChiTietSach?MaSach=<%=sach.getMaSach()%>" class="text-a">
 																<%=sach.getTenSach()%>
 															</a>
 														</h3>	
@@ -318,7 +318,7 @@
 																	out.print(numberFormat.format(sach.getDonGia()));
 																%> đ
 															</span>
-															<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sach.getMaSach()%>" class="chi_tiet">
+															<a href="/ChiTietSach?MaSach=<%=sach.getMaSach()%>" class="chi_tiet">
 																Chi Tiết
 															</a>
 														</div>
@@ -398,7 +398,7 @@
 												<div class="col-md-12 col-sm-12 col-xs-12 padding-0">
 													<div class="group_sp">
 														<div class="anh_sp my_border">
-															<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sachDau.getMaSach() %>" class="">
+															<a href="/ChiTietSach?MaSach=<%=sachDau.getMaSach() %>" class="">
 																<img class="anh" src="${url}/static/img/sanpham/<%=sachDau.getUrlHinh() %>" title="sp" alt="anhsp">
 																<%
 																if( gioHang== null ){
@@ -419,7 +419,7 @@
 																}
 																if(soLuongDB >= 1){
 																%>
-																	<a href="/SachKyAnh/ThemSachVaoGioHang?MaSach=<%=sachDau.getMaSach() %>&SoLuong=1" class="them_gh text-a" >
+																	<a href="/ThemSachVaoGioHang?MaSach=<%=sachDau.getMaSach() %>&SoLuong=1" class="them_gh text-a" >
 																		<span class="glyphicon glyphicon-shopping-cart"></span>
 																		<span class="text"> Thêm vào giỏ</span>
 																	</a>
@@ -430,7 +430,7 @@
 														</div>
 														<div class="tensp_giasp">
 															<h3 class="tensp">
-																<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sachDau.getMaSach() %>" class="text-a">
+																<a href="/ChiTietSach?MaSach=<%=sachDau.getMaSach() %>" class="text-a">
 																	<%=sachDau.getTenSach() %>
 																</a>
 															</h3>	
@@ -440,7 +440,7 @@
 																		out.print(numberFormat.format(sachDau.getDonGia()));
 																	%> đ
 																</span>
-																<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sachDau.getMaSach() %>" class="chi_tiet">
+																<a href="/ChiTietSach?MaSach=<%=sachDau.getMaSach() %>" class="chi_tiet">
 																	Chi Tiết
 																</a>
 															</div>
@@ -469,7 +469,7 @@
 											<div class="col-md-12 col-sm-12 col-xs-12 padding-0">
 												<div class="group_sp ">
 													<div class="anh_sp my_border">
-														<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sachDau.getMaSach() %>" class="">
+														<a href="/ChiTietSach?MaSach=<%=sachDau.getMaSach() %>" class="">
 															<img class="anh" src="${url}/static/img/sanpham/<%=sachDau.getUrlHinh() %>" title="sp" alt="anhsp">
 															<%
 															if( gioHang== null ){
@@ -490,7 +490,7 @@
 															}
 															if(soLuongDB >= 1){
 															%>
-																<a href="/SachKyAnh/ThemSachVaoGioHang?MaSach=<%=sachDau.getMaSach() %>&SoLuong=1" class="them_gh text-a" >
+																<a href="/ThemSachVaoGioHang?MaSach=<%=sachDau.getMaSach() %>&SoLuong=1" class="them_gh text-a" >
 																	<span class="glyphicon glyphicon-shopping-cart"></span>
 																	<span class="text"> Thêm vào giỏ</span>
 																</a>
@@ -501,7 +501,7 @@
 													</div>
 													<div class="tensp_giasp">
 														<h3 class="tensp">
-															<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sachDau.getMaSach() %>" class="text-a">
+															<a href="/ChiTietSach?MaSach=<%=sachDau.getMaSach() %>" class="text-a">
 																<%=sachDau.getTenSach() %>
 															</a>
 														</h3>	
@@ -511,7 +511,7 @@
 																	out.print(numberFormat.format(sachDau.getDonGia()));
 																%> đ
 															</span>
-															<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sachDau.getMaSach() %>" class="chi_tiet">
+															<a href="/ChiTietSach?MaSach=<%=sachDau.getMaSach() %>" class="chi_tiet">
 																Chi Tiết
 															</a>
 														</div>
@@ -537,7 +537,7 @@
 											<div class="col-md-12 col-sm-12 col-xs-12 padding-0">
 												<div class="group_sp ">
 													<div class="anh_sp my_border">
-														<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sachDau.getMaSach() %>" class="">
+														<a href="/ChiTietSach?MaSach=<%=sachDau.getMaSach() %>" class="">
 															<img class="anh" src="${url}/static/img/sanpham/<%=sachDau.getUrlHinh() %>" title="sp" alt="anhsp">
 															<%
 															if( gioHang== null ){
@@ -558,7 +558,7 @@
 															}
 															if(soLuongDB >= 1){
 															%>
-																<a href="/SachKyAnh/ThemSachVaoGioHang?MaSach=<%=sachDau.getMaSach() %>&SoLuong=1" class="them_gh text-a" >
+																<a href="/ThemSachVaoGioHang?MaSach=<%=sachDau.getMaSach() %>&SoLuong=1" class="them_gh text-a" >
 																	<span class="glyphicon glyphicon-shopping-cart"></span>
 																	<span class="text"> Thêm vào giỏ</span>
 																</a>
@@ -569,7 +569,7 @@
 													</div>
 													<div class="tensp_giasp">
 														<h3 class="tensp">
-															<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sachDau.getMaSach() %>" class="text-a">
+															<a href="/ChiTietSach?MaSach=<%=sachDau.getMaSach() %>" class="text-a">
 																<%=sachDau.getTenSach() %>
 															</a>
 														</h3>	
@@ -579,7 +579,7 @@
 																	out.print(numberFormat.format(sachDau.getDonGia()));
 																%> đ
 															</span>
-															<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sachDau.getMaSach() %>" class="chi_tiet">
+															<a href="/ChiTietSach?MaSach=<%=sachDau.getMaSach() %>" class="chi_tiet">
 																Chi Tiết
 															</a>
 														</div>

@@ -49,11 +49,11 @@
 						</span>
 					</div>
 					<ul class="nav nav-pills nav-stacked">
-						<li><a href="/SachKyAnh/GiaoHangTrangChu"><i class="fa fa-home"></i> Trang chủ</a></li>
-						<li><a href="/SachKyAnh/GiaoHangXemDonHangGiao"><i class="fa fa-table"></i> Đơn hàng cần giao</a></li>
-						<li><a href="/SachKyAnh/GiaoHangCapNhatTTDH"><i class="fa fa-edit"></i> Cập nhật tình trạng ĐH</a></li>
-						<li><a href="/SachKyAnh/GiaoHangCapNhatTaiKhoan" class="active"><i class="fa fa-address-book"></i> Cập nhật tài khoản</a></li>
-						<li><a href="/SachKyAnh/GiaoHangDangXuat"><i class="fa fa-power-off"></i> Đăng xuất</a></li>
+						<li><a href="/GiaoHangTrangChu"><i class="fa fa-home"></i> Trang chủ</a></li>
+						<li><a href="/GiaoHangXemDonHangGiao"><i class="fa fa-table"></i> Đơn hàng cần giao</a></li>
+						<li><a href="/GiaoHangCapNhatTTDH"><i class="fa fa-edit"></i> Cập nhật tình trạng ĐH</a></li>
+						<li><a href="/GiaoHangCapNhatTaiKhoan" class="active"><i class="fa fa-address-book"></i> Cập nhật tài khoản</a></li>
+						<li><a href="/GiaoHangDangXuat"><i class="fa fa-power-off"></i> Đăng xuất</a></li>
 					</ul>
 					<br>
 				</div>
@@ -89,7 +89,7 @@
 	                    		session.removeAttribute("thatBai");
 	                    	}
 	                    	%>
-	                    	<form method="post" action="/SachKyAnh/GiaoHangCapNhatTaiKhoan" id="formCN" onsubmit="return formValidationAll();" class="form-horizontal">
+	                    	<form method="post" action="/GiaoHangCapNhatTaiKhoan" id="formCN" onsubmit="return formValidationAll();" class="form-horizontal">
 								<div class="form-group">
 					                <label for="name" class="col-sm-3 control-label">Họ tên (<span class="warning">*</span>)</label>
 					                <div class="col-sm-9">
@@ -258,7 +258,7 @@
 	<%
 	}
 	else{
-		response.sendRedirect("/SachKyAnh/view/admin/view/quantri_dangnhap.jsp");
+		response.sendRedirect("/view/admin/view/quantri_dangnhap.jsp");
 	}
 	%>	
 </body>

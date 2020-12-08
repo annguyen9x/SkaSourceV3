@@ -51,9 +51,9 @@
 						        </span>
 						    </h2>
 						    <ul>
-						        <li class="list-li"><a href="/SachKyAnh/userCapNhatTaiKhoan" class="text-a"><span class="glyphicon glyphicon-user"></span> Cập nhật tài khoản</a></li>
-						        <li class="list-li"><a href="/SachKyAnh/LichSuMuaHang" class="text-a"><i class="glyphicon glyphicon-list"></i> Xem lịch sử mua hàng</a></li>
-						        <li class="list-li"><a href="/SachKyAnh/userDangXuat" class="text-a"><i class="glyphicon glyphicon-log-out"></i> Đăng xuất</a></li>
+						        <li class="list-li"><a href="/userCapNhatTaiKhoan" class="text-a"><span class="glyphicon glyphicon-user"></span> Cập nhật tài khoản</a></li>
+						        <li class="list-li"><a href="/LichSuMuaHang" class="text-a"><i class="glyphicon glyphicon-list"></i> Xem lịch sử mua hàng</a></li>
+						        <li class="list-li"><a href="/userDangXuat" class="text-a"><i class="glyphicon glyphicon-log-out"></i> Đăng xuất</a></li>
 						    </ul>
 						</div>
 					</div>
@@ -95,7 +95,7 @@
 				            			KhachHang khachHang = (KhachHang) session.getAttribute("TaiKhoan");
 				            			if( khachHang != null ){
 			                    	%>
-									<form method="post" action="/SachKyAnh/userCapNhatTaiKhoan" id="formCN" onsubmit="return validation();" class="form-horizontal">
+									<form method="post" action="/userCapNhatTaiKhoan" id="formCN" onsubmit="return validation();" class="form-horizontal">
 										<div class="form-group">
 							                <label for="name" class="col-sm-3 control-label">Họ tên<span class="warning"> (*)</span></label>
 							                <div class="col-sm-9">

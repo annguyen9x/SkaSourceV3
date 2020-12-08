@@ -51,19 +51,19 @@
 						</span>
 					</div>
 					<ul class="nav nav-pills nav-stacked">
-						<li><a href="/SachKyAnh/AdminTrangChu"><i class="fa fa-home"></i> Trang chủ</a></li>
-						<li><a href="/SachKyAnh/AdminDanhSachDH"><i class="fa fa-table"></i> Danh sách đơn hàng</a></li>
-						<li><a href="/SachKyAnh/AdminXuLyDonHang"><i class="fa fa-edit"></i> Xử lý đơn hàng</a></li>
+						<li><a href="/AdminTrangChu"><i class="fa fa-home"></i> Trang chủ</a></li>
+						<li><a href="/AdminDanhSachDH"><i class="fa fa-table"></i> Danh sách đơn hàng</a></li>
+						<li><a href="/AdminXuLyDonHang"><i class="fa fa-edit"></i> Xử lý đơn hàng</a></li>
 						<li class="menu_cha">
-							<a href="/SachKyAnh/AdminCapNhatSach" class="active"><i class="fa fa-book"></i> Cập nhật sách</a>
+							<a href="/AdminCapNhatSach" class="active"><i class="fa fa-book"></i> Cập nhật sách</a>
 							<ul class="menu_con">
-								<li><a href="/SachKyAnh/AdminCapNhatLoaiSach">Cập nhật loại sách</a></li>
-								<li><a href="/SachKyAnh/AdminCapNhatSach">Cập nhật sách</a></li>
+								<li><a href="/AdminCapNhatLoaiSach">Cập nhật loại sách</a></li>
+								<li><a href="/AdminCapNhatSach">Cập nhật sách</a></li>
 							</ul>
 						</li>
-						<li><a href="/SachKyAnh/AdminCapNhatTaiKhoan"><i class="fa fa-address-book"></i> Cập nhật nhân viên</a></li>
-						<li><a href="/SachKyAnh/AdminSuaMatKhau"><i class="fa fa-key"></i> Thay đổi mật khẩu</a></li>
-						<li><a href="/SachKyAnh/AdminDangXuat"><i class="fa fa-power-off"></i> Đăng xuất</a></li>
+						<li><a href="/AdminCapNhatTaiKhoan"><i class="fa fa-address-book"></i> Cập nhật nhân viên</a></li>
+						<li><a href="/AdminSuaMatKhau"><i class="fa fa-key"></i> Thay đổi mật khẩu</a></li>
+						<li><a href="/AdminDangXuat"><i class="fa fa-power-off"></i> Đăng xuất</a></li>
 					</ul>
 					<br>
 				</div>
@@ -92,7 +92,7 @@
 											<th>Tên loại sách</th>
 											<th class="text-center">Số lượng sách có trong loại</th>
 											<th colspan="2" class="text-center">
-												<a type="button" href="/SachKyAnh/AdminThemLoaiSach" class="btn btn-default" style="background:#F47920; color:#fff">Thêm loại sách</a>
+												<a type="button" href="/AdminThemLoaiSach" class="btn btn-default" style="background:#F47920; color:#fff">Thêm loại sách</a>
 											</th>
 										</tr>
 									</thead>
@@ -108,10 +108,10 @@
 												<th class="ten_sp"><%=loaiSach.getTenLoaiSach() %></th>
 												<th class="so_luong"><span><%=soLuongSachThuocLoaiSach %></span> (cuốn)</th>
 												<th class="text-center">
-													<a type="button" href="/SachKyAnh/AdminSuaLoaiSach?MaLoaiSach=<%=loaiSach.getMaLoaiSach() %>" class="btn btn-primary">Sửa</a>
+													<a type="button" href="/AdminSuaLoaiSach?MaLoaiSach=<%=loaiSach.getMaLoaiSach() %>" class="btn btn-primary">Sửa</a>
 												</th class="text-center">
 												<th>
-													<a type="button" onclick="return xacNhanXoaLoaiSach('<%=soLuongSachThuocLoaiSach %>');" href="/SachKyAnh/AdminXoaLoaiSach?MaLoaiSach=<%=loaiSach.getMaLoaiSach() %>" class="btn btn-danger" style="color:#111">Xóa</a>
+													<a type="button" onclick="return xacNhanXoaLoaiSach('<%=soLuongSachThuocLoaiSach %>');" href="/AdminXoaLoaiSach?MaLoaiSach=<%=loaiSach.getMaLoaiSach() %>" class="btn btn-danger" style="color:#111">Xóa</a>
 													<script type="text/javascript">
 														function xacNhanXoaLoaiSach(slSachThuocLoaiSach){
 															var xacNhan = confirm("Bạn có chắc chắn muốn xóa loại sách này không ?");
@@ -148,7 +148,7 @@
 	<%
 	}
 	else{
-		response.sendRedirect("/SachKyAnh/view/admin/view/quantri_dangnhap.jsp");
+		response.sendRedirect("/view/admin/view/quantri_dangnhap.jsp");
 	}
 	%>
 </body>

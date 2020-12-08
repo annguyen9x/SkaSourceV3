@@ -27,7 +27,7 @@ public class AdminThemTaiKhoanNhanVienController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		response.sendRedirect("/SachKyAnh/view/admin/view/admin_them_taikhoan_nhanvien.jsp");
+		response.sendRedirect("/view/admin/view/admin_them_taikhoan_nhanvien.jsp");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -59,7 +59,7 @@ public class AdminThemTaiKhoanNhanVienController extends HttpServlet {
 		
 		if(nhanVienDao.kiemTraEmailTonTai(email) == true || nhanVienDao.kiemTraDienThoaiTonTai(dienThoai) == true ) {
 				session.setAttribute("LoiThemNhanVien", "Email hoac dien thoai da ton tai");
-				response.sendRedirect("/SachKyAnh/AdminThemTaiKhoanNhanVien");
+				response.sendRedirect("/AdminThemTaiKhoanNhanVien");
 		}else {
 			if( tenNV.length() >= 2 && email.length() > 0 && dienThoai.length() >= 10 && !gioiTinh.equals("") 
 				&& KiemTraNgayThang.ktNgayThang(strNgaySinh)== true && !diaChi.equals("")) {
@@ -76,11 +76,11 @@ public class AdminThemTaiKhoanNhanVienController extends HttpServlet {
 				NhanVien nhanVien = new NhanVien(tenNV, chucVu, matKhau, email, dienThoai, gioiTinh, ngaySinh, diaChi);
 				
 				if( nhanVienDao.insert(nhanVien) == true ) {
-					response.sendRedirect("/SachKyAnh/AdminCapNhatTaiKhoan");
+					response.sendRedirect("/AdminCapNhatTaiKhoan");
 					return;
 				}else {
 					session.setAttribute("LoiThemNhanVien", "Them nhan vien that bai !!!");
-					response.sendRedirect("/SachKyAnh/AdminThemTaiKhoanNhanVien");
+					response.sendRedirect("/AdminThemTaiKhoanNhanVien");
 					return;
 				}
 			}

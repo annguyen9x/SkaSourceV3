@@ -37,7 +37,7 @@ public class GiaoHangXuLyCapNhatTTDHController extends HttpServlet {
 		
 		String[] dsSoHD = request.getParameterValues("SoHD");
 		if( dsSoHD == null ) {
-			response.sendRedirect("/SachKyAnh/view/admin/view/giaohang_trangchu.jsp");
+			response.sendRedirect("/view/admin/view/giaohang_trangchu.jsp");
 		}
 		else {
 			SimpleDateFormat dateFormat = new SimpleDateFormat(KiemTraNgayThang.DATE_FORMAT);
@@ -93,7 +93,7 @@ public class GiaoHangXuLyCapNhatTTDHController extends HttpServlet {
 				session.setAttribute("DsDHCNTTDHloi", DsDHCNTTDHloi);
 			}
 			
-			response.sendRedirect("/SachKyAnh/view/admin/view/giaohang_cn_tinhtrang_dh.jsp");
+			response.sendRedirect("/view/admin/view/giaohang_cn_tinhtrang_dh.jsp");
 		}
 	}
 

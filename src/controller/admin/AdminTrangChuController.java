@@ -16,7 +16,7 @@ public class AdminTrangChuController extends HttpServlet {
 		if( session.getAttribute("DsDonHangChon") != null ) {
 			session.removeAttribute("DsDonHangChon");
 		}
-		response.sendRedirect("/SachKyAnh/view/admin/view/admin_trangchu.jsp");
+		response.sendRedirect("/view/admin/view/admin_trangchu.jsp");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -30,7 +30,7 @@ public class AdminTrangChuController extends HttpServlet {
 			session.removeAttribute("DsDonHangChon");
 		}
 		session.setAttribute("DsDonHangChon", dsDonHangChon);
-		response.sendRedirect("/SachKyAnh/view/admin/view/admin_trangchu.jsp");
+		response.sendRedirect("/view/admin/view/admin_trangchu.jsp");
 	}
 
 }

@@ -18,19 +18,19 @@
 		</span>
 	</div>
 	<ul class="nav nav-pills nav-stacked">
-		<li><a href="/SachKyAnh/AdminTrangChu" class="active"><i class="fa fa-home"></i> Trang chủ</a></li>
-		<li><a href="/SachKyAnh/AdminDanhSachDH"><i class="fa fa-table"></i> Danh sách đơn hàng</a></li>
-		<li><a href="/SachKyAnh/AdminXuLyDonHang"><i class="fa fa-edit"></i> Xử lý đơn hàng</a></li>
+		<li><a href="/AdminTrangChu" class="active"><i class="fa fa-home"></i> Trang chủ</a></li>
+		<li><a href="/AdminDanhSachDH"><i class="fa fa-table"></i> Danh sách đơn hàng</a></li>
+		<li><a href="/AdminXuLyDonHang"><i class="fa fa-edit"></i> Xử lý đơn hàng</a></li>
 		<li class="menu_cha">
-			<a href="/SachKyAnh/AdminCapNhatSach"><i class="fa fa-book"></i> Cập nhật sách</a>
+			<a href="/AdminCapNhatSach"><i class="fa fa-book"></i> Cập nhật sách</a>
 			<ul class="menu_con">
-				<li><a href="/SachKyAnh/AdminCapNhatLoaiSach">Cập nhật loại sách</a></li>
-				<li><a href="/SachKyAnh/AdminCapNhatSach">Cập nhật sách</a></li>
+				<li><a href="/AdminCapNhatLoaiSach">Cập nhật loại sách</a></li>
+				<li><a href="/AdminCapNhatSach">Cập nhật sách</a></li>
 			</ul>
 		</li>
-		<li><a href="/SachKyAnh/AdminCapNhatTaiKhoan"><i class="fa fa-address-book"></i> Cập nhật nhân viên</a></li>
-		<li><a href="/SachKyAnh/AdminSuaMatKhau"><i class="fa fa-key"></i> Thay đổi mật khẩu</a></li>
-		<li><a href="/SachKyAnh/AdminDangXuat"><i class="fa fa-power-off"></i> Đăng xuất</a></li>
+		<li><a href="/AdminCapNhatTaiKhoan"><i class="fa fa-address-book"></i> Cập nhật nhân viên</a></li>
+		<li><a href="/AdminSuaMatKhau"><i class="fa fa-key"></i> Thay đổi mật khẩu</a></li>
+		<li><a href="/AdminDangXuat"><i class="fa fa-power-off"></i> Đăng xuất</a></li>
 	</ul>
 	<br>
 </div>

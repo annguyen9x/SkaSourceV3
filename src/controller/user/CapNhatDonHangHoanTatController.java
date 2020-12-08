@@ -41,9 +41,9 @@ public class CapNhatDonHangHoanTatController extends HttpServlet {
 		HttpSession session = request.getSession();
 		Map<String, Object> gioHang = (Map<String, Object>)session.getAttribute("GioHang");
 		if( gioHang != null) {
-			response.sendRedirect("/SachKyAnh/view/user/view/capnhat_diachi_dathang.jsp");
+			response.sendRedirect("/view/user/view/capnhat_diachi_dathang.jsp");
 		}else {
-			response.sendRedirect("/SachKyAnh/userTrangChu");
+			response.sendRedirect("/userTrangChu");
 		}
 	}
 

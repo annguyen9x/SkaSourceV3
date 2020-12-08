@@ -52,7 +52,7 @@ public class AdminXoaLoaiSachController extends HttpServlet {
 			session.setAttribute("MapSlSachThuocLoai", mapSlSachThuocLoai);
 		}
 		
-		response.sendRedirect("/SachKyAnh/view/admin/view/admin_capnhat_loaisach.jsp");
+		response.sendRedirect("/view/admin/view/admin_capnhat_loaisach.jsp");
 	}
 
 }

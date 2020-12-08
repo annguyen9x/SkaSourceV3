@@ -10,7 +10,7 @@
 			<div class="col-md-3 col-sm-6 col-xs-12">
 				<div class="group_footer">
 					<div class="top_footer logo_footer">
-						<a href="/SachKyAnh/userTrangChu" class="text-a">
+						<a href="/userTrangChu" class="text-a">
 							<img src="${url}/static/img/logo/logofooter.png">
 						</a>
 					</div>
@@ -47,25 +47,25 @@
 					<ul>
 						<li class="list-li">
 							<span class="glyphicon glyphicon-chevron-right" style="color:#fff; font-size: 1rem"></span>
-							<a href="/SachKyAnh/MenuNgang?NoiDung=gt" class="text-a">
+							<a href="/MenuNgang?NoiDung=gt" class="text-a">
 								Giới Thiệu
 							</a>
 						</li>
 						<li class="list-li">
 							<span class="glyphicon glyphicon-chevron-right" style="color:#fff; font-size: 1rem"></span>
-							<a href="/SachKyAnh/MenuNgang?NoiDung=hdmh" class="text-a">
+							<a href="/MenuNgang?NoiDung=hdmh" class="text-a">
 								Hướng Dẫn Mua Hàng, Thanh Toán
 							</a>
 						</li>
 						<li class="list-li">
 							<span class="glyphicon glyphicon-chevron-right" style="color:#fff; font-size: 1rem"></span>
-							<a href="/SachKyAnh/MenuNgang?NoiDung=dv" class="text-a">
+							<a href="/MenuNgang?NoiDung=dv" class="text-a">
 								Dịch vụ
 							</a>
 						</li>
 						<li class="list-li">
 							<span class="glyphicon glyphicon-chevron-right" style="color:#fff; font-size: 1rem"></span>
-							<a href="/SachKyAnh/MenuNgang?NoiDung=lh" class="text-a">
+							<a href="/MenuNgang?NoiDung=lh" class="text-a">
 								Liên Hệ
 							</a>
 						</li>

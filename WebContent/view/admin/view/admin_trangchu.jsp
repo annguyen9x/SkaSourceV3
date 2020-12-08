@@ -86,7 +86,7 @@
 						<div class="noidung_chinh">
 							<p class="tieude_bang">Danh sách đơn hàng</p>
 							<div class="tim_kiem">
-								<form action="/SachKyAnh/AdminTrangChu" method="post" accept-charset="utf-8">
+								<form action="/AdminTrangChu" method="post" accept-charset="utf-8">
 									<div class="col-md-4 col-sm-5 col-xs-12 col-md-offset-3 col-md-offset-3" style="padding:0px; ">
 										<select name="DsDonHangChon" id="DsDonHangChon" class="form-control">
 											<%
@@ -221,12 +221,12 @@
 														<td><%=nguoiNhanHang.getTenNN() %></td>
 														<td><%=hoaDon.getNgayDat() %></td>
 														<td><%=hoaDon.getTinhTrangDH() %></td>
-														<td><a href="/SachKyAnh/AdminThongTinDH?SoHD=<%=hoaDon.getSoHD()%>">Xem chi tiết</a></td>
+														<td><a href="/AdminThongTinDH?SoHD=<%=hoaDon.getSoHD()%>">Xem chi tiết</a></td>
 													</tr>
 										<%	
 													}
 												}else{
-													response.sendRedirect("/SachKyAnh/view/admin/view/quantri_dangnhap.jsp");
+													response.sendRedirect("/view/admin/view/quantri_dangnhap.jsp");
 												}
 											}
 											if( dhTrongDanhSach == false){
@@ -252,7 +252,7 @@
 	<%
 	}
 	else{
-		response.sendRedirect("/SachKyAnh/view/admin/view/quantri_dangnhap.jsp");
+		response.sendRedirect("/view/admin/view/quantri_dangnhap.jsp");
 	}
 	%>
 </body>

@@ -75,7 +75,7 @@ public class CapNhatTaiKhoanController extends HttpServlet {
 		if( session.getAttribute("TaiKhoan") == null ) {
 			response.sendRedirect("userTrangChu");
 		}else {
-			response.sendRedirect("/SachKyAnh/view/user/view/capnhat_taikhoan.jsp");
+			response.sendRedirect("/view/user/view/capnhat_taikhoan.jsp");
 		}
 	}
 }

@@ -61,11 +61,11 @@
 						</span>
 					</div>
 					<ul class="nav nav-pills nav-stacked">
-						<li><a href="/SachKyAnh/GiaoHangTrangChu" class="active"><i class="fa fa-home"></i> Trang chủ</a></li>
-						<li><a href="/SachKyAnh/GiaoHangXemDonHangGiao"><i class="fa fa-table"></i> Đơn hàng cần giao</a></li>
-						<li><a href="/SachKyAnh/GiaoHangCapNhatTTDH"><i class="fa fa-edit"></i> Cập nhật tình trạng ĐH</a></li>
-						<li><a href="/SachKyAnh/GiaoHangCapNhatTaiKhoan"><i class="fa fa-address-book"></i> Cập nhật tài khoản</a></li>
-						<li><a href="/SachKyAnh/GiaoHangDangXuat"><i class="fa fa-power-off"></i> Đăng xuất</a></li>
+						<li><a href="/GiaoHangTrangChu" class="active"><i class="fa fa-home"></i> Trang chủ</a></li>
+						<li><a href="/GiaoHangXemDonHangGiao"><i class="fa fa-table"></i> Đơn hàng cần giao</a></li>
+						<li><a href="/GiaoHangCapNhatTTDH"><i class="fa fa-edit"></i> Cập nhật tình trạng ĐH</a></li>
+						<li><a href="/GiaoHangCapNhatTaiKhoan"><i class="fa fa-address-book"></i> Cập nhật tài khoản</a></li>
+						<li><a href="/GiaoHangDangXuat"><i class="fa fa-power-off"></i> Đăng xuất</a></li>
 					</ul>
 					<br>
 				</div>
@@ -106,7 +106,7 @@
 						<div class="noidung_chinh">
 							<p class="tieude_bang">Danh sách đơn hàng</p>
 							<div class="tim_kiem">
-								<form action="/SachKyAnh/GiaoHangTrangChu" method="post" accept-charset="utf-8">
+								<form action="/GiaoHangTrangChu" method="post" accept-charset="utf-8">
 									<div class="col-md-4 col-sm-5 col-xs-12 col-md-offset-3 col-md-offset-3" style="padding:0px; ">
 										<select name="DsDonHangChon" class="form-control">
 											<%
@@ -177,12 +177,12 @@
 												<td><%=nguoiNhanHang.getTenNN() %></td>
 												<td><%=hoaDon.getNgayDat() %></td>
 												<td><%=hoaDon.getTinhTrangDH() %></td>
-												<td><a href="/SachKyAnh/GiaoHangThongTinDH?SoHD=<%=hoaDon.getSoHD()%>">Xem chi tiết</a></td>
+												<td><a href="/GiaoHangThongTinDH?SoHD=<%=hoaDon.getSoHD()%>">Xem chi tiết</a></td>
 											</tr>
 										<%	
 													}
 												}else{
-													response.sendRedirect("/SachKyAnh/view/admin/view/quantri_dangnhap.jsp");
+													response.sendRedirect("/view/admin/view/quantri_dangnhap.jsp");
 												}
 											}
 											if( dhTrongDanhSach == false){
@@ -208,7 +208,7 @@
 	<%
 	}
 	else{
-		response.sendRedirect("/SachKyAnh/view/admin/view/quantri_dangnhap.jsp");
+		response.sendRedirect("/view/admin/view/quantri_dangnhap.jsp");
 	}
 	%>
 </body>

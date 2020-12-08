@@ -20,7 +20,7 @@ public class AdminSuaMatKhauController extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.sendRedirect("/SachKyAnh/view/admin/view/admin_sua_matkhau.jsp");
+		response.sendRedirect("/view/admin/view/admin_sua_matkhau.jsp");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -47,7 +47,7 @@ public class AdminSuaMatKhauController extends HttpServlet {
 			else {
 				session.setAttribute("KetQuaDoiMatKhau", "thatBai");
 			}
-			response.sendRedirect("/SachKyAnh/view/admin/view/admin_sua_matkhau.jsp");
+			response.sendRedirect("/view/admin/view/admin_sua_matkhau.jsp");
 		} else {
 			PrintWriter writer = response.getWriter();
 			writer.print("<script type='text/javascript'>");

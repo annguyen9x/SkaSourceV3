@@ -16,7 +16,7 @@ public class GiaoHangCapNhatTTDHController extends HttpServlet {
 		if( session.getAttribute("DsDonHangChon") != null ) {
 			session.removeAttribute("DsDonHangChon");
 		}
-		response.sendRedirect("/SachKyAnh/view/admin/view/giaohang_cn_tinhtrang_dh.jsp");
+		response.sendRedirect("/view/admin/view/giaohang_cn_tinhtrang_dh.jsp");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -38,7 +38,7 @@ public class GiaoHangCapNhatTTDHController extends HttpServlet {
 		}
 		session.setAttribute("DsDonHangChon", dsDonHangChon);
 		
-		response.sendRedirect("/SachKyAnh/view/admin/view/giaohang_cn_tinhtrang_dh.jsp");
+		response.sendRedirect("/view/admin/view/giaohang_cn_tinhtrang_dh.jsp");
 	}
 
 }

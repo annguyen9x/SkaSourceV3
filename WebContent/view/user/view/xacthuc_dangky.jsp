@@ -51,9 +51,9 @@
 						        </span>
 						    </h2>
 						    <ul>
-						        <li class="list-li"><a href="/SachKyAnh/userDangNhap" class="text-a"><i class="fa fa-sign-in"></i> Đăng nhập</a></li>
-						        <li class="list-li"><a href="/SachKyAnh/userDangKy" class="text-a"><i class="fa fa-lock"></i> Đăng ký</a></li>
-						        <li class="list-li"><a href="/SachKyAnh/QuenMatKhau" class="text-a"><i class="fa fa-question"></i> Quên mật khẩu</a></li>
+						        <li class="list-li"><a href="/userDangNhap" class="text-a"><i class="fa fa-sign-in"></i> Đăng nhập</a></li>
+						        <li class="list-li"><a href="/userDangKy" class="text-a"><i class="fa fa-lock"></i> Đăng ký</a></li>
+						        <li class="list-li"><a href="/QuenMatKhau" class="text-a"><i class="fa fa-question"></i> Quên mật khẩu</a></li>
 						    </ul>
 						</div>
 					</div>
@@ -81,13 +81,13 @@
 											String maXacNhanSai = (String)session.getAttribute("maXacNhanDKSai");
 											if( thanhCong != null ){
 										%>
-											<div class="alert alert-success"><%=thanhCong %> Mời <a href="/SachKyAnh/userDangNhap">đăng nhập</a> vào tài khoản.</div>		
+											<div class="alert alert-success"><%=thanhCong %> Mời <a href="/userDangNhap">đăng nhập</a> vào tài khoản.</div>		
 										<%
 												session.removeAttribute("dKThanhCong");
 											}
 											if( thatBai != null ){ 
 										%>
-											<div class="alert alert-danger"><%=thatBai %> Quay về <a href="/SachKyAnh/userTrangChu">trang chủ</a>.</div>		
+											<div class="alert alert-danger"><%=thatBai %> Quay về <a href="/userTrangChu">trang chủ</a>.</div>		
 										<%	
 											session.removeAttribute("dKThatBai");
 											}
@@ -101,7 +101,7 @@
 											KhachHang kh = (KhachHang)session.getAttribute("TaiKhoanDK");
 											if( kh != null ){ 
 										%>
-											<form method="post" action="/SachKyAnh/XacNhanEmailDangKy" id="formXacNhanDK" class="form-horizontal">
+											<form method="post" action="/XacNhanEmailDangKy" id="formXacNhanDK" class="form-horizontal">
 												<div class="form-group">
 									            	<label for="email">Đăng nhập vào email <span style="color:#F47920;">&quot;<% if (kh != null ){ out.print(kh.getEmail()); } %>&quot;</span> để lấy mã xác nhận</label>
 									            </div>

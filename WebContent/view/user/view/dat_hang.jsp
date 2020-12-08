@@ -74,7 +74,7 @@
 						<div class="row margin-0">
 							<!-- noi dung dat hang -->
 							<section class="dat_hang">
-								<form action="/SachKyAnh/DatHang" method="post" onsubmit="return ktDiaChiGiaoHang('<%=trangThaiDangNhap %>');" id="datHang" class="form_dathang">
+								<form action="/DatHang" method="post" onsubmit="return ktDiaChiGiaoHang('<%=trangThaiDangNhap %>');" id="datHang" class="form_dathang">
 									<div class="col-md-4 col-xs-12 col-xs-12 padding-0 chon_diachi">
 										<h5>1. Loại tài khoản giao hàng</h5>
 										<div class="noi_dung my_border">
@@ -108,7 +108,7 @@
 												<%
 													}else{
 												%>
-													<p style="text-transform: none; font-weight:normal;">Bạn chưa đăng nhập. Xin mời <a href="/SachKyAnh/userDangNhap">đăng nhập</a> vào tài khoản trước !</p>
+													<p style="text-transform: none; font-weight:normal;">Bạn chưa đăng nhập. Xin mời <a href="/userDangNhap">đăng nhập</a> vào tài khoản trước !</p>
 												<%
 													}
 												%>
@@ -137,7 +137,7 @@
 												<%
 													}else{
 												%>
-													<p style="text-transform: none; font-weight:normal;">Bạn chưa đăng nhập. Xin mời <a href="/SachKyAnh/userDangNhap">đăng nhập</a> vào tài khoản trước !</p>
+													<p style="text-transform: none; font-weight:normal;">Bạn chưa đăng nhập. Xin mời <a href="/userDangNhap">đăng nhập</a> vào tài khoản trước !</p>
 												<%
 													}
 												%>

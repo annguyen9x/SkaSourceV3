@@ -80,7 +80,7 @@ public class XemCapNhatDonHangController extends HttpServlet {
 		
 		//Tạo session để đánh dấu có thể thêm sách vào GH
 		session.setAttribute("CapNhatDonHang", "DangCapNhatDH");
-		response.sendRedirect("/SachKyAnh/view/user/view/capnhat_donhang.jsp");
+		response.sendRedirect("/view/user/view/capnhat_donhang.jsp");
 	}
 
 }

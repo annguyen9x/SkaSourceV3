@@ -23,7 +23,7 @@ public class KhoCapNhatTaiKhoanController extends HttpServlet {
 	NhanVienDao nhanVienDao = new NhanVienDao();
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.sendRedirect("/SachKyAnh/view/admin/view/kho_capnhat_taikhoan.jsp");
+		response.sendRedirect("/view/admin/view/kho_capnhat_taikhoan.jsp");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -62,7 +62,7 @@ public class KhoCapNhatTaiKhoanController extends HttpServlet {
 			}else {
 				session.setAttribute("thatBai", "Cập nhật thông tin tài khoản thất bại !!!");
 			}
-			response.sendRedirect("/SachKyAnh/KhoCapNhatTaiKhoan");
+			response.sendRedirect("/KhoCapNhatTaiKhoan");
 		}else {
 			PrintWriter writer = response.getWriter();
 			writer.print("<script type='text/javascript'>");

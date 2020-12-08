@@ -14,16 +14,16 @@ public class MenuNgangController extends HttpServlet {
 		String noidung = request.getParameter("NoiDung");
 		
 		if(noidung.equals("gt")) {
-			response.sendRedirect("/SachKyAnh/view/user/view/gioi_thieu.jsp");
+			response.sendRedirect("/view/user/view/gioi_thieu.jsp");
 		}
 		else if(noidung.equals("dv")) {
-			response.sendRedirect("/SachKyAnh/view/user/view/dich_vu.jsp");
+			response.sendRedirect("/view/user/view/dich_vu.jsp");
 		}
 		else if(noidung.equals("hdmh")) {
-			response.sendRedirect("/SachKyAnh/view/user/view/huongdan_muahang.jsp");
+			response.sendRedirect("/view/user/view/huongdan_muahang.jsp");
 		}
 		else if(noidung.equals("lh")) {
-			response.sendRedirect("/SachKyAnh/view/user/view/lien_he.jsp");
+			response.sendRedirect("/view/user/view/lien_he.jsp");
 		}
 	}
 

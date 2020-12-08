@@ -28,7 +28,7 @@
 				<hr>
 			</header><!-- /header -->
 			<section>
-				<form action="/SachKyAnh/quantri" method="post" accept-charset="utf-8">
+				<form action="/quantri" method="post" accept-charset="utf-8">
 					<input type="email" name="Email" class="form-control" required="required" placeholder="Vui lòng nhập email">
 					<%
 						String errorEmail = (String)request.getAttribute("errorEmail");

@@ -37,10 +37,10 @@ public class XoaGioHangController extends HttpServlet {
 					}
 				}
 			}
-			response.sendRedirect("/SachKyAnh/XemGioHang");
+			response.sendRedirect("/XemGioHang");
 		}
 		else {
-			response.sendRedirect("/SachKyAnh/userTrangChu");
+			response.sendRedirect("/userTrangChu");
 		}
 	}
 

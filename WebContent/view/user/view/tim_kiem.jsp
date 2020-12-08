@@ -87,7 +87,7 @@
 															<div class="col-md-12 col-sm-12 col-xs-12 padding-0">
 																<div class="group_sp my_border">
 																	<div class="anh_sp">
-																		<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sach.getMaSach() %>" class="">
+																		<a href="/ChiTietSach?MaSach=<%=sach.getMaSach() %>" class="">
 																			<img class="anh" src="${url}/static/img/sanpham/<%=sach.getUrlHinh() %>" title="sp" alt="anhsp">
 																			<a href="#" class="them_gh text-a" >
 																				<span class="glyphicon glyphicon-shopping-cart"></span>
@@ -97,7 +97,7 @@
 																	</div>
 																	<div class="tensp_giasp">
 																		<h3 class="tensp">
-																			<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sach.getMaSach() %>" class="text-a">
+																			<a href="/ChiTietSach?MaSach=<%=sach.getMaSach() %>" class="text-a">
 																				<%=sach.getTenSach() %>
 																			</a>
 																		</h3>	
@@ -108,7 +108,7 @@
 																					out.print(numberFormat.format(sach.getDonGia()));
 																				%> đ
 																			</span>
-																			<a href="/SachKyAnh/ChiTietSach?MaSach=<%=sach.getMaSach() %>" class="chi_tiet">
+																			<a href="/ChiTietSach?MaSach=<%=sach.getMaSach() %>" class="chi_tiet">
 																				Chi Tiết
 																			</a>
 																		</div>

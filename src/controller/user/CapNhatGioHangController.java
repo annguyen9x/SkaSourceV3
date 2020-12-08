@@ -34,9 +34,9 @@ public class CapNhatGioHangController extends HttpServlet {
 				chiTietGioHang.put("SoLuong", soLuong);
 				chiTietGioHang.put("SoLuongDB", (int)chiTietGioHang.get("TongSoLuongDB") - soLuong);
 			}
-			response.sendRedirect("/SachKyAnh/XemGioHang");
+			response.sendRedirect("/XemGioHang");
 		}else {
-			response.sendRedirect("/SachKyAnh/userTrangChu");
+			response.sendRedirect("/userTrangChu");
 		}
 	}
 

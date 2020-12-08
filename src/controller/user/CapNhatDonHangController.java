@@ -65,9 +65,9 @@ public class CapNhatDonHangController extends HttpServlet {
 				chiTietGioHang.put("SoLuongDB", (int)chiTietGioHang.get("TongSoLuongDB") - soLuong);
 			}
 			hoaDonDao.updateTongTien(tongTienMoi, soHD);
-			resp.sendRedirect("/SachKyAnh/view/user/view/capnhat_donhang.jsp");
+			resp.sendRedirect("/view/user/view/capnhat_donhang.jsp");
 		}else {
-			resp.sendRedirect("/SachKyAnh/userTrangChu");
+			resp.sendRedirect("/userTrangChu");
 		}
 	}
 }

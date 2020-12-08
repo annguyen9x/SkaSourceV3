@@ -24,7 +24,7 @@
 			<li>
 				<span class="glyphicon glyphicon-ok" style="font-size:10px">&nbsp;</span>
 				<span>
-					<a href="/SachKyAnh/SachTheoLoaiSach?MaLoaiSach=<%=loaiSach.getMaLoaiSach()%>" class="text-a">
+					<a href="/SachTheoLoaiSach?MaLoaiSach=<%=loaiSach.getMaLoaiSach()%>" class="text-a">
 						<%=loaiSach.getTenLoaiSach() %>
 					</a>
 				</span>
