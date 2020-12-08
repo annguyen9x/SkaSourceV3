@@ -27,6 +27,7 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.JasperRunManager;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import util.ConnectDBUtil;
 
 @WebServlet("/KhoXuatHoaDon")
 public class KhoXuatHoaDonController extends HttpServlet {
@@ -65,11 +66,8 @@ public class KhoXuatHoaDonController extends HttpServlet {
 		String ngay = String.valueOf(Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
 		
 		try {
-			String user = "sa";
-			String password = "123456";
-			String url = "jdbc:sqlserver://localhost:1433; databaseName=SachKyAnh";
-			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-			conn = DriverManager.getConnection(url, user, password);
+			Class.forName(ConnectDBUtil.DBProperties.HEROKU_POSTGRESQL_DRIVER);
+			conn = DriverManager.getConnection(ConnectDBUtil.DBProperties.HEROKU_POSTGRESQL_URL, ConnectDBUtil.DBProperties.HEROKU_POSTGRESQL_USER, ConnectDBUtil.DBProperties.HEROKU_POSTGRESQL_PASSWORD);
 
 			JasperReport jasperReport = null;
 			JasperDesign jasperDesign = null;

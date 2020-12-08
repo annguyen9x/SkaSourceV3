@@ -4,32 +4,16 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import util.ConnectDBUtil;
+
 public class KetNoiDatabase {
 	protected static Connection conn;
 	
 	public KetNoiDatabase() {
 		
-		//Connect to postgresql local
-//		String user = "sa";
-//		String password = "123456";
-//		String url = "jdbc:sqlserver://localhost:1433; databaseName=SachKyAnh";
-		
-		//Connect to postgresql local
-//		String user = "postgres";
-//		String password = "123456";
-//		String url = "jdbc:postgresql://localhost/SachKyAnh";
-		
-		//Connect to postgresql heroku
-		String host = "ec2-52-201-184-16.compute-1.amazonaws.com";
-		String port = "5432";
-		String db = "dat5h0nfceu4d8";
-		String user = "qgdojvwxrnvobp";
-		String password = "5b85a636b97b408a936720286738451de370ef1be96b22df635affb35860aaba";
-		String url = "jdbc:postgresql://" + host + ":"+port+"/" + db;
 		try {
-			//Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-			Class.forName("org.postgresql.Driver");
-			conn = DriverManager.getConnection(url, user, password);
+			Class.forName(ConnectDBUtil.DBProperties.HEROKU_POSTGRESQL_DRIVER);
+			conn = DriverManager.getConnection(ConnectDBUtil.DBProperties.HEROKU_POSTGRESQL_URL, ConnectDBUtil.DBProperties.HEROKU_POSTGRESQL_USER, ConnectDBUtil.DBProperties.HEROKU_POSTGRESQL_PASSWORD);
 		} catch (ClassNotFoundException e) {
 			System.out.println("Loi load driver: " + e.toString());
 		} catch (SQLException e) {
