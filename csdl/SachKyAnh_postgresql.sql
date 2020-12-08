@@ -52,7 +52,7 @@ Values(N'Nguyễn Trọng Hiếu', N'Giao Hàng', 'e10adc3949ba59abbe56e057f20f8
 
 Create table LoaiSach(
 MaLoaiSach varchar(4) primary key,
-TenLoaiSach varchar(100) not null,
+TenLoaiSach varchar(100) not null
 );
 
 Insert into LoaiSach Values('LS01', N'Sách Khoa Học, Công Nghệ');
