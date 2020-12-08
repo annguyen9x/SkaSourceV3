@@ -15,9 +15,17 @@ public class KetNoiDatabase {
 //		String url = "jdbc:sqlserver://localhost:1433; databaseName=SachKyAnh";
 		
 		//Connect to postgresql local
-		String user = "postgres";
-		String password = "123456";
-		String url = "jdbc:postgresql://localhost/SachKyAnh";
+//		String user = "postgres";
+//		String password = "123456";
+//		String url = "jdbc:postgresql://localhost/SachKyAnh";
+		
+		//Connect to postgresql heroku
+		String host = "ec2-52-201-184-16.compute-1.amazonaws.com";
+		String port = "5432";
+		String db = "dat5h0nfceu4d8";
+		String user = "qgdojvwxrnvobp";
+		String password = "5b85a636b97b408a936720286738451de370ef1be96b22df635affb35860aaba";
+		String url = "jdbc:postgresql://" + host + ":"+port+"/" + db;
 		try {
 			//Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 			Class.forName("org.postgresql.Driver");
