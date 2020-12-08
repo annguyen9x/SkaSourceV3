@@ -10,7 +10,7 @@ Mục tiêu của đề tài là “Xây dựng website bán sách cho hiệu s�
 
 # Công cụ xây dựng chương trình
 - IDE: Eclipse
-- Database: SQL server 2014
+- *Database: SQL server 2014* **(Đổi sang Database Postgresql để deployee server)**
 - Web Server: Apache Tomcat v9.0
 
 # Sơ đồ Usecase
