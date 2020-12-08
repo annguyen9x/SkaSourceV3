@@ -24,9 +24,12 @@ public class NguoiNhanHangDao implements ITFNguoiNhanHangDao{
 			String sql = "Insert into NguoiNhanHang(SoHD, TenNN, DienThoai, DiaChi) Values(?,?,?,?)";
 			pStatement = conn.prepareStatement(sql);
 			pStatement.setInt(1, nnh.getSoHD());
-			pStatement.setNString(2, nnh.getTenNN());
-			pStatement.setNString(3, nnh.getDienThoai());
-			pStatement.setNString(4, nnh.getDiaChi());
+//			pStatement.setNString(2, nnh.getTenNN());
+//			pStatement.setNString(3, nnh.getDienThoai());
+//			pStatement.setNString(4, nnh.getDiaChi());
+			pStatement.setString(2, nnh.getTenNN());
+			pStatement.setString(3, nnh.getDienThoai());
+			pStatement.setString(4, nnh.getDiaChi());
 			int rows = pStatement.executeUpdate();
 			conn.commit();
 			if( rows > 0 ) {
@@ -60,9 +63,12 @@ public class NguoiNhanHangDao implements ITFNguoiNhanHangDao{
 			conn.setAutoCommit(false);
 			String sql = "Update NguoiNhanHang Set TenNN = ?, DienThoai= ?, DiaChi= ? Where SoHD= ?";
 			pStatement = conn.prepareStatement(sql);
-			pStatement.setNString(1, nnh.getTenNN());
-			pStatement.setNString(2, nnh.getDienThoai());
-			pStatement.setNString(3, nnh.getDiaChi());
+//			pStatement.setNString(1, nnh.getTenNN());
+//			pStatement.setNString(2, nnh.getDienThoai());
+//			pStatement.setNString(3, nnh.getDiaChi());
+			pStatement.setString(1, nnh.getTenNN());
+			pStatement.setString(2, nnh.getDienThoai());
+			pStatement.setString(3, nnh.getDiaChi());
 			pStatement.setInt(4, nnh.getSoHD());
 			int rows = pStatement.executeUpdate();
 			conn.commit();

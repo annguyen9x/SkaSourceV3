@@ -128,7 +128,8 @@ public class CapNhatDonHangHoanTatController extends HttpServlet {
 					request.setAttribute("HoanTatDonHang", "ThatBai");
 					PrintWriter writer = response.getWriter();
 					writer.print("<script type='text/javascript'>");
-					writer.print("alert('Đã cập nhật đơn hàng thành công. Lỗi khi gửi mail thông tin đơn hàng từ server, vui lòng kiểm tra kết nối internet !!!');");
+					writer.print("alert('Đã cập nhật đơn hàng: " + soHD + " thành công, tổng tiền: " +  numberFormat.format(tongTien)+" đ" 
+					+ ". Lỗi khi gửi mail thông tin đơn hàng từ server, vui lòng kiểm tra kết nối internet !!!');");
 					writer.print("location='userTrangChu'");
 					writer.print("</script>");
 				}

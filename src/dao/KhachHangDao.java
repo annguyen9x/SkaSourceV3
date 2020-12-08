@@ -24,15 +24,26 @@ public class KhachHangDao implements ITFKhachHangDao{
 			conn.setAutoCommit(false);
 			String sql = "Insert into KhachHang(TenKH , MatKhau, Email, DienThoai, GioiTinh, NgaySinh, DiaChi) Values(?,?,?,?,?,?,?)";
 			pStatement = conn.prepareStatement(sql);
-			pStatement.setNString(1, kh.getTenKH());
-			pStatement.setNString(2, kh.getMatKhau());
-			pStatement.setNString(3, kh.getEmail());
-			pStatement.setNString(4, kh.getDienThoai());
-			pStatement.setNString(5, kh.getGioiTinh());
+			//sql server
+//			pStatement.setNString(1, kh.getTenKH());
+//			pStatement.setNString(2, kh.getMatKhau());
+//			pStatement.setNString(3, kh.getEmail());
+//			pStatement.setNString(4, kh.getDienThoai());
+//			pStatement.setNString(5, kh.getGioiTinh());
+			
+			//postgresql
+			pStatement.setString(1, kh.getTenKH());
+			pStatement.setString(2, kh.getMatKhau());
+			pStatement.setString(3, kh.getEmail());
+			pStatement.setString(4, kh.getDienThoai());
+			pStatement.setString(5, kh.getGioiTinh());
+			
 			SimpleDateFormat dateFormat = new SimpleDateFormat(KiemTraNgayThang.DATE_FORMAT);
 			String ngaySinh = dateFormat.format(kh.getNgaySinh());
-			pStatement.setString(6, ngaySinh);
-			pStatement.setNString(7, kh.getDiaChi());
+//			pStatement.setString(6, ngaySinh);
+			pStatement.setDate( 6, java.sql.Date.valueOf(ngaySinh) );
+//			pStatement.setNString(7, kh.getDiaChi());
+			pStatement.setString(7, kh.getDiaChi());
 			int rows = pStatement.executeUpdate();
 			conn.commit();
 			if( rows > 0 ) {
@@ -64,15 +75,23 @@ public class KhachHangDao implements ITFKhachHangDao{
 			conn.setAutoCommit(false);
 			String sql = "Update KhachHang Set TenKH= ? , MatKhau= ?, Email= ?, DienThoai= ?, GioiTinh= ?, NgaySinh= ?, DiaChi= ? Where MaKH=?";
 			pStatement = conn.prepareStatement(sql);
-			pStatement.setNString(1, kh.getTenKH());
-			pStatement.setNString(2, kh.getMatKhau());
-			pStatement.setNString(3, kh.getEmail());
-			pStatement.setNString(4, kh.getDienThoai());
-			pStatement.setNString(5, kh.getGioiTinh());
+//			pStatement.setNString(1, kh.getTenKH());
+//			pStatement.setNString(2, kh.getMatKhau());
+//			pStatement.setNString(3, kh.getEmail());
+//			pStatement.setNString(4, kh.getDienThoai());
+//			pStatement.setNString(5, kh.getGioiTinh());
+			
+			pStatement.setString(1, kh.getTenKH());
+			pStatement.setString(2, kh.getMatKhau());
+			pStatement.setString(3, kh.getEmail());
+			pStatement.setString(4, kh.getDienThoai());
+			pStatement.setString(5, kh.getGioiTinh());
 			SimpleDateFormat dateFormat = new SimpleDateFormat(KiemTraNgayThang.DATE_FORMAT);
 			String ngaySinh = dateFormat.format(kh.getNgaySinh());
-			pStatement.setString(6, ngaySinh);
-			pStatement.setNString(7, kh.getDiaChi());
+//			pStatement.setString(6, ngaySinh);
+			pStatement.setDate( 6, java.sql.Date.valueOf(ngaySinh) );
+//			pStatement.setNString(7, kh.getDiaChi());
+			pStatement.setString(7, kh.getDiaChi());
 			pStatement.setInt(8, kh.getMaKH());
 			int rows = pStatement.executeUpdate();
 			conn.commit();

@@ -28,7 +28,8 @@ public class LoaiSachDao implements ITFLoaiSachDao{
 			String sql = "Insert into LoaiSach(MaLoaiSach, TenLoaiSach) Values(?,?)";
 			pStatement = conn.prepareStatement(sql);
 			pStatement.setString(1, ls.getMaLoaiSach());
-			pStatement.setNString(2, ls.getTenLoaiSach());
+//			pStatement.setNString(2, ls.getTenLoaiSach());
+			pStatement.setString(2, ls.getTenLoaiSach());
 			int rows = pStatement.executeUpdate();
 			conn.commit();
 			if( rows > 0 ) {
@@ -61,7 +62,8 @@ public class LoaiSachDao implements ITFLoaiSachDao{
 			String sql = "Update LoaiSach Set MaLoaiSach= ?, TenLoaiSach= ? Where MaLoaiSach=?";
 			pStatement = conn.prepareStatement(sql);
 			pStatement.setString(1, ls.getMaLoaiSach());
-			pStatement.setNString(2, ls.getTenLoaiSach());
+//			pStatement.setNString(2, ls.getTenLoaiSach());
+			pStatement.setString(2, ls.getTenLoaiSach());
 			pStatement.setString(3, ls.getMaLoaiSach());
 			int rows = pStatement.executeUpdate();
 			conn.commit();
@@ -132,7 +134,8 @@ public class LoaiSachDao implements ITFLoaiSachDao{
 			if( rs.next() ) {
 				loaiSach = new LoaiSach();
 				loaiSach.setMaLoaiSach(rs.getString("MaLoaiSach"));
-				loaiSach.setTenLoaiSach(rs.getNString("TenLoaiSach"));
+//				loaiSach.setTenLoaiSach(rs.getNString("TenLoaiSach"));
+				loaiSach.setTenLoaiSach(rs.getString("TenLoaiSach"));//postgresql
 			}
 			conn.commit();
 			return loaiSach;
@@ -168,7 +171,8 @@ public class LoaiSachDao implements ITFLoaiSachDao{
 			while( rs.next() ) {
 				LoaiSach loaiSach = new LoaiSach();
 				loaiSach.setMaLoaiSach(rs.getString("MaLoaiSach"));
-				loaiSach.setTenLoaiSach(rs.getNString("TenLoaiSach"));
+//				loaiSach.setTenLoaiSach(rs.getNString("TenLoaiSach"));
+				loaiSach.setTenLoaiSach(rs.getString("TenLoaiSach"));
 				dsLoaiSach.add(loaiSach);
 			}
 			conn.commit();

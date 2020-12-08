@@ -1,10 +1,12 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,24 +25,70 @@ public class HoaDonDao implements ITFHoaDonDao{
 	private ResultSet rs;
 	
 	//Dung khi khong dung Trigger tinh TongTien
+	@Override
+	public int insert(HoaDon hd) {
+		ketNoiDatabase = new KetNoiDatabase();
+		try {
+			conn = ketNoiDatabase.getConn();
+			conn.setAutoCommit(false);
+			String sql = "Insert into HoaDon(ThayDoiNN, NgayDat, TinhTrangDH, MaKH, TongTien) Values(?,?,?,?,?)";
+			pStatement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			pStatement.setString(1, hd.getThayDoiNN());
+			SimpleDateFormat dateFormat = new SimpleDateFormat(KiemTraNgayThang.DATE_FORMAT);
+//			pStatement.setString(2, dateFormat.format(hd.getNgayDat()));
+			pStatement.setDate( 2, java.sql.Date.valueOf(dateFormat.format(hd.getNgayDat())) );
+//			pStatement.setNString(3, hd.getTinhTrangDH());
+			pStatement.setString(3, hd.getTinhTrangDH());
+			if( hd.getMaKH() == 0 ) {
+				pStatement.setNull(4, java.sql.Types.INTEGER);
+			}else {
+				pStatement.setInt(4, hd.getMaKH());
+			}
+			pStatement.setFloat(5, hd.getTongTien());
+			pStatement.executeUpdate();
+			int soHD = -1;
+			rs = pStatement.getGeneratedKeys();
+			if( rs.next() ) {
+				soHD = rs.getInt(1);
+			}
+			conn.commit();
+			return soHD;
+		} catch (SQLException e) {
+			System.out.println("Loi insert HoaDon: " + e.toString());
+			try {
+                conn.rollback();
+            } catch (SQLException ex1) {
+                System.out.println("Loi rollback");
+            }
+		}finally {
+			try {
+				pStatement.close();
+			} catch (SQLException e) {
+				System.out.println("Loi dong ket noi PreparedStatement: " + e.toString());
+			}
+			ketNoiDatabase.closeConnection(conn);
+		}
+		return -1;
+	}
+	
+	//Dung khi co Trigger tinh TongTien
 //	@Override
 //	public int insert(HoaDon hd) {
 //		ketNoiDatabase = new KetNoiDatabase();
 //		try {
 //			conn = ketNoiDatabase.getConn();
 //			conn.setAutoCommit(false);
-//			String sql = "Insert into HoaDon(IDNN, PhiGiaoHang, TongTien, NgayDat, TinhTrangDH, MaKH) Values(?,?,?,?,?,?)";
+//			String sql = "Insert into HoaDon(ThayDoiNN, NgayDat, TinhTrangDH, MaKH) Values(?,?,?,?)";
 //			pStatement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-//			pStatement.setInt(1, hd.getIdNN());
-//			pStatement.setFloat(2, hd.getPhiGiaoHang());
-//			pStatement.setFloat(3, hd.getTongTien());
+//			pStatement.setString(1, hd.getThayDoiNN());
 //			SimpleDateFormat dateFormat = new SimpleDateFormat(KiemTraNgayThang.DATE_FORMAT);
-//			pStatement.setString(4, dateFormat.format(hd.getNgayDat()));
-//			pStatement.setNString(5, hd.getTinhTrangDH());
+//			pStatement.setString(2, dateFormat.format(hd.getNgayDat()));
+////			pStatement.setNString(3, hd.getTinhTrangDH());
+//			pStatement.setString(3, hd.getTinhTrangDH());
 //			if( hd.getMaKH() == 0 ) {
-//				pStatement.setNull(6, java.sql.Types.INTEGER);
+//				pStatement.setNull(4, java.sql.Types.INTEGER);
 //			}else {
-//				pStatement.setInt(6, hd.getMaKH());
+//				pStatement.setInt(4, hd.getMaKH());
 //			}
 //			pStatement.executeUpdate();
 //			int soHD = -1;
@@ -67,50 +115,6 @@ public class HoaDonDao implements ITFHoaDonDao{
 //		}
 //		return -1;
 //	}
-	
-	//Dung khi co Trigger tinh TongTien
-	@Override
-	public int insert(HoaDon hd) {
-		ketNoiDatabase = new KetNoiDatabase();
-		try {
-			conn = ketNoiDatabase.getConn();
-			conn.setAutoCommit(false);
-			String sql = "Insert into HoaDon(ThayDoiNN, NgayDat, TinhTrangDH, MaKH) Values(?,?,?,?)";
-			pStatement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-			pStatement.setString(1, hd.getThayDoiNN());
-			SimpleDateFormat dateFormat = new SimpleDateFormat(KiemTraNgayThang.DATE_FORMAT);
-			pStatement.setString(2, dateFormat.format(hd.getNgayDat()));
-			pStatement.setNString(3, hd.getTinhTrangDH());
-			if( hd.getMaKH() == 0 ) {
-				pStatement.setNull(4, java.sql.Types.INTEGER);
-			}else {
-				pStatement.setInt(4, hd.getMaKH());
-			}
-			pStatement.executeUpdate();
-			int soHD = -1;
-			rs = pStatement.getGeneratedKeys();
-			if( rs.next() ) {
-				soHD = rs.getInt(1);
-			}
-			conn.commit();
-			return soHD;
-		} catch (SQLException e) {
-			System.out.println("Loi insert HoaDon: " + e.toString());
-			try {
-                conn.rollback();
-            } catch (SQLException ex1) {
-                System.out.println("Loi rollback");
-            }
-		}finally {
-			try {
-				pStatement.close();
-			} catch (SQLException e) {
-				System.out.println("Loi dong ket noi PreparedStatement: " + e.toString());
-			}
-			ketNoiDatabase.closeConnection(conn);
-		}
-		return -1;
-	}
 
 	@Override
 	public boolean xulyDonHang(int soHD, int maNVGiao,  String tinhTrangDonHang) {
@@ -121,7 +125,8 @@ public class HoaDonDao implements ITFHoaDonDao{
 			String sql = "Update HoaDon Set MaNVGiao= ?, TinhTrangDH= ? Where SoHD= ?";
 			pStatement = conn.prepareStatement(sql);
 			pStatement.setFloat(1, maNVGiao);
-			pStatement.setNString(2, tinhTrangDonHang);
+//			pStatement.setNString(2, tinhTrangDonHang);
+			pStatement.setString(2, tinhTrangDonHang);
 			pStatement.setInt(3, soHD);
 			int rows = pStatement.executeUpdate();
 			conn.commit();
@@ -155,7 +160,8 @@ public class HoaDonDao implements ITFHoaDonDao{
 			conn.setAutoCommit(false);
 			String sql = "Update HoaDon Set ThayDoiNN= ? Where SoHD= ?";
 			pStatement = conn.prepareStatement(sql);
-			pStatement.setNString(1, thayDoiNN);
+//			pStatement.setNString(1, thayDoiNN);
+			pStatement.setString(1, thayDoiNN);
 			pStatement.setInt(2, soHD);
 			int rows = pStatement.executeUpdate();
 			conn.commit();
@@ -189,12 +195,14 @@ public class HoaDonDao implements ITFHoaDonDao{
 			conn.setAutoCommit(false);
 			String sql = "Update HoaDon Set TinhTrangDH= ?, NgayGiao=? Where SoHD= ?";
 			pStatement = conn.prepareStatement(sql);
-			pStatement.setNString(1, tinhTrangDonHang);
+//			pStatement.setNString(1, tinhTrangDonHang);
+			pStatement.setString(1, tinhTrangDonHang);
 			if( ngayGiao.equals("") ){
 				pStatement.setNull(2, java.sql.Types.VARCHAR);
 			}
 			else {
-				pStatement.setString(2, ngayGiao);
+//				pStatement.setString(2, ngayGiao);
+				pStatement.setDate( 2, java.sql.Date.valueOf(ngayGiao) );
 			}
 			pStatement.setInt(3, soHD);
 			int rows = pStatement.executeUpdate();
@@ -229,7 +237,8 @@ public class HoaDonDao implements ITFHoaDonDao{
 			conn.setAutoCommit(false);
 			String sql = "Update HoaDon Set TinhTrangDH= ? Where SoHD= ?";
 			pStatement = conn.prepareStatement(sql);
-			pStatement.setNString(1, tinhTrangDonHang);
+//			pStatement.setNString(1, tinhTrangDonHang);
+			pStatement.setString(1, tinhTrangDonHang);
 			pStatement.setInt(2, soHD);
 			int rows = pStatement.executeUpdate();
 			conn.commit();

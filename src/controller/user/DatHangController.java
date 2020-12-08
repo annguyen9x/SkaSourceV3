@@ -98,11 +98,11 @@ public class DatHangController extends HttpServlet {
 					HoaDonDao hoaDonDao = new HoaDonDao();
 					
 					//Dung khi khong co Trigger tinh TongTien
-	//				HoaDon hoaDon = new HoaDon(idNN, tongTien, ngayDat, tinhTrangDH, maKH);
-	//				int soHD = hoaDonDao.insert(hoaDon);
+					HoaDon hoaDon = new HoaDon(thayDoiNN, tongTien, ngayDat, tinhTrangDH, maKH);
 					
 					//Dung khi co Trigger tinh TongTien
-					HoaDon hoaDon = new HoaDon(thayDoiNN, ngayDat, tinhTrangDH, maKH);
+//					HoaDon hoaDon = new HoaDon(thayDoiNN, ngayDat, tinhTrangDH, maKH);
+					
 					int soHD = hoaDonDao.insert(hoaDon);
 					
 					if( soHD != -1 ) {
@@ -182,7 +182,8 @@ public class DatHangController extends HttpServlet {
 							}else {
 								PrintWriter writer = resp.getWriter();
 								writer.print("<script type='text/javascript'>");
-								writer.print("alert('Đã đặt hàng thành công. Lỗi khi gửi mail thông tin đơn hàng từ server, vui lòng kiểm tra kết nối internet !!!');");
+								writer.print("alert('Đã đặt hàng thành công, MaDH: "+ soHD + ", tổng tiền: "+  numberFormat.format(tongTien)+" đ" 
+								+". Lỗi khi gửi mail thông tin đơn hàng từ server, vui lòng kiểm tra kết nối internet !!!');");
 								writer.print("location='userTrangChu'");
 								writer.print("</script>");
 							}

@@ -31,7 +31,8 @@ public class NhapSachDao implements ITFNhapSachDao {
 			pStatement.setInt(4, nhapSach.getSoLuongNhap());
 			SimpleDateFormat dateFormat = new SimpleDateFormat(KiemTraNgayThang.DATE_FORMAT);
 			String ngayNhap = dateFormat.format(nhapSach.getNgayNhap());
-			pStatement.setString(5, ngayNhap);
+//			pStatement.setString(5, ngayNhap);
+			pStatement.setDate( 5, java.sql.Date.valueOf(ngayNhap) );
 			int rows = pStatement.executeUpdate();
 			conn.commit();
 			if( rows > 0 ) {

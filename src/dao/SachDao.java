@@ -223,7 +223,8 @@ public class SachDao implements ITFSachDao{
 			sach = new Sach ();
 			if( rs.next() ) {
 				sach.setMaSach(rs.getString("MaSach"));
-				sach.setTenSach(rs.getNString("TenSach"));
+//				sach.setTenSach(rs.getNString("TenSach"));
+				sach.setTenSach(rs.getString("TenSach"));//postgresql
 				sach.setDonGia(rs.getFloat("DonGia"));
 				sach.setSoLuong(rs.getInt("SoLuong"));
 				sach.setUrlHinh(rs.getString("UrlHinh"));
@@ -270,7 +271,8 @@ public class SachDao implements ITFSachDao{
 			while( rs.next() ) {
 				Sach sach = new Sach();
 				sach.setMaSach(rs.getString("MaSach"));
-				sach.setTenSach(rs.getNString("TenSach"));
+//				sach.setTenSach(rs.getNString("TenSach"));
+				sach.setTenSach(rs.getString("TenSach"));//postgresql
 				sach.setDonGia(rs.getFloat("DonGia"));
 				sach.setSoLuong(rs.getInt("SoLuong"));
 				sach.setUrlHinh(rs.getString("UrlHinh"));
@@ -310,16 +312,21 @@ public class SachDao implements ITFSachDao{
 		try {
 			conn = KetNoiDatabase.getConn();
 			conn.setAutoCommit(false);
-			String sql = "Select Top "+ soLuong +" MaSach, TenSach, DonGia, SoLuong, UrlHinh, NoiDung, TacGia, NamXB, NXB, MaLoaiSach " + 
-						 "From Sach " + 
-						 "Order By DonGia DESC ";
+//			String sql = "Select Top "+ soLuong +" MaSach, TenSach, DonGia, SoLuong, UrlHinh, NoiDung, TacGia, NamXB, NXB, MaLoaiSach " + 
+//						 "From Sach " + 
+//						 "Order By DonGia DESC ";
+			String sql = "Select MaSach, TenSach, DonGia, SoLuong, UrlHinh, NoiDung, TacGia, NamXB, NXB, MaLoaiSach " + 
+					"From Sach " + 
+					"Order By DonGia DESC "
+					+ "Limit "+ soLuong;
 			pStatement = conn.prepareStatement(sql);
 			rs = pStatement.executeQuery();
 			dsSachNoiBat = new ArrayList<Sach>();
 			while( rs.next() ) {
 				Sach sach = new Sach();
 				sach.setMaSach(rs.getString("MaSach"));
-				sach.setTenSach(rs.getNString("TenSach"));
+//				sach.setTenSach(rs.getNString("TenSach"));
+				sach.setTenSach(rs.getString("TenSach"));
 				sach.setDonGia(rs.getFloat("DonGia"));
 				sach.setSoLuong(rs.getInt("SoLuong"));
 				sach.setUrlHinh(rs.getString("UrlHinh"));
@@ -359,16 +366,21 @@ public class SachDao implements ITFSachDao{
 		try {
 			conn = KetNoiDatabase.getConn();
 			conn.setAutoCommit(false);
-			String sql = "Select Top "+ soLuong +" MaSach, TenSach, DonGia, SoLuong, UrlHinh, NoiDung, TacGia, NamXB, NXB, MaLoaiSach " + 
-						 "From Sach " + 
-						 "Order By NamXB DESC ";
+//			String sql = "Select Top "+ soLuong +" MaSach, TenSach, DonGia, SoLuong, UrlHinh, NoiDung, TacGia, NamXB, NXB, MaLoaiSach " + 
+//						 "From Sach " + 
+//						 "Order By NamXB DESC ";
+			String sql = "Select MaSach, TenSach, DonGia, SoLuong, UrlHinh, NoiDung, TacGia, NamXB, NXB, MaLoaiSach " + 
+					"From Sach " + 
+					"Order By NamXB DESC "
+					+ "Limit " + soLuong;
 			pStatement = conn.prepareStatement(sql);
 			rs = pStatement.executeQuery();
 			dsSachMoi = new ArrayList<Sach>();
 			while( rs.next() ) {
 				Sach sach = new Sach();
 				sach.setMaSach(rs.getString("MaSach"));
-				sach.setTenSach(rs.getNString("TenSach"));
+//				sach.setTenSach(rs.getNString("TenSach"));
+				sach.setTenSach(rs.getString("TenSach"));
 				sach.setDonGia(rs.getFloat("DonGia"));
 				sach.setSoLuong(rs.getInt("SoLuong"));
 				sach.setUrlHinh(rs.getString("UrlHinh"));
@@ -418,7 +430,8 @@ public class SachDao implements ITFSachDao{
 			while( rs.next() ) {
 				Sach sach = new Sach();
 				sach.setMaSach(rs.getString("MaSach"));
-				sach.setTenSach(rs.getNString("TenSach"));
+//				sach.setTenSach(rs.getNString("TenSach"));
+				sach.setTenSach(rs.getString("TenSach"));
 				sach.setDonGia(rs.getFloat("DonGia"));
 				sach.setSoLuong(rs.getInt("SoLuong"));
 				sach.setUrlHinh(rs.getString("UrlHinh"));
@@ -468,7 +481,8 @@ public class SachDao implements ITFSachDao{
 			dsTenSachTheoLoaiSach = new ArrayList<Sach>();
 			while( rs.next() ) {
 				Sach sach = new Sach();
-				sach.setTenSach(rs.getNString("TenSach"));
+//				sach.setTenSach(rs.getNString("TenSach"));
+				sach.setTenSach(rs.getString("TenSach"));
 
 				dsTenSachTheoLoaiSach.add(sach);
 			}
@@ -505,13 +519,15 @@ public class SachDao implements ITFSachDao{
 						 "Where TenSach=? " +
 						 "Order By DonGia ASC";
 			pStatement = conn.prepareStatement(sql);
-			pStatement.setNString(1, tenSach);
+//			pStatement.setNString(1, tenSach);
+			pStatement.setString(1, tenSach);
 			rs = pStatement.executeQuery();
 			dsSachTheoTenSach = new ArrayList<Sach>();
 			while( rs.next() ) {
 				Sach sach = new Sach();
 				sach.setMaSach(rs.getString("MaSach"));
-				sach.setTenSach(rs.getNString("TenSach"));
+//				sach.setTenSach(rs.getNString("TenSach"));
+				sach.setTenSach(rs.getString("TenSach"));
 				sach.setDonGia(rs.getFloat("DonGia"));
 				sach.setSoLuong(rs.getInt("SoLuong"));
 				sach.setUrlHinh(rs.getString("UrlHinh"));
@@ -595,7 +611,8 @@ public class SachDao implements ITFSachDao{
 			while( rs.next() ) {
 				Sach sach = new Sach();
 				sach.setMaSach(rs.getString("MaSach"));
-				sach.setTenSach(rs.getNString("TenSach"));
+//				sach.setTenSach(rs.getNString("TenSach"));
+				sach.setTenSach(rs.getString("TenSach"));
 				sach.setDonGia(rs.getFloat("DonGia"));
 				sach.setSoLuong(rs.getInt("SoLuong"));
 				sach.setUrlHinh(rs.getString("UrlHinh"));

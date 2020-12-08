@@ -8,16 +8,24 @@ public class KetNoiDatabase {
 	protected static Connection conn;
 	
 	public KetNoiDatabase() {
-		String user = "sa";
+		
+		//Connect to postgresql local
+//		String user = "sa";
+//		String password = "123456";
+//		String url = "jdbc:sqlserver://localhost:1433; databaseName=SachKyAnh";
+		
+		//Connect to postgresql local
+		String user = "postgres";
 		String password = "123456";
-		String url = "jdbc:sqlserver://localhost:1433; databaseName=SachKyAnh";
+		String url = "jdbc:postgresql://localhost/SachKyAnh";
 		try {
-			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			//Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			Class.forName("org.postgresql.Driver");
 			conn = DriverManager.getConnection(url, user, password);
 		} catch (ClassNotFoundException e) {
 			System.out.println("Loi load driver: " + e.toString());
 		} catch (SQLException e) {
-			 System.out.println("Loi duong dan sqlserver: " + e.toString());
+			 System.out.println("Loi duong dan sql: " + e.toString());
 		}
 	}
 	
